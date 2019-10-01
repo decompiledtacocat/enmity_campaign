@@ -1,0 +1,34 @@
+function SilencingDispelFinishConditions takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A046' )
+endfunction
+
+function SilencingDispelFinishActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local real x=GetHandleReal(caster,"dispeltargetx")
+    local real y=GetHandleReal(caster,"dispeltargety")
+    local location targetloc=Location(x,y)
+    local location casterloc=GetUnitLoc(caster)
+    local player owner=GetOwningPlayer(caster)
+    local unit buffer
+    set buffer=CreateRabbit(owner,casterloc)
+    call UnitAddAbilityBJ('A04E',buffer )
+    call SetUnitAbilityLevelSwapped( 'A04E', buffer, GetUnitAbilityLevelSwapped('A046', caster) )
+    call SetUnitVertexColorBJ( buffer, 100, 100, 100, 100.00 )
+    call IssuePointOrderLocBJ(buffer, "silence", targetloc )
+    call FlushHandleLocals(caster)
+    call RemoveLocation(targetloc)
+    call RemoveLocation(casterloc)
+    set casterloc=null
+    set targetloc=null
+    set buffer=null
+    set caster=null
+    set owner=null
+endfunction
+//===========================================================================
+function InitTrig_SilencingDispelFinish takes nothing returns nothing
+    set gg_trg_SilencingDispelFinish = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SilencingDispelFinish, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_SilencingDispelFinish, Condition( function SilencingDispelFinishConditions) )
+    call TriggerAddAction( gg_trg_SilencingDispelFinish, function SilencingDispelFinishActions)
+endfunction
+

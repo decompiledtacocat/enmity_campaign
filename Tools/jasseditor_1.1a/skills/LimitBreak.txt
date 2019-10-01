@@ -1,0 +1,97 @@
+function Trig_LimitBreak_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0CX' ) 
+endfunction
+
+function Trig_LimitBreak_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0CX')
+local integer duration=15
+local timer t
+local integer life
+local integer mana
+
+if GetUnitAbilityLevel(caster,'A0D0')<=0 then
+call UnitAddAbility(caster,'A0D0')
+endif
+if GetUnitAbilityLevel(caster,'A0D1')<=0 then
+call UnitAddAbility(caster,'A0D1')
+endif
+
+if GetUnitAbilityLevel(caster,'A0D9')<=0 then
+call UnitAddAbility(caster,'A0D9')
+endif
+if GetUnitAbilityLevel(caster,'A0D5')<=0 then
+call UnitAddAbility(caster,'A0D5')
+endif
+
+if GetUnitAbilityLevel(caster,'A0DA')<=0 then
+call UnitAddAbility(caster,'A0DA')
+endif
+if GetUnitAbilityLevel(caster,'A0D6')<=0 then
+call UnitAddAbility(caster,'A0D6')
+endif
+
+if GetUnitAbilityLevel(caster,'A0DB')<=0 then
+call UnitAddAbility(caster,'A0DB')
+endif
+if GetUnitAbilityLevel(caster,'A0D8')<=0 then
+call UnitAddAbility(caster,'A0D8')
+endif
+
+if GetUnitAbilityLevel(caster,'A0DC')<=0 then
+call UnitAddAbility(caster,'A0DC')
+endif
+if GetUnitAbilityLevel(caster,'A0D7')<=0 then
+call UnitAddAbility(caster,'A0D7')
+endif
+
+
+
+if level==1 then
+set life='A0D0'
+set mana='A0D1'
+elseif level==2 then
+set life='A0D9'
+set mana='A0D5'
+elseif level==3 then
+set life='A0DA'
+set mana='A0D6'
+elseif level==4 then
+set life='A0DB'
+set mana='A0D8'
+elseif level==5 then
+set life='A0DC'
+set mana='A0D7'
+endif
+if GetUnitAbilityLevel(caster,life)<=0 then
+call UnitAddAbility(caster,life)
+endif
+if GetUnitAbilityLevel(caster,mana)<=0 then
+call UnitAddAbility(caster,mana)
+endif
+set t=CreateTimer()
+call TimerStart( t, duration, false, null)
+loop
+        exitwhen (TimerGetRemaining(t)<=0) or (IsUnitDeadBJ(caster))
+        call TriggerSleepAction(0)
+endloop
+call DestroyTimer(t)
+set t=null
+if GetUnitAbilityLevel(caster,life)>0 then
+call UnitRemoveAbility(caster,life)
+endif
+if GetUnitAbilityLevel(caster,mana)>0 then
+call UnitRemoveAbility(caster,mana)
+endif
+
+
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_LimitBreak takes nothing returns nothing
+    set gg_trg_LimitBreak = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_LimitBreak, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_LimitBreak, Condition( function Trig_LimitBreak_Conditions ) )
+    call TriggerAddAction( gg_trg_LimitBreak, function Trig_LimitBreak_Actions )
+endfunction

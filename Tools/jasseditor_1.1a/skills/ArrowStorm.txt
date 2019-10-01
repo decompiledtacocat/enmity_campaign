@@ -1,0 +1,40 @@
+function ArrowStormConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A089' ) 
+endfunction
+function ArrowStormActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit shooter
+    local player owner=GetOwningPlayer(caster)
+    local location targetloc=GetSpellTargetLoc()
+    local location casterloc=GetUnitLoc(caster)
+    local location fireloc
+    local integer loopend=(GetUnitAbilityLevelSwapped('A089', caster) * 5 )
+    local integer loopstart=1
+    local integer alevel=GetHeroLevel(caster)
+    loop
+        exitwhen loopstart > loopend
+        set shooter=CreateUnitAtLoc( owner, 'u012',casterloc,bj_UNIT_FACING )
+        call SetUnitVertexColorBJ( shooter, 100.00, 100.00, 100.00, 100.00 )
+        call SetUnitAbilityLevelSwapped( 'A09U',shooter, alevel )
+        set fireloc=PolarProjectionBJ(targetloc, GetRandomReal(0, 300.00), GetRandomDirectionDeg())
+        call IssuePointOrderLocBJ( shooter, "attackground", fireloc )
+        call RemoveLocation(fireloc)
+        set loopstart = loopstart + 1
+    endloop
+    call RemoveLocation(casterloc)
+    call RemoveLocation(targetloc)
+    set targetloc=null
+    set casterloc=null
+    set shooter=null
+    set caster=null
+    set fireloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_ArrowStorm takes nothing returns nothing
+    set gg_trg_ArrowStorm = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ArrowStorm, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_ArrowStorm, Condition( function ArrowStormConditions ) )
+    call TriggerAddAction( gg_trg_ArrowStorm, function ArrowStormActions )
+endfunction
+

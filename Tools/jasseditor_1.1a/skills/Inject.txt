@@ -1,0 +1,26 @@
+function InjectConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A04G' ) 
+endfunction
+function InjectActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    local location targetloc=GetUnitLoc(target)
+    local integer level=GetUnitAbilityLevelSwapped('A04G',caster)
+    local player owner=GetOwningPlayer(caster)
+    local unit rabbit=CreateRabbit(owner,targetloc)
+    call UnitAddAbilityBJ('A05O', rabbit)
+    call SetUnitAbilityLevelSwapped('A05O' ,rabbit,level )
+    call IssueTargetOrderBJ(rabbit,"shadowstrike",target )
+    call RemoveLocation(targetloc)
+    set rabbit=null
+    set targetloc=null
+    set caster=null
+    set target=null
+endfunction
+//===========================================================================
+function InitTrig_Inject takes nothing returns nothing
+    set gg_trg_Inject = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Inject, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Inject, Condition( function InjectConditions ) )
+    call TriggerAddAction( gg_trg_Inject, function InjectActions )
+endfunction

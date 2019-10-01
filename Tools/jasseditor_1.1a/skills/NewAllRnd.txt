@@ -1,0 +1,53 @@
+function AllRandomFunction takes nothing returns nothing
+local group temp
+local player owner
+local location tloc
+local integer id=1
+local integer select
+local unit  picked
+call DisplayTextToForce( GetPlayersAll(), "All Random mode has been chosen all players will be given a random hero." )
+loop
+exitwhen id>11
+set owner=Player(id)
+if GetBooleanAnd(id!=6,(GetPlayerSlotState(owner)==PLAYER_SLOT_STATE_PLAYING)) then 
+set temp=CreateGroup()
+           if (udg_allpick==true) then
+             set select=GetRandomInt(0,1)
+             set select=GetHeroIndex(select)
+           else
+            if id >6 then
+             set select=GetHeroIndex(1)
+            else 
+             set select=GetHeroIndex(0)
+           endif
+          endif
+    call SetPlayerStateBJ( owner, PLAYER_STATE_RESOURCE_LUMBER, 0 )
+    if ( id>6 ) then
+        set tloc=GetRectCenter(gg_rct_Hero_Revive_Yellow)
+        call PanCameraToTimedLocForPlayer( owner, tloc, 0 )
+        set picked=CreateUnitAtLoc(owner,select, tloc, bj_UNIT_FACING )
+        call MultiCheck(picked,true)  
+    else
+        set tloc=GetRectCenter(gg_rct_Hero_Revive_Good)
+        call PanCameraToTimedLocForPlayer( owner, tloc, 0 )
+        set picked=CreateUnitAtLoc(owner,select,tloc, bj_UNIT_FACING  )
+        call MultiCheck(picked,true)  
+    endif
+ 
+call DestroyGroup(temp)
+set temp=null
+call RemoveLocation(tloc)
+set tloc=null       
+endif    
+set id=id+1
+endloop
+set temp=null
+set picked=null
+set owner=null
+call DestroyTrigger(gg_trg_Repick)
+call DestroyTrigger(gg_trg_Random)
+call DestroyTrigger(gg_trg_AllRandom)
+call DestroyTrigger(gg_trg_Marker15)
+call DestroyTrigger(gg_trg_Marker90)
+call DestroyTrigger(gg_trg_MultiPick)
+endfunction

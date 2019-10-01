@@ -1,0 +1,156 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil Courier New;}}
+{\colortbl ;\red0\green0\blue0;\red0\green136\blue204;\red0\green0\blue128;\red0\green0\blue255;\red128\green0\blue0;\red120\green120\blue120;}
+\viewkind4\uc1\pard\cf1\b\f0\fs18 function \b0 Trig_CrashAttack_Conditions\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 boolean\cf1\b 
+\par \cf3\b0 return\cf1\b  \cf3\b0 GetBooleanOr\cf1\b (\cf3\b0 GetBooleanOr\cf1\b ( \cf3\b0 GetSpellAbilityId\cf1\b () \cf3\b0 ==\cf1\b  \cf4\b0\i 'A08H'\cf1\i0 ,\cf3 GetSpellAbilityId\cf1\b () \cf3\b0 ==\cf1\b  \cf4\b0\i 'A0HA'\cf1\b\i0  ) \b0 ,\cf3 GetSpellAbilityId\cf1\b () \cf3\b0 ==\cf1\b  \cf4\b0\i 'A0HB'\cf1\b\i0 )
+\par endfunction
+\par function \b0 KillTree\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 nothing\cf1\b 
+\par     \cf3\b0 call\cf1\b  \cf3\b0 KillDestructable\cf1\b ( \cf3\b0 GetEnumDestructable\cf1\b () )
+\par endfunction
+\par 
+\par function \b0 TreeCheck\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 boolean\cf1\b 
+\par \cf3\b0 return\cf1\b  ( \cf3\b0 IsDestructableAliveBJ\cf1\b (\cf3\b0 GetEnumDestructable\cf1\b ()) \cf3\b0 ==\cf1\b  \cf5\b0 true\cf1\b  )
+\par endfunction
+\par 
+\par function \b0 CountDestructablesInRect_Enum\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 nothing\cf1\b 
+\par     if ( \b0 TreeCheck\b () ) then
+\par         \cf3\b0 set\cf1\b  \b0 bj_randomSubGroupWant\b  \cf3\b0 =\cf1\b  \b0 bj_randomSubGroupWant\b  \cf3\b0 +\cf1\b  \cf3\b0 1\cf1\b 
+\par     endif
+\par endfunction
+\par 
+\par function \b0 CountDestructablesInCircle\b  takes \cf2\b0 location\cf1\b  \b0 where,\b  \cf2\b0 real\cf1\b  \b0 radius\b  returns \cf2\b0 integer\cf1\b 
+\par     \cf3\b0 local\cf1\b  \cf2\b0 integer\cf1\b  \b0 old\b  \cf3\b0 =\cf1\b  \b0 bj_randomSubGroupWant\b 
+\par     \cf3\b0 local\cf1\b  \cf2\b0 integer\cf1\b  \b0 new\b 
+\par     \cf3\b0 set\cf1\b  \b0 bj_randomSubGroupWant\b  \cf3\b0 =\cf1\b  \cf3\b0 0\cf1\b 
+\par     \cf3\b0 call\cf1\b  \cf3\b0 EnumDestructablesInCircleBJ\cf1\b (\b0 radius,\b  \b0 where,\b  function \b0 CountDestructablesInRect_Enum\b )
+\par     \cf3\b0 set\cf1\b  \b0 new\b  \cf3\b0 =\cf1\b  \b0 bj_randomSubGroupWant\b 
+\par     \cf3\b0 set\cf1\b  \b0 bj_randomSubGroupWant\b  \cf3\b0 =\cf1\b  \b0 old\b 
+\par     \cf3\b0 return\cf1\b  \b0 new\b 
+\par endfunction    
+\par 
+\par function \b0 ShoveActions\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 nothing\cf1\b 
+\par \cf3\b0 local\cf1\b  \cf2\b0 unit\cf1\b  \b0 movecaster\cf3 =\cf1 GetHandleUnit\b (\cf3\b0 GetTriggeringTrigger\cf1\b ()\b0 ,\cf4\i "CrashMoveCaster"\cf1\b\i0 )
+\par \cf3\b0 local\cf1\b  \cf2\b0 unit\cf1\b  \b0 caster\cf3 =\cf1 GetHandleUnit\b (\cf3\b0 GetTriggeringTrigger\cf1\b ()\b0 ,\cf4\i "CrashCaster"\cf1\b\i0 )
+\par \cf3\b0 local\cf1\b  \cf2\b0 unit\cf1\b  \b0 target\cf3 =\cf1 GetHandleUnit\b (\cf3\b0 GetTriggeringTrigger\cf1\b ()\b0 ,\cf4\i "CrashTarget"\cf1\b\i0 )
+\par \cf3\b0 local\cf1\b  \cf2\b0 real\cf1\b  \b0 angle\cf3 =\cf1 GetHandleReal\b (\cf3\b0 GetTriggeringTrigger\cf1\b ()\b0 ,\cf4\i "CrashAngle"\cf1\b\i0 )
+\par \cf3\b0 local\cf1\b  \cf2\b0 real\cf1\b  \b0 damage\cf3 =\cf1 GetHandleReal\b (\cf3\b0 GetTriggeringTrigger\cf1\b ()\b0 ,\cf4\i "CrashTreeDamage"\cf1\b\i0 )
+\par \cf3\b0 local\cf1\b  \cf2\b0 location\cf1\b  \b0 targetloc\cf3 =GetUnitLoc\cf1\b (\b0 target\b )
+\par \cf3\b0 local\cf1\b  \cf2\b0 location\cf1\b  \b0 moveloc\cf3 =PolarProjectionBJ\cf1\b (\b0 targetloc,\b  \cf3\b0 8.00\cf1 ,\b  \b0 angle\b ) 
+\par \cf3\b0 local\cf1\b  \cf2\b0 integer\cf1\b  \b0 treecount\cf3 =0\cf1\b 
+\par \cf3\b0 call\cf1\b  \cf3\b0 SetUnitPositionLoc\cf1\b (\b0 target,\b  \b0 moveloc\b )
+\par if \b0 movecaster\cf3 !=\cf5 null\cf1\b  then
+\par \cf3\b0 call\cf1\b  \cf3\b0 SetUnitPositionLoc\cf1\b (\b0 movecaster,\b  \b0 moveloc\b )
+\par \cf3\b0 call\cf1\b  \cf3\b0 SetUnitFacingToFaceUnitTimed\cf1\b (\b0 movecaster,target,\cf3 0\cf1\b )
+\par endif
+\par \cf3\b0 call\cf1\b  \cf3\b0 DestroyEffectBJ\cf1\b (\cf3\b0 AddSpecialEffectLocBJ\cf1\b (\b0 targetloc,\b  \cf4\b0\i "Abilities\\\\Weapons\\\\AncientProtectorMissile\\\\AncientProtectorMissile.mdl"\cf1\b\i0  ))
+\par \cf3\b0 set\cf1\b  \b0 treecount\cf3 =\cf1\b  \b0 CountDestructablesInCircle\b (\b0 targetloc,\cf3 150\cf1\b )
+\par if \b0 treecount\cf3 >0\cf1\b  then
+\par \cf3\b0 call\cf1\b  \cf3\b0 EnumDestructablesInCircleBJ\cf1\b ( \cf3\b0 150.00\cf1 ,\b  \b0 targetloc,\b  function \b0 KillTree\b  )
+\par \cf3\b0 call\cf1\b  \b0 UnitDamageTargetBJ\b ( \b0 caster,\b  \b0 target,\b  \b0 damage\cf3 /4\cf1 ,\b  \b0 ATTACK_TYPE_SIEGE,\b  \b0 DAMAGE_TYPE_UNKNOWN\b  )
+\par endif
+\par 
+\par \cf3\b0 call\cf1\b  \cf3\b0 RemoveLocation\cf1\b (\b0 moveloc\b )
+\par \cf3\b0 call\cf1\b  \cf3\b0 RemoveLocation\cf1\b (\b0 targetloc\b )
+\par \cf3\b0 set\cf1\b  \b0 targetloc\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 moveloc\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 caster\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 target\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 movecaster\cf3 =\cf5 null\cf1\b 
+\par endfunction
+\par 
+\par 
+\par 
+\par function \b0 CrashActions\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 nothing\cf1\b 
+\par \cf3\b0 local\cf1\b  \cf2\b0 unit\cf1\b  \b0 caster\cf3 =GetSpellAbilityUnit\cf1\b ()
+\par \cf3\b0 local\cf1\b  \cf2\b0 unit\cf1\b  \b0 target\cf3 =GetSpellTargetUnit\cf1\b ()
+\par \cf3\b0 local\cf1\b  \cf2\b0 player\cf1\b  \b0 owner\cf3 =GetOwningPlayer\cf1\b (\b0 caster\b )
+\par \cf3\b0 local\cf1\b  \cf2\b0 location\cf1\b  \b0 castloc\cf3 =GetUnitLoc\cf1\b (\b0 caster\b )
+\par \cf3\b0 local\cf1\b  \cf2\b0 location\cf1\b  \b0 targetloc\cf3 =GetUnitLoc\cf1\b (\b0 target\b )
+\par \cf3\b0 local\cf1\b  \cf2\b0 integer\cf1\b  \b0 id\cf3 =GetSpellAbilityId\cf1\b ()
+\par \cf3\b0 local\cf1\b  \cf2\b0 integer\cf1\b  \b0 level\cf3 =GetUnitAbilityLevel\cf1\b (\b0 caster,id\b  )
+\par \cf3\b0 local\cf1\b  \cf2\b0 integer\cf1\b  \b0 telelevel\cf3 =GetUnitAbilityLevel\cf1\b (\b0 caster,\cf4\i 'A0HD'\cf1\b\i0  )
+\par \cf3\b0 local\cf1\b  \cf2\b0 real\cf1\b  \b0 damage\b 
+\par \cf3\b0 local\cf1\b  \cf2\b0 real\cf1\b  \b0 angle\cf3 =AngleBetweenPoints\cf1\b (\b0 castloc,targetloc\b )
+\par \cf3\b0 local\cf1\b  \cf2\b0 trigger\cf1\b  \b0 t\b 
+\par \cf3\b0 local\cf1\b  \cf2\b0 timer\cf1\b  \b0 tim\b 
+\par \cf3\b0 local\cf1\b  \cf2\b0 unit\cf1\b  \b0 rabbit\cf3 =\cf1 CreateRabbit\b (\b0 owner,targetloc\b )
+\par \cf3\b0 local\cf1\b  \cf2\b0 unit\cf1\b  \b0 movecaster\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 local\cf1\b  \cf2\b0 boolean\cf1\b  \b0 tele\cf3 =\cf5 false\cf1\b 
+\par \cf3\b0 call\cf1\b  \cf3\b0 UnitAddAbility\cf1\b (\b0 rabbit,\cf4\i 'A0H9'\cf1\b\i0 )
+\par if \b0 id\cf4\i =='A0HB'\cf1\b\i0  then \cf6\b0\i //right\cf1\b\i0 
+\par \cf3\b0 call\cf1\b  \b0 SetUnitAbilityLevel\b (\b0 rabbit,\cf4\i 'A0H9'\cf1\i0 ,\cf3 2\cf1\b )
+\par \cf3\b0 set\cf1\b  \b0 angle\cf3 =\cf1 angle\cf3 -80\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 damage\cf3 =\cf1 level\cf3 *15+GetHeroStatBJ\cf1\b (\cf5\b0 bj_HEROSTAT_STR\cf1 ,\b  \b0 caster,\b  \cf5\b0 true\cf1\b )
+\par      if \b0 telelevel\cf3 >1\cf1\b  then
+\par      \cf3\b0 call\cf1\b  \cf3\b0 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectByIdLoc\cf1\b (\cf4\b0\i 'A0HD'\cf1\b\i0  \b0 ,\b  \cf5\b0 EFFECT_TYPE_SPECIAL\cf1 ,\b  \b0 castloc\b ))
+\par      \cf3\b0 call\cf1\b  \cf3\b0 ShowUnitHide\cf1\b (\b0 caster\b )
+\par      \cf3\b0 set\cf1\b  \b0 movecaster\cf3 =\cf1 caster\b 
+\par      \cf3\b0 set\cf1\b  \b0 tele\cf3 =\cf5 true\cf1\b 
+\par      endif
+\par elseif \b0 id\cf4\i =='A0HA'\cf1\b\i0  then\cf6\b0\i //left\cf1\b\i0 
+\par \cf3\b0 call\cf1\b  \b0 SetUnitAbilityLevel\b (\b0 rabbit,\cf4\i 'A0H9'\cf1\i0 ,\cf3 1\cf1\b )
+\par \cf3\b0 set\cf1\b  \b0 angle\cf3 =\cf1 angle\cf3 +80\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 damage\cf3 =\cf1 level\cf3 *10+GetHeroStatBJ\cf1\b (\cf5\b0 bj_HEROSTAT_STR\cf1 ,\b  \b0 caster,\b  \cf5\b0 true\cf1\b )
+\par      if \b0 telelevel\cf3 >0\cf1\b  then
+\par      \cf3\b0 call\cf1\b  \cf3\b0 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectByIdLoc\cf1\b (\cf4\b0\i 'A0HD'\cf1\b\i0  \b0 ,\b  \cf5\b0 EFFECT_TYPE_SPECIAL\cf1 ,\b  \b0 castloc\b ))
+\par      \cf3\b0 call\cf1\b  \cf3\b0 ShowUnitHide\cf1\b (\b0 caster\b )
+\par      \cf3\b0 set\cf1\b  \b0 movecaster\cf3 =\cf1 caster\b 
+\par      \cf3\b0 set\cf1\b  \b0 tele\cf3 =\cf5 true\cf1\b 
+\par      endif
+\par else
+\par \cf3\b0 call\cf1\b  \b0 SetUnitAbilityLevel\b (\b0 rabbit,\cf4\i 'A0H9'\cf1\i0 ,\cf3 3\cf1\b )
+\par \cf3\b0 set\cf1\b  \b0 damage\cf3 =\cf1 level\cf3 *20+GetHeroStatBJ\cf1\b (\cf5\b0 bj_HEROSTAT_STR\cf1 ,\b  \b0 caster,\b  \cf5\b0 true\cf1\b )
+\par      if \b0 telelevel\cf3 >2\cf1\b  then
+\par      \cf3\b0 call\cf1\b  \cf3\b0 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectByIdLoc\cf1\b (\cf4\b0\i 'A0HD'\cf1\b\i0  \b0 ,\b  \cf5\b0 EFFECT_TYPE_SPECIAL\cf1 ,\b  \b0 castloc\b ))
+\par      \cf3\b0 call\cf1\b  \cf3\b0 ShowUnitHide\cf1\b (\b0 caster\b )
+\par      \cf3\b0 set\cf1\b  \b0 movecaster\cf3 =\cf1 caster\b 
+\par      \cf3\b0 set\cf1\b  \b0 tele\cf3 =\cf5 true\cf1\b 
+\par      endif 
+\par endif
+\par \cf3\b0 call\cf1\b  \cf3\b0 IssueTargetOrder\cf1\b (\b0 rabbit,\cf4\i "stormbolt"\cf1\i0 ,target\b )
+\par 
+\par \cf3\b0 call\cf1\b  \b0 UnitDamageTargetBJ\b ( \b0 caster,\b  \b0 target,\b  \b0 damage,\b  \b0 ATTACK_TYPE_SIEGE,\b  \b0 DAMAGE_TYPE_NORMAL\b  )
+\par \cf3\b0 call\cf1\b  \cf3\b0 DestroyEffect\cf1\b ( \cf3\b0 AddSpecialEffectLocBJ\cf1\b (\b0 targetloc,\b  \cf4\b0\i "Abilities\\\\Spells\\\\Human\\\\ThunderClap\\\\ThunderClapCaster.mdl"\cf1\b\i0  ))
+\par 
+\par \cf3\b0 set\cf1\b  \b0 t\cf3 =CreateTrigger\cf1\b ()
+\par \cf3\b0 call\cf1\b  \b0 SetHandleHandle\b (\b0 t,\cf4\i "CrashCaster"\cf1\i0 ,caster\b )
+\par \cf3\b0 call\cf1\b  \b0 SetHandleHandle\b (\b0 t,\cf4\i "CrashTarget"\cf1\i0 ,target\b )
+\par \cf3\b0 call\cf1\b  \b0 SetHandleReal\b (\b0 t,\cf4\i "CrashAngle"\cf1\i0 ,angle\b )
+\par \cf3\b0 call\cf1\b  \b0 SetHandleReal\b (\b0 t,\cf4\i "CrashTreeDamage"\cf1\i0 ,damage\b )
+\par \cf3\b0 call\cf1\b  \b0 SetHandleHandle\b (\b0 t,\cf4\i "CrashMoveCaster"\cf1\i0 ,movecaster\b )
+\par \cf3\b0 call\cf1\b  \cf3\b0 TriggerRegisterTimerEventPeriodic\cf1\b (\b0 t,\b  \cf3\b0 0.02\cf1\b  )
+\par \cf3\b0 call\cf1\b  \cf3\b0 TriggerAddAction\cf1\b (\b0 t,\b  function \b0 ShoveActions\b  )
+\par 
+\par \cf3\b0 set\cf1\b  \b0 tim\cf3 =CreateTimer\cf1\b ()
+\par \cf3\b0 call\cf1\b  \cf3\b0 TimerStart\cf1\b ( \b0 tim,\b  \b0 .75,\b  \cf5\b0 false\cf1 ,\b  \cf5\b0 null\cf1\b )
+\par loop
+\par         \cf3\b0 exitwhen\cf1\b  (\cf3\b0 TimerGetRemaining\cf1\b (\b0 tim\b )\cf3\b0 <=0\cf1\b )
+\par         \cf3\b0 call\cf1\b  \cf3\b0 TriggerSleepAction\cf1\b (\cf3\b0 0\cf1\b )
+\par endloop
+\par \cf3\b0 call\cf1\b  \cf3\b0 DestroyTimer\cf1\b (\b0 tim\b )
+\par \cf3\b0 set\cf1\b  \b0 tim\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 call\cf1\b  \b0 FlushHandleLocals\b (\b0 t\b )
+\par \cf3\b0 call\cf1\b  \cf3\b0 DestroyTrigger\cf1\b (\b0 t\b )
+\par 
+\par \cf3\b0 call\cf1\b  \cf3\b0 ShowUnitShow\cf1\b (\b0 caster\b )
+\par  if \b0 tele\cf3 ==\cf5 true\cf1\b  then
+\par \cf3\b0 call\cf1\b  \cf3\b0 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectById\cf1\b (\cf4\b0\i 'A0HD'\cf1\b\i0  \b0 ,\b  \cf5\b0 EFFECT_TYPE_SPECIAL\cf1 ,\b  \cf3\b0 GetUnitX\cf1\b (\b0 caster\b )\b0 ,\cf3 GetUnitY\cf1\b (\b0 caster\b )))
+\par \cf3\b0 call\cf1\b  \cf3\b0 SelectUnitForPlayerSingle\cf1\b (\b0 caster,owner\b )
+\par  endif
+\par  
+\par \cf3\b0 set\cf1\b  \b0 caster\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 target\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 call\cf1\b  \cf3\b0 RemoveLocation\cf1\b (\b0 castloc\b )
+\par \cf3\b0 call\cf1\b  \cf3\b0 RemoveLocation\cf1\b (\b0 targetloc\b )
+\par \cf3\b0 set\cf1\b  \b0 castloc\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 targetloc\cf3 =\cf5 null\cf1\b 
+\par \cf3\b0 set\cf1\b  \b0 t\cf3 =\cf5 null\cf1\b 
+\par endfunction
+\par \cf6\b0\i //===========================================================================\cf1\b\i0 
+\par function \b0 InitTrig_CrashAttack\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 nothing\cf1\b 
+\par     \cf3\b0 set\cf1\b  \b0 gg_trg_CrashAttack\b  \cf3\b0 =\cf1\b  \cf3\b0 CreateTrigger\cf1\b (  )
+\par     \cf3\b0 call\cf1\b  \cf3\b0 TriggerRegisterAnyUnitEventBJ\cf1\b ( \b0 gg_trg_CrashAttack,\b  \cf5\b0 EVENT_PLAYER_UNIT_SPELL_EFFECT\cf1\b  )
+\par     \cf3\b0 call\cf1\b  \cf3\b0 TriggerAddCondition\cf1\b ( \b0 gg_trg_CrashAttack,\b  \cf3\b0 Condition\cf1\b ( function \b0 Trig_CrashAttack_Conditions\b  ) )
+\par     \cf3\b0 call\cf1\b  \cf3\b0 TriggerAddAction\cf1\b ( \b0 gg_trg_CrashAttack,\b  function \b0 CrashActions\b )
+\par endfunction\cf0\b0 
+\par }
+ 

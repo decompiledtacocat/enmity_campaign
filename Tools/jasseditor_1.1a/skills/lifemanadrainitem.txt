@@ -1,0 +1,39 @@
+function Trig_ManaLifeRune_Conditions takes nothing returns boolean
+return GetBooleanOr(GetSpellAbilityId() == 'A0EG',GetSpellAbilityId() == 'A0EF'  )
+endfunction
+function Trig_ManaLifeRune_Actions takes nothing returns nothing
+local integer id=GetSpellAbilityId()
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local unit target=GetSpellTargetUnit()
+local unit rune
+local location targetloc=GetUnitLoc(target)
+if id=='A0EG' then//life
+set rune=CreateUnitAtLoc(owner,'o00W',targetloc,bj_UNIT_FACING)
+call SetUnitLifeBJ(rune,100)
+elseif id=='A0EF' then//mana
+set rune=CreateUnitAtLoc(owner,'o00Z',targetloc,bj_UNIT_FACING)
+endif
+if GetUnitState(target,UNIT_STATE_MANA)<1 then
+call KillUnit(rune)
+else
+call UnitApplyTimedLifeBJ(8, 'Brai', rune)
+call IssueTargetOrder(rune,"drain",target)
+call SetHandleHandle(rune,"itemdrain",caster)
+endif
+set caster=null
+set owner=null
+set target=null
+set rune=null
+call RemoveLocation(targetloc)
+set targetloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_ManaLifeRune takes nothing returns nothing
+    set gg_trg_ManaLifeRune = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ManaLifeRune, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_ManaLifeRune, Condition( function Trig_ManaLifeRune_Conditions ) )
+    call TriggerAddAction( gg_trg_ManaLifeRune, function Trig_ManaLifeRune_Actions )
+endfunction
+

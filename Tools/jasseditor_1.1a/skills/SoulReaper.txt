@@ -1,0 +1,30 @@
+function SoulReaperConditions takes nothing returns boolean
+return (GetUnitAbilityLevelSwapped('A045', GetAttacker()) > 0 ) 
+endfunction
+
+function SoulReaperActions takes nothing returns nothing
+    local unit soulreaper=GetAttacker()
+    local unit soulreapertarget=GetAttackedUnitBJ()
+    local integer slevel=GetUnitAbilityLevelSwapped('A045',soulreaper)
+    local real souldamage=(I2R(slevel) * 6.00 )
+    local real soultargetmana=GetUnitStateSwap(UNIT_STATE_MANA, soulreapertarget)
+    local real soulreapermana=GetUnitStateSwap(UNIT_STATE_MANA, soulreaper)
+    
+    if ( soultargetmana > souldamage ) then
+        call SetUnitManaBJ(soulreaper, (soulreapermana + souldamage))
+    else
+        call SetUnitManaBJ(soulreaper, (soulreapermana + soultargetmana))
+    endif
+    if (IsUnitType(soulreapertarget, UNIT_TYPE_SUMMONED) == true ) then
+        call SetUnitManaBJ(soulreaper, (soulreapermana+(I2R(slevel)*30)) )
+    endif
+    set soulreaper=null
+    set soulreapertarget=null
+endfunction
+//===========================================================================
+function InitTrig_SoulReaper takes nothing returns nothing
+    set gg_trg_SoulReaper = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SoulReaper, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_SoulReaper, Condition( function SoulReaperConditions) )
+    call TriggerAddAction( gg_trg_SoulReaper, function SoulReaperActions )
+endfunction

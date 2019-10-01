@@ -1,0 +1,40 @@
+function DarkThrustConditions takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A050' )
+endfunction
+
+function DarkThrustActions takes nothing returns nothing
+    local unit dtcaster=GetSpellAbilityUnit()
+    local location dtpoint
+    local location dtcastpos=GetUnitLoc(dtcaster)
+    local player dtplayer=GetOwningPlayer(dtcaster)
+    local integer dloop=2
+    local integer dloop2=(GetUnitAbilityLevelSwapped('A050', dtcaster) + 2 )
+    
+    if ( GetSpellTargetUnit() == null ) then
+        set dtpoint=GetSpellTargetLoc()
+    else
+        set dtpoint=GetUnitLoc(dtcaster)
+    endif
+    loop
+        exitwhen dloop > dloop2
+        call CreateNUnitsAtLocFacingLocBJ( 1, 'n00S',dtplayer, dtcastpos, dtpoint )
+        call DestroyGroup(GetLastCreatedGroup())
+        call SetUnitPathing( GetLastCreatedUnit(), false )
+        call SetUnitVertexColorBJ( GetLastCreatedUnit(), 100, 100, 100, 100.00 )
+        call IssuePointOrderLocBJ( GetLastCreatedUnit(), "carrionswarm", dtpoint )
+        call TriggerSleepAction(0)
+        set dloop = dloop + 1            
+    endloop
+    set dtcaster=null
+    set dtplayer=null
+    call RemoveLocation (dtcastpos)
+    call RemoveLocation (dtpoint)
+endfunction
+
+//===========================================================================
+function InitTrig_DarkThrust takes nothing returns nothing
+    set gg_trg_DarkThrust = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DarkThrust, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DarkThrust, Condition(function DarkThrustConditions) )
+    call TriggerAddAction( gg_trg_DarkThrust, function DarkThrustActions )
+endfunction

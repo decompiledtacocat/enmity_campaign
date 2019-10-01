@@ -1,0 +1,49 @@
+function ManTurretUDConditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanAnd(( IsUnitIllusionBJ(GetEnteringUnit()) == false ), ( IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) == true )),( IsUnitAlly(GetEnteringUnit(), Player(6)) == true ))
+endfunction
+function ManTurretUDFilter  takes nothing returns boolean
+return  GetBooleanAnd((GetOwningPlayer(GetFilterUnit()) == Player(PLAYER_NEUTRAL_PASSIVE) ),GetBooleanOr(( GetUnitTypeId(GetFilterUnit()) == 'h00M' ),( GetUnitTypeId(GetFilterUnit()) == 'h00L' )) )
+endfunction
+function ManTurretUDActions takes nothing returns nothing
+    local unit pickedunit
+    local unit enteringunit=GetEnteringUnit()
+    local location unitlocation=GetUnitLoc(enteringunit)
+    local player mplayer=GetOwningPlayer(enteringunit)
+    local group turretgroup=GetUnitsInRangeOfLocMatching(300.00,unitlocation, Condition(function ManTurretUDFilter))
+    call IssueImmediateOrderBJ(enteringunit, "holdposition" )
+    call RemoveLocation(unitlocation)
+    loop
+      set pickedunit=FirstOfGroup(turretgroup)
+      exitwhen pickedunit==null
+      call SetUnitOwner( pickedunit, mplayer, true )
+      call GroupRemoveUnit(turretgroup,pickedunit)
+    endloop
+call DestroyGroup(turretgroup)
+set turretgroup=null
+set pickedunit=null
+set enteringunit=null
+set mplayer =null
+set unitlocation=null
+endfunction
+//===========================================================================
+function InitTrig_ManTurretUD takes nothing returns nothing
+    set gg_trg_ManTurretUD = CreateTrigger(  )
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire1)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire2)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire3)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire4)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire5)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire6)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire7)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire8)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire9)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire10)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire11)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire12)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire13)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire14)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire15)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire16)
+    call TriggerAddCondition( gg_trg_ManTurretUD, Condition( function ManTurretUDConditions ) )
+    call TriggerAddAction( gg_trg_ManTurretUD, function ManTurretUDActions )
+endfunction

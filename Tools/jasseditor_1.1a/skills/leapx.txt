@@ -1,0 +1,124 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil Courier New;}{\f1\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue0;\red0\green136\blue204;\red0\green0\blue128;\red0\green0\blue255;\red128\green0\blue0;\red120\green120\blue120;}
+\viewkind4\uc1\pard\cf1\b\f0\fs18 function\b0  LeapMove \b takes\b0  \cf2 nothing\cf1  \b returns\b0  \cf2 nothing
+\par \cf3\f1 local\cf1  \cf2 trigger\cf1  t\cf3 =GetTriggeringTrigger\cf1\b ()\cf2\b0\f0 
+\par \cf3\f1 local\cf1  \cf2 unit\cf1  caster\cf3 =\cf1 GetHandleUnit\b (\b0 t,\cf4\i "leapattackunit"\cf1\b\i0 )\cf2\b0\f0 
+\par \cf3\f1 local\cf1  \cf2 unit\cf1  dummy\cf3 =\cf1 GetHandleUnit\b (\b0 t,\cf4\i "leapattacker"\cf1\b\i0 )\b0 
+\par \cf3 local\cf1  \cf2 unit\cf1  target\cf3 =\cf1 GetHandleUnit\b (\b0 t,\cf4\i "leapattacked"\cf1\b\i0 )\b0\f0 
+\par \cf3 local\cf1  \cf2 location\cf1  \f1 castloc\cf3 =GetUnitLoc\cf1\b (\b0 dummy\b )\b0 
+\par \cf3 local\cf1  \cf2 location\cf1  targetloc
+\par \cf3 local\cf1  \cf2 location\cf1  moveloc\cf3 =PolarProjectionBJ\cf1\b (\b0 castloc, \cf3 9.00\cf1 , attackAngle\b )\b0\f0 
+\par \cf3 local\cf1  \cf2 real\cf1  Angle
+\par \b\f1 if\b0  \b (\cf3\b0 IsUnitAliveBJ\cf1\b (\b0 target\b )\cf3\b0 ==\cf5 true\cf1 ,target\cf3 !=\cf5 null\cf1\b )\b0  \b then\b0 
+\par \cf3 set\cf1  targetloc\cf3 =GetUnitLoc\cf1\b (\b0 target\b )\b0\f0 
+\par     \cf3 set\cf1  Angle \cf3 =\cf1  \cf3 AngleBetweenPoints\cf1\b (\b0 castloc, targetloc\b )\b0 
+\par     \cf3 call\cf1  \cf3 SetUnitPositionLoc\cf1\b (\b0  dummy, moveloc \b )\b0 
+\par     \cf3 call\cf1  \cf3 SetUnitFacingTimed\cf1\b (\b0  dummy, Angle, \cf3 0\cf1  \b )\b0 
+\par 
+\par     \b if\b0  \cf3 DistanceBetweenPoints\cf1\b (\b0\f1 castloc\f0 ,target\f1 loc\b\f0 )\b0  \cf3 <=\cf1\b  \cf3\b0 15.00\cf1  \cf3 and\cf1  \cf3 GetUnitFlyHeight\cf1\b (\b0 dummy\b ) \cf3\b0 <\cf1  \cf3 2\cf1  \b then\b0 
+\par         \cf6\i //\cf1\i0  \cf6\i Cause\cf1\i0  \cf6\i Damage
+\par         \f1 //line\cf1\i0  \cf6\i goes\cf1\i0  \cf6\i here\cf1\i0\f0 
+\par         \cf6\i //\cf1\i0  \cf6\i Face\cf1\i0  \cf6\i the\cf1\i0  \cf6\i target\cf1\i0  \cf6\i one\cf1\i0  \cf6\i last\cf1\i0  \cf6\i time\cf1\i0 
+\par         \cf3 call\cf1  \cf3 SetUnitFacingTimed\cf1\b (\b0  dummy, Angle, \cf3 0\cf1  \b )\b0 
+\par 
+\par         \cf3 call\cf1  \f1 PolledWait2\b\f0 (\b0  \cf3 0.5\cf1  \b )\b0 
+\par \f1         \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 moveloc\b )\b0 
+\par \f0         \cf3\f1 set\cf1  moveloc\cf3 =\cf5 null\cf1\f0 
+\par         \cf6\i //\cf1\i0  \cf6\i Remove\cf1\i0  \cf6\i leaper\cf1\i0 
+\par         \cf3 set\cf1  moveloc\cf3 =\cf1  \cf3 GetUnitLoc\cf1\b (\b0 dummy\b )\b0 
+\par         \cf3 call\cf1  \cf3 RemoveUnit\cf1\b (\b0 dummy\b )\b0 
+\par         \cf6\i //\cf1\i0  \cf6\i Restore\cf1\i0  \cf6\i blademaster\cf1\i0 
+\par         \cf3 call\cf1  \cf3 SetUnitPositionLoc\cf1\b (\b0 caster, moveloc\b )\b0 
+\par         \cf3 call\cf1\b  \cf3\b0 SetUnitFacingTimed\cf1\b (\b0  caster, Angle, \cf3 0\cf1  \b )\b0 
+\par         \cf3 call\cf1  \cf3 SetUnitAnimation\cf1\b (\b0  caster, \cf4\i "Stand\cf1\i0  \cf4\i Ready"\cf1\i0  \b )\b0 
+\par         \cf3 call\cf1  \cf3 ShowUnitShow\cf1\b (\b0 caster\b )\b0 
+\par         \cf3 call\cf1\b  \cf3\b0 SelectUnitForPlayerSingle\cf1\b (\b0 caster, \cf3 GetOwningPlayer\cf1\b (\b0 caster\b )\b0  \b )
+\par \b0         \cf3\f1 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 targetloc\b )\b0 
+\par \f0         \cf3\f1 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 castloc\b )\b0 
+\par \f0         \cf3\f1 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 moveloc\b )\b0 
+\par \f0         \cf3\f1 set\cf1  target\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  dummy\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  caster\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  targetloc\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  castloc\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  moveloc\cf3 =\cf5 null\cf1 
+\par         \f0 
+\par         \cf3 call\cf1  \cf3 DestroyTrigger\cf1\b (\b0\f1 t\b\f0 )\b0 
+\par     \b endif
+\par     \b0     \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 targetloc\b )\b0 
+\par         \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 castloc\b )\b0 
+\par         \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 moveloc\b )\b0 
+\par         \cf3 set\cf1  target\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  dummy\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  caster\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  targetloc\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  castloc\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  moveloc\cf3 =\cf5 null\cf1 
+\par \b\f1 else
+\par \b0         \cf3 call\cf1  \cf3 SetUnitPositionLoc\cf1\b (\b0 caster, castloc\b )\b0 
+\par         \cf3 call\cf1  \cf3 SetUnitFacingTimed\cf1\b (\b0  caster, Angle, \cf3 0\cf1  \b )\b0 
+\par         \cf3 call\cf1  \cf3 SetUnitAnimation\cf1\b (\b0  caster, \cf4\i "Stand\cf1\i0  \cf4\i Ready"\cf1\i0  \b )\b0 
+\par         \cf3 call\cf1  \cf3 ShowUnitShow\cf1\b (\b0 caster\b )\b0 
+\par         \cf3 call\cf1  \cf3 SelectUnitForPlayerSingle\cf1\b (\b0 caster, \cf3 GetOwningPlayer\cf1\b (\b0 caster\b )\b0  \b )\b0 
+\par 
+\par 
+\par         \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 targetloc\b )\b0 
+\par         \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 castloc\b )\b0 
+\par         \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 moveloc\b )\b0 
+\par         \cf3 set\cf1  target\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  dummy\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  caster\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  targetloc\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  castloc\cf3 =\cf5 null\cf1 
+\par         \cf3 set\cf1  moveloc\cf3 =\cf5 null\cf1 
+\par \b endif\b0\f0 
+\par 
+\par \b endfunction\b0 
+\par 
+\par \b function\b0  \f1 LeapAttack\f0 Actions \b takes\b0  \cf2\f1 unit\cf1  caster, \cf2 unit\cf1  target, \cf2 string\cf1  ani\f0  \b returns\b0  \cf2 nothing\cf1 
+\par     \cf3\f1 local\cf1  \cf2 player\cf1  owner\cf3 =GetOwningPlayer\cf1\b (\b0 caster\b )\b0\f0 
+\par     \cf3\f1 local\cf1  \cf2 unit\cf1  dummy
+\par     \cf3 local\cf1  \cf2 location\cf1  castloc\cf3 =GetUnitLoc\cf1\b (\b0 caster\b )
+\par \b0\f0     \cf3\f1 local\cf1  \cf2 location\cf1  targetloc\cf3 =GetUnitLoc\cf1\b (\b0 target\b )\b0\f0 
+\par \cf3     local \cf2 real\cf3  \cf1 leapDist
+\par     \cf3 local\cf1  \cf2 real\cf1  leapHeight
+\par     \cf3 local\cf1  \cf2 real\cf1  leapRate
+\par     \cf3 local\cf1  \cf2 real\cf1  leapWait
+\par     \cf3\f1 local\cf1  \cf2 trigger\cf1  t\f0 
+\par \f1     \f0 
+\par     \cf6\i //\cf1\i0  \cf6\i Set\cf1\i0  \cf6\i target\cf1\i0 
+\par     \cf3 set\cf1  udg_hero_DW_LeapTarget \cf3 =\cf1  udg_hero_SpellUnitTargets\b [\cf3\b0 GetPlayerId\cf1\b (\cf3\b0 GetOwningPlayer\cf1\b (\b0 udg_hero_DW_Daywalker\b ))]\b0 
+\par 
+\par     \cf3 call\cf1  \cf3 ShowUnitHide\cf1\b (\b0 caster\b )
+\par \b0     \cf3 set\cf1  dummy\cf3 =CreateUnitAtLoc\cf1\b (\b0  \cf3 Player\cf1\b (\cf3\b0 15\cf1\b )\b0 , \cf3 GetUnitTypeId\cf1\b (\b0 caster\b )\b0 , castloc, \cf3 GetUnitFacing\cf1\b (\b0 caster\b ))
+\par \b0    \f1  \cf3\f0 call\cf1  \cf3 UnitAddAbility\cf1\b (\b0 dummy,\cf4\i 'Aloc'\cf1\b\i0 )\b0 
+\par     \cf6\i //\cf1\i0  \cf6\i Find\cf1\i0  \cf6\i out\cf1\i0  \cf6\i how\cf1\i0  \cf6\i far\cf1\i0  \cf6\i the\cf1\i0  \cf6\i target\cf1\i0  \cf6\i is,\cf1\i0  \cf6\i this\cf1\i0  \cf6\i determines\cf1\i0  \cf6\i height\cf1\i0  \cf6\i leaped\cf1\i0  \cf6\i and\cf1\i0  \cf6\i time\cf1\i0  \cf6\i waited.\cf1\i0 
+\par     \cf6\i //\cf1\i0  \cf6\i This\cf1\i0  \cf6\i assumes\cf1\i0  \cf6\i that\cf1\i0  \cf6\i the\cf1\i0  \cf6\i daywalker\cf1\i0  \cf6\i will\cf1\i0  \cf6\i move\cf1\i0  \cf6\i (x,y)\cf1\i0  \cf6\i at\cf1\i0  \cf6\i a\cf1\i0  \cf6\i constant\cf1\i0  \cf6\i rate\cf1\i0  \cf6\i while\cf1\i0  \cf6\i leaping\cf1\i0 
+\par     \cf6\i //\cf1\i0  \cf6\i You\cf1\i0  \cf6\i can\cf1\i0  \cf6\i adjust\cf1\i0  \cf6\i this\cf1\i0  \cf6\i for\cf1\i0  \cf6\i different\cf1\i0  \cf6\i hero\cf1\i0  \cf6\i models\cf1\i0 
+\par     \cf3 set\cf1  leapDist \cf3 =\cf1  \cf3 DistanceBetweenPoints\cf1\b (\b0\f1 castloc\f0 , targetloc\cf3  \cf1\b )\b0 
+\par     \cf3 set\cf1  leapHeight \cf3 =\cf1  leapDist \cf3 /\cf1  \cf3 5\cf1  \cf3 +\cf1  \cf3 350\cf1 
+\par     \cf3 set\cf1  leapRate \cf3 =\cf1  leapDist \cf3 *\cf1  \cf3 2\cf1 
+\par     \cf3 set\cf1  leapWait \cf3 =\cf1  leapDist \cf3 /\cf1  \cf3 1500\cf1  \cf3 +\cf1  .15
+\par 
+\par     \cf6\i //\cf1\i0  \cf6\i Setup\cf1\i0  \cf6\i Leaper's\cf1\i0  \cf6\i animation\cf1\i0  \cf6\i and\cf1\i0  \cf6\i make\cf1\i0  \cf6\i him\cf1\i0  \cf6\i unselectable\cf1\i0 
+\par     \cf3 call\cf1  \cf3 SetUnitTimeScalePercent\cf1\b (\b0  dummy, \cf3 25.00\cf1  \cf3 *\cf1  \b (\b0 leapDist \cf3 /\cf1  \cf3 800\cf1\b )\b0  \b )
+\par \b0  
+\par     \cf6\i //\f1 set ani\cf1\i0\f0 
+\par     \cf3 call\cf1  \cf3 SetUnitAnimation\cf1\b (\b0  dummy, ani\b )\b0 
+\par 
+\par     \cf6\i //\cf1\i0  \cf6\i\f1 Leap\f0 
+\par \cf1\i0     \cf3 call\cf1  \cf3 SetUnitFlyHeightBJ\cf1\b (\b0  dummy, leapHeight, leapRate \b )\b0 
+\par     \cf3 set\cf1  \f1 t\cf3 =\cf1\f0  \cf3 CreateTrigger\cf1\b ()
+\par \b0     \cf3\f1 call\cf1  SetHandleHandle\f0 
+\par     \cf3 call\cf1  \cf3 TriggerAddAction\cf1\b (\b0  \f1 t\f0 , \b function\b0  LeapMove \b )\b0 
+\par     \cf3 call\cf1  \cf3 TriggerRegisterTimerEventPeriodic\cf1\b (\b0  \f1 t\f0 , \cf3 0.0\f1 1\cf1\f0  \b )
+\par \b0     \cf6\i\f1 //wait\cf1\i0  \cf6\i to\cf1\i0  \cf6\i peak\cf1\i0\f0 
+\par     \cf3 call\cf1  \cf3 PolledWait\cf1\b (\b0  leapWait \b )\b0 
+\par     \cf3 call\cf1  \cf3 SetUnitFlyHeightBJ\cf1\b (\b0 dummy, \cf3 0\cf1 , leapRate \b )\b0 
+\par     \cf3 call\cf1  \cf3 SetUnitTimeScalePercent\cf1\b (\b0  dummy, \cf3 100.00\cf1  \b )\b0 
+\par 
+\par \b endfunction\b0 
+\par 
+\par \cf0 
+\par }
+ 

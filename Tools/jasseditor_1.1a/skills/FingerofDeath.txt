@@ -1,0 +1,44 @@
+function TouchOfDeathConditions takes nothing returns boolean
+return (GetSpellAbilityId() == 'A04P' )
+endfunction
+
+function TouchOfDeathActions takes nothing returns nothing
+    local unit fodtarget=GetSpellTargetUnit()
+    local unit fodcaster=GetSpellAbilityUnit()
+    local integer fodloop
+    local integer fodlevel=GetUnitAbilityLevelSwapped('A04P', fodcaster)
+    local location fodpos
+    local effect fodfx
+    set fodloop=1
+loop
+    exitwhen fodloop >3
+    if (GetBooleanAnd((fodloop==fodlevel), ( GetUnitStateSwap(UNIT_STATE_LIFE,fodtarget) < ((150*fodlevel) + 350.00) ))) then
+    set fodpos=GetUnitLoc(fodtarget)
+    call AddSpecialEffectLocBJ( fodpos, "Abilities\\Spells\\Human\\MarkOfChaos\\MarkOfChaosTarget.mdl" )
+    set fodfx=GetLastCreatedEffectBJ()
+    call AddSpecialEffectLocBJ( fodpos, "Doodads\\BlackCitadel\\Props\\RuneArt\\RuneArt2.mdl" )
+    call RemoveLocation (fodpos)
+    call TriggerSleepAction( 0.05 )
+    call SetUnitLifeBJ( fodtarget, 0.50 )
+    call DestroyEffect (fodfx)
+    if (IsUnitAliveBJ(fodtarget) == true ) then
+     call UnitDamageTargetBJ(fodcaster, fodtarget, 50.00, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+     endif
+    set fodtarget=null
+    set fodcaster=null
+    return
+    endif
+    set fodloop=fodloop+1
+endloop
+    set fodtarget=null
+    set fodcaster=null
+endfunction
+
+//===========================================================================
+function InitTrig_TouchOfDeath takes nothing returns nothing
+    set gg_trg_TouchOfDeath = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_TouchOfDeath, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_TouchOfDeath, Condition( function TouchOfDeathConditions  ) )
+    call TriggerAddAction( gg_trg_TouchOfDeath, function TouchOfDeathActions  )
+endfunction
+

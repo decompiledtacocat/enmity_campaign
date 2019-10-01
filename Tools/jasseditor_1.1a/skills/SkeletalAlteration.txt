@@ -1,0 +1,33 @@
+function SkeletalAlterationConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A090' )
+endfunction
+function SkeletalAlterationActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    local player owner=GetOwningPlayer(caster)
+    local location targetloc=GetUnitLoc(target)
+    local integer level=GetUnitAbilityLevelSwapped('A090',caster)
+    local unit buffer=CreateUnitAtLoc(owner,'n011', targetloc, bj_UNIT_FACING)
+    if (  IsUnitEnemy(target, owner) == true  ) then
+        call UnitAddAbilityBJ( 'A08I',buffer)
+        call SetUnitAbilityLevelSwapped( 'A08I', buffer, level )
+        call IssueTargetOrderBJ(buffer, "slow", target )
+    else
+        call UnitAddAbilityBJ( 'A08Z', buffer)
+        call SetUnitAbilityLevelSwapped( 'A08Z',buffer,level)
+        call IssueTargetOrderBJ( buffer, "bloodlust", target)
+    endif
+    call RemoveLocation(targetloc)
+    set buffer=null
+    set owner=null
+    set target=null
+    set caster=null
+endfunction
+//===========================================================================
+function InitTrig_Skeletal_Alteration takes nothing returns nothing
+    set gg_trg_Skeletal_Alteration = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Skeletal_Alteration, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Skeletal_Alteration, Condition( function SkeletalAlterationConditions ) )
+    call TriggerAddAction( gg_trg_Skeletal_Alteration, function SkeletalAlterationActions )
+endfunction
+

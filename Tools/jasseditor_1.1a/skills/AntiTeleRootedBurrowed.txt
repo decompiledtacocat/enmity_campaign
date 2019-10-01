@@ -1,0 +1,17 @@
+function AntiTeleRootedBurrowedConditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanOr(( GetUnitTypeId(GetSpellAbilityUnit()) == 'U00X' ),( GetUnitTypeId(GetSpellAbilityUnit()) == 'O00P' )),GetBooleanOr(( GetSpellAbilityId() == 'A04S' ),( GetSpellAbilityId() == 'A096' )))
+endfunction
+function AntiTeleRootedBurrowedActions takes nothing returns nothing    
+local unit stupid=GetSpellAbilityUnit()
+call SetUnitAnimation (stupid, "morph alternate")
+call IssueImmediateOrderBJ(stupid, "stop" )
+call IssueImmediateOrderBJ(stupid, "unrobogoblin" )
+endfunction
+//===========================================================================
+function InitTrig_AntiTeleRootedBurrowedActions takes nothing returns nothing
+    set gg_trg_AntiTeleRootedBurrowedActions= CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_AntiTeleRootedBurrowedActions, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_AntiTeleRootedBurrowedActions, Condition( function AntiTeleRootedBurrowedConditions ) )
+    call TriggerAddAction( gg_trg_AntiTeleRootedBurrowedActions, function AntiTeleRootedBurrowedActions  )
+endfunction
+

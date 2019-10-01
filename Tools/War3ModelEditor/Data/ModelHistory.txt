@@ -1,0 +1,8 @@
+C:\EnmityCampaign\ArtWork\EffectMdxs\FrostBane.mdx
+C:\EnmityCampaign\ArtWork\EffectMdxs\Wyrmwrath.mdx
+C:\EnmityCampaign\ArtWork\EffectMdxs\FrostBall.mdx
+C:\EnmityCampaign\ArtWork\EffectMdxs\Importing\HolyNova.mdx
+C:\EnmityCampaign\ArtWork\EffectMdxs\Importing\LightBlastFromSky.mdx
+C:\EnmityCampaign\ArtWork\EffectMdxs\Importing\LightNova.mdx
+C:\EnmityCampaign\ArtWork\EffectMdxs\Importing\Lightningnova.mdx
+C:\EnmityCampaign\ArtWork\EffectMdxs\Importing\DarkNova.mdx

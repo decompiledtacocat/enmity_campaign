@@ -1,0 +1,36 @@
+function Trig_ManaLifeRuneFinish_Conditions takes nothing returns boolean
+return GetBooleanOr(GetUnitTypeId(GetSpellAbilityUnit()) == 'o00W',GetUnitTypeId(GetSpellAbilityUnit()) == 'o00Z') 
+endfunction
+
+function Trig_ManaLifeRuneFinish_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer id=GetUnitTypeId(caster)
+local unit target=GetHandleUnit(caster,"itemdrain")
+local effect fx
+if IsUnitAliveBJ(target)==true then
+if id=='o00W' then//life
+call SetUnitLifeBJ(target,GetUnitState(target,UNIT_STATE_LIFE)+(GetUnitState(caster,UNIT_STATE_LIFE)-100))
+set fx=AddSpecialEffectTarget("Abilities\\Spells\\Other\\Drain\\DrainTarget.mdl",target,"chest")
+elseif id=='o00Z' then//mana
+call SetUnitManaBJ(target,GetUnitState(target,UNIT_STATE_MANA)+GetUnitState(caster,UNIT_STATE_MANA))
+set fx=AddSpecialEffectTarget("Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl",target,"chest")
+endif
+endif
+call KillUnit(caster)
+call FlushHandleLocals(caster)
+call TriggerSleepAction(1)
+call DestroyEffect(fx)
+set fx=null
+set caster=null
+set target=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_ManaLifeRuneFinish takes nothing returns nothing
+    set gg_trg_ManaLifeRuneFinish = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ManaLifeRuneFinish, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_ManaLifeRuneFinish, Condition( function Trig_ManaLifeRuneFinish_Conditions ) )
+    call TriggerAddAction( gg_trg_ManaLifeRuneFinish, function Trig_ManaLifeRuneFinish_Actions )
+endfunction
+

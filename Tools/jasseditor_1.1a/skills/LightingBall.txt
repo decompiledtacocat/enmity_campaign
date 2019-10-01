@@ -1,0 +1,52 @@
+function Trig_LightingBall_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0EQ' 
+
+endfunction
+
+function Trig_LightingBall_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local unit rabbit
+local unit picked
+local group temp
+local integer level=GetUnitAbilityLevel(caster,'A0EQ')
+local real  maxdamage=level*65
+local real interval
+local location moveloc
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocMatching(550.00,castloc, Condition(function filtercheck))
+set interval=360/CountUnitsInGroup(temp)        
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null
+                   set interval=interval+interval
+                   set moveloc=PolarProjectionBJ(castloc,75,interval)
+                   set rabbit=CreateRabbit(owner,castloc)
+                    call UnitAddAbility(rabbit,'A0EP')
+                    call IssueTargetOrder(rabbit,"chainlightning",picked)
+                    call UnitDamageTargetBJ(caster, picked,GetRandomReal(1,maxdamage), ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                   call RemoveLocation(moveloc)
+                   set moveloc=null
+                   call GroupRemoveUnit(temp,picked)  
+                  endloop
+                call DestroyGroup(temp)
+                set temp=null
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+set caster=null
+set rabbit=null
+set picked=null
+
+
+endfunction
+
+//===========================================================================
+function InitTrig_LightingBall takes nothing returns nothing
+    set gg_trg_LightingBall = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_LightingBall, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_LightingBall, Condition( function Trig_LightingBall_Conditions ) )
+    call TriggerAddAction( gg_trg_LightingBall, function Trig_LightingBall_Actions )
+endfunction

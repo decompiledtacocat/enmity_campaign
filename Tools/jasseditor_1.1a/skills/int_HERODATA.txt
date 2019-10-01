@@ -1,0 +1,92 @@
+function INIT_HeroData takes nothing returns nothing
+set udg_DataHU[0]='O00O' //AP
+set udg_DataHU[1]='H00R' //ARMADA
+set udg_DataHU[2]='H012' //BERSERKER
+set udg_DataHU[3]='O001' //BLADEMASTER
+set udg_DataHU[4]='H00N' //BLOODMAGE
+set udg_DataHU[5]='O000' //SHAKER
+set udg_DataHU[6]='E002' //ELITE ARCHER
+set udg_DataHU[7]='U008' //CRUSADER
+set udg_DataHU[8]='O016' //BREAKER
+set udg_DataHU[9]='O006' //MECH GOLEM
+set udg_DataHU[10]='H017' //NETHER SORC
+set udg_DataHU[11]='O004' //NINJA
+set udg_DataHU[12]='E000' //OMEGA
+set udg_DataHU[13]='N01U' //PANDA
+set udg_DataHU[14]='N02I' //ELEMENT
+set udg_DataHU[15]='E001' //RANGER
+set udg_DataHU[16]='H00Q' //STORM
+set udg_DataHU[17]='N00W' //TINKER
+set udg_DataHU[18]='H00S' //MAIDEN
+set udg_DataHU[19]='U00G' //TRAP
+set udg_DataHU[20]='H00H' //MK
+set udg_DataHU[21]='H005' //WATERMAGE
+set udg_DataHU[22]='O00Q' //DOCTER
+set udg_DataHU[23]='0000' 
+set udg_DataHU[24]='0000' 
+set udg_DataHU[25]='0000' 
+set udg_DataHU[26]='0000'
+set udg_DataHU[27]='0000'
+set udg_DataHU[28]='0000'
+set udg_DataHU[29]='0000'
+set udg_DataHU[30]='0000'
+
+set udg_DataUD[0]='U018' //broodspider
+set udg_DataUD[1]='O012' //bb edge
+set udg_DataUD[2]='O011' //sword
+set udg_DataUD[3]='N00R' //CONSUMER
+set udg_DataUD[4]='U00W' //CRYPTLORD
+set udg_DataUD[5]='U00J' //DARK RANGER
+set udg_DataUD[6]='U007' //DEATH KNIGHT
+set udg_DataUD[7]='U006' //DEMONESS
+set udg_DataUD[8]='U01A' //DESTROYER
+set udg_DataUD[9]='O00V' //DOOMGAURD
+set udg_DataUD[10]='N02S' //FACELESS
+set udg_DataUD[11]='E00C' //FALLEN
+set udg_DataUD[12]='U00Z' //GARG
+set udg_DataUD[13]='U01F' //GLOOM
+set udg_DataUD[14]='U00H' //FIRELORD
+set udg_DataUD[15]='U01H' //SHADE
+set udg_DataUD[16]='E00D' //INSIDIOUS
+set udg_DataUD[17]='U00F' //LICH
+set udg_DataUD[18]='U01B' //BONE
+set udg_DataUD[19]='U00D' //VAMP
+set udg_DataUD[20]='N02R' //PITLORD
+set udg_DataUD[21]='O003' //SHAPELESS
+set udg_DataUD[22]='O005' //S DESTROYER
+set udg_DataUD[23]='U00K' //REAPER
+set udg_DataUD[24]='U002' //UA
+set udg_DataUD[25]='U00I' //VOIDLORD
+set udg_DataUD[26]='0000'
+set udg_DataUD[27]='0000'
+set udg_DataUD[28]='0000'
+set udg_DataUD[29]='0000'
+set udg_DataUD[30]='0000'
+
+endfunction
+
+
+function GetHeroIndex takes integer team returns integer
+local integer maxud=23
+local integer maxhu=26
+local integer sel
+local integer good=0
+local integer indx
+if team==0 then
+set sel=maxhu
+else
+set sel=maxud
+endif
+
+loop 
+exitwhen good>0
+set indx=GetRandomInt(0,sel)
+if team==0 then 
+set good=udg_DataHU[indx]
+else
+set good=udg_DataUD[indx]
+endif
+endloop
+
+return good
+endfunction

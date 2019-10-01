@@ -1,0 +1,90 @@
+function Trig_ShadowFlare_Conditions takes nothing returns boolean
+return GetUnitTypeId(GetSummonedUnit()) == 'u01L' 
+endfunction
+
+function Trig_ShadowFlare_Actions takes nothing returns nothing
+local unit caster=GetSummoningUnit()
+local unit flare=GetSummonedUnit()
+local location flareloc=GetUnitLoc(flare)
+local location castloc
+local integer level=GetUnitAbilityLevel(caster,'A0HV')
+local integer sloop=0
+local unit rabbit
+local player owner=GetOwningPlayer(caster)
+local group temp
+local player owner=GetOwningPlayer(caster)
+local unit picked
+local real damage=50
+local integer charges=0
+loop
+exitwhen sloop>=level*5
+set rabbit=CreateRabbitXY(owner,GetUnitX(caster),GetUnitY(caster))
+call UnitAddAbility(rabbit,'A0HX')
+call SetUnitFlyHeight(rabbit,GetRandomReal(0,140),999) 
+call SetUnitPosition(rabbit,GetUnitX(caster),GetUnitY(caster))
+set castloc=GetUnitLoc(caster)
+if DistanceBetweenPoints(castloc,flareloc) <=800 then
+call IssueTargetOrder(rabbit,"drunkenhaze",flare)
+set charges=charges+1
+endif
+call RemoveLocation(castloc)
+set castloc=null
+call TriggerSleepAction(0)
+set sloop=sloop+1
+endloop
+
+loop
+exitwhen charges<=0 or IsUnitDeadBJ(flare)
+
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocMatching(600,flareloc,Condition(function filtercheck))
+
+if CountUnitsInGroup(temp)>0 then
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null or charges<=0
+set picked=GroupPickRandomUnit(temp)
+set rabbit=CreateRabbitXY(owner,GetUnitX(caster),GetUnitY(caster))
+call UnitAddAbility(rabbit,'A0HX')
+call SetUnitFlyHeight(rabbit,GetUnitFlyHeight(flare),9999)
+call SetUnitPosition(rabbit,GetUnitX(flare),GetUnitY(flare))
+set castloc=GetUnitLoc(picked)
+if DistanceBetweenPoints(castloc,flareloc) <=600 then
+call IssueTargetOrder(rabbit,"drunkenhaze",picked)
+set charges=charges-1
+call TriggerSleepAction(0)
+call UnitDamageTargetBJ(caster, picked,damage, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+else 
+call TriggerSleepAction(0)
+endif
+call RemoveLocation(castloc)
+set castloc=null
+call GroupRemoveUnit(temp,picked)
+endloop
+
+else
+call TriggerSleepAction(0)
+endif
+
+call DestroyGroup(temp)
+set temp=null
+endloop
+
+
+
+call KillUnit(flare)
+set flare=null
+call RemoveLocation(flareloc)
+set caster=null
+call KillUnit(rabbit)
+set rabbit=null
+endfunction
+
+//===========================================================================
+function InitTrig_ShadowFlare takes nothing returns nothing
+    set gg_trg_ShadowFlare = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ShadowFlare, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_ShadowFlare, Condition( function Trig_ShadowFlare_Conditions ) )
+    call TriggerAddAction( gg_trg_ShadowFlare, function Trig_ShadowFlare_Actions )
+endfunction

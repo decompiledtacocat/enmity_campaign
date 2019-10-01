@@ -1,0 +1,50 @@
+function RustWaterBuffCheckActions takes nothing returns nothing
+local group rustgroup
+local unit pickedunit
+local integer rustindex
+local boolean turnoff=true
+//A00I damage modifer
+//B001 buff
+set rustindex=1
+loop
+exitwhen rustindex>5
+     if (CountUnitsInGroup(udg_RustingWater[rustindex]) > 0)then
+       set turnoff=false
+       set rustgroup=CreateGroup()
+       call GroupAddGroup(udg_RustingWater[rustindex],rustgroup)
+        loop
+           set pickedunit=FirstOfGroup(rustgroup)
+           exitwhen pickedunit==null
+         if (UnitHasBuffBJ(pickedunit, 'B001') == true)then
+              if (GetUnitAbilityLevelSwapped('A00I', pickedunit) <1 )then
+              call UnitAddAbilityBJ( 'A00I', pickedunit)
+              endif
+              
+              if (GetUnitAbilityLevelSwapped('A00I', pickedunit)!=rustindex )then
+               call SetUnitAbilityLevelSwapped('A00I', pickedunit, rustindex)
+              endif
+         else
+              if (GetUnitAbilityLevelSwapped('A00I', pickedunit) >0 )then
+              call UnitRemoveAbilityBJ( 'A00I', pickedunit)
+              endif
+          call  GroupRemoveUnit(udg_RustingWater[rustindex],pickedunit)
+         endif   
+          set pickedunit=null
+          call GroupRemoveUnit(rustgroup,pickedunit)
+        endloop
+       call DestroyGroup(rustgroup)
+     endif
+set rustindex= rustindex+1       
+endloop
+if turnoff==true then
+call DisableTrigger( GetTriggeringTrigger() )
+endif
+endfunction
+
+//===========================================================================
+function InitTrig_RustWaterBuffCheck takes nothing returns nothing
+    set gg_trg_RustWaterBuffCheck = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_RustWaterBuffCheck, 1.00 )
+    call TriggerAddAction( gg_trg_RustWaterBuffCheck, function RustWaterBuffCheckActions )
+endfunction
+

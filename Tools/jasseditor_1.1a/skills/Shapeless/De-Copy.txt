@@ -1,0 +1,44 @@
+function DeCopy takes unit xcopy, unit oldcopy returns nothing 
+local integer array copylevels
+local player owner=GetOwningPlayer(xcopy)
+local integer sloop=0
+loop
+exitwhen sloop>4
+set copylevels[sloop]=GetHandleInt(oldcopy,("xcopylevel"+I2S(sloop))) 
+set sloop=sloop+1
+endloop
+    if (copylevels[0]>0 ) then
+        call SelectHeroSkill( xcopy, 'A06C' )
+        call SetUnitAbilityLevelSwapped( 'A06C', xcopy, copylevels[0] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[0] - 1 ) )
+    endif
+    if ( copylevels[1]>0  ) then
+        call SelectHeroSkill( xcopy, 'A061' )
+        call SetUnitAbilityLevelSwapped( 'A061', xcopy, copylevels[1] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[1] - 1 ) )
+    endif
+    if (copylevels[2]>0  ) then
+        call SelectHeroSkill( xcopy, 'A064' )
+        call SetUnitAbilityLevelSwapped( 'A064', xcopy, copylevels[2] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[2] - 1 ) )
+    endif
+    if ( copylevels[3]>0  ) then
+        call SelectHeroSkill( xcopy, 'A04O' )
+        call SetUnitAbilityLevelSwapped( 'A04O', xcopy, copylevels[3] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[3] - 1 ) )
+    endif
+    if ( copylevels[4]>0  ) then
+        call SelectHeroSkill( xcopy, 'A07S' )
+        call SetUnitAbilityLevelSwapped( 'A07S', xcopy, copylevels[4] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[4] - 1 ) )
+    endif
+    call UnitRemoveAbilityBJ('A06F', xcopy )
+    call UnitRemoveAbilityBJ('A06G', xcopy )
+    call SelectUnitAddForPlayer( xcopy,owner)
+    call transferward(oldcopy,xcopy)
+    call KillSummons(oldcopy)
+    call FlushHandleLocals(oldcopy)
+    set owner=null
+    set xcopy=null
+    set oldcopy=null
+endfunction

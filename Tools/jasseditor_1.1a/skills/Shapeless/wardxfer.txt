@@ -1,0 +1,8 @@
+function transferward takes unit old, unit new returns nothing
+local unit w1=GetHandleUnit(old,"ward1")
+local unit w2=GetHandleUnit(old,"ward2")
+call SetHandleHandle(new ,"ward1",w1)
+call SetHandleHandle(new ,"ward2",w2)
+set w1=null
+set w2=null
+endfunction

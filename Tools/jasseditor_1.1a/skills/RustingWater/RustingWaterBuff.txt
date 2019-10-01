@@ -1,0 +1,31 @@
+function RustingWaterConditions takes nothing returns boolean
+    return ( GetUnitAbilityLevelSwapped('A00K', GetAttacker()) > 0 )
+endfunction
+
+function RustingWaterActions takes nothing returns nothing
+    local unit rustwaterunit=GetAttacker()
+    local unit rustwatertarget=GetAttackedUnitBJ()
+    local integer rustwaterlevel=GetUnitAbilityLevelSwapped('A00K',rustwaterunit)
+    local integer rustwaterindex
+    set rustwaterindex=1
+    loop
+    exitwhen rustwaterindex>5
+    if (GetBooleanAnd((IsUnitInGroup(rustwatertarget, udg_RustingWater[rustwaterindex]) == false ),( rustwaterlevel==rustwaterindex )) ) then
+        call GroupAddUnitSimple(rustwatertarget, udg_RustingWater[rustwaterindex])
+        call EnableTrigger( gg_trg_RustWaterBuffCheck )
+    set rustwaterunit=null
+    set rustwatertarget=null
+    return
+    endif
+    set rustwaterindex=rustwaterindex+1
+    endloop
+endfunction
+
+//===========================================================================
+function InitTrig_RustingWater takes nothing returns nothing
+    set gg_trg_RustingWater = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RustingWater, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_RustingWater, Condition( function RustingWaterConditions ) )
+    call TriggerAddAction( gg_trg_RustingWater, function RustingWaterActions )
+endfunction
+

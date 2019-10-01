@@ -1,0 +1,57 @@
+function Trig_AbsorbDamage_Conditions takes nothing returns boolean
+return  GetSpellAbilityId() == 'A0H1'
+endfunction
+function AbsorbPassiveDamageCondition takes nothing returns boolean
+return GetEventDamage()>=1 
+endfunction
+
+function AbsorbPassiveDamage takes nothing returns nothing
+local unit caster=GetTriggerUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0H7')
+local real damage=GetEventDamage()
+local unit source=GetEventDamageSource()
+local real life=GetUnitState(caster, UNIT_STATE_LIFE)
+local real absorb=damage*(1+(.5*level))
+if level > 0 then
+   if GetRandomInt(0,100)<10 then 
+   call SetUnitLifeBJ(caster,life+absorb)
+   call DestroyEffect(AddSpellEffectTargetById('A0H7' , EFFECT_TYPE_SPECIAL, caster,"origin"))
+   call FadingText("absorbed",105,105,105, GetUnitX(source), GetUnitY(source))
+   endif
+else
+set source=null
+call SetHandleHandle(caster,"AbsorbDamagePassive",null)
+set caster=null
+call DestroyTrigger(GetTriggeringTrigger())
+endif
+set source=null
+set caster=null
+endfunction
+
+function Trig_AbsorbDamage_Actions takes nothing returns nothing
+local unit caster=GetLearningUnit()
+local trigger t=GetHandleTrigger(caster,"AbsorbDamagePassive")
+if t==null then
+else DestroyTrigger(t)
+set t=null
+endif
+set t=CreateTrigger()
+call SetHandleHandle(caster,"AbsorbDamagePassive",t)
+call TriggerAddAction(t, function AbsorbPassiveDamage)
+call TriggerAddCondition(t, Condition( function AbsorbPassiveDamageCondition ) )
+call TriggerRegisterUnitEvent( t, caster, EVENT_UNIT_DAMAGED )
+loop
+call TriggerSleepAction(0)
+exitwhen UnitHasBuffBJ(caster,'B03P')
+endloop
+call DestroyTrigger(t)
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_AbsorbDamage takes nothing returns nothing
+    set gg_trg_AbsorbDamage = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ(gg_trg_AbsorbDamage, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_AbsorbDamage, Condition( function Trig_AbsorbDamage_Conditions ) )
+    call TriggerAddAction( gg_trg_AbsorbDamage, function Trig_AbsorbDamage_Actions )
+endfunction

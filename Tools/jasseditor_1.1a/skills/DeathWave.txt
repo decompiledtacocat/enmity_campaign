@@ -1,0 +1,57 @@
+function DeathWaveConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0BG' ) 
+endfunction
+
+function DeathWaveActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit portal
+local unit buffer
+local location targetloc=GetSpellTargetLoc()
+local location newloc
+local location casterloc=GetUnitLoc(caster)
+local integer level=GetUnitAbilityLevel(caster,'A0BG')
+local player owner=GetOwningPlayer(caster)
+local real angle= AngleBetweenPoints(casterloc,targetloc)
+    set portal=CreateUnitAtLoc(owner, 'n021', targetloc,angle)
+    call RemoveLocation(targetloc)
+    set targetloc=GetUnitLoc(portal)
+    call SetUnitTimeScalePercent(portal, 300 )
+    call SetUnitAnimation( portal, "birth" )
+    call QueueUnitAnimationBJ( portal, "stand" )
+    call SetUnitTimeScalePercent(portal, 300 )
+    set buffer=CreateUnitAtLoc( owner, 'n022',targetloc, bj_UNIT_FACING)
+    call SetUnitVertexColorBJ( buffer, 100.00, 100.00, 100.00, 100.00 )
+    call UnitAddAbility(buffer, 'A0BF')
+    call SetUnitAbilityLevelSwapped('A0BF',buffer,level)
+    call PlaySoundOnUnitBJ(gg_snd_MagicLariatLoop1,150,portal)
+    call PolledWait2(2.0)
+    call PlaySoundOnUnitBJ(gg_snd_MarkOfChaos,150,portal)
+    call PolledWait2(1.5)
+    set newloc=PolarProjectionBJ (targetloc, 200, angle)
+    call IssuePointOrderLocBJ(buffer, "shockwave", newloc)
+    call KillUnit(portal)
+    call PolledWait2(1.0)
+    call ShowUnitHide(buffer)
+    call PolledWait2(10.0)
+    call KillUnit(buffer)
+    call RemoveUnit(buffer)
+    call RemoveUnit(portal)
+call RemoveLocation(targetloc)
+call RemoveLocation(newloc)
+call RemoveLocation(casterloc)
+set owner=null
+set casterloc=null
+set newloc=null
+set targetloc=null
+set buffer=null
+set portal=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_DeathWave takes nothing returns nothing
+    set gg_trg_DeathWave = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DeathWave, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DeathWave, Condition( function DeathWaveConditions ) )
+    call TriggerAddAction( gg_trg_DeathWave, function DeathWaveActions )
+endfunction

@@ -1,0 +1,162 @@
+function UnitCreationActions takes nothing returns nothing
+    local location spawnloc
+    local location spawmoveloc
+    local group spawngroup
+    local integer spawnloop
+    local unit spawnbuilding
+    local unit spawntierb
+    local player spawnplayer
+    local rect spawnarea
+    
+    //human spawns.
+    // right rax gg_unit_h001_0013 sanc gg_unit_h002_0016 spwn gg_rct_RightCastleSpawn spwndest gg_rct_Right_Castle
+    //center rax gg_unit_h001_0015 sanc gg_unit_h002_0012 spwn gg_rct_CenterCastleSpawn spwndest gg_rct_Center_Caslte
+    //left rax  gg_unit_h001_0009 sanc gg_unit_h002_0014  spwn gg_rct_LeftCastleSpawn spwndest gg_rct_Left_Castle
+    //left flank  gg_unit_h001_0291  gg_unit_h002_0292 spwn gg_rct_HuLeftFlank goto gg_rct_HuLeftFlank2
+    //right flank gg_unit_h001_0293 sanc gg_unit_h002_0294 gg_rct_HuRightFlank goto gg_rct_RightFlank
+    set spawnplayer=Player(0)
+    set spawnloop=1
+    loop
+         exitwhen spawnloop > 5
+         if spawnloop==1 then//right
+         set spawnbuilding=gg_unit_h001_0013
+         set spawntierb=gg_unit_h002_0016
+         set spawnarea=gg_rct_RightCastleSpawn
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_Right_Castle)
+         elseif spawnloop==2 then//center
+         set spawnbuilding=gg_unit_h001_0015
+         set spawntierb=gg_unit_h002_0012
+         set spawnarea=gg_rct_CenterCastleSpawn
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_Center_Caslte)
+         elseif spawnloop==3 then//left
+         set spawnbuilding=gg_unit_h001_0009
+         set spawntierb=gg_unit_h002_0014
+         set spawnarea=gg_rct_LeftCastleSpawn
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_Left_Castle)
+         elseif spawnloop==4 then//leftflank
+         set spawnbuilding=gg_unit_h001_0291
+         set spawntierb=gg_unit_h002_0292
+         set spawnarea=gg_rct_HuLeftFlank
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_HuLeftFlank2)
+         elseif spawnloop==5 then//leftright
+         set spawnbuilding=gg_unit_h001_0009
+         set spawntierb=gg_unit_h001_0293
+         set spawnarea=gg_rct_HuRightFlank
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_RightFlank)
+         endif
+     if (IsUnitAliveBJ(spawnbuilding) == true)then
+        call CreateUnitAtLoc(spawnplayer, 'h006',spawnloc, bj_UNIT_FACING )
+        call CreateUnitAtLoc(spawnplayer, 'h006',spawnloc, bj_UNIT_FACING )
+          if spawnloop <4 then
+          call CreateUnitAtLoc(spawnplayer, 'h008',spawnloc, bj_UNIT_FACING )
+         endif
+     endif
+     if (GetBooleanAnd((IsUnitAliveBJ(spawntierb) == true),( udg_TierUpgrade[1] == true ))) then
+        call CreateUnitAtLoc(spawnplayer, 'h007',spawnloc, bj_UNIT_FACING )
+          if spawnloop <4 then
+          call CreateUnitAtLoc(spawnplayer, 'h009',spawnloc, bj_UNIT_FACING )
+         endif
+     endif
+     
+       set spawngroup=GetUnitsInRectOfPlayer(spawnarea,spawnplayer)
+       call GroupPointOrderLoc(spawngroup,"attack",spawmoveloc)
+       
+       call DestroyGroup(spawngroup)
+       set spawngroup=null
+       call RemoveLocation(spawnloc)
+       call RemoveLocation(spawmoveloc)
+       set spawnloc=null
+       set spawmoveloc=null
+       
+       set spawnbuilding=null
+       set spawntierb=null
+       set spawnarea=null
+
+       set spawnloop = spawnloop + 1
+    endloop
+    
+    // Undead
+    // right rax gg_unit_u005_0124 sanc gg_unit_u004_0125 spwn gg_rct_RightBlackSpawn spwndest gg_rct_Right_of_Citadel
+    //center rax gg_unit_u005_0127 sanc gg_unit_u004_0126 spwn gg_rct_CenterBlackSpawn spwndest gg_rct_Center_Citadel
+    //left rax  gg_unit_u005_0129 sanc gg_unit_u004_0130  spwn gg_rct_LeftBlackSpawn spwndest gg_rct_Left_of_Citdel
+    //left flank  gg_unit_u005_0287 sanc gg_unit_u004_0288  spwn gg_rct_UDFlankLeft spwndest gg_rct_UDLeftFlank2
+    //right flank  gg_unit_u005_0289 sanc gg_unit_u004_0290  spwn gg_rct_UDFlankRight spwndest gg_rct_RightFlank
+    
+    set spawnplayer=null
+    set spawnplayer=Player(6)
+    set spawnloop=1
+    loop
+         exitwhen spawnloop > 5
+         if spawnloop==1 then//right
+         set spawnbuilding=gg_unit_u005_0124
+         set spawntierb=gg_unit_u004_0125
+         set spawnarea=gg_rct_RightBlackSpawn
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_Right_of_Citadel)
+         elseif spawnloop==2 then//center
+         set spawnbuilding=gg_unit_u005_0127
+         set spawntierb=gg_unit_u004_0126 
+         set spawnarea=gg_rct_CenterBlackSpawn
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_Center_Citadel)
+         elseif spawnloop==3 then//left
+         set spawnbuilding=gg_unit_u005_0129
+         set spawntierb=gg_unit_u004_0130
+         set spawnarea=gg_rct_LeftBlackSpawn
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_Left_of_Citdel)
+         elseif spawnloop==4 then//leftflank
+         set spawnbuilding=gg_unit_u005_0287
+         set spawntierb=gg_unit_u004_0288
+         set spawnarea=gg_rct_UDFlankLeft 
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_UDLeftFlank2)
+         elseif spawnloop==5 then//rightflank
+         set spawnbuilding=gg_unit_u005_0289 
+         set spawntierb=gg_unit_u004_0290  
+         set spawnarea=gg_rct_UDFlankRight
+         set spawnloc=GetRectCenter(spawnarea)
+         set spawmoveloc=GetRectCenter(gg_rct_RightFlank)
+         endif
+     if (IsUnitAliveBJ(spawnbuilding) == true)then
+        call CreateUnitAtLoc(spawnplayer, 'u00B',spawnloc, bj_UNIT_FACING )
+        call CreateUnitAtLoc(spawnplayer, 'u00B',spawnloc, bj_UNIT_FACING )
+         if spawnloop<4 then
+        call CreateUnitAtLoc(spawnplayer, 'u00A',spawnloc, bj_UNIT_FACING )
+        endif
+     endif
+     if (GetBooleanAnd((IsUnitAliveBJ(spawntierb) == true),( udg_TierUpgrade[1] == true ))) then
+        call CreateUnitAtLoc(spawnplayer, 'u009',spawnloc, bj_UNIT_FACING )
+        if spawnloop<4 then
+        call CreateUnitAtLoc(spawnplayer, 'u00C',spawnloc, bj_UNIT_FACING )
+        endif
+     endif
+       set spawngroup=GetUnitsInRectOfPlayer(spawnarea,spawnplayer)
+       call GroupPointOrderLoc(spawngroup,"attack",spawmoveloc)
+       call DestroyGroup(spawngroup)
+       set spawngroup=null
+       call RemoveLocation(spawnloc)
+       call RemoveLocation(spawmoveloc)
+       set spawnloc=null
+       set spawmoveloc=null
+       
+       set spawnbuilding=null
+       set spawntierb=null
+       set spawnarea=null
+       set spawnloop = spawnloop + 1
+    endloop
+    set spawnplayer=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_UnitCreation takes nothing returns nothing
+    set gg_trg_UnitCreation = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_UnitCreation, 35.00 )
+    call TriggerAddAction( gg_trg_UnitCreation, function UnitCreationActions)
+endfunction

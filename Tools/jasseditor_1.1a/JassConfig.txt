@@ -1,0 +1,20 @@
+Warning:
+- Messing up this file can cause errors in Jass Editor
+- If there are problems, delete the file and Jass Editor restores it automatically.
+You can add your own files to these lists.
+
+[Functions]
+Func.txt
+Custom.txt
+
+[Constants]
+Const.txt
+
+[Syntax]
+Syn.txt
+
+[AIFunctions]
+AIFunc.txt
+
+[AIConstants]
+AIConst.txt

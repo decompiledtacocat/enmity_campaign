@@ -1,0 +1,35 @@
+function PossessionAlt takes unit original, unit new returns nothing
+local integer isposs=GetHandleInt(original,"possessed!")
+local integer isxcopy=GetHandleInt(original,"isacopy")
+local unit shapeless
+local integer owner
+local unit caster
+local unit xcopy
+local integer sloop=0
+if (isposs==1) then
+set shapeless=GetHandleUnit(original,"Shapeless")
+set owner=GetHandleInt(original,"OrignalOwner")
+call SetHandleInt(original,"possessed!",0)
+call SetHandleHandle(shapeless,"possessing",new)
+call SetHandleHandle(new,"Shapeless",shapeless)
+call SetHandleInt(new,"OrignalOwner",owner)
+call SetHandleInt(new,"possessed!",1)
+endif
+if (isxcopy==1) then
+set caster=GetHandleUnit(original,"oldcopy")
+call SetHandleHandle(caster,"newcopy",new)
+call SetHandleHandle(new,"oldcopy",caster)
+  loop
+    exitwhen sloop>4
+    call SetHandleInt(new ,("xcopylevel"+I2S(sloop)), GetHandleInt(original,("xcopylevel"+I2S(sloop)))) 
+    set sloop=sloop+1
+  endloop
+call SetHandleInt(new,"isacopy",1) 
+call UnitAddAbilityBJ( 'A06G',new )
+call UnitAddAbilityBJ( 'A06F',new ) 
+endif
+set caster=null
+set xcopy=null
+set shapeless=null
+endfunction
+

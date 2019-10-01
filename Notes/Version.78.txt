@@ -1,0 +1,391 @@
+Completed:
+--------------------------------
+=======================================================================
+Game Play Changes
+=======================================================================
+--Agility no longer increases armor.
+--Non charged Items are no longer stackable.
+--Ghoul base damage increased by 1.
+--Replaced fiends with Skeletal Marksman
+--Web Upgrade removed
+--Marksman Upgrade Added.
+--Creature attack upgrades changed to Arrow Head Upgrades.
+--Max Hero level changed to 25.
+--Stat bonus skills now go up to level 7.
+--Panda Temporarly Removed
+--Hell Shade Temporarly Removed
+--Curse and Slow mana cost changed to 30 from 50.
+
+Terrain
+--Created Outpost.
+
+Items
+--Added Item Creation effect
+
+Shops
+--Resorted Recipe Shops
+--Non Mech and Non Racial Item Recipes now display the item icons.
+--Moved shops.
+
+Game Option
+-nr no item restrictions
+
+Single Player Cheat
+--bringemout - Upgrades creep tier.
+
+Heros:
+--Class Name updates. Tank: Assault: Range: Mage: Support: Tech:
+
+=======================================================================
+Alliance Balance Changes
+=======================================================================
+ADDED NEW HERO
+--Gun Slinger
+
+Ninja
+--Mirror Images now take 200% physical damage up from 150%.
+--Mirror Image - Mana cost increased to 110 from 95.
+
+Storm Mage
+--Raven Form now drains 15 mana per second when activated.
+
+Ancient Protector
+--Root mana cost changed to 0 from 25.
+
+Witch Doctor
+--Hex Mana cost increased to 110 from 75.
+--Hex Now last 4 seconds at all levels. Cast range per level is now 300/500/700/900/1100.
+--Hex Cooldown per level is now 12/11/10/9/8 seconds.
+--Voodoo Mana cost changed to 75 from 125
+
+Transcendant Madien
+--Wild Lightning now deals 35-85/70-170/105-255/140-340/175-425 damage from 1-x.
+
+Elite Archer
+--Volley now gains 1 damage for every 3 points of agility.
+--Volley can now target structures.
+
+Ranger
+--Will O the Wisp now release 2/4/6 wisp from 2/3/4 wisp.
+
+Earth Shaker
+--Bottle Rocket cast ranged changed to 450 from 600.
+
+Iron Golem
+--Removed Sentinel Force Rockets
+--Added Nine Breaker
+
+=======================================================================
+Scourge Balance Changes
+=======================================================================
+Undead Royal Assassin
+--Increased Foul play backstab radius slightly.
+--Soul Edge now benefits from units killed by units owned by the Royal Assassin.
+
+
+Reaper
+--Ghost Form now drains 15 mana per second when activated.
+
+
+Gargoyle
+--Gale Storm now does 3/5/7 air lancers up from 2/4/6.
+--Gale Storm now lands the gargoyle next to his target.
+--Air Lancer now recieves 1 bonus damage for every 3 points of agility of the gargolye.
+
+CryptLord
+--Burrow mana cost changed to 0 from 25.
+
+I.Demon
+--Dark Curse no longer inflicts sleep and hex.
+--Dark Curse infliction base chances increased by 2%, levels increase chances accordingly.
+--Dark Curse is now 100 mana. Cooldown reduced to 10 seconds from 15.
+--Hinder mana cost changed to 225/150/75.
+--Hinder cooldowns changed to 35/25/15 seconds.
+
+BBE
+--Burning Blade Tech Balze damage increased to 9-13/18-26/27-39/36-52/45-65 damage from 7-10/14-20/21-30/28-40/35-50.
+--Burning Blade now stacks.
+
+Burning Blade Sword
+--Bloodstrike now deals 2/4/6/8/10% unit health every 3 seconds over 9 seconds from a random number up to 2/3/4/5/6% per second over 15 seconds.
+--Burning Blade Tech Wraith duration changed to 6 seconds at all level from 10 seconds.
+--Cross Slash cast time reduced.
+
+Gloom 
+--dischord changed to mutuation - grants control of a unit increases damage by 200/400/600%,
+movement speed by 50% and attack speed by 50% but kills unit over 10 seconds.
+
+=======================================================================
+Items:
+=======================================================================
+--Recipes are now 100/200/300 gold.
+--Added Grenade Launcher - While having this item Grenades are now instant damage spells.
+
+Mystic Robe
+--Changed to Warlock Armor.
+--Added active skill demon armor which gives + 10 armor and 3 bonus life and mana regeneration fr 45 seconds.
+--Mage Class Only
+
+Mana Capacitor - Name changed to Pendant of Mana.
+Regenerator - Name changed to Pendant of Vitality
+
+Aegis Reflector
+--Now requires an Aegis and Pendant of Mana.
+--Removed Pierce/Magic/Spell Reduction now gives 12 armor.
+--400 bonus mana up from 350
+--Mana shield Absorbs 100% damage costing .75(up from .65) mana per 1 point of damage absorbed.
+
+Stealth Cloaker
+--Changed to Cloaking Device
+--Renders unit invisible for 10 seconds from 45 seconds.
+--Can now affect non mechanical units.
+
+Mind Staff 
+--Recipe Changed to Sceptor of Knowledge, Wand of Knowledge, and Dragon Lance.
+--No longer gives mana regeneration now gives 15 damage damage.
+--Bonus Intelligence changed to 30 from 35.
+
+
+Spell Book
+--Cyclone cooldown changed to 20 seconds from 6 seconds,mana cost changed to 150 from 125.
+
+Tome of Retraining
+--now removes all buffs.
+
+Summoner Stone
+--Now adds 50% more HP from a constant 500 hp to units under it's effects.
+
+
+Belt of Regeneration
+--Removed
+
+Raging Claws
+--Removed
+
+Executioner
+--Removed
+
+Shock Absorber
+--Now requires Aegis and Heavy Armor to make.
+--Now Gives 20 armor, reduces damage by 20, has taunt, and gives chance deal 50 damage and stun attackers for 2 seconds.
+
+Spiked Armor 
+--Now returns 25 damage to melee attacks up from 15.
+--No longer has taunt and 150 pierce damage to nearby enemy units.
+
+Remote Mines
+--Removed
+
+
+Gauntlet of Destruction
+--Requires Golden Gloves and Bison Strength
+--23 Strength, 8 damage
+--Shockwave - Launches a shockwave in front of user destroying trees and dealing 240 damage to all it's path.
+--Bash - 10% chance to deal 20 bonus damage and stun on attacks.
+--Tank Class Only.
+
+Grenade Launcher
+--When inventory Flash bangs and Grenades become instant attacks.
+
+Grenade
+--Cool down changed to 4 seconds from 3.
+
+Flash Bang
+--Cool down changed to 4 seconds from 3.
+
+Juggernaut
+--Is now tier 3
+--Now Requires Ring Of Power, Runed Bracer, Helm of Iron Strength
+--25 strength.
+--2 armor. 
+--Avatar - Grants user spell immunity, 25 damage, 500 life and 5 armor for 8 seconds.
+--Tank Class Only
+
+Ring of Power
+--Requires Ring of Protection, Belt Of Giant Strength
+--2 Armor, 6 strength, use - Increase damage by 25 for 8 seconds.
+
+Combat Boots
+--Require Boots of Quel, Running Boots.
+--15 Agility
+--2 Armor
+--Dash
+--50+ speed.
+
+Infiltrator
+--5 armor
+--15 agility
+--20% evasion
+--Air Trick - Teleports to target and deals 100 damage.
+--Assault Class Only
+
+Quick Step Boots
+--Removed.
+
+Assassins Mark 
+--Changed to Death's Embrace
+--Attack speed changd to 20% from 30%.
+--Backstab now called Opportunity.
+--No longer deals poison damage
+--Track changed to Death's Desire.
+--Death's Desire - Grants vision of target reduces armor by 10.
+--Assault Class Only
+
+
+Rangers Cloak of Shadows
+--Removed
+
+Rusting Gloves
+--Removed
+
+Poison Threads
+--Requires Acid Grenade and Orb of Power
+--Increases Damage by 10%.
+--Corrosive reduces armor.
+--Ranger Class Only
+
+Fire Thread
+--Requires Grenade and Orb of Power
+--Increases Damage by 10%.
+--Active - Explosive Arrow.
+--Ranger Class Only
+
+Flash Threads
+--Requires Flash Bang and Orb of Power
+--Increases Damage by 10%.
+--Active - Blinding Arrow - Silences chance to miss.
+--Ranger Class Only
+
+Defiler
+--Requires Medallion of Honor, Dragon Lance and Claws of attack.
+25 damage.
+10 to all stats.
+Defiler's Touch - Attacks infict target with poison which deals 10 damage per second over 120 seconds.
+Defiler's Wrath - Inflicts a curse which disables spell casting, causes target to miss 50% of it's attacks and reduces targets attack and movement speed by 25%. Last 6 seconds. 
+Defiler's Touch and Wrath can only be used by Light Melee heros.
+--Assault Class Only
+
+Orb of Power
+--Increases damage by 10%.
+
+Talisman of evasion
+--cost increased to 600
+
+
+Hawk Eye Lens
+--Require Crystal Ball, Medalion of Honor, Orb of Power
+--25% chance to instantly kill units.
+--20% increased ranged damage.
+--True Sight (minor)
+--Shatter Shot - Reduces armor by 12.
+--Ranger Class Only
+
+Shadow cloak
+--Body Armor, Talisman of evasion and Cloaking Device.
+--Flash - Renders user invisible for 4 seconds and Blinds and slows all nearby units.
+--Armor
+--Hide
+--Evasion
+--Ranger Class Only
+
+Acid Grenade
+--Reduces enemy units armor by 6 for 10 seconds.
+
+Holy Seal of the Paladin
+--Now requires Full Plated armor instead of Protecting Ring
+
+
+Stealth Armor - changed to Ghost Armor
+--Stealth backstab damage changed to 150 from 75.
+--Now requires hood of cunning, body armor and cloaking device.
+
+Orb of Inertia
+--Increases movement and attack speed by 10%
+
+Mechanical Purger
+--Removed
+
+Polish and restore 
+--removed
+
+Purification potion
+--Charges 4
+--removes all buffs and debuffs.
+
+Devastator
+--Bounce cooldown changed to 25 from 15.
+--Tank Class Only
+
+Cat Tooth
+--Item Damage changed 30 from 40
+--Cost changed to 1800 from 2400.
+
+Golden Gloves
+--Melee Attackers Only.
+
+Warped Armor
+--3 armor.
+--9 Intelligence.
+--Increases movement and attack speed by 10%.
+--Blink - Short distance teleportation.
+--Mage Class Only.
+
+Overclocked Generator
+--Duration changed to 120 from 45.
+--Cooldown increased to 30 seconds from 15.
+--Mana cost changed to 0.
+
+Generator
+--Duration changed to 120 from 45.
+--Cooldown increased to 30 seconds from 15.
+--Mana cost changed to 0.
+
+Improved Land Mines
+--Requires Hood of Cunning, Orb of Power, and Land Mines.
+--9 agility
+--Improved Land Mine - Places a hidden land mine at a target point. Enemy units that move near the land mine will activate the mine, destroying the mine and causing area of effect damage deal up to 450 damage to nearby units.
+
+Land Mines
+--Now cost 15 mana.
+--cooldown changed to 2 from 4.
+
+Stasis Traps
+--Requires Tazer, EMP Shockwave, and Wand of Knowledge.
+--9 intelligence.
+--Stasis Trap - Summons an invisible and immovable ward that stuns enemy units around it. The trap activates when an enemy land unit approaches and destroys all other stasis wards in its area of effect. The trap lasts 150 seconds. The stun lasts 2.5 seconds.
+
+Tazer
+--Stuns target for 2.5 seconds.
+
+Mind Blaster
+--Requires Wand of Knowledge, and Claws of Attack.
+--Burns 2 mana and deals damage equal to mana burned. Burns 2 mana for each point of intelligence.
+--9 intelligence
+--10 damage.
+
+=======================================================================
+Fixes:
+=======================================================================
+
+Fixed an issue related to casting X-Copy on a Omega Hunter while in Ethereal Assassin Form.
+Fixed an issue which causes shockabsorber to reduce about 2x the amount of damage intended.
+Fixed tooltip error on Vine Grasp and Seedling Cannon.
+Fixed an issue related to Gauntlet of Destruction with Ancient Protector and Crypt Lord.
+Fixed an issue which allowed ranged heavy melees to use bash on certain items.
+Fixed and issue where reaper and stormage mana regeneration would stop.
+Mutate - Small Graphical changes.
+Mutate - Can only be casted on organic units.
+Mutated Units revert back to normal after death.
+Gun Slinger now has a propper name.
+
+Fixed an issue where Sketal Destroyer Images would produce more destroyers.
+Fixed Gargoyle Vision when in stone form.
+Fixed Marksman tooltip to display propper damage.
+Fixed an issue causing acid grenades to hit a players own units.
+
+Fixed GunSlinger Elusive tooltip.
+Fixed C4 Lag issues.
+
+
+Gun Kanta
+--No longer takes damage from melee return damage skills.

@@ -1,0 +1,56 @@
+function Trig_Blade_Storm_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0C0' ) 
+endfunction
+
+function Trig_Blade_Storm_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local unit cyclone
+local location targetloc=GetSpellTargetLoc()
+local location castloc=GetUnitLoc(caster)
+local location movep
+local integer level=GetUnitAbilityLevel(caster,'A0C0')
+local integer bloop=1
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local location subp=PolarProjectionBJ(castloc,800,angle)
+
+loop
+exitwhen bloop > level
+
+if bloop==1 then
+set movep=PolarProjectionBJ(targetloc,700,angle)
+elseif bloop >1 then
+  if ModuloInteger(bloop, 2) == 0 then 
+  set movep=PolarProjectionBJ(subp,bloop*125,angle+90)
+  else 
+  set movep=PolarProjectionBJ(subp,bloop*125,angle-90)
+  endif
+endif
+set cyclone=CreateUnitAtLoc(owner,'n02D',castloc,bj_UNIT_FACING)
+call IssuePointOrderLocBJ( cyclone, "move", movep )
+call UnitApplyTimedLifeBJ( 2, 'BTLF', cyclone)
+call RemoveLocation(movep)
+set movep=null
+set cyclone=null
+set bloop=bloop+1
+endloop
+call RemoveLocation(subp)
+call RemoveLocation(targetloc)
+call RemoveLocation(castloc)
+set cyclone=null
+set owner=null
+set caster=null
+set castloc=null
+set targetloc=null
+set subp=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_Blade_Storm takes nothing returns nothing
+    set gg_trg_Blade_Storm = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Blade_Storm, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Blade_Storm, Condition( function Trig_Blade_Storm_Conditions ) )
+    call TriggerAddAction( gg_trg_Blade_Storm, function Trig_Blade_Storm_Actions )
+endfunction
+

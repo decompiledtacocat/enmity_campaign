@@ -1,0 +1,146 @@
+
+//summonn base lmine
+function WarpConditions takes nothing returns boolean
+return GetSpellAbilityId()=='0000'
+endfunction
+
+function WarpActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location targetloc=GetSpellTargetLoc()
+local integer level=GetUnitAbilityLevel(caster,'0000')
+local unit hole=CreateUnit(owner,'xxxx', GetLocationX(targetloc),GetLocationY(targetloc))
+call SetHandleHandle(hole,"HoleChild",null)
+call MaxUnit(caster,hole,"WarpHole",level,3)
+call RemoveLocation(targetloc)
+set targetloc=null
+set owner=null
+set caster=null
+set hole=null
+endfunction
+
+//===========================================================================
+function InitTrig_Warp takes nothing returns nothing
+    set gg_trg_Warp = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_LandMines, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_LandMines, Condition( function Trig_LandMines_Conditions ) )
+    call TriggerAddAction( gg_trg_LandMines, function Trig_LandMines_Actions )
+endfunction
+
+//spawn
+
+function WarpSpawnConditions takes nothing returns boolean
+return GetSpellAbilityId()=='A0H3'
+endfunction
+
+
+function WarpHoleWarpActions  takes nothing returns nothing
+local unit caster=GetEnteringUnit()
+local unit target=GetHandleUnit(GetTriggeringTrigger(),"step")
+local trigger alt
+if GetBooleanAnd(target!=null, IsUnitAliveBJ(target)==true ) then
+if IsUnitAlly(caster,GetOwningPlayer(target)) then 
+call DisableTrigger(alt)
+call SetUnitPosition(caster,GetUnitX(target),GetUnitY(target))
+call EnableTrigger(alt)
+endif
+endif
+set target=null
+set caster=null
+endfunction
+
+function WarpHoleWarpActions2  takes nothing returns nothing
+local unit caster=GetEnteringUnit()
+local unit target=GetHandleUnit(GetTriggeringTrigger(),"step")
+local trigger alt
+if GetBooleanAnd(target!=null, IsUnitAliveBJ(target)==true ) then
+if IsUnitAlly(caster,GetOwningPlayer(target)) then 
+set alt=GetHandleTrigger(target,"HoleTrig")
+call DisableTrigger(alt)
+call SetUnitPosition(caster,GetUnitX(target),GetUnitY(target))
+call EnableTrigger(alt)
+endif
+endif
+set target=null
+set caster=null
+endfunction
+
+function WarpSpawnActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetSpellTargetLoc()
+local trigger t
+local trigger t2
+local rect warparea=RectFromCenterSizeBJ(castloc, 150.00, 150.00)
+local unit hole=CreateUnit(owner,'h01D', GetLocationX(targetloc),GetLocationY(targetloc),bj_UNIT_FACING)
+local location holeloc=GetUnitLoc(hole)
+local rect warparea2=RectFromCenterSizeBJ(holeloc, 150.00, 150.00)
+call SetUnitAnimation(hole,"birth")
+call UnitRemoveAbility(hole,'A0H3')
+call UnitRemoveAbility(caster,'A0H3')
+call SetHandleHandle(caster,"HoleChild",hole)
+call SetHandleHandle(hole,"HoleParent",caster)
+
+
+    set t = CreateTrigger()
+    call SetHandleHandle(caster,"HoleTrig",t)
+    call SetHandleHandle(GetTriggeringTrigger(),"step",hole)
+    call TriggerRegisterEnterRectSimple( t,warparea)
+    call TriggerAddAction( t, function WarpHoleWarpActions  )
+   
+   set t2 = CreateTrigger()
+   call SetHandleHandle(hole,"HoleTrig",t2)
+   call SetHandleHandle(GetTriggeringTrigger(),"step",caster)
+    call TriggerRegisterEnterRectSimple( t2,warparea2)
+    call TriggerAddAction( t2, function WarpHoleWarpActions2  )
+
+call RemoveLocation(castloc)
+set castloc=null
+call RemoveLocation(holeloc)
+set holeloc=null
+call RemoveLocation(targetloc)
+set targetloc=null
+set owner=null
+set caster=null
+set hole=null
+endfunction
+
+//death
+
+function WarpDeathConditions takes nothing returns boolean
+return GetUnitTypeId(GetDyingUnit())=='h01D'
+endfunction
+
+function WarpDeathActions takes nothing returns nothing
+local unit caster=GetDyingUnit()
+local unit x=GetHandleUnit(caster,"HoleParent")
+local unit y=GetHandleUnit(caster,"HoleChild")
+if y!=null then
+if IsUnitAliveBJ(y) then
+call KillUnit(y)
+call DestroyTrigger(GetHandleTrigger(x,"HoleTrig"))
+call FlushHandleLocals(y)
+endif
+elseif x!=null then
+if IsUnitAliveBJ(x) then
+call KillUnit(x)
+call DestroyTrigger(GetHandleTrigger(y,"HoleTrig"))
+call FlushHandleLocals(x)
+endif
+set caster=null
+set y=null
+set x=null
+endfunction
+
+
+
+
+
+
+
+
+
+
+
+

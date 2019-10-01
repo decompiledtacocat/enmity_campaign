@@ -1,0 +1,116 @@
+function Trig_SealOfSacrifice_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0F7' ) 
+endfunction
+function SealOfSacrificeHeal takes nothing returns nothing
+local unit target=GetTriggerUnit()
+local unit caster=GetHandleUnit(target,"sealcaster")
+local real damage=GetEventDamage()
+local integer level=GetHandleInt(target,"seallevel")
+local effect fx1=null
+local effect fx2=null
+
+if GetBooleanOr(damage>GetUnitState(target,UNIT_STATE_LIFE),GetBooleanOr(UnitHasBuffBJ(target,'B029')==false,IsUnitAliveBJ(caster)==false)) then 
+
+if UnitHasBuffBJ(target,'B029')==true then
+call UnitRemoveBuffBJ('B029',target)
+endif
+call SetHandleHandle(target,"sealcaster",null)
+call SetHandleHandle(caster,"sealtarget",null)
+call SetHandleHandle(caster,"sealtrigger",null)
+set caster=null
+set target=null
+call FlushHandleLocals(GetTriggeringTrigger())
+call DestroyTrigger(GetTriggeringTrigger())
+
+elseif GetBooleanAnd(damage >0,GetBooleanAnd(UnitHasBuffBJ(target,'B029')==true,IsUnitAliveBJ(caster)==true)) then
+  call SetUnitLifeBJ(caster,GetUnitState(caster,UNIT_STATE_LIFE)+(level*.25*damage))
+  set fx1=AddSpellEffectTargetById('A0F7', EFFECT_TYPE_SPECIAL, caster, "chest" )
+  set fx2=AddSpellEffectTargetById('A0F7', EFFECT_TYPE_SPECIAL, target, "overhead" )
+  call PolledWait2(.5)
+  call DestroyEffect(fx1)
+  call DestroyEffect(fx2)
+  set fx1=null
+  set fx2=null
+endif
+
+
+
+set caster=null
+set target=null
+endfunction
+function Trig_SealOfSacrifice_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(target)
+local integer level=GetUnitAbilityLevel(caster,'A0F7')
+local trigger t
+local unit rabbit=CreateRabbit(owner,castloc)
+local trigger oldtrigger=GetHandleTrigger(caster,"sealtrigger")
+local unit oldunit
+
+
+if oldtrigger!=null then
+set oldunit=GetHandleUnit(caster,"sealtarget")
+if UnitHasBuffBJ(oldunit,'B029')==true then
+call UnitRemoveBuffBJ('B029',oldunit)
+endif
+call SetHandleHandle(oldunit,"sealcaster",null)
+call SetHandleInt(oldunit,"seallevel",0)
+call FlushHandleLocals(oldtrigger)
+call DestroyTrigger(oldtrigger)
+set oldtrigger=null
+endif
+
+if UnitHasBuffBJ(target,'B029')==true then
+call UnitRemoveBuffBJ('B029',target)
+set oldunit=GetHandleUnit(target,"sealcaster")
+set oldtrigger=GetHandleTrigger(oldunit,"sealtrigger")
+call SetHandleHandle(oldunit,"sealtrigger",null)
+call SetHandleHandle(oldunit,"sealtarget",null)
+call SetHandleHandle(target,"sealcaster",null)
+call SetHandleInt(target,"seallevel",0)
+call FlushHandleLocals(oldtrigger)
+call DestroyTrigger(oldtrigger)
+set oldtrigger=null
+endif
+
+if GetHandleTrigger(target,"sealtarget")!=null then
+set oldtrigger=GetHandleTrigger(target,"sealtrigger")
+set oldunit=GetHandleUnit(target,"sealtarget")
+if UnitHasBuffBJ(oldunit,'B029')==true then
+call UnitRemoveBuffBJ('B029',oldunit)
+endif
+call SetHandleHandle(target,"sealtrigger",null)
+call SetHandleHandle(target,"sealtarget",null)
+call SetHandleHandle(oldunit,"sealcaster",null)
+call SetHandleInt(oldunit,"seallevel",0)
+call FlushHandleLocals(oldtrigger)
+call DestroyTrigger(oldtrigger)
+set oldtrigger=null
+endif
+
+call UnitAddAbility(rabbit,'A0F8')
+call SetUnitAbilityLevelSwapped( 'A0F8', rabbit, level )
+call IssueTargetOrder(rabbit,"innerfire",target)
+call PolledWait(0)
+set t=CreateTrigger()
+call SetHandleHandle(caster,"sealtrigger",t)
+call SetHandleHandle(caster,"sealtarget",target)
+call SetHandleHandle(target,"sealcaster",caster)
+call SetHandleInt(target,"seallevel",level)
+call TriggerAddAction(t, function SealOfSacrificeHeal)
+call TriggerRegisterUnitEvent( t, target, EVENT_UNIT_DAMAGED )
+set caster=null
+set target=null
+set oldunit=null
+set oldtrigger=null
+endfunction
+
+//===========================================================================
+function InitTrig_SealOfSacrifice takes nothing returns nothing
+    set gg_trg_SealOfSacrifice = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SealOfSacrifice, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SealOfSacrifice, Condition( function Trig_SealOfSacrifice_Conditions ) )
+    call TriggerAddAction( gg_trg_SealOfSacrifice, function Trig_SealOfSacrifice_Actions )
+endfunction

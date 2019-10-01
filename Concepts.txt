@@ -1,0 +1,94 @@
+New Heros 
+
+
+Elemental Fist 
+
+Elemental Fist - Adds elemental effects. 
+Omni - Multiple attacks. 
+==================================== 
+
+
+
+
+
+Ragnorok - Teleporting strikes. 
+
+
+
+AA attack - 
+CalTrops - By scattering these devices across a path, the Ninja makes it both difficult and painful to move through. When used, target area is covered with caltrops (graphic indicates this). Any units moving through this area are slowed and take .5 damage per World Unit moved, as well as 5 damage per second in the AoE. Caltrops last for 25 seconds after used. 35 second cooldown. 
+============================= 
+
+11.) Tenticles.
+
+12.) Root Shield - entangels enemys.
+
+
+===================================== 
+
+
+
+Undead - Mech 
+
+Auto Mine - Deploys mines, 
+Gas/Bof - 
+
+
+
+Radar - Ping
+
+
+
+
+======================================= 
+
+
+Fly Light - Taunting Time Bomb 
+============================================ 
+
+
+Cerebus - Melee 
+Fire - Burns ground , kill trees 
+Ice - AOE low dmg high freeze. 
+Lighting - Forked Lighting Dmg 1-x 
+Three stomp - freeze units around, fire then lighting. 
+====================================================== 
+
+
+DoppleGanger - Creates a perfect image renders user invis.
+ 
+Mana Nova - Cost a % percentage and deals a percentage of current mana to surrounding units.
+
+
+Solidier - Pierce 
+Proxy mine - Grenade - Stuns, damage. 
+Nuke - Precise Strikes from the air.
+
+
+Dragon Hawk-
+
+Air Charge - Stunning air lancer.
+Cloaking Field - Arbitor 
+Stasis Field - Arbitor
+
+
+Taunt - Increases unit attack speed/movement but increases chance of miss and increases parry stun.
+
+
+
+Ranger #2 
+Light Ray - Deals damage to enemy's and heals friendlies and dispels.
+Ghosting Nova - Banishes surrounding enemys.
+Mana Feed - Everytime a unit cast a spell a % of it's cost will restores the casters mana. 
+Essence Flare - (Channel) - Increases all ally units mana regeneration/health regeneration by 500%.
+
+
+
+
+Light Melee Brawler - 
+
+Special Strike - Deals extra effect depending on strike angle.
+Counter - first melee attack and stuns.
+speed/evasion passive - xxx
+Charge strike - Add bonus damage to next attack, can stack up to x times.
+

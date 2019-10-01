@@ -1,0 +1,105 @@
+function AxearangCondition takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A09R' )
+endfunction
+function axefiltercheck takes nothing returns boolean
+//uses udg_axefilterplayer to check if filter unit is enemy, alive and not structure
+return (GetBooleanAnd(GetBooleanAnd(( IsUnitAliveBJ(GetFilterUnit()) == true ),( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false )),( IsUnitEnemy(GetFilterUnit(), udg_axefilterplayer) == true )))
+endfunction
+function AxearangDamageActions takes nothing returns nothing
+   local unit axe=GetHandleUnit(GetTriggeringTrigger(),"axearang")
+   local unit caster=GetHandleUnit(axe,"axeowner")
+   local group damagegroup
+   local location axeloc=GetUnitLoc(axe)
+   local location ownerloc=GetUnitLoc(caster)
+   local location targetloc
+   local unit picked
+   local unit dmgfx
+   local player owner=GetOwningPlayer(axe)
+   local integer axereturn=GetHandleInt(axe,"return")
+   local real damage=I2R(GetHeroStatBJ(bj_HEROSTAT_STR, caster, true))
+   local real tx
+   local real ty
+   
+
+             set tx=GetHandleReal(axe,"targetx")
+             set ty=GetHandleReal(axe,"targety")
+             set targetloc=Location(tx, ty)
+             set udg_axefilterplayer=null
+             set udg_axefilterplayer=owner
+             set damagegroup=GetUnitsInRangeOfLocMatching(80.00,axeloc, Condition(function axefiltercheck ))
+                  loop
+                   set picked=FirstOfGroup(damagegroup)
+                   exitwhen picked==null
+                   call PlaySoundOnUnitBJ( gg_snd_MetalHeavySliceFlesh2, 100.0, picked)
+                   set dmgfx=CreateRabbit(owner,axeloc)
+                   call UnitAddAbility(dmgfx,'A0B2')
+                   call IssueTargetOrder(dmgfx,"slow",picked)
+                   call UnitDamageTargetBJ(caster, picked, damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+                   call GroupRemoveUnit(damagegroup,picked)  
+                  endloop
+                call DestroyGroup(damagegroup)
+                set damagegroup=null
+   
+                if (axereturn==1) then
+                call IssuePointOrderLocBJ( axe, "move", ownerloc)
+                endif
+                if (axereturn==0) then
+                call IssuePointOrderLocBJ( axe, "move", targetloc)
+                endif 
+                if  GetBooleanAnd((axereturn==0),(DistanceBetweenPoints(axeloc,targetloc) <=100 )) then
+                call SetHandleInt(axe,"return",1) 
+                call IssuePointOrderLocBJ( axe, "move", ownerloc)
+                endif
+                if  GetBooleanAnd((axereturn==1),(DistanceBetweenPoints(axeloc,ownerloc) <=100 )) then
+                call KillUnit(axe)
+                call FlushHandleLocals(axe)
+                call FlushHandleLocals(GetTriggeringTrigger())
+                call DestroyTrigger(GetTriggeringTrigger())
+                endif
+             call RemoveLocation(axeloc)
+             call RemoveLocation(targetloc) 
+             call RemoveLocation(ownerloc)
+             set ownerloc=null
+             set targetloc=null
+             set axeloc=null 
+             set picked=null
+             set axe=null
+             set caster=null
+
+endfunction
+
+function AxearangActions takes nothing returns nothing
+    local unit axethrower=GetSpellAbilityUnit()
+    local unit axe
+    local player axplayer=GetOwningPlayer(axethrower)
+    local location startloc=GetUnitLoc(axethrower)
+    local location targetloc=GetSpellTargetLoc()
+    local trigger t
+    set axe=CreateUnitAtLoc( axplayer, 'h00I', startloc,AngleBetweenPoints(startloc,targetloc) )
+    call PlaySoundOnUnitBJ( gg_snd_AxeMissileLaunch1, 100,axe)
+    call IssuePointOrderLocBJ( axe, "move", targetloc)
+    set t=CreateTrigger()
+    call SetHandleHandle(t,"axearang",axe)
+    call SetHandleHandle(axe,"axeowner",axethrower)
+    call SetHandleReal(axe,"targetx",GetLocationX(targetloc))
+    call SetHandleReal(axe,"targety",GetLocationY(targetloc))
+    call SetHandleInt(axe,"return",0)
+    
+    call TriggerRegisterTimerEventPeriodic( t, 0.40 )
+    call TriggerAddAction( t, function AxearangDamageActions  )
+    
+    call RemoveLocation(startloc)
+    call RemoveLocation(targetloc)
+    set axplayer=null
+    set targetloc=null
+    set startloc=null
+    set axe=null
+    set axethrower=null
+endfunction
+//===========================================================================
+function InitTrig_Axearang takes nothing returns nothing
+    set gg_trg_Axearang = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Axearang, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Axearang, Condition( function AxearangCondition  ) )
+    call TriggerAddAction( gg_trg_Axearang, function AxearangActions  )
+endfunction

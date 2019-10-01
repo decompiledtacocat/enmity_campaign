@@ -1,0 +1,44 @@
+function RepickConditions takes nothing returns boolean
+return  ( udg_TimeMarker[1] == false )
+endfunction
+function RepickFilter takes nothing returns boolean
+    return GetBooleanAnd(( IsUnitType(GetFilterUnit(), UNIT_TYPE_HERO) == true ),RectContainsUnit(gg_rct_HeroSelection, GetFilterUnit()) == false )
+endfunction
+function RepickActions takes nothing returns nothing
+local unit picked
+local player owner=GetTriggerPlayer()
+local group temp=GetUnitsOfPlayerMatching(owner, Condition(function RepickFilter ))
+
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+call MultiCheck(picked,false)
+    call SetPlayerStateBJ( owner, PLAYER_STATE_RESOURCE_GOLD, 425 )
+    call SetPlayerStateBJ( owner, PLAYER_STATE_RESOURCE_LUMBER, 100 )
+call RemoveUnit(picked)
+call GroupRemoveUnit(temp,picked)
+endloop
+set picked=null
+call DestroyGroup(temp)
+set temp=null
+set owner=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_Repick takes nothing returns nothing
+    set gg_trg_Repick = CreateTrigger(  )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(1), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(2), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(3), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(4), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(5), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(7), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(8), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(9), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(10), "-repick", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Repick, Player(11), "-repick", true )
+    call TriggerAddCondition( gg_trg_Repick, Condition( function RepickConditions ) )
+    call TriggerAddAction( gg_trg_Repick, function RepickActions )
+endfunction
+

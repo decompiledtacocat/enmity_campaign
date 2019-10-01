@@ -1,0 +1,43 @@
+function DevourFinishCondition takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A06C' )
+endfunction
+function TrigDevourFinishActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetUnitAbilityLevelSwapped('A06C', caster)
+if (level==1)then
+call UnitAddAbilityBJ( 'A0B5', caster)
+elseif (level==2)then
+call UnitAddAbilityBJ( 'A0B6', caster)
+elseif (level==3)then
+call UnitAddAbilityBJ( 'A0B7', caster)
+elseif (level==4)then
+call UnitAddAbilityBJ( 'A0B8', caster)
+elseif (level==5)then
+call UnitAddAbilityBJ( 'A06E', caster)
+endif
+call SetUnitAbilityLevelSwapped( 'A06E', caster, GetUnitAbilityLevelSwapped('A06D', caster))
+    loop
+        exitwhen GetBooleanOr(caster==null,(UnitHasBuffBJ(caster, 'Bdvv') == false))
+        call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL, 1))
+    endloop
+if (level==1)then
+call UnitRemoveAbilityBJ( 'A0B5', caster)
+elseif (level==2)then
+call UnitRemoveAbilityBJ( 'A0B6', caster)
+elseif (level==3)then
+call UnitRemoveAbilityBJ( 'A0B7', caster)
+elseif (level==4)then
+call UnitRemoveAbilityBJ( 'A0B8', caster)
+elseif (level==5)then
+call UnitRemoveAbilityBJ( 'A06E', caster)
+endif
+set caster=null
+endfunction
+//===========================================================================
+function InitTrig_DevourFinish takes nothing returns nothing
+    set gg_trg_DevourFinish = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DevourFinish, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_DevourFinish, Condition( function DevourFinishCondition) )
+    call TriggerAddAction( gg_trg_DevourFinish, function TrigDevourFinishActions)
+endfunction
+

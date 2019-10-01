@@ -1,0 +1,51 @@
+function ProtectorRootConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A085' )
+endfunction
+function ProtectorRootActions takes nothing returns nothing
+    local unit ap=GetSpellAbilityUnit()
+    local unit pickedroot
+    local player aplayer=GetOwningPlayer(ap)
+    local location rootloc
+    local location aploc=GetUnitLoc(ap)
+    local group roots=CreateGroup()
+    local integer rloop
+    local integer rloopmax=( 4 * GetUnitAbilityLevelSwapped('A085', ap) )
+    if ( GetUnitTypeId(ap) == 'O00P'  ) then
+        // Rooted
+        set rloop = 1
+        loop
+            exitwhen rloop >rloopmax
+            set rootloc=PolarProjectionBJ(aploc, 175.00, ( 45.00 + ( I2R(rloop) * 90.00 ) ))
+            set pickedroot=CreateUnitAtLoc(aplayer, 'n01O',rootloc , bj_UNIT_FACING )
+            call SetUnitAnimation(pickedroot, "birth" )
+            call QueueUnitAnimationBJ(pickedroot, "stand" )
+            call GroupAddUnit(roots,pickedroot)
+            set rloop = rloop + 1
+        endloop
+      call SetHandleHandle(ap,"roots",roots)  
+      set roots=null
+    else
+      set roots=GetHandleGroup(ap,"roots") 
+      loop
+      set pickedroot=FirstOfGroup(roots)
+      exitwhen pickedroot==null
+      call KillUnit(pickedroot)
+      call GroupRemoveUnit(roots,pickedroot)
+      endloop
+      call DestroyGroup(roots)
+      set roots=null
+    endif
+   call RemoveLocation(rootloc)
+   call RemoveLocation(aploc)
+   set ap=null
+   set pickedroot=null 
+endfunction
+
+//===========================================================================
+function InitTrig_ProtectorRoot takes nothing returns nothing
+    set gg_trg_ProtectorRoot = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ProtectorRoot, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_ProtectorRoot, Condition( function ProtectorRootConditions  ) )
+    call TriggerAddAction( gg_trg_ProtectorRoot, function ProtectorRootActions  )
+endfunction
+

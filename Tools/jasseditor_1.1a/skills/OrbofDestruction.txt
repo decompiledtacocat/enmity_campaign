@@ -1,0 +1,41 @@
+function OrbODestructionConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0AA' )
+endfunction
+function OrbODestructionActions takes nothing returns nothing
+    local unit caster= GetSpellAbilityUnit()
+    local location targetloc= GetSpellTargetLoc()
+    local location casterloc= GetUnitLoc(caster)
+    local player owner= GetOwningPlayer(caster)
+    local integer level=GetUnitAbilityLevelSwapped('A0AA', caster) 
+    local effect ofx=AddSpecialEffectLocBJ( targetloc, "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeTarget.mdl" )
+    local location stupidloc=PolarProjectionBJ(casterloc, 1000.00, ( 180.00 + AngleBetweenPoints(casterloc,targetloc)))
+    local unit stupid 
+    set stupid =CreateUnitAtLoc( owner, 'n01P',stupidloc , bj_UNIT_FACING )
+    call SetUnitVertexColorBJ( stupid , 100.00, 100.00, 100.00, 100.00 )
+    call SetUnitAbilityLevelSwapped('A0AB', stupid ,level)
+    call SetUnitAbilityLevelSwapped('A0AC', stupid ,level)
+    call IssuePointOrderLocBJ(stupid , "attackground", targetloc)
+    call PolledWait2( 1.50 )
+    call DestroyEffectBJ( ofx )
+    call RemoveLocation(targetloc)
+    call RemoveLocation(casterloc)
+    call RemoveLocation(stupidloc)
+    set stupidloc=null
+    set targetloc=null
+    set casterloc=null
+    set caster=null
+    set owner=null
+    set ofx=null
+    set stupidloc=null
+    call RemoveUnit(stupid)
+    set stupid=null
+endfunction
+
+//===========================================================================
+function InitTrig_OrbODestruction takes nothing returns nothing
+    set gg_trg_OrbODestruction = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_OrbODestruction, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_OrbODestruction, Condition( function OrbODestructionConditions ) )
+    call TriggerAddAction( gg_trg_OrbODestruction, function OrbODestructionActions )
+endfunction
+

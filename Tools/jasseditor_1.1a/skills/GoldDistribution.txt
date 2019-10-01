@@ -1,0 +1,50 @@
+function GoldDistributionActions takes nothing returns nothing
+    local integer playerindex
+    local player goldplayer
+    local player goldgivingplayer
+    local integer gold
+    set playerindex = 2
+    set goldgivingplayer=Player(0)
+    set gold=( GetPlayerState(goldgivingplayer, PLAYER_STATE_RESOURCE_GOLD) / 5 )
+    call SetPlayerStateBJ( goldgivingplayer, PLAYER_STATE_RESOURCE_GOLD, 0 )
+    loop
+        exitwhen playerindex > 6
+        set goldplayer=ConvertedPlayer(playerindex)
+        if GetPlayerSlotState(goldplayer)==PLAYER_SLOT_STATE_PLAYING then
+        call SetPlayerStateBJ( goldplayer, PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(goldplayer, PLAYER_STATE_RESOURCE_GOLD) + gold ) )
+        endif
+        if GetPlayerSlotState(goldplayer)==PLAYER_SLOT_STATE_LEFT then
+        call SplitPlayerGold(goldplayer)
+        endif
+        set goldplayer=null
+        set playerindex = playerindex + 1
+    endloop
+    
+    set goldplayer=null
+    set playerindex = 8
+    set goldgivingplayer=Player(6)
+    set gold=( GetPlayerState(goldgivingplayer, PLAYER_STATE_RESOURCE_GOLD) / 5 )
+    call SetPlayerStateBJ( goldgivingplayer, PLAYER_STATE_RESOURCE_GOLD, 0 )
+    loop
+        exitwhen playerindex  > 12
+        set goldplayer=ConvertedPlayer(playerindex)
+        if GetPlayerSlotState(goldplayer)==PLAYER_SLOT_STATE_PLAYING then
+        call SetPlayerStateBJ( goldplayer, PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(goldplayer, PLAYER_STATE_RESOURCE_GOLD) + gold ) )
+        endif
+        if GetPlayerSlotState(goldplayer)==PLAYER_SLOT_STATE_LEFT then
+         call SplitPlayerGold(goldplayer)
+        endif
+        set goldplayer=null
+        set playerindex  = playerindex  + 1
+    endloop
+    call SetPlayerStateBJ( goldgivingplayer, PLAYER_STATE_RESOURCE_GOLD, 0 )
+    set goldgivingplayer=null
+    set goldplayer=null
+endfunction
+
+//===========================================================================
+function InitTrig_GoldDistribution takes nothing returns nothing
+    set gg_trg_GoldDistribution = CreateTrigger(  )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_GoldDistribution, 5.00 )
+    call TriggerAddAction( gg_trg_GoldDistribution, function GoldDistributionActions )
+endfunction

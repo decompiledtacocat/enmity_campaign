@@ -1,0 +1,45 @@
+function Trig_PockEnlistment_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0BR'
+
+endfunction
+
+function Trig_PockEnlistment_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location loc=GetSpellTargetLoc()
+local unit center=GetHandleUnit(caster,"enlistment")
+local integer level=GetUnitAbilityLevel(caster,'A0BR')
+local integer utype
+
+if IsUnitAliveBJ(center) then
+call KillUnit(center)
+endif
+if level==1 then
+set utype='n029'
+elseif level==2 then
+set utype='n02A'
+elseif level==3 then
+set utype='n02B'
+elseif level==4 then
+set utype='n02C'
+elseif level==5 then
+set utype='n024'
+endif
+set center=CreateUnitAtLoc(owner,utype,loc, bj_UNIT_FACING) 
+call SetHandleHandle(caster,"enlistment",center)
+
+call RemoveLocation(loc)
+set loc=null
+set caster=null
+set owner=null
+set center=null
+endfunction
+
+//===========================================================================
+function InitTrig_PockEnlistment takes nothing returns nothing
+    set gg_trg_PockEnlistment = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PockEnlistment, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_PockEnlistment, Condition( function Trig_PockEnlistment_Conditions ) )
+    call TriggerAddAction( gg_trg_PockEnlistment, function Trig_PockEnlistment_Actions )
+endfunction
+

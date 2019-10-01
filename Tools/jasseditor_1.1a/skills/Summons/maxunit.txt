@@ -1,0 +1,48 @@
+function MaxUnit takes unit caster,unit utype,string cat, integer maxlevel, integer maxlimit returns nothing
+    local unit array picked
+    local unit array temp
+    local integer gloop=1
+    local integer count=0
+    local integer diff
+    loop
+        exitwhen gloop>maxlimit
+        set temp[gloop]=null
+        set picked[count+1]=GetHandleUnit(caster,(cat+I2S(gloop)))
+        if GetBooleanAnd((IsUnitAliveBJ(picked[count+1])==true),(picked[count+1]!=null)) then
+        set count = count+1
+        endif
+        set gloop=gloop+1
+    endloop
+    //count is equal to # of alive units picked 1-count is list size
+    if (count>=maxlevel) then
+       set diff = (count-maxlevel)
+       set gloop=0
+         loop
+          exitwhen gloop>diff 
+          call KillUnit(picked[gloop+1])
+          set gloop=gloop+1
+         endloop
+    endif     
+       set gloop=1
+       set count=1
+         loop
+            exitwhen gloop>maxlimit
+            if GetBooleanAnd((IsUnitAliveBJ(picked[gloop])==true),(picked[gloop]!=null)) then
+            set temp[count]=picked[gloop]
+            set count = count+1
+            endif
+          set gloop=gloop+1
+         endloop
+    set temp[count]=utype
+    set gloop=1
+    loop
+     exitwhen gloop>maxlimit
+     call SetHandleHandle(caster,(cat+I2S(gloop)),temp[gloop])
+     set temp[gloop]=null
+     set picked[gloop]=null
+     set gloop=gloop+1
+    endloop
+set caster=null
+set utype=null    
+endfunction
+

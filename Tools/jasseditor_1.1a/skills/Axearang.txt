@@ -1,0 +1,44 @@
+function AxearangCondition takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A09R' )
+endfunction
+function AxearangActions takes nothing returns nothing
+    local unit axethrower= GetSpellAbilityUnit()
+    local unit axe
+    local player axplayer=GetOwningPlayer(axethrower)
+    local location startloc=GetUnitLoc(axethrower)
+    local location targetloc=GetSpellTargetLoc()
+    local group axegroup=GetHandleGroup(axethrower,"axes")
+    set axe=CreateUnitAtLoc( axplayer, 'h00I', startloc,AngleBetweenPoints(startloc,targetloc) )
+    if (axegroup==null) then
+    set axegroup=CreateGroup()
+    endif
+    call GroupAddUnit(axegroup,axe)
+    call SetHandleReal(axe,"targetx",GetLocationX(targetloc))
+    call SetHandleReal(axe,"targety",GetLocationY(targetloc))
+    call SetHandleHandle(axethrower,"axes",axegroup)
+    call SetHandleInt(axe,"return",0)
+    call PlaySoundOnUnitBJ( gg_snd_AxeMissileLaunch1, 100,axe)
+    call KillSoundWhenDone(GetLastPlayedSound())
+    call IssuePointOrderLocBJ( axe, "move", targetloc)
+    if (IsUnitInGroup(axethrower,udg_axethrowers)==false) then
+    call GroupAddUnit(udg_axethrowers,axethrower)
+    endif
+    if( IsTriggerEnabled(gg_trg_AxearangDamage)==false )then
+    call EnableTrigger(gg_trg_AxearangDamage )
+    endif
+    call RemoveLocation(startloc)
+    call RemoveLocation(targetloc)
+    set axplayer=null
+    set targetloc=null
+    set startloc=null
+    set axe=null
+    set axethrower=null
+    set axegroup=null
+endfunction
+//===========================================================================
+function InitTrig_Axearang takes nothing returns nothing
+    set gg_trg_Axearang = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Axearang, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Axearang, Condition( function AxearangCondition  ) )
+    call TriggerAddAction( gg_trg_Axearang, function AxearangActions  )
+endfunction

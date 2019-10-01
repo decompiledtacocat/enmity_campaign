@@ -1,0 +1,86 @@
+function DisorderConditions takes nothing returns boolean
+return (UnitHasBuffBJ(GetOrderedUnit(),'B028')==true)
+endfunction
+
+function DisorderActions  takes nothing returns nothing
+local unit caster=GetOrderedUnit()
+local location castloc
+local location targetloc
+local location newloc
+local string order=OrderId2String(GetIssuedOrderIdBJ())
+local integer sloop=0
+local rect area
+local real angle
+local real dist
+local integer flag=GetHandleInt(caster,"disordered")
+if flag >=1 then
+call SetHandleInt(caster,"disordered",0)
+return
+endif
+
+
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_ORDER then
+ if GetBooleanOr(order=="stop",order=="holdposition") then
+ set castloc=GetUnitLoc(caster)
+ set area=GetRectFromCircleBJ(castloc,300)
+ set targetloc=GetRandomLocInRect(area) 
+ call SetHandleInt(caster,"disordered",1)
+ call IssuePointOrderLoc(caster,"move",targetloc)
+ call RemoveLocation(castloc)
+ set castloc=null
+ call RemoveLocation(targetloc)
+ set targetloc=null
+ call RemoveRect(area)
+ set area=null
+ endif
+endif
+
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER then
+  if GetBooleanOr(GetBooleanOr(order=="move",order=="attack"),GetBooleanOr(order=="patrol",order=="smart")) then
+  set castloc=GetUnitLoc(caster)
+  set targetloc=GetOrderPointLoc()
+  set angle=AngleBetweenPoints(targetloc,castloc)
+  set dist=DistanceBetweenPoints(targetloc,castloc)
+  set newloc=PolarProjectionBJ(castloc,dist,angle) 
+   call SetHandleInt(caster,"disordered",1)
+  call IssuePointOrderLoc(caster,order,newloc)
+  call RemoveLocation(castloc)
+  call RemoveLocation(targetloc)
+  call RemoveLocation(newloc)
+  set newloc=null
+  set castloc=null
+  set targetloc=null
+  endif
+ endif
+ 
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER then
+ if GetBooleanOr(GetBooleanOr(order=="move",order=="attack"),order=="smart") then
+  set castloc=GetUnitLoc(caster)
+  set targetloc=Location(GetWidgetX(GetOrderTarget()),GetWidgetY(GetOrderTarget()))
+  set angle=AngleBetweenPoints(targetloc,castloc)
+  set dist=DistanceBetweenPoints(targetloc,castloc)
+  set newloc=PolarProjectionBJ(castloc,dist,angle) 
+  call SetHandleInt(caster,"disordered",1)
+  call IssuePointOrderLoc(caster,order,newloc)
+  call RemoveLocation(castloc)
+  call RemoveLocation(targetloc)
+  call RemoveLocation(newloc)
+  set newloc=null
+  set castloc=null
+  set targetloc=null
+ endif
+endif
+
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_Disorder takes nothing returns nothing
+    set gg_trg_Disorder = CreateTrigger( )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Disorder , EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Disorder , EVENT_PLAYER_UNIT_ISSUED_ORDER )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Disorder , EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER )
+    call TriggerAddCondition( gg_trg_Disorder , Condition( function DisorderConditions  ) )
+    call TriggerAddAction( gg_trg_Disorder , function DisorderActions  )
+endfunction
+

@@ -1,0 +1,28 @@
+function PossessionStartConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A04O' )
+endfunction
+function PossessionStartActions takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+local unit target= GetSpellTargetUnit()
+if (GetHandleInt(target,"possessed!")==1) then
+call IssueImmediateOrderBJ( caster, "stop" )
+call DisplayTextToPlayer(GetOwningPlayer(caster),0.50,0, "|cffffcc00Unable to possess units that are already possessed.|r" )
+return
+elseif (GetUnitTypeId(target) == 'O003' ) then
+call IssueImmediateOrderBJ( caster, "stop" )
+call DisplayTextToPlayer(GetOwningPlayer(caster),0.50,0, "|cffffcc00Unable to possess units other shapeless.|r" )
+return
+else
+call SetHandleHandle(caster,"possession",target)
+call SetUnitInvulnerable( target, true )
+endif
+set caster=null
+set target=null
+endfunction
+//===========================================================================
+function InitTrig_PossessionStart takes nothing returns nothing
+    set gg_trg_PossessionStart = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PossessionStart, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_PossessionStart, Condition( function PossessionStartConditions) )
+    call TriggerAddAction( gg_trg_PossessionStart, function PossessionStartActions)
+endfunction

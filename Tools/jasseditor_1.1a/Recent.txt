@@ -1,0 +1,10 @@
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\DShadow.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\UnitCreation.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\DShadow2.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\DCircle2.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\DemonCircle.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\RustingWater\RustingWaterBuffcheck.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\RustingWater\RustingWaterBuff.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\GoldDistribution.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\ShopCleanUp.txt
+C:\Documents and Settings\TekkVicious\Desktop\jasseditor_1.1a\skills\DarkThrust.txt

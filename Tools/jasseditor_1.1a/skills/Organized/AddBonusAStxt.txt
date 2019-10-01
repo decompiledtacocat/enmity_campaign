@@ -1,0 +1,59 @@
+function SetGetAttackSpeedBonusLevel takes unit caster, integer bonus, integer level returns nothing
+local integer id
+if bonus == 1 then
+set id='A0BX'
+elseif bonus == 2 then
+set id='A0ES'
+elseif bonus == 3 then
+set id='A02W'
+endif 
+if level<=0 then
+  if GetUnitAbilityLevel(caster,id)>0 then
+  call UnitRemoveAbility(caster,id)
+  endif
+else
+  if GetUnitAbilityLevel(caster,id)<=0 then
+  call UnitAddAbility(caster,id)
+  endif
+  call SetUnitAbilityLevel(caster,id,level)
+endif
+set caster=null
+endfunction
+
+function GetAttackSpeedBonus takes unit caster returns integer
+local integer one=GetUnitAbilityLevel(caster,'A0BX')
+local integer two=GetUnitAbilityLevel(caster,'A0ES')*10
+local integer three=GetUnitAbilityLevel(caster,'A02W')*100
+return one+two+three
+endfunction
+
+function SetBonusAttackSpeed takes unit caster, integer speed, boolean add returns nothing
+//1-9 A00H
+//10-90 A05J
+//100-1000 A067
+local integer one
+local integer two
+local integer three
+local integer bonus
+if speed >999 then
+set speed =999
+endif
+set one=ModuloInteger(speed,10)
+set two=ModuloInteger(speed/10,10)
+set three=ModuloInteger(speed/100,10)
+set bonus=SetGetAttackSpeedBonusLevel(caster)
+if add==false then
+call SetGetAttackSpeedBonusLevel(caster,1,one) 
+call SetGetAttackSpeedBonusLevel(caster,2,two) 
+call SetGetAttackSpeedBonusLevel(caster,3,three) 
+else
+call SetGetAttackSpeedBonusLevel(caster,1,one+bonus)
+call SetGetAttackSpeedBonusLevel(caster,2,two+bonus)
+call SetGetAttackSpeedBonusLevel(caster,3,three+bonus)
+endif
+set caster=null
+endfunction
+function RemoveAttackSpeed takes unit caster returns nothing
+call SetBonusAttackSpeed(caster,0,false)
+set caster=null
+endfunction

@@ -1,0 +1,41 @@
+function SummonerAuraFilter takes nothing returns boolean
+return GetBooleanAnd(( GetUnitTypeId(GetEnumUnit()) != 'n01E' ),( IsUnitType(GetEnumUnit(), UNIT_TYPE_MECHANICAL) == false )) 
+endfunction
+
+function SummonerAuraBuffsFunction takes nothing returns nothing
+local group temp
+local unit picked
+local player owner=GetEnumPlayer()
+set temp=GetUnitsOfPlayerMatching(owner, Condition(function SummonerAuraFilter))
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+  
+    if GetBooleanAnd(UnitHasBuffBJ(picked, 'B00R') == true,GetUnitAbilityLevelSwapped('A07O', picked) == 0)   then
+            call UnitAddAbilityBJ( 'A07O', picked)
+    elseif GetBooleanAnd(UnitHasBuffBJ(picked, 'B00R') == false,GetUnitAbilityLevelSwapped('A07O', picked) != 0) then
+            call UnitRemoveAbilityBJ( 'A07O', picked )
+    endif
+call GroupRemoveUnit(temp,picked)
+endloop    
+call DestroyGroup(temp)
+set temp=null
+set owner=null
+endfunction
+function SummonerAuraBuffsActions takes nothing returns nothing
+    call ForForce( udg_SummonerAuraPlayers, function SummonerAuraBuffsFunction  )
+    if ( CountPlayersInForceBJ(udg_SummonerAuraPlayers) == 0  ) then
+        call DisableTrigger( GetTriggeringTrigger() )
+    else
+        call DoNothing(  )
+    endif
+endfunction
+
+//===========================================================================
+function InitTrig_SummonerAuraBuffs takes nothing returns nothing
+    set gg_trg_SummonerAuraBuffs = CreateTrigger(  )
+    call DisableTrigger( gg_trg_SummonerAuraBuffs )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_SummonerAuraBuffs, 2.00 )
+    call TriggerAddAction( gg_trg_SummonerAuraBuffs, function SummonerAuraBuffsActions  )
+endfunction
+

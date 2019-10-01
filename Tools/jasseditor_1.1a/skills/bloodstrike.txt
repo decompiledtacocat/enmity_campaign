@@ -1,0 +1,49 @@
+function Trig_BloodStrike_Conditions takes nothing returns boolean
+return  GetUnitAbilityLevel(GetAttacker(),'A0A6')>0
+endfunction
+
+function Trig_BloodStrike_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local location castloc
+local player owner=GetOwningPlayer(caster)
+local unit target=GetAttackedUnitBJ()
+local integer level=GetUnitAbilityLevel(caster,'A0A6')
+local real maxdamage=.01+.01*level
+local real life
+local unit rabbit
+
+if GetRandomInt(0,100)>=80 then
+set castloc=GetUnitLoc(target)
+        set rabbit=CreateRabbit(owner,castloc)
+        call RemoveLocation(castloc)
+        set castloc=null
+        call UnitAddAbility(rabbit,'A0A7')
+        call IssueTargetOrder(rabbit,"shadowstrike",target)
+        set rabbit=null
+loop
+        exitwhen (IsUnitDeadBJ(target)) or UnitHasBuffBJ(target,'B037')==false
+        set life=GetUnitState(target, UNIT_STATE_LIFE)
+    if (life >life-GetRandomReal(.01,maxdamage)*GetUnitState(target, UNIT_STATE_MAX_LIFE) ) then
+            call SetUnitLifeBJ(caster, life-GetRandomReal(.01,maxdamage)*GetUnitState(target, UNIT_STATE_MAX_LIFE) )
+        else
+            call SetUnitLifeBJ(caster, 1.00 )
+    endif
+        call DestroyEffect(AddSpellEffectTargetById('A0A6', EFFECT_TYPE_SPECIAL,target,"chest"))
+        call TriggerSleepAction(GetRandomReal(.25,2))
+endloop
+
+endif
+
+set caster=null
+set target=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_BloodStrike takes nothing returns nothing
+    set gg_trg_BloodStrike = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_BloodStrike, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_BloodStrike, Condition( function Trig_BloodStrike_Conditions ) )
+    call TriggerAddAction( gg_trg_BloodStrike, function Trig_BloodStrike_Actions )
+endfunction
+

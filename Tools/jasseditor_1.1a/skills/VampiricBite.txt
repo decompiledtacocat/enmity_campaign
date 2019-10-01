@@ -1,0 +1,46 @@
+function VampiricBiteCastingConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A00F' ) 
+endfunction
+
+function VampiricBiteCastingActions takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+local unit target = GetSpellTargetUnit()
+local location targetloc
+local location casterloc
+local integer level=GetUnitAbilityLevelSwapped('A00F', caster)
+local player owner=GetOwningPlayer(caster)
+    call SelectUnitRemoveForPlayer(caster, owner )
+    call PolledWait2(.25)
+    if IsUnitAliveBJ(target)==false then
+    call SelectUnitAddForPlayer(caster, owner )
+    set caster=null
+    set target=null
+    set owner=null   
+    return
+    endif
+    call GroupRemoveUnit(udg_vampbiters,caster)
+    set targetloc=GetUnitLoc(target)
+    set casterloc=GetUnitLoc(caster)
+    call SetUnitPositionLocFacingBJ( caster,targetloc, AngleBetweenPoints(casterloc,targetloc))
+    call UnitAddAbilityBJ( 'A00W', caster )
+    call UnitAddAbilityBJ( 'A00G', caster )
+    call SetUnitAbilityLevelSwapped( 'A00G',caster,level  )
+    call SetUnitAbilityLevelSwapped( 'AIsz',caster,level )
+    call IssueTargetOrderBJ(caster, "attack",target)
+call RemoveLocation(targetloc)
+call RemoveLocation(casterloc)
+set caster=null
+set targetloc=null
+set target=null
+set casterloc=null
+set owner=null    
+endfunction
+
+//===========================================================================
+function InitTrig_VampiricBiteCasting takes nothing returns nothing
+    set gg_trg_VampiricBiteCasting = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_VampiricBiteCasting, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_VampiricBiteCasting, Condition( function VampiricBiteCastingConditions ) )
+    call TriggerAddAction( gg_trg_VampiricBiteCasting, function VampiricBiteCastingActions )
+endfunction
+

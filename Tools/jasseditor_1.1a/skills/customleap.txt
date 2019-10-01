@@ -1,0 +1,99 @@
+function Trig_Leap_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A05Q' 
+endfunction
+function LeapFunc takes nothing returns nothing
+local trigger t=GetTriggeringTrigger()
+local unit caster=GetHandleUnit(t,"LeapCaster")
+local location targetloc=Location(GetHandleReal(t,"LeapX"),GetHandleReal(t,"LeapY"))
+local real distance=GetHandleReal(t,"LeapDistance")
+local real damage=GetHandleReal(t,"LeapDamage")
+    local unit fake=GetHandleUnit(t,"LeapFake")
+    
+local player leapingPlayer = GetOwningPlayer(caster)
+local location castloc = GetUnitLoc(caster)
+
+    local real halfdistance = distance / 2
+    local real moveIncrement = 8
+    local location polartemp 
+
+    local location fakeLoc = GetUnitLoc(fake)
+    //Start moving the fake version of caster
+
+ if DistanceBetweenPoints(fakeLoc, targetloc) <= 50 then
+     call RemoveUnit( fake )
+
+    //Bring real guy back
+    call SetUnitPathing( caster, true )
+    call SetUnitPositionLoc( caster, targetloc )
+    call ShowUnitShow( caster )
+    call SelectUnitForPlayerSingle( caster, leapingPlayer )
+
+    call RemoveLocation(castloc)
+    call RemoveLocation(targetloc)
+    call RemoveLocation(fakeLoc)
+    set castloc=null
+    set targetloc=null
+    set fakeLoc=null
+    set leapingPlayer=null
+    set fake=null
+    set caster=null
+    call FlushHandleLocals(t)
+    call DestroyTrigger(t)
+else
+        set polartemp = PolarProjectionBJ(fakeLoc, moveIncrement, AngleBetweenPoints(fakeLoc, targetloc))
+        call SetUnitPositionLoc( fake, polartemp )
+        //Control arc of the leap
+        if ( DistanceBetweenPoints(fakeLoc, targetloc) > halfdistance ) then
+            call SetUnitFlyHeightBJ( fake, ( halfdistance ), distance)
+        else
+            call SetUnitFlyHeightBJ( fake, ( 0 ), distance)
+        endif
+        call RemoveLocation(fakeLoc)
+   
+        set fakeLoc = GetUnitLoc(fake)
+        call RemoveLocation(polartemp)
+endif
+    call RemoveLocation(castloc)
+    call RemoveLocation(targetloc)
+    call RemoveLocation(fakeLoc)
+    set castloc=null
+    set targetloc=null
+    set fakeLoc=null
+    set fake=null
+    set caster=null
+    set leapingPlayer=null
+endfunction
+function Trig_Leap_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetSpellTargetLoc()
+local unit fake=CreateUnitAtLoc(Player(15),'o014', castloc, GetUnitFacing(caster) )
+local trigger t
+local real distance=DistanceBetweenPoints(castloc, targetloc)
+local real damage=10
+call SetUnitColor( fake , GetPlayerColor( GetOwningPlayer(caster)) )
+call SetUnitPathing(caster , false )
+call ShowUnitHide( caster )
+set t= CreateTrigger()
+call SetHandleHandle(t,"LeapCaster",caster)
+call SetHandleReal(t,"LeapX",GetLocationX(targetloc))
+call SetHandleReal(t,"LeapY",GetLocationY(targetloc))
+call SetHandleReal(t,"LeapDistance",distance)
+call SetHandleReal(t,"LeapDamage",damage)
+call SetHandleHandle(t,"LeapFake",fake)
+call TriggerRegisterTimerEventPeriodic(t, 0.02 )
+call TriggerAddAction(t, function LeapFunc )
+call RemoveLocation(castloc)
+call RemoveLocation(targetloc)
+set targetloc=null
+set castloc=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_Leap takes nothing returns nothing
+    set gg_trg_Leap = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Leap, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Leap, Condition( function Trig_Leap_Conditions ) )
+    call TriggerAddAction( gg_trg_Leap, function Trig_Leap_Actions )
+endfunction

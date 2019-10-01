@@ -1,0 +1,32 @@
+function ProtectorCryptDeathConditions takes nothing returns boolean
+return GetBooleanOr((GetUnitTypeId(GetDyingUnit()) == 'U00X' ),( GetUnitTypeId(GetDyingUnit()) == 'O00P' ))
+endfunction
+
+function ProtectorCryptDeathActions takes nothing returns nothing
+// runs if rooted or burrowed.
+local unit deadstupid=GetDyingUnit()
+local group roots=CreateGroup()
+local unit pickedroot
+if (GetUnitTypeId(deadstupid) == 'U00X') then
+        set pickedroot=GetHandleUnit(deadstupid,"impaler")
+        call KillUnit(pickedroot)
+        call RemoveUnit(pickedroot)
+elseif (GetUnitTypeId(deadstupid) == 'O00P') then
+      set roots=GetHandleGroup(deadstupid,"roots") 
+      loop
+      set pickedroot=FirstOfGroup(roots)
+      exitwhen pickedroot==null
+      call KillUnit(pickedroot)
+      call GroupRemoveUnit(roots,pickedroot)
+      endloop
+endif
+call DestroyGroup(roots)
+set roots=null
+endfunction
+//===========================================================================
+function InitTrig_ProtectorCryptDeath takes nothing returns nothing
+    set gg_trg_ProtectorCryptDeath= CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ProtectorCryptDeath, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_ProtectorCryptDeath, Condition( function ProtectorCryptDeathConditions ) )
+    call TriggerAddAction( gg_trg_ProtectorCryptDeath, function ProtectorCryptDeathActions )
+endfunction

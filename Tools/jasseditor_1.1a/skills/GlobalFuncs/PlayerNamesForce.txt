@@ -1,0 +1,25 @@
+function GetPlayerNames takes integer min, integer max returns string
+local string playernames=""
+//takes player 0 == player1
+ loop
+     exitwhen min > max 
+     if GetPlayerSlotState(Player(min)) == PLAYER_SLOT_STATE_PLAYING then 
+     set playernames = ( playernames + ", " + GetPlayerName(Player(min)))
+     endif
+     set min=min+1
+ endloop
+return playernames
+endfunction
+
+function GetPlayerForce takes integer min, integer max returns force
+local force temp
+//takes player 0 == player1
+ loop
+     exitwhen min > max 
+     if GetPlayerSlotState(Player(min)) == PLAYER_SLOT_STATE_PLAYING then 
+     call ForceAddPlayer(temp,Player(min)) 
+     endif
+     set min=min+1
+ endloop
+return temp
+endfunction

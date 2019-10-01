@@ -1,0 +1,53 @@
+function SmokeConditions takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A084' )
+endfunction
+function SmokeActions takes nothing returns nothing
+    local unit caster =GetSpellAbilityUnit()
+    local unit buffunit
+    local location targetloc=GetSpellTargetLoc()
+    local player owner=GetOwningPlayer(caster)
+    local integer smokelevel=GetUnitAbilityLevelSwapped('A084', caster )
+    local unit rabbit
+    local unit rabbit2
+    set buffunit=CreateRabbit(owner,targetloc)
+    call UnitAddAbilityBJ( 'A03E', buffunit )
+    call UnitAddAbilityBJ( 'A06J', buffunit )
+    call SetUnitAbilityLevelSwapped( 'A06J', buffunit, smokelevel )
+    call SetUnitAbilityLevelSwapped( 'A03E', buffunit, smokelevel )
+    call IssuePointOrderLocBJ( buffunit, "cloudoffog", targetloc )
+    set rabbit=CreateUnitAtLoc(owner, 'n02J',targetloc, bj_UNIT_FACING)
+    call SetUnitVertexColorBJ( rabbit, 100.00, 100.00, 100.00, 100.00 )
+    call UnitAddAbility(rabbit,'A0FA')
+    call SetUnitAbilityLevelSwapped( 'A0FA', rabbit, smokelevel )
+    
+    set rabbit2=CreateUnitAtLoc(owner, 'n02J',targetloc, bj_UNIT_FACING)
+    call SetUnitVertexColorBJ( rabbit2, 100.00, 100.00, 100.00, 100.00 )
+    call UnitAddAbility(rabbit2,'A0FA')
+    call SetUnitAbilityLevelSwapped( 'A0FA', rabbit2, smokelevel )
+    
+    loop
+    exitwhen IsUnitDeadBJ(buffunit)==true
+    call DisplayTextToPlayer(Player(1),0,0,"start")
+    call IssuePointOrderLocBJ( rabbit2, "silence", targetloc )
+    call IssuePointOrderLocBJ( rabbit, "silence", targetloc )
+    call PolledWait2(.4)
+    call DisplayTextToPlayer(Player(1),0,0,"fin")
+    endloop
+    call SilentKill(rabbit)
+    call SilentKill(rabbit2) 
+    set caster =null
+    set buffunit=null
+    set rabbit=null
+    set rabbit2=null
+    call RemoveLocation (targetloc)
+    set owner=null
+endfunction
+//===========================================================================
+function InitTrig_Smoke takes nothing returns nothing
+    set gg_trg_Smoke = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Smoke, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Smoke, Condition( function SmokeConditions ) )
+    call TriggerAddAction( gg_trg_Smoke, function SmokeActions  )
+endfunction
+
+

@@ -1,0 +1,66 @@
+function IsLocInQuadChild takes location p, location l1, location l2 returns integer
+  if GetLocationY(p) > RMinBJ(GetLocationY(l1),GetLocationY(l2)) then
+    if GetLocationY(p) <= RMaxBJ(GetLocationY(l1),GetLocationY(l2)) then
+      if GetLocationX(p) <= RMaxBJ(GetLocationX(l1),GetLocationX(l2)) then
+        if (GetLocationY(l1) != GetLocationY(l2)) then
+          if (GetLocationX(l1) == GetLocationX(l2)) or (GetLocationX(p) <= (GetLocationY(p)-GetLocationY(l1))*(GetLocationX(l2)-GetLocationX(l1))/(GetLocationY(l2)-GetLocationY(l1))+GetLocationX(l1)) then
+            return 1
+          endif
+        endif
+      endif
+    endif
+  endif
+  return 0
+endfunction
+
+function IsLocInQuad takes location p, location l1, location l2, location l3, location l4 returns boolean
+  local integer counter = 0
+  set counter = counter + IsLocInQuadChild(p, l1, l2)
+  set counter = counter + IsLocInQuadChild(p, l2, l3)
+  set counter = counter + IsLocInQuadChild(p, l3, l4)
+  set counter = counter + IsLocInQuadChild(p, l4, l1)
+  return (counter / 2) * 2 != counter
+endfunction
+function GroupEnumUnitsInQuad takes group g, location l1, location l2, location l3, location l4, boolexpr filter returns nothing
+  local location lmin = Location(RMinBJ(RMinBJ(RMinBJ(GetLocationX(l1), GetLocationX(l2)), GetLocationX(l3)), GetLocationX(l4)), RMinBJ(RMinBJ(RMinBJ(GetLocationY(l1), GetLocationY(l2)), GetLocationY(l3)), GetLocationY(l4)))
+  local location lmax = Location(RMaxBJ(RMaxBJ(RMaxBJ(GetLocationX(l1), GetLocationX(l2)), GetLocationX(l3)), GetLocationX(l4)), RMaxBJ(RMaxBJ(RMaxBJ(GetLocationY(l1), GetLocationY(l2)), GetLocationY(l3)), GetLocationY(l4)))
+  local group hg = CreateGroup()
+  local rect r = RectFromLoc(lmin, lmax)
+  local unit u = null
+  local location l = null
+  call GroupEnumUnitsInRect(hg, r, filter)
+  loop
+    set u = FirstOfGroup(hg)
+    exitwhen u == null
+    set l = GetUnitLoc(u)
+    if IsLocInQuad(l, l1, l2, l3, l4) then
+      call GroupAddUnit(g, u)
+    endif
+    call RemoveLocation(l)
+    call GroupRemoveUnit(hg, u)
+  endloop
+  call DestroyGroup(hg)
+  call RemoveRect(r)
+  call RemoveLocation(lmin)
+  call RemoveLocation(lmax)
+  set hg = null
+  set r = null
+  set lmin = null
+  set lmax = null
+  set l = null
+endfunction
+
+function offsetangle(real angle,boolean up) returns real
+if up ==true then
+angle=angle+90
+  if angle>180 then
+  angle=-1*(360-angle) 
+  endif
+else
+angle=angle-90
+  if angle<-180 then
+  angle=(360+angle) 
+  endif
+endif
+return angle
+endfunction

@@ -1,0 +1,33 @@
+function SelfDestructEggCondition takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0AD' ) 
+endfunction
+
+function SelfDestructEggActions takes nothing returns nothing
+   local unit caster=GetSpellAbilityUnit()
+   local player owner=GetOwningPlayer(caster)
+   local unit spawn
+   local location eggloc= GetUnitLoc(caster)
+   local integer spidercount=GetRandomInt(10, 20)
+   local integer sloop=1
+    call KillUnit( caster )
+    loop
+        exitwhen sloop > spidercount
+        set spawn=CreateUnitAtLoc(owner,'n01E',eggloc,(I2R(sloop) * ( 360.00 / I2R(spidercount))))
+        call UnitApplyTimedLifeBJ( 7.00, 'BTLF', spawn)
+        set sloop = sloop + 1
+    endloop
+    set caster=null
+    set owner=null
+    set spawn=null
+    call RemoveLocation(eggloc)
+    set eggloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_SelfDestructEgg takes nothing returns nothing
+    set gg_trg_SelfDestructEgg = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SelfDestructEgg, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SelfDestructEgg, Condition( function SelfDestructEggCondition  ) )
+    call TriggerAddAction( gg_trg_SelfDestructEgg, function SelfDestructEggActions  )
+endfunction
+

@@ -1,0 +1,41 @@
+function ElementalMovementActions takes nothing returns nothing
+    local unit element
+    local unit core
+    local location coreloc
+    local group coregroup
+    local integer gloop
+      if (CountUnitsInGroup (udg_elementals)==0) then 
+      call DisableTrigger(gg_trg_ElementalMovement)
+      return
+      endif
+     set coregroup=CreateGroup()
+     call GroupAddGroup( udg_elementals , coregroup) 
+    loop
+      set core=FirstOfGroup(coregroup)
+      exitwhen core==null
+      set coreloc=GetUnitLoc(core)
+      set gloop=0
+    loop
+        exitwhen gloop >3
+        set element=GetHandleUnit(core,("elements"+I2S(gloop)))
+        call IssuePointOrderLocBJ( element, "move",coreloc  )
+        set gloop = gloop + 1
+    endloop
+    call RemoveLocation (coreloc)
+    call GroupRemoveUnit(coregroup,core)
+endloop
+call DestroyGroup(coregroup)
+set coreloc=null
+set coregroup=null
+set core=null
+set element=null
+endfunction
+
+//===========================================================================
+function InitTrig_ElementalMovement takes nothing returns nothing
+    set gg_trg_ElementalMovement = CreateTrigger(  )
+    call DisableTrigger( gg_trg_ElementalMovement )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_ElementalMovement, 5.00 )
+    call TriggerAddAction( gg_trg_ElementalMovement, function ElementalMovementActions)
+endfunction
+

@@ -1,0 +1,27 @@
+function Trig_PocketGun_Conditions takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr(GetUnitTypeId(GetSummonedUnit()) == 'n02N' ,GetUnitTypeId(GetSummonedUnit()) == 'n02M'  ),GetUnitTypeId(GetSummonedUnit()) == 'h00F' )
+endfunction
+
+function Trig_PocketGun_Actions takes nothing returns nothing
+local unit caster=GetSummoningUnit()
+local unit sum=GetSummonedUnit()
+local integer id=GetUnitTypeId(caster)
+if id=='h00F' then//pocketgun
+call MaxUnit(caster,sum,"PocketGun",1,1)
+elseif id=='n02N' then//mine
+call MaxUnit(caster,sum,"PocketMine",3,3)
+elseif id=='n02M' then//worker
+call MaxUnit(caster,sum,"PocketRobo",3,3)
+endif
+set sum=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_PocketGun takes nothing returns nothing
+    set gg_trg_PocketGun = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PocketGun, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_PocketGun, Condition( function Trig_PocketGun_Conditions ) )
+    call TriggerAddAction( gg_trg_PocketGun, function Trig_PocketGun_Actions )
+endfunction
+

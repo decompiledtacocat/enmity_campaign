@@ -1,0 +1,19 @@
+function SummonerAuraLossConditions takes nothing returns boolean
+return ( GetItemTypeId(GetManipulatedItem()) == 'I02Z' )
+endfunction
+function SummonerAuraLossActions takes nothing returns nothing
+local player owner=GetItemPlayer(GetManipulatedItem())
+    if ( IsPlayerInForce(owner, udg_SummonerAuraPlayers) == false  ) then
+        call ForceRemovePlayerSimple(owner, udg_SummonerAuraPlayers )
+    endif
+set owner=null
+endfunction
+
+//===========================================================================
+function InitTrig_SummonerAura_Loss takes nothing returns nothing
+    set gg_trg_SummonerAura_Loss = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SummonerAura_Loss, EVENT_PLAYER_UNIT_DROP_ITEM )
+    call TriggerAddCondition( gg_trg_SummonerAura_Loss, Condition( function SummonerAuraLossConditions  ) )
+    call TriggerAddAction( gg_trg_SummonerAura_Loss, function SummonerAuraLossActions  )
+endfunction
+

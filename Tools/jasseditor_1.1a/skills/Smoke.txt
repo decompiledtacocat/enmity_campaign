@@ -1,0 +1,30 @@
+function SmokeConditions takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A084' )
+endfunction
+function SmokeActions takes nothing returns nothing
+    local unit caster = GetSpellAbilityUnit()
+    local unit buffunit
+    local location targetloc=GetSpellTargetLoc()
+    local player owner=GetOwningPlayer(caster )
+    local integer smokelevel=GetUnitAbilityLevelSwapped('A084', caster )
+
+    set buffunit=CreateUnitAtLoc( owner, 'n011',targetloc, bj_UNIT_FACING)
+    call SetUnitVertexColorBJ( buffunit, 100.00, 100.00, 100.00, 100.00 )
+    call UnitAddAbilityBJ( 'A03E', buffunit )
+    call UnitAddAbilityBJ( 'A06J', buffunit )
+    call SetUnitAbilityLevelSwapped( 'A06J', buffunit, smokelevel )
+    call SetUnitAbilityLevelSwapped( 'A03E', buffunit, smokelevel )
+    call IssuePointOrderLocBJ( buffunit, "cloudoffog", targetloc )
+    set caster =null
+    set buffunit=null
+    call RemoveLocation (targetloc)
+    set owner=null
+endfunction
+//===========================================================================
+function InitTrig_Smoke takes nothing returns nothing
+    set gg_trg_Smoke = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Smoke, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Smoke, Condition( function SmokeConditions ) )
+    call TriggerAddAction( gg_trg_Smoke, function SmokeActions  )
+endfunction
+

@@ -1,0 +1,195 @@
+
+~~~~~~~~~~~~~~~~~Warcraft 3 Viewer~~~~~~~~~~~~~~~~
+                      Manuel
+
+(traduction par TheProphet)
+______________________________________________________
+
+Contenu:
+
+1 - De quoi ai-je besoin ?
+2 - Voir une image
+3 - Extraire une image
+4 - Convertir en BLP
+5 - Voir les textures éditées dans le Warcraft 3 Viewer
+6 - Recharger les textures
+7 - Utiliser les images dans l'éditeur de Warcraft 3
+8 - FAQ
+______________________________________________________
+
+1 - De quoi ai-je besoin ?
+
+~Warcraft III Viewer
+
+~Paintshop Pro, Photoshop ou Gimp(gratuit)           (avancé)
+ Ça n'est pas nécessaire juste pour voir les images,
+ cependant l'un ou l'autre sera nécessaire si vous voulez
+ modifier les textures des unités.
+
+~3Ds max, Milkshape ou Gmax(gratuit)             (avancé)
+ Ça n'est pas nécessaire, mais l'un ou l'autre
+ le sera si vous voulez faire du modelage.
+______________________________________________________
+
+2 - Voir une image
+
+ Il y a trois moyens pour voir une image :
+
+(a) Utiliser l'arborescence qui apparaît lorsque
+    l'on charge le Warcraft 3 Viewer.
+
+(b) Utiliser "Rechercher dans le MPQ" (CTRL+F) dans le
+    menu "Vue". Ensuite, entrer le nom de l'unité que
+    vous voulez voir.
+
+(c) Pour voir une image déjà extraite,
+    faire "Ouvrir" dans le menu
+    "Fichier" (CTRL+O)
+_____________________________________________________
+
+3 - Extraire une image
+
+ Pour manipuler une image, il faut d'abord
+ l'extraire.
+
+~Premièrement, charger une image en faisant (a) ou (b)
+ de la partie 2 - Voir une image
+
+~Ensuite, sélectionner le type d'extraction à effectuer
+ selon le type de fichier à extraire (choisis le type
+ par défaut) dans le menu "Fichier ouvert".
+
+______________________________________________________
+
+4 - Convertir en .BLP
+
+ Une fois que vous avez changé votre image (logiciels
+ plus haut), vous devez la remettre en fichier .BLP
+ pour l'utiliser dans Warcraft 3.
+
+~Pour convertir l'image éditée en .BLP, sélectionnez
+ 'BMP, TGA, ou JPG -> BLP' dans le menu
+ 'Conversion de fichiers'.
+
+______________________________________________________
+
+5 - Voir les textures éditées dans le Warcraft 3 Viewer
+
+~Chargez le .MDX de l'unité sur laquelle vous voulez voir
+ la texture manipulée. Allez dans 'Changer les textures'
+ (CTRL+M) dans le menu 'Fichier ouvert'. Sélectionnez la
+ texture que vous voulez changer en cliquant dessus dans
+ la liste, puis cliquez sur le bouton 'Changer...'.
+
+~Pour remettre la texture originale sur le model, retournez
+ dans 'Changer les textures' et désactivez la texture
+ manipulée que vous avez importée.
+______________________________________________________
+
+6 - Recharger les textures
+
+ Pour voir immédiatement le résultat de votre travail d'édition
+ de texture, vous pouvez utiliser cette fonctionnalité.
+
+~Convertissez le .BLP de l'unité sur laquelle vous voulez
+ travailler en .TGA (ou .BMP ou .JPG)
+
+~Chargez le .MDX de l'unité en question dans le Warcraft 3
+ Viewer (pour voir le modèle).
+
+~Allez dans 'Changer les textures' et changez le chemin
+ du .BLP par le .TGA que vous venez de créer.
+
+~Sans fermer le Warcraft 3 Viewer, ouvrez le fichier .TGA
+ que vous avez créé dans Photoshop (ou autre).
+
+~Éditez la texture .TGA et sauvegardez-la.
+
+~Retournez dans le Warcraft 3 Viewer et faites 'Recharger
+ les textures' dans le menu 'Vue'. Vous devriez voir apparaître
+ les changements que vous avez effectués.
+
+ Note: vous pouvez positionner les fenêtres de votre programme
+ de retouche et celles du Warcraft 3 Viewer pour voir le
+ résultat pendant que vous modifiez (si vous sauvez le fichier
+ et rechargez les textures).
+
+ Note: 'Convertir les TGA locaux et recharger les textures'
+ fait la même chose, sauf que les fichier .TGA locaux sont
+ reconnus et convertis automatiquement.
+_____________________________________________________
+
+7 - Utiliser les images dans l'éditeur de Warcraft 3
+
+~Pour utiliser une image dans une carte, lancez le World
+ Editor et ouvrez le gestionnaire d'importations (F12).
+ Sélectionnez 'Importer un fichier' (CTRL+I) et sélectionnez
+ le fichier à importer.
+
+~Après avoir importé le fichier, double-cliquez dessus dans
+ le gestionnaire d'importations et cochez 'Chemin personnalisé'.
+
+~Entrez le chemin exact du fichier que vous voulez remplacer.
+ Si vous ne le connaissez pas, utilisez 'Rechercher dans le
+ MPQ' (CTRL+F) dans le Warcraft 3 Viewer pour le trouver.
+
+______________________________________________________
+
+8 - FAQ
+
+~Qu'est-ce donc que cette texture 'Textures\white.blp' dans
+ la fenêtre de changement de textures ?
+ Non seulement elle est toujours là, mais en plus on peut
+ pas la changer.
+
+ Ne vous souciez pas de cette texture, c'est juste une texture
+ utilisée en interne pour l'affichage des Caméras et des axes.
+
+
+~Comment et pourquoi changer l'image et le couleur de fond ?
+Vous pouvez changer l'image de fond (Rendu -> Image de fond) pour 
+faire comme si votre modèle était dans Warcraft 3. Cela peut être
+fait pour avoir une idée de ce que vont donner les couleurs en
+présence du terrain. Vous pouvez aussi faire des captures pas mal
+avec ça.
+
+Pour mettre une scène de Warcraft en tant qu'image de fond, allez
+dans l'éditeur de Warcraft 3, positionnez votre vue comme vous la
+voulez. Ensuite, faites "IMPR ECRAN" sur le clavier. Vous trouverez
+votre image dans le dossier "Screenshots" de Warcraft 3.
+
+Pour redimensionner l'image de fond, utilisez le pavé numérique :
+les touches sont les suivantes :
+Largeur--------------4 ou 6
+Hauteur--------------2 ou 8
+Largeur et Hauteur---1 ou 9
+
+Vous pouvez changer la couleur de fond (Rendu -> Couleur de fond)
+pour obtenir une meilleure vue des couleurs de votre modèle.
+(ex: si vous avez une texture sombre, vous ne souhaitez pas un
+fond sombre)
+
+
+
+~Qu'est-ce que le répertoire de Warcraft 3 ?
+Ce n'est qu'un autre nom pour la pléthore de dossiers
+dans lequel vos fichiers de Warcraft 3 sont stockés.
+
+______________________________________________________
+Pour plus d'aide : http://www.wc3campaigns.com
+
+Remerciements à TheProphet pour avoir fait un programme si
+utile, sans lequel nous ne serions que des modders des cavernes.
+
+                                                       __
+                                                      ____
+           00                                        ______
+            0000                                    ________
+             00000                                 __________
+00000000000000000000 Warcraft 3 Viewer créé par :  TheProphet
+             00000
+            0000
+           00
+
+
+Manuel écrit par J3y : J3lademaster  -)--------

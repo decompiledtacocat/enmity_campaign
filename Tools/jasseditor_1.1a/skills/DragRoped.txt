@@ -1,0 +1,95 @@
+function Trig_RopeAndDrag_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0A4' 
+endfunction
+
+function DragRollActions takes nothing returns nothing
+local trigger t=GetTriggeringTrigger()
+local unit caster=GetHandleUnit(t,"DragCaster")
+local unit target=GetHandleUnit(t,"DragTarget")
+local real damage=GetHandleReal(t,"DragDamage")
+local location targetloc=GetUnitLoc(target)
+local location castloc=GetUnitLoc(caster)
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local location moveloc=PolarProjectionBJ(castloc, 250.00, angle+GetRandomReal(-10,10)) 
+local lightning rope=GetHandleLightning(GetTriggeringTrigger(),"DragRope")
+if UnitHasBuffBJ(target,'B036')==true then
+call SetUnitPositionLoc(target, moveloc)
+call MoveLightningLoc(rope, castloc, targetloc )
+call DestroyEffectBJ(AddSpecialEffectLocBJ(targetloc, "Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl" ))
+call UnitDamageTargetBJ( caster, target, damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_UNKNOWN )
+else
+if GetUnitAbilityLevel(target,'Aloc')>0 then
+call UnitRemoveAbility(target,'Aloc')
+endif
+call RemoveLocation(moveloc)
+call RemoveLocation(targetloc)
+call RemoveLocation(castloc)
+set targetloc=null
+set moveloc=null
+set caster=null
+set target=null
+set castloc=null
+call SetHandleHandle(target,"Dragged",null)
+call DestroyLightning(rope)
+call FlushHandleLocals(t)
+call DestroyTrigger(t)
+endif
+call RemoveLocation(moveloc)
+call RemoveLocation(targetloc)
+call RemoveLocation(castloc)
+set castloc=null
+set targetloc=null
+set moveloc=null
+set caster=null
+set target=null
+endfunction 
+  
+function DragActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetUnitLoc(target)
+local integer level=GetUnitAbilityLevel(caster,'A0A4' )
+local real damage=.25*level
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local lightning rope
+local trigger t=GetHandleTrigger(target,"Dragged")
+call PolledWait2(1)
+if t!=null then
+if GetUnitAbilityLevel(target,'Aloc')>0 then
+call UnitRemoveAbility(target,'Aloc')
+endif
+call DisableTrigger(t)
+set rope=GetHandleLightning(GetTriggeringTrigger(),"DragRope")
+call DestroyLightning(rope)
+call FlushHandleLocals(t)
+call DestroyTrigger(t)
+set t=null
+endif
+call UnitAddAbility(target,'Aloc')
+set rope=AddLightningLoc( "SPLK", castloc, targetloc )
+call SetUnitFacingTimed(caster,angle-180,1)
+set t= CreateTrigger()
+call SetHandleHandle(target,"Dragged",t)
+call SetHandleHandle(t,"DragCaster",caster)
+call SetHandleHandle(t,"DragTarget",target)
+call SetHandleHandle(t,"DragRope",rope)
+call SetHandleReal(t,"DragDamage",damage)
+call TriggerRegisterTimerEventPeriodic(t, 0.02 )
+call TriggerAddAction(t, function DragRollActions )
+
+call RemoveLocation(targetloc)
+call RemoveLocation(castloc)
+set targetloc=null
+set caster=null
+set target=null
+set castloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_RopeAndDrag takes nothing returns nothing
+    set gg_trg_RopeAndDrag = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RopeAndDrag, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_RopeAndDrag, Condition( function Trig_RopeAndDrag_Conditions ) )
+    call TriggerAddAction( gg_trg_RopeAndDrag, function DragActions  )
+endfunction

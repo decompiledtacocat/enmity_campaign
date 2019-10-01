@@ -1,0 +1,72 @@
+function NukeCondition takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A06K' )
+endfunction
+
+function NukeActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit array missilelauncher
+    local player owner=GetOwningPlayer(caster)
+    local location targetloc=GetSpellTargetLoc()
+    local location castloc=GetUnitLoc(caster)
+    local location missileloc
+    local integer nloop=1
+    local integer nloop2=1
+    local integer nlevel=GetUnitAbilityLevelSwapped('A06K', caster)
+    local boolean stopped=false
+    local rect targetarea=RectFromCenterSizeBJ(targetloc, 800.00, 800.00)
+    loop
+        exitwhen nloop > 5
+        set missilelauncher[nloop]=CreateUnitAtLoc( owner, 'u00V', castloc, bj_UNIT_FACING )
+        call SetUnitVertexColorBJ(missilelauncher[nloop], 100.00, 100.00, 100.00, 100.00 )
+        call SetHandleHandle(caster,("launcher"+I2S(nloop) ),missilelauncher[nloop])
+        call SetUnitAbilityLevelSwapped( 'A06N', missilelauncher[nloop], nlevel )
+        call SetUnitAbilityLevelSwapped( 'A06L', missilelauncher[nloop], nlevel )
+        set nloop = nloop + 1
+    endloop
+loop
+    exitwhen nloop2 > 20
+    set nloop=1
+       loop
+            exitwhen nloop >5 
+            if (IsUnitAliveBJ(missilelauncher[nloop])==false) then
+            set nloop2=21
+            set nloop=6
+            set stopped=true
+            endif
+            set missileloc=GetRandomLocInRect(targetarea)
+            call IssuePointOrderLocBJ(missilelauncher[nloop], "attackground", missileloc )
+            call RemoveLocation(missileloc)
+            call TriggerSleepAction( 0 )
+            set nloop=nloop  + 1
+        endloop
+      set nloop2=nloop2 + 1 
+    endloop
+    if stopped==false then
+    call IssueImmediateOrder(caster,"stop")
+    endif
+    set nloop=1
+    loop
+    exitwhen nloop>5
+    set  missilelauncher[nloop]=null
+    set nloop=nloop+1
+    endloop
+    set caster=null
+    call RemoveLocation(targetloc)
+    call RemoveLocation(missileloc)
+    call RemoveRect(targetarea)
+    call RemoveLocation(castloc)
+    set castloc=null
+    set targetarea=null
+    set owner=null
+    set targetloc=null   
+    set missileloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_Nuke takes nothing returns nothing
+    set gg_trg_Nuke = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Nuke, EVENT_PLAYER_UNIT_SPELL_CHANNEL )
+    call TriggerAddCondition( gg_trg_Nuke, Condition( function NukeCondition  ) )
+    call TriggerAddAction( gg_trg_Nuke, function NukeActions  )
+endfunction
+

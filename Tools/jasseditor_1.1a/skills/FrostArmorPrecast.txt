@@ -1,0 +1,21 @@
+function Trig_FrostArmorCasting_Conditions takes nothing returns boolean
+return( GetSpellAbilityId() == 'A02P' ) 
+
+
+function Trig_FrostArmorCasting_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetUnitAbilityLevelSwapped('A02P', caster)
+local unit target=GetSpellTargetUnit()
+call SetHandleInt(target,"frostarmor",level)
+set caster=null
+set target=null
+endfunction
+
+//===========================================================================
+function InitTrig_FrostArmorCasting takes nothing returns nothing
+    set gg_trg_FrostArmorCasting = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_FrostArmorCasting, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_FrostArmorCasting, Condition( function Trig_FrostArmorCasting_Conditions ) )
+    call TriggerAddAction( gg_trg_FrostArmorCasting, function Trig_FrostArmorCasting_Actions )
+endfunction
+

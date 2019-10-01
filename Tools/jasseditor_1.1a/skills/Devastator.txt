@@ -1,0 +1,43 @@
+function Trig_Devastator_Conditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanAnd(( IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_STRUCTURE) == false ),( IsUnitAlly(GetAttackedUnitBJ(), GetOwningPlayer(GetAttacker())) == false )),GetBooleanAnd(GetBooleanAnd( ( IsUnitType(GetAttacker(), UNIT_TYPE_MELEE_ATTACKER) == true ),( IsUnitAlly(GetAttackedUnitBJ(), GetOwningPlayer(GetAttacker())) == false )),GetBooleanAnd(( UnitHasItemOfTypeBJ(GetAttacker(), 'I02V') == true ),( IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_STRUCTURE) == false ))))
+endfunction
+
+function Trig_Devastator_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local unit picked
+local group targets
+local player owner=GetOwningPlayer(caster)
+local effect sfx
+local location loc=GetUnitLoc(caster)
+    if (GetRandomInt(1, 100) <= 20) then
+      set sfx=AddSpecialEffectLocBJ( loc, "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl" )
+        if (IsUnitIllusionBJ(caster) == false) then
+        set targets=CreateGroup()
+        set udg_tempfilterplayer=null
+        set udg_tempfilterplayer=owner
+        set targets = GetUnitsInRangeOfLocMatching(350.00,loc, Condition(function filtercheck))
+          loop
+          set picked=FirstOfGroup(targets)
+          exitwhen picked==null
+          call UnitDamageTargetBJ(caster, picked, 100.00, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+          call GroupRemoveUnit(targets,picked)
+          endloop
+        call DestroyGroup(targets)
+        set targets=null
+        endif
+        call PolledWait2(1.0)
+        call DestroyEffect(sfx)
+    endif
+call RemoveLocation(loc)
+set loc=null
+set owner=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_Devastator takes nothing returns nothing
+    set gg_trg_Devastator = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Devastator, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_Devastator, Condition( function Trig_Devastator_Conditions ) )
+    call TriggerAddAction( gg_trg_Devastator, function Trig_Devastator_Actions )
+endfunction

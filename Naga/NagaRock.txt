@@ -1,0 +1,300 @@
+Warcraft 3: 5th race added.
+Naga. by tekkvicious
+
+To play as naga select Undead before starting the game.
+When the game starts you will be prompted on which race you want to play.
+For other races besides Naga and udead just select them as you would normally
+
+Please send feedback/balance/suggestion/etc to:
+www.nagamap.tk
+
+
+
+Version 0.9 Changes
+-----------------------------
+Heros
+------------------------------
+Sea Medusa - Petrification Arrow Stones now take up 1/2/3 food per level.
+Sea Medusa - Base Speed Increased to 300 up from 270.
+
+Omega Hunter - Messatsu Gou Hado is now 75 mana down from 85.
+Omega Hunter - Demon Shadow area effect reduce to 550 from 700.
+
+Queen of Malice - Venom Spike is now 85 mana down from 95.
+Queen of Malice - Mana Poison is now 50 mana down from 65.
+Queen of Malice - Time Poison is now 75/65/55/ mana down from 75/75/75.
+
+
+Units
+----------------------------------------
+Mymridon - Cost decreased to 180 down from 185. 
+Mymridon - Build Time reduced to 26 down from 29.
+
+Royal Mymridon - Cooldown decreased to 1.5 down from 1.7
+
+Snap Dragon - Build Time Reduced to 22 down from 23
+
+Frost Ray - Build Time Decreased to 32 down from 60. (error)
+Frost Ray - Air to Air base damage increased to 32 up from 28. 
+
+Sirens - Now after protect is researched will have protect on auto cast when trained.
+Sirens - Protect now gives 10 bonus hit regeneration.
+Reavers - Now when trained will have parasite on auto cast.
+
+Couatl - Shadow Sight is now 75 mana down from 100. 
+Couatl - Vanish now last 120 seconds up from 60.
+
+
+Version 0.8 Changes
+
+
+Heros
+--------------------------------------------
+Omega Hunter - Fixed a glitch with demon shadow which would not allow him to reapear.
+Omega Hunter - Duration of Demon Shadow reduce to .7 seconds down from 1.2 still attacks twice
+Omega Hunter - DemonShadow Damage is now 25-30/30-35/35-40 Down from 25-30/35-40/45-50
+
+Sea Medusa - Base Intelligence is now 17 up from 15.
+Sea Medusa - Intelligence per level is now 2.7 up from 2.2
+
+Queen of Malice - Intelligence per level is no 2.1 up from 1.9
+Queen of Malice - Mana Poison 65 mana down from 75.
+Queen of Malice - Time Poison 75 mana up from 65.
+
+
+UNITS
+----------------------
+Parasitic Crabs - Now last 50 seconds down from 60.
+
+
+
+Version 0.8a Changes: 
+
+
+Heros
+------------------------------------------------------
+Sea Medusa - Vacuum aura movement reduced to 7/14/21.
+Sea Medusa - Disable now last 2(1)/4(2)/6(3) seconds and has a 7 second cooldown and casting range of 800 Mana cost increased to 90.
+Sea Medusa - Petrafication stones now last 20/40/60 seconds up from 20/30/40.
+
+Queen of Malice - No longer has Poison Blades and now has Time Poison.
+Queen of Malice - Mana Poison cast range increased to 700 up from 500 and cool down reduced to 5.  (note that mana damage does not stack)
+Queen of Malice - Venom Spike Cool down reduced to 8 down from 10.
+
+Lord of the Depths - No longer has Ancient Hyrda and now has Cloaking Rain.
+
+Omega Hunter - Starting Strength reduced to 19 down from 23.
+Omega Hunter - Starting intelligence reduced to 15 down from 16.
+Omega Hunter - Intelligence gain reduced to 1.6 per level down from 1.8
+Omega Hunter - Now has 1 less armor.
+Omega Hunter - Raging Demon duration has been shorten.
+Omega Hunter - Messatsu gou hado has been fix so it hits more often now, before there was an error in its aoe, which sometimes allowed for missed attacks, it now has a 7 second cooldown.
+Omega Hunter - Level 1 Messatsu gou hado now has a max damage of 150.
+Omega Hunter - fix a bug which allowed production of 4 hero's if omega hunter was chosen first.
+
+
+
+UNITS
+-------------------------------------------------
+Couatl - Lumber cost increased to 75.
+Couatl - Shadow Sight is now 100 mana.
+
+Magi Crusher - Lumber cost increased to 50.
+
+Mur'gul Slaves - now have 230 hp.
+Submerged Slaves - Now have a range of 700 up from 600.
+
+Mur'gul Reaver - Shrink "shrink" Effect has been slightly decreased.
+Mur'gul Reaver - The original spell parasite was bugged. So Parasite has been reworked. Units that die under parasite now spawn 2 parasitic crabs. Each crab can cast parasite. Crabs are extremely weak, and do low damage.
+
+
+Dragon Turtle - Now deal siege damage, cool down increased to 2.
+Dragon Turtle - Now has new ability Bulldoze
+
+Siren - Now has Protect, and no longer has Stop.
+Siren - Healing Water mana cost increased to 35.
+Royal Mymridons - No longer gain speed from Increase mymridon speed.
+Mymridons and royal mymridons - Start with 0 armor.
+
+Coral Beds - Now have a build time of 50 up from 45.
+Coral Beds - are now 135 gold 45 wood.
+
+Spawning grounds - Is now 195 gold 55 wood.
+
+Serpent Spire - Is now 225 Gold Up from 210.
+
+Air Guardian - is now 75 gold/20 lumber to upgrade down from 100/40.
+Air Guardians - Now have a 35 second build time down from 50.
+Ground Guardians - Cost increased to 160 gold 75 wood, build time increased to 55.
+Ground and Air Guardians and coral beds - Now have 3 armor.
+
+Deep Sea Gate - Now Cost 145 Gold Up from 135.
+
+Shrine of Azshara - Is now 140 gold 155 lumber from 145/115.
+
+Swamp Pit- Is now 130 gold 140 lumber from 140/120
+Swamp pit - Now Requires a serpent Spire.
+
+Naga Sea Crystal - Is now 100 gold 125 lumber from 160 gold 60 lumber.
+
+Upgrades & Tech Tree
+------------------------------------------
+
+Naga now start with 4 slaves.
+
+Lumber cost for Tier 2 increased to 210 and tier 3 230.
+Cleave - Is now 100 gold 200 wood up from 75/125
+Increase Mymridon speed - is now 150 gold 150 wood up from 50/100.
+Increase Mymridon Speed - is now called flanking speed.
+
+Light Water Weapons - Is now 75 gold 150 wood up from 50/125.
+Light WAter Weapons - Is now Called Liquid Strength.
+Snap Dragon Speed - is 100 gold 100 wood from 50/100.
+Strenth of the deep - 150 gold with increments of 100 and 75 lumber with increments of 150
+
+The Range of Water Effects have been increased to 700 up from 400.
+Water Effect - Now decreases movement by 20% and attack by 10% down from 20/20.
+
+
+Misc
+-------------------------------------------
+Several Triggers were redone so the maps should run alot smoother.
+You can Now choose anyrace to be use naga, but choosing naga will announce to all player that you have chosen naga.
+
+
+
+
+
+
+
+
+
+
+
+Version 0.7 Changes:
+
+HEROS
+------------------------------------------------------------------------
+Sea Medusa - Fixed a glitch where petrafied units won't deal damage when they die.
+Sea Medusa - Petrafication Arrow stones are no longer auto targetable by units from both sides.
+Stones are now magic immune but vunderable.
+Sea Medusa - Disable now last 3/6/9 seconds and 3/4/5 seconds on heros.
+Sea Medusa - Petrafication arrow now deals 3 damage per second at level 1.
+
+Lord of the Depths - Minions now have an attack cooldown of 1 at all levels.
+
+New Hero added - Omega Hunter.
+
+UNITS
+-------------------------
+Royal Mymridon - Fixed an error where cleave was doing 30% splash not 15%
+
+Snap Dragon - Poison Sting deals 2 damage over 5 seconds.
+Snap Dragon - Hit points reduced to 305.
+Snap Dragon - base speed reduced to 270.
+
+Turtle Speed upgrade - Now boost turtles speed by 50.
+
+Dragon Turtle - Fixed a bug which didn't allow turtles to attack buildings.
+Dragon Turtle - Can now attack trees.
+Dragon Turtle - Have new upgrade Ramming Speed which greatly Increases it's movement speed.
+Dragon Turtle - Are now 455 gold and 125 lumber
+
+Mur'gul Reaver - No longer has tarnish, now has a new master spell shrink.
+Mur'gul Reaver - Plague is now an adpet spell with 150 mana cost.
+Siren - Stop now effects Air units and Completely disables spells/ attacks/ special abilities and movement.
+
+
+
+Buildings
+---------------------------------------
+Naga Sea Crystal - Fix a glitch where naga sea crystal would need a minimum of 50  mana to cast healing and etc.
+Naga Sea Crystal - Now are 160 gold 35 wood.
+Coral Bed - Fixed an error which gave coral beds a small collision size.
+Sea Vault - Now sells Water Stones. Which Give the Water Regeneration effect to nearby units.
+
+
+Misc.
+------------------------------------------------
+
+Orb of Water - Now reduces damage of its target by 33% and armor by 2.
+Water Effect has been added.
+Water effect - Gives bonus regeneration and slows enemy movement and attack by 20%
+Water effect - allows units with submerge and mur'gul slaves to submerge.
+Water Effect - is only spawned by temple of tides.
+Mur'gul slaves that submerge become gaurdian tentacles.
+
+
+
+
+
+Version 0.6 Changes:
+
+HEROS
+------------------------------------------------------------------------
+
+Lord of the depths - Watery minion hp 130/250/390.
+
+Poison Witch - No longer has adrenaline, Now has a new spell Poison Spike.
+Poison Witch - Is now called The Queen of Malice. (i don't know)
+
+Sea Medusa - Some Graphical Changes.
+Sea Medusa - Vaccum aura now reduces movement by 9/14/23.
+Sea Medusa - Now has Petrafication arrow only and it has been completely reworked refer to tooltip.
+Sea Medusa - is now agility stats changed accordingly.
+Sea Medusa - Tentacle Now spawn 9 Tentacles down from 12.
+
+UNITS 
+---------------------------------------------------------------
+Snap Dragon - Poison dmg reduced to 2.
+Snap Dragon - Base damage reduced by 1.
+
+Royal Mymridon - Are now 5 food and cost 270 gold.
+Royal Mymridon - now have 1225 hp.
+
+Dragon Turtle - Boosted base armor to 3.
+Dragon Turtle - Life decreased to 1035
+Dragon Turtle - Now has resistant skin after obtaining spiked shell armor.
+Dragon Turtle - Increased Cost to 400 gold.
+Dragon Turtle - Lowered Attack cool down to 1.5 Damage changed to 45 and damage dice to 1d11.
+Dragon Turtle - No longer does siege damage.
+Dragon Turtle - Increased collision size to 70.
+
+Acid Turtle - Now have attack Ground ability.
+
+Manta - Base damage changed to 48. 
+Manta - Damage dice changed to 2d5.
+Manta - Hit points reduced to 925
+
+Couatl - Base Armor reduced to 0
+Couatl - Vanish is now 50 mana.
+Couatl - Shadow Sight is now 75 mana.
+Couatl - Base damage reduced to 9.
+
+Siren  - Stop last 25 seconds.
+Siren - Healing Water now heal 200 hp over 20 seconds 
+Siren - Healing water now has 2 second cool down
+Siren - Water Image Cool increased to 30 and duration increased to 30.
+Siren - Water Image mana cost increased to 150
+
+Magi-Crusher - base mana is now 150, and starting mana is 75.
+Magi-Crusher - base damage is now 12.
+Magi-Crusher - Armor is now unarmored and hp is now 545.
+Magi-Crusher - Wave dispel no longer requires anti-magi upgrade.
+
+Buildings 
+-----------------------------------------------------
+Naga Defense - Coral Reefs can now be upgraded to Air Guardian or Ground Guardian.
+Naga Sea Crystal - Starting max mana is now 200.
+Naga Sea Crystal - Hit points reduced to 375
+
+UPGRADES/MISC 
+---------------------------------------------------------------------------
+Misc - Change the size look of several units.
+Coral Armor - Base Cost increased to 175
+Coral Blades - Base Cost reduced to 125 gold 50 wood.
+Coral Blades - Lumber Increments reduced to 100.
+Strength of the deep - Base Cost increased to 175 gold 175 wood.
+Strength of the deep - Cost Increments increased to 100 gold and 100 wood.
+Orb of slow - now called orb of water.
+Fixed a few tool tips.

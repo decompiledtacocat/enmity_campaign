@@ -1,0 +1,17 @@
+function AntiImpaleBurrowedConditions takes nothing returns boolean
+return GetBooleanAnd(( GetUnitTypeId(GetSpellAbilityUnit()) == 'U00X' ),( GetSpellAbilityId() == 'A06U' ))
+endfunction
+function AntiImpaleBurrowedActions takes nothing returns nothing
+    local unit stupid=GetSpellAbilityUnit()
+    call IssueImmediateOrderBJ(stupid , "stop" )
+    set stupid=null
+endfunction
+
+//===========================================================================
+function InitTrig_AntiImpaleBurrowed takes nothing returns nothing
+    set gg_trg_AntiImpaleBurrowed = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_AntiImpaleBurrowed, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_AntiImpaleBurrowed, Condition( function AntiImpaleBurrowedConditions ) )
+    call TriggerAddAction( gg_trg_AntiImpaleBurrowed, function AntiImpaleBurrowedActions  )
+endfunction
+

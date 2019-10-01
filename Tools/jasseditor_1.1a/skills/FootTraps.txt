@@ -1,0 +1,37 @@
+function Trig_Foot_Trap_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0EN' )
+endfunction
+
+function Trig_Foot_Trap_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local unit ward
+local location targetloc=GetSpellTargetLoc()
+local integer max=3*(GetUnitAbilityLevel(caster,'A0EN'))
+set ward=CreateUnitAtLoc(owner,'o010', targetloc,bj_UNIT_FACING )
+call PlaySoundOnUnitBJ(gg_snd_StasisTrapBirth,100,ward)
+call MaxUnit(caster,ward,"foottrap",max,9)
+call PolledWait2(3.0)
+if IsUnitAliveBJ(ward)==true then
+call UnitAddAbility(ward,'A0EM')
+call UnitAddAbility(ward,'Apiv')
+call GroupAddUnit(udg_wardgroup,ward)
+    if IsTriggerEnabled(gg_trg_FootTrapDetection)==false then
+    call EnableTrigger(gg_trg_FootTrapDetection)
+    endif
+endif
+set caster=null
+set owner=null
+call RemoveLocation(targetloc)
+set targetloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_Foot_Trap takes nothing returns nothing
+    set gg_trg_Foot_Trap = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Foot_Trap, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Foot_Trap, Condition( function Trig_Foot_Trap_Conditions ) )
+    call TriggerAddAction( gg_trg_Foot_Trap, function Trig_Foot_Trap_Actions )
+endfunction    
+    
+   

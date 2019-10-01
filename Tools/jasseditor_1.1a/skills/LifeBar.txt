@@ -1,0 +1,53 @@
+function LifeBarFilter takes nothing returns boolean
+return GetBooleanAnd((IsUnitAliveBJ(GetFilterUnit())==true ),( IsUnitType(GetFilterUnit(), UNIT_TYPE_HERO)==true ))
+endfunction
+function LifeBar takes nothing returns nothing
+local group playerunits
+local unit hero
+local integer index=0
+local string status=""
+local integer barloop
+local integer maxloop
+local real percent
+//index players with Player(x) 
+loop
+exitwhen index>11
+  if GetBooleanAnd((GetPlayerSlotState(Player(index)) == PLAYER_SLOT_STATE_PLAYING ),GetBooleanAnd((index!=6) ,(index!=0))) then
+  set playerunits=CreateGroup()
+  set playerunits=GetUnitsOfPlayerMatching(Player(index), Condition(function LifeBarFilter))
+  loop
+  set hero=FirstOfGroup(playerunits)
+  exitwhen hero==null
+  set status=""
+    set barloop=1
+    set maxloop=R2I(( GetUnitLifePercent(hero) * 0.20 ))
+    loop
+    exitwhen barloop > maxloop
+    set status=status +"|"
+    set barloop=barloop+1
+    endloop
+  call MultiboardSetItemValueBJ(GetLastCreatedMultiboard(), 2, index+2, status)
+  set percent = GetUnitLifePercent(hero)
+        if (percent >=75 ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+2, 0.00, 100.00, 0.00, 0 )
+        elseif ( percent<75 ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+2, 70.00, 100.00, 20.00, 0 )
+        elseif (percent<65 ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+2, 70.00, 100.00, 20.00, 0 )
+        elseif ( percent<55  ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+2, 100.00, 90.00, 0.00, 0 )
+        elseif ( percent<45  ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+2, 100.00, 45.00, 0.00, 0 )
+        elseif ( percent<25  ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+2, 100.00, 0.00, 0.00, 0 )
+        endif
+  call GroupRemoveUnit(playerunits,hero)
+  endloop
+  call DestroyGroup(playerunits)
+  set playerunits=null
+  endif
+set index=index+1
+endloop
+endfunction
+
+

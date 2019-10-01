@@ -1,0 +1,19 @@
+function PossessionDiesAsAunitConditions takes nothing returns boolean
+return GetBooleanAnd((IsUnitType(GetDyingUnit(), UNIT_TYPE_HERO) == false ),(GetHandleInt(GetDyingUnit(),"possessed!")==1))
+endfunction
+
+function PossessionDiesAsAunitActions takes nothing returns nothing
+local unit dying=GetDyingUnit()
+local unit shapeless=GetHandleUnit(dying,"Shapeless")
+call UNPOSSESS(shapeless)
+set dying=null
+set shapeless=null
+endfunction
+//===========================================================================
+function InitTrig_PossessionDiesAsAunit takes nothing returns nothing
+    set gg_trg_PossessionDiesAsAunit = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PossessionDiesAsAunit, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_PossessionDiesAsAunit, Condition( function PossessionDiesAsAunitConditions  ) )
+    call TriggerAddAction( gg_trg_PossessionDiesAsAunit, function PossessionDiesAsAunitActions  )
+endfunction
+

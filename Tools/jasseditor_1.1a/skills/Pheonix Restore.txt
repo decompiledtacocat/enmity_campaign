@@ -1,0 +1,29 @@
+function PheonixRestoreConditions takes nothing returns boolean
+return ( GetUnitTypeId(GetDyingUnit()) == 'h00O' )
+endfunction
+function PheonixRestoreActions takes nothing returns nothing
+local unit caster=GetDyingUnit()
+local unit rabbit
+local unit rabbit2
+local player owner=GetOwningPlayer(caster)
+local location casterloc=GetUnitLoc(caster)
+set rabbit=CreateRabbit(owner,casterloc)
+set rabbit2=CreateRabbit(owner,casterloc)
+call UnitAddAbility(rabbit,'A0BI' )
+call UnitAddAbility(rabbit2,'A0BJ' )
+call IssueImmediateOrder(rabbit,"replenish")
+call IssueImmediateOrder(rabbit2,"resurrection")
+call RemoveLocation(casterloc)
+set rabbit=null
+set rabbit2=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_PheonixRestore takes nothing returns nothing
+    set gg_trg_PheonixRestore = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PheonixRestore, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_PheonixRestore, Condition( function PheonixRestoreConditions ) )
+    call TriggerAddAction( gg_trg_PheonixRestore, function PheonixRestoreActions )
+endfunction
+

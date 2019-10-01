@@ -1,0 +1,177 @@
+function UnitTakesDamageActions takes nothing returns nothing
+local unit takedamage=GetTriggerUnit()
+local unit target
+local unit caster
+local unit source
+local real damage
+local integer level
+local effect fx
+local effect fx2
+local integer sacrificeoff=0
+local integer devouroff=0
+
+//Seal of Sacrifice Tigger unit is Unit to heal.
+set caster=GetTriggerUnit()
+set target=GetHandleUnit(caster,"sealtarget")
+set damage=GetEventDamage()
+set level=GetHandleInt(caster,"seallevel")
+if target!=null then
+if GetBooleanAnd(GetBooleanAnd(UnitHasBuffBJ(target,'B029')==true,IsUnitAliveBJ(caster)==true),IsUnitAliveBJ(target)==true) then
+  if damage >0 then
+  call SetUnitLifeBJ(target,GetUnitState(target,UNIT_STATE_LIFE)+damage*(.5*level))
+  set fx=AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl",caster,"chest")
+  set fx2=AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl",target,"overhead")
+  call TriggerSleepAction(.5)
+  call DestroyEffect(fx)
+  set fx=null
+  call DestroyEffect(fx2)
+  set fx2=null
+  endif
+else
+set sacrificeoff=1
+endif
+else 
+set sacrificeoff=1
+endif 
+
+//Mask of The Devourer Trigger unit is target.
+set target=caster
+set caster=GetHandleUnit(target,"MaskOfDevour")
+set source=GetEventDamageSource()
+set damage=GetEventDamage()
+if GetBooleanAnd(source==caster,source!=null) then
+call SetHandleHandle(target,"MaskOfDevour",null)
+call SetUnitManaBJ(caster,GetUnitState(caster,UNIT_STATE_MANA)+damage*.04)
+set fx=AddSpecialEffectTarget("Abilities\\Spells\\Undead\\ReplenishMana\\SpiritTouchTarget.mdl",caster,"chest")
+call TriggerSleepAction(.5)
+call DestroyEffect(fx)
+set fx=null
+set devouroff=1
+endif
+
+set target=null
+set caster=null
+set source=null
+if GetBooleanAnd(devouroff==1,sacrificeoff==1) then
+call SetHandleInt(takedamage,"TakesDamage",0)
+set takedamage=null
+call DestroyTrigger(GetTriggeringTrigger())
+endif
+
+endfunction
+function Trig_MaskOfTheDevourer_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local unit target=GetAttackedUnitBJ()
+local trigger t
+call SetHandleHandle(target,"MaskOfDevour",caster)
+if GetHandleInt(target,"TakesDamage")!=1 then
+set t=CreateTrigger()
+call SetHandleInt(target,"TakesDamage",1)
+     call TriggerAddAction(t, function UnitTakesDamageActions )
+     call TriggerRegisterUnitEvent( t, target, EVENT_UNIT_DAMAGED )
+endif
+set caster=null
+set target=null
+endfunction
+
+function MaskOfTheDevourer takes nothing returns nothing
+local unit target=GetTriggerUnit()
+local unit caster=GetHandleUnit(GetTriggeringTrigger(),"MaskOfDevour")
+local unit source=GetEventDamageSource()
+local real damage=GetEventDamage()
+local effect fx
+if source==caster then
+call SetUnitManaBJ(caster,GetUnitState(caster,UNIT_STATE_MANA)+damage*.04)
+set fx=AddSpecialEffectTarget("Abilities\\Spells\\Undead\\ReplenishMana\\SpiritTouchTarget.mdl",caster,"chest")
+call TriggerSleepAction(.5)
+call DestroyEffect(fx)
+set fx=null
+set caster=null
+set target=null
+set source=null
+call DestroyTrigger(GetTriggeringTrigger())
+endif
+set caster=null
+set target=null
+set source=null
+endfunction
+
+
+
+
+
+function Trig_SealOfSacrifice_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0EO')
+local trigger t
+local unit oldunit=GetHandleUnit(caster,"sealtarget")
+local unit oldcaster
+if oldunit!=null then
+if UnitHasBuffBJ(oldunit,'B029')==true then
+call UnitRemoveBuffBJ('B029',oldunit)
+endif
+call SetHandleHandle(oldunit,"sealcaster",null)
+call SetHandleHandle(caster,"sealtarget",null)
+endif
+
+if UnitHasBuffBJ(target,'B029')==true then
+call UnitRemoveBuffBJ('B029',target)
+set oldunit=GetHandleUnit(target,"sealcaster")
+call SetHandleHandle(target,"sealcaster",null)
+call SetHandleHandle(oldunit,"sealtarget",null)
+endif
+if GetHandleTrigger(target,"sealtarget")!=null then
+set oldunit=GetHandleUnit(target,"sealtarget")
+call SetHandleHandle(target,"sealcaster",null)
+call SetHandleHandle(oldunit,"sealtarget",null)
+if UnitHasBuffBJ(oldunit,'B029')==true then
+call UnitRemoveBuffBJ('B029',oldunit)
+endif
+endif
+call SetHandleHandle(target,"sealcaster",caster)
+call SetHandleHandle(caster,"sealtarget",target)
+call SetHandleInt(caster,"seallevel",level)
+
+
+
+if GetHandleInt(caster,"TakesDamage")!=1 then
+set t=CreateTrigger()
+call SetHandleInt(caster,"TakesDamage",1)
+call TriggerAddAction(t, function UnitTakesDamageActions )
+call TriggerRegisterUnitEvent( t, caster, EVENT_UNIT_DAMAGED )
+endif
+set caster=null
+set target=null
+set oldunit=null
+set oldtrigger=null
+endfunction
+
+function SealOfSacrificeHeal takes nothing returns nothing
+local unit caster=GetTriggerUnit()
+local unit target=GetHandleUnit(GetTriggeringTrigger(),"sealtarget")
+local real damage=GetEventDamage()
+local integer level=GetHandleInt(GetTriggeringTrigger(),"seallevel")
+local effect fx
+local effect fx2
+
+if GetBooleanAnd(GetBooleanAnd(UnitHasBuffBJ(target,'B029')==true,IsUnitAliveBJ(caster)==true),IsUnitAliveBJ(target)==true) then
+  if damage >0 then
+  call SetUnitLifeBJ(target,GetUnitState(target,UNIT_STATE_LIFE)+damage*(.5*level))
+  set fx=AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl",caster,"chest")
+  set fx2=AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl",target,"overhead")
+  call TriggerSleepAction(.5)
+  call DestroyEffect(fx)
+  set fx=null
+  call DestroyEffect(fx2)
+  set fx2=null
+  endif
+else  
+call SetHandleHandle(target,"sealcaster",null)
+call SetHandleHandle(caster,"sealtrigger",null)
+call FlushHandleLocals(GetTriggeringTrigger())
+call DestroyTrigger(GetTriggeringTrigger())
+endif
+set caster=null
+set target=null
+endfunction

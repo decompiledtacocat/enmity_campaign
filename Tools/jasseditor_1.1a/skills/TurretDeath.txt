@@ -1,0 +1,32 @@
+function TurretDeathConditions takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr(( GetUnitTypeId(GetDyingUnit()) == 'h00L' ),( GetUnitTypeId(GetDyingUnit()) == 'h00M' )),GetBooleanOr(( GetUnitTypeId(GetDyingUnit()) == 'h00K' ),( GetUnitTypeId(GetDyingUnit()) == 'h00J' )) )
+endfunction
+function TurretDeathFilter  takes nothing returns boolean
+return ( GetUnitTypeId(GetFilterUnit()) == 'n01Q' )
+endfunction
+function TurretDeathActions takes nothing returns nothing
+    local unit mstation
+    local unit deadturret=GetDyingUnit()
+    local location turretloc=GetUnitLoc(deadturret)
+    local group turretdeathgroup= GetUnitsInRangeOfLocMatching(300.00,turretloc, Condition(function TurretDeathFilter) )
+loop
+      set mstation=FirstOfGroup(turretdeathgroup)
+      exitwhen mstation==null
+      call KillUnit(mstation)
+      call RemoveUnit( mstation )
+      call GroupRemoveUnit(turretdeathgroup,mstation)
+endloop
+call RemoveLocation(turretloc)
+call DestroyGroup(turretdeathgroup)
+set mstation=null
+set deadturret=null
+set turretdeathgroup=null
+set turretloc=null
+endfunction
+//===========================================================================
+function InitTrig_TurretDeath takes nothing returns nothing
+    set gg_trg_TurretDeath = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_TurretDeath, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_TurretDeath, Condition( function TurretDeathConditions) )
+    call TriggerAddAction( gg_trg_TurretDeath, function TurretDeathActions)
+endfunction

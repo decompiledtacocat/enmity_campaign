@@ -1,0 +1,78 @@
+function Trig_LightingShield_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0ER' )
+endfunction
+
+function ElectricThunderActions  takes nothing returns nothing
+local trigger t=GetTriggeringTrigger()
+local unit caster=GetHandleUnit(t,"ElectricThunderCaster")
+local integer level=GetHandleInt(t,"ElectricThunderLevel")
+local real duration=GetHandleReal(t,"ElectricThunderDur")
+local integer stop=GetHandleInt(caster,"ElectricThunder")
+local group temp
+local unit picked
+local real maxdamage=level*35
+local unit rabbit
+local location castloc=GetUnitLoc(caster)
+local player owner=GetOwningPlayer(caster)
+
+
+if duration >=2 or stop!=1 then
+set t=null
+                call DestroyGroup(temp)
+                set temp=null
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+set caster=null
+set rabbit=null
+set picked=null
+call FlushHandleLocals(GetTriggeringTrigger())
+call DestroyTrigger(GetTriggeringTrigger())
+return
+else
+                set udg_tempfilterplayer=null
+                set udg_tempfilterplayer=owner
+                set temp=GetUnitsInRangeOfLocMatching(250.00,castloc, Condition(function filtercheck))
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null
+                   set rabbit=CreateRabbit(owner,castloc)
+                    call UnitAddAbility(rabbit,'A0ET')
+                    call IssueTargetOrder(rabbit,"purge",picked)
+                    call UnitDamageTargetBJ(caster, picked,GetRandomReal(1,maxdamage), ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                   call GroupRemoveUnit(temp,picked)  
+                  endloop
+                call DestroyGroup(temp)
+                set temp=null
+endif
+set duration=duration+.5
+call SetHandleReal(t,"ElectricThunderDur",duration)
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+set caster=null
+set rabbit=null
+set picked=null
+endfunction
+
+function Trig_LightingShield_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0ER')
+local trigger t
+call SetHandleInt(caster,"ElectricThunder",1)
+set t=CreateTrigger()
+call SetHandleHandle(t,"ElectricThunderCaster",caster)
+call SetHandleInt(t,"ElectricThunderLevel",level)
+call SetHandleReal(t,"ElectricThunderDur",0)
+    call TriggerRegisterTimerEventPeriodic( t, 0.5 )
+    call TriggerAddAction( t, function ElectricThunderActions  )
+endfunction
+
+//===========================================================================
+function InitTrig_LightingShield takes nothing returns nothing
+    set gg_trg_LightingShield = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_LightingShield, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_LightingShield, Condition( function Trig_LightingShield_Conditions ) )
+    call TriggerAddAction( gg_trg_LightingShield, function Trig_LightingShield_Actions )
+endfunction
+

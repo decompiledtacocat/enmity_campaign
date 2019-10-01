@@ -1,0 +1,77 @@
+function VineWhipConditions takes nothing returns boolean
+return (GetSpellAbilityId() == 'A09L' )
+endfunction
+function VineWhipActions takes nothing returns nothing
+    local unit vcaster=GetSpellAbilityUnit()
+    local unit vtarget=GetSpellTargetUnit()
+    local location vcasterloc=GetUnitLoc(vcaster)
+    local location vtargetloc=GetUnitLoc(vtarget)
+    local location vmoveloc
+    local player vplayer=GetOwningPlayer(vcaster)
+    local integer vloop
+    local integer vloopmax
+    local real vwait=(DistanceBetweenPoints(vcasterloc, vtargetloc) / 1500 )
+    local effect vfx
+    local real vlevel=I2R(GetUnitAbilityLevelSwapped('A09L', vcaster))
+    local real vherolevel=I2R(GetHeroLevel(vcaster)) 
+    local real vdamage=((2.00 *vherolevel)+( 65.00 *vlevel ))
+    if ( GetUnitTypeId(vcaster) == 'O00P') then
+        // VineWhipRooted
+        call PauseUnitBJ( true, vtarget )
+        set vloopmax = R2I(DistanceBetweenPoints(vcasterloc, vtargetloc)/ 10 )
+        set vfx=AddSpecialEffectTargetUnitBJ( "origin", vtarget, "Abilities\\Spells\\NightElf\\EntanglingRoots\\EntanglingRootsTarget.mdl" )
+        call SetUnitPositionLocFacingLocBJ( vtarget , vtargetloc, vcasterloc )
+        call RemoveLocation(vtargetloc)
+        set vloop = 1
+        loop
+            exitwhen vloop > vloopmax
+            set vtargetloc=GetUnitLoc(vtarget)
+            set vmoveloc=PolarProjectionBJ(vtargetloc, ( DistanceBetweenPoints(vcasterloc, vtargetloc) - ( ( 1.00 / I2R(vloopmax) ) * DistanceBetweenPoints(vcasterloc, vtargetloc) ) ), AngleBetweenPoints( vtargetloc,vcasterloc)) 
+            call SetUnitPositionLoc(vtarget,vmoveloc )
+            call RemoveLocation(vtargetloc)
+            call RemoveLocation(vmoveloc)
+            call TriggerSleepAction(0)
+            set vloop  = vloop + 1
+        endloop
+            call UnitRemoveBuffBJ( 'B01D', vtarget )
+            call DestroyEffectBJ( vfx )
+            call PauseUnitBJ( false, vtarget )
+    else
+        
+        call PolledWait2(vwait)
+        call RemoveLocation(vtargetloc)
+        set vtargetloc=GetUnitLoc(vtarget)
+        if ( IsUnitAliveBJ(vtarget) == true ) then
+          set udg_tempecheckunit=null
+          set udg_tempecheckunit=vtarget
+          if (etherealcheck()) then 
+          call UnitDamageTargetBJ(vcaster, vtarget, vdamage, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+          else
+          call UnitDamageTargetBJ(vcaster, vtarget, vdamage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+          endif
+              call PolledWait2(0.5)
+              if ( IsUnitAliveBJ(vtarget) == false ) then
+              call CreateUnitAtLoc(vplayer,'e00A',vtargetloc,bj_UNIT_FACING)
+              endif
+        endif
+        call RemoveLocation(vtargetloc)
+    endif
+call RemoveLocation(vtargetloc)
+call RemoveLocation(vcasterloc)
+call RemoveLocation(vmoveloc)
+set vcaster=null
+set vtarget=null
+set vcasterloc=null
+set vtargetloc=null
+set vmoveloc=null
+set vplayer=null
+endfunction
+
+//===========================================================================
+function InitTrig_VineWhip takes nothing returns nothing
+    set gg_trg_VineWhip = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_VineWhip, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_VineWhip, Condition( function VineWhipConditions  ) )
+    call TriggerAddAction( gg_trg_VineWhip, function VineWhipActions  )
+endfunction
+

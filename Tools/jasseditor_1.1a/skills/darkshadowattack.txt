@@ -1,0 +1,34 @@
+function Trig_DarkShadowAttack_Conditions takes nothing returns boolean
+return GetBooleanAnd(IsUnitIllusionBJ(GetAttacker()) == false,GetUnitTypeId(GetAttacker()) == 'E00D')
+endfunction
+
+function Trig_DarkShadowAttack_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local unit target=GetAttackedUnitBJ()
+local unit array shadow
+local integer sloop=0
+set shadow[0]=GetHandleUnit(caster,"darkshadow1")
+set shadow[1]=GetHandleUnit(caster,"darkshadow2")
+set shadow[2]=GetHandleUnit(caster,"darkshadow3")
+loop
+exitwhen sloop>2
+if GetBooleanAnd(shadow[sloop]!=null, IsUnitAliveBJ(shadow[sloop])==true) then
+call TriggerSleepAction(0)
+call IssueTargetOrder (shadow[sloop],"attack",target)
+endif
+set sloop=sloop+1
+endloop
+set caster=null
+set target=null
+set shadow[0]=null
+set shadow[1]=null
+set shadow[2]=null
+endfunction
+
+//===========================================================================
+function InitTrig_DarkShadowAttack takes nothing returns nothing
+    set gg_trg_DarkShadowAttack = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DarkShadowAttack, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_DarkShadowAttack, Condition( function Trig_DarkShadowAttack_Conditions ) )
+    call TriggerAddAction( gg_trg_DarkShadowAttack, function Trig_DarkShadowAttack_Actions )
+endfunction

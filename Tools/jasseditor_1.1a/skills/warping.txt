@@ -1,0 +1,79 @@
+function Trig_Warping_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0J7' 
+endfunction
+
+function WarpFilter takes nothing returns boolean
+return GetBooleanAnd( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false,GetBooleanAnd(GetOwningPlayer(GetFilterUnit())==GetOwningPlayer(udg_tempfilterplayer),GetUnitTypeId(GetFilterUnit())!='h01D') )
+endfunction
+
+
+function Trig_Warping_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local unit picked
+local group temp
+local real area=250
+local unit target=GetHandleUnit(caster,"HoleLink")
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocMatching(area,castloc, Condition(function WarpFilter))
+ 
+if GetBooleanAnd(CountUnitsInGroup(temp)>0 , taget!=null ) then
+   
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null or x>=exit
+                   call SpellEffectXY('A0HO',EFFECT_TYPE_SPECIAL,GetUnitX(picked),GetUnitY(picked))
+                   call SetUnitPosition(picked,GetUnitX(target)+GetRandomReal(1,50),GetUnitY(target)+GetRandomReal(1,50))
+                   call SetUnitPosition(picked,GetUnitX(target),GetUnitY(target))
+                   call SpellEffectXY('A0HO',EFFECT_TYPE_SPECIAL,GetUnitX(picked),GetUnitY(picked))
+        
+                   call GroupRemoveUnit(temp,picked) 
+           
+                  endloop
+endif      
+                call DestroyGroup(temp)
+                set temp=null
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+set caster=null
+set picked=null
+endfunction
+
+//===========================================================================
+function InitTrig_Warping takes nothing returns nothing
+    set gg_trg_Warping = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Warping , EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Warping , Condition( function Trig_Warping_Conditions ) )
+    call TriggerAddAction( gg_trg_Warping , function Trig_Warping_Actions )
+endfunction
+
+
+
+
+
+function WarpHoleWarpActions  takes nothing returns nothing
+local unit caster
+local unit target
+if target!=null then
+
+if IsUnitAliveBJ(target)==false then
+set caster=null
+set target=null
+call FlushHandleLocals(GetTriggeringTrigger())
+call DestroyTrigger(GetTriggeringTrigger())
+elseif IsUnitAliveBJ(target)==true then
+
+if then 
+
+set udg_incoming=caster
+endif
+
+endif
+
+endif
+set target=null
+set caster=null
+endfunction

@@ -1,0 +1,96 @@
+function SummonerAuraFilter takes nothing returns boolean
+return IsUnitType(GetFilterUnit(), UNIT_TYPE_MECHANICAL) == false 
+endfunction
+function HasSStone takes nothing returns boolean
+return UnitHasItemOfTypeBJ(GetFilterUnit(),'I02Z')
+endfunction
+function HasSummonerStoneBuff takes nothing returns boolean
+return UnitHasBuffBJ(GetFilterUnit(), 'B00R')
+endfunction
+
+function RemoveSummonerBuffs takes player owner returns nothing
+local group temp=GetUnitsOfPlayerMatching(owner, Condition(function HasSummonerStoneBuff ))
+local unit picked 
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+call UnitRemoveBuffsBJ('B00R',picked)
+call GroupRemoveUnit(temp,picked)
+endloop    
+call DestroyGroup(temp)
+set temp=null
+endfunction
+
+function SummonerAuraBuffsFunction takes nothing returns nothing
+local group temp
+local unit picked
+local group tempx
+local player owner=GetEnumPlayer()
+set temp=GetUnitsOfPlayerMatching(owner, Condition(function SummonerAuraFilter))
+set tempx=GetUnitsOfPlayerMatching(owner,Condition(function HasSStone))
+if CountUnitsInGroup(tempx)<= 0 then
+call RemoveSummonerBuffs(owner)
+call ForceRemovePlayer(udg_SummonerPlayers,owner)
+endif
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+
+    if GetBooleanAnd(UnitHasBuffBJ(picked, 'B00R') == true,GetCurrentBonusLife(picked)  <= 0)   then
+set life=GetUnitState(picked, UNIT_STATE_MAX_LIFE)
+set bonus=R2I(life*.5)  
+          call SetBonusLife(picked,bonus,false)
+     elseif GetBooleanAnd(UnitHasBuffBJ(picked, 'B00R') ==false,GetCurrentBonusLife(picked)> 0) then
+            call RemoveBonusLife(picked) 
+           
+    endif
+    
+call GroupRemoveUnit(temp,picked)
+endloop    
+call DestroyGroup(temp)
+
+
+call DestroyGroup(tempx)
+set tempx=null
+set temp=null
+set owner=null
+endfunction
+function SummonerAuraBuffsActions takes nothing returns nothing
+    call ForForce( udg_SummonerPlayers, function SummonerAuraBuffsFunction  )
+    if ( CountPlayersInForceBJ(udg_SummonerPlayers) == 0  ) then
+        call DisableTrigger( GetTriggeringTrigger() )
+    endif
+endfunction
+
+//===========================================================================
+function InitTrig_SummonerAuraBuffs takes nothing returns nothing
+    set gg_trg_SummonerAuraBuffs = CreateTrigger(  )
+    call DisableTrigger( gg_trg_SummonerAuraBuffs )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_SummonerAuraBuffs, 2.00 )
+    call TriggerAddAction( gg_trg_SummonerAuraBuffs, function SummonerAuraBuffsActions  )
+endfunction
+
+
+function SummonerAuraConditions takes nothing returns boolean
+return ( GetItemTypeId(GetManipulatedItem()) == 'I02Z' )
+endfunction
+
+function SummonerAuraActions takes nothing returns nothing
+local player owner=GetOwningPlayer(GetManipulatingUnit())
+    if (IsPlayerInForce(owner, udg_SummonerPlayers) == false ) then
+        call ForceAddPlayerSimple(owner, udg_SummonerPlayers )
+        if (IsTriggerEnabled(gg_trg_SummonerAuraBuffs )==false) then
+        call EnableTrigger( gg_trg_SummonerAuraBuffs )
+        endif
+    endif
+set owner=null
+endfunction
+
+//===========================================================================
+function InitTrig_SummonerAura takes nothing returns nothing
+    set gg_trg_SummonerAura = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SummonerAura, EVENT_PLAYER_UNIT_PICKUP_ITEM )
+    call TriggerAddCondition( gg_trg_SummonerAura, Condition( function SummonerAuraConditions  ) )
+    call TriggerAddAction( gg_trg_SummonerAura, function SummonerAuraActions )
+endfunction
+

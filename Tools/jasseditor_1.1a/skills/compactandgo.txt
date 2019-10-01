@@ -1,0 +1,27 @@
+function Trig_CompactGun_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0FW' ) 
+endfunction
+
+function Trig_CompactGun_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local location castloc=GetUnitLoc(caster)
+local effect fx=AddSpellEffectByIdLoc('A0FW',EFFECT_TYPE_CASTER,castloc)
+call KillUnit(caster)
+call RemoveUnit(caster)
+call CreateItemLoc( 'I04F', castloc )
+call PolledWait2(.5)
+call DestroyEffect(fx)
+call RemoveLocation(castloc)
+set fx=null
+set caster=null
+set castloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_CompactGun takes nothing returns nothing
+    set gg_trg_CompactGun = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_CompactGun, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_CompactGun, Condition( function Trig_CompactGun_Conditions ) )
+    call TriggerAddAction( gg_trg_CompactGun, function Trig_CompactGun_Actions )
+endfunction
+

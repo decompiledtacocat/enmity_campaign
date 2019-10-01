@@ -1,0 +1,51 @@
+function PandaSmashConditions takes nothing returns boolean
+return GetBooleanOr(( GetUnitAbilityLevelSwapped('A0AE', GetAttacker()) > 0 ),( GetUnitAbilityLevelSwapped('A00N', GetAttacker()) > 0 ))
+endfunction
+function PandaSmashActions takes nothing returns nothing
+local unit caster= GetAttacker()
+local unit picked
+local player owner=GetOwningPlayer(caster)
+local integer level
+local group stupid
+local location casterloc=GetUnitLoc(caster)
+local integer chance
+local real area
+local real damage=I2R(GetHeroStatBJ(bj_HEROSTAT_STR, caster, true))
+if (GetUnitAbilityLevelSwapped('A0AE',caster)>GetUnitAbilityLevelSwapped('A00N', caster)) then
+set level=GetUnitAbilityLevelSwapped('A0AE',caster)
+else
+set level=GetUnitAbilityLevelSwapped('A00N',caster)
+endif
+set chance=( 5 * level )
+set area=225.00 + ( 25.00 * I2R(level) )
+    if ( GetRandomInt(1, 100) <= chance) then
+        call SetUnitAnimation(caster, "slam" )
+        if  ( IsUnitIllusionBJ(caster) == false )  then
+        set stupid=CreateGroup()
+        set udg_tempfilterplayer=null
+        set udg_tempfilterplayer=owner
+        set stupid=GetUnitsInRangeOfLocMatching(area,casterloc,Condition(function filtercheck))
+            loop
+            set picked=FirstOfGroup(stupid)
+            exitwhen picked==null
+            call UnitDamageTargetBJ( caster, picked, damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+            call GroupRemoveUnit(stupid,picked)
+            endloop
+            call DestroyGroup(stupid)
+            set stupid=null
+            set picked=null
+        endif
+    endif
+set owner=null
+call RemoveLocation(casterloc)
+set casterloc=null    
+endfunction
+
+//===========================================================================
+function InitTrig_PandaSmash takes nothing returns nothing
+    set gg_trg_PandaSmash = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PandaSmash, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_PandaSmash, Condition( function PandaSmashConditions  ) )
+    call TriggerAddAction( gg_trg_PandaSmash, function PandaSmashActions  )
+endfunction
+

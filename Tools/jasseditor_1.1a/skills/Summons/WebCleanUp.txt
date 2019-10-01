@@ -1,0 +1,16 @@
+function WebCleanUpConditions takes nothing returns boolean
+return ( GetUnitTypeId(GetDyingUnit()) == 'n01F' )
+endfunction
+function WebCleanUpActions takes nothing returns nothing
+local unit stupid=GetDyingUnit()
+call RemoveUnit(stupid)
+set stupid=null
+endfunction
+//===========================================================================
+function InitTrig_WebCleanUp takes nothing returns nothing
+    set gg_trg_WebCleanUp = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_WebCleanUp, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_WebCleanUp, Condition( function WebCleanUpConditions ) )
+    call TriggerAddAction( gg_trg_WebCleanUp, function WebCleanUpActions )
+endfunction
+

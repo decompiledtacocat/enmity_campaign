@@ -1,0 +1,24 @@
+function ForeverWalkerDeathConditions takes nothing returns boolean
+return ( GetUnitTypeId(GetDyingUnit()) == 'n01Y' ) 
+endfunction
+
+function ForeverWalkerDeathActions takes nothing returns nothing
+    local unit soul=GetDyingUnit()
+    local unit newborn=GetHandleUnit(soul,"newborn")
+    local unit killer=GetKillingUnitBJ()
+    call SetHandleInt(newborn,"dead",1)
+    call SetUnitInvulnerable(newborn, false )
+    call UnitDamageTargetBJ(killer, newborn, 9999.00, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL)
+    call FlushHandleLocals(soul)
+    set soul=null
+    set newborn=null
+    set killer=null
+endfunction
+//===========================================================================
+function InitTrig_ForeverWalkerDeath takes nothing returns nothing
+    set gg_trg_ForeverWalkerDeath = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ForeverWalkerDeath, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_ForeverWalkerDeath, Condition( function ForeverWalkerDeathConditions ) )
+    call TriggerAddAction( gg_trg_ForeverWalkerDeath, function ForeverWalkerDeathActions )
+endfunction
+

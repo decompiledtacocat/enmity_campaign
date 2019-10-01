@@ -1,0 +1,23 @@
+function SummonerAuraConditions takes nothing returns boolean
+return ( UnitHasItemOfTypeBJ(GetTriggerUnit(), 'I02Z') == true ) 
+endfunction
+
+function SummonerAuraActions takes nothing returns nothing
+local player owner=GetOwningPlayer(GetTriggerUnit())
+    if (IsPlayerInForce(owner, udg_SummonerAuraPlayers) == false ) then
+        call ForceAddPlayerSimple(owner, udg_SummonerAuraPlayers )
+        if (IsTriggerEnabled(gg_trg_SummonerAuraBuffs )) then
+        call EnableTrigger( gg_trg_SummonerAuraBuffs )
+        endif
+    endif
+set owner=null
+endfunction
+
+//===========================================================================
+function InitTrig_SummonerAura takes nothing returns nothing
+    set gg_trg_SummonerAura = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SummonerAura, EVENT_PLAYER_UNIT_PICKUP_ITEM )
+    call TriggerAddCondition( gg_trg_SummonerAura, Condition( function SummonerAuraConditions  ) )
+    call TriggerAddAction( gg_trg_SummonerAura, function SummonerAuraActions )
+endfunction
+

@@ -1,0 +1,17 @@
+function xcopyalt takes unit original, unit new returns nothing
+local integer isposs=GetHandleInt(original,"isacopy")
+local unit caster
+local unit xcopy
+local integer sloop=0
+if (isposs==1) then
+set caster=(original,"oldcopy")
+call SetHandleHandle(caster,"newcopy",new)
+  loop
+    exitwhen sloop>4
+    call SetHandleInt(new ,("xcopylevel"+I2S(sloop)), GetHandleInt(original,("xcopylevel"+I2S(sloop)))) 
+    set sloop=sloop+1
+  endloop
+endif
+set caster=null
+set xcopy=null
+endfunction

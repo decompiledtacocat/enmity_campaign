@@ -1,0 +1,30 @@
+function Trig_ExplosiveArrow_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0F0' ) 
+endfunction
+
+function Trig_ExplosiveArrow_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local unit rabbit=CreateRabbit(owner,castloc)
+local integer level=GetUnitAbilityLevel(caster,'A0F0')
+call UnitAddAbility(rabbit,'A0EZ')
+call SetUnitAbilityLevelSwapped( 'A0EZ', rabbit, level )
+call IssueTargetOrder(rabbit,"acidbomb",target)
+set caster=null
+set target=null
+set owner=null
+call RemoveLocation(castloc)
+set castloc=null
+set rabbit=null
+endfunction
+
+//===========================================================================
+function InitTrig_ExplosiveArrow takes nothing returns nothing
+    set gg_trg_ExplosiveArrow = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ExplosiveArrow, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_ExplosiveArrow, Condition( function Trig_ExplosiveArrow_Conditions ) )
+    call TriggerAddAction( gg_trg_ExplosiveArrow, function Trig_ExplosiveArrow_Actions )
+endfunction
+

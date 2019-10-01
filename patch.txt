@@ -1,0 +1,151 @@
+4,394 kb
+
+Stage 1: Revamp
+Stage 2: Divide
+Stage 3: Polish
+
+
+
+
+RANGERS:
+--------
+
+Elite Archer 
+-Summon Hawk Removed.
+-Break Removed.
+-True Skill Removed.
+-New Skill Added: Searing Arrows
+-New Skill Added: Deadly Precision
+-New Skill Added: Multi Arrow 
+
+Hunter
+-Summon Joy and Spitz Removed.
+-New Skill Added: Arcane Trap.
+-Frost Arrow - Duration increased to 2 from 1 second. Mana cost reduced.
+
+Gun Slinger
+-Blast shot cool down increased 12 seconds to from 10.
+
+===============================
+Items:
+===============================
+
+Combat Knife - Now takes 1 seconds to free user from ensnares.
+
+Acuria Lens I 
+-10% increased damage.
+-Use: Acuria's Blessing - Increases base damage by 100% but slows attack speed by 100%.
+
+Acuria Lens II (Upgrade)
+-20% increased damage.
+-Use: Acuria's Blessing - Increases base damage by 200% but slows attack speed by 100%.
+
+*new
+Silencer
+-5 intelligence.
+-50 mana.
+-Use: Silence - Silence target for x seconds.
+
+*new
+Time Chain
+-5 intelligence
+-1 armor
+-Use: Time Chain - Slows target enemy's attack speed and movement by 25-45%. 
+------Increases target ally's attack speed and movement by 25-45%.
+
+================
+SUPPORT ITEMS:
+================
+==Level 1==
+*new
+Healing Ward
+-100 mana
+-100% mana regeneration
+-Use: Heal Ward - restores 1-3% life per second.
+
+*revamp
+Ring of Protection
+-2 armor
+-10 strength
+-10 intelligence
+-Use: Increases armor by 4-6 and shield nearby friendlys from 300-900 spell/magic damage.
+
+*new
+
+==Level 2==
+*new
+xxx Armor
+-6 armor
+-10 to all stats.
+-Use: Purify Removes all Buffs from target enemy or all debuffs from target friendly unit.
+
+
+Shared ITEMS:
+
+*new
+Red Lens
+-Minor Passive Detection
+-+5 all stats.
+-1 armor.
+-Use: Major Detection.
+===================
+Scourge Items:
+===================
+*Revamp
+Wand of Necromancy
+-5 intelligence
+-Use: Raise Dead.
+
+*Revamp
+Frost Skull (mage Only)
+-3 armor
+-10 intelligence
+-Use: Frost.
+
+*Revamp
+Mask of the Devourer
+-1 armor.
+-5 to all stats.
+-4% mana leach, 8% life leech.
+-Use: Devour Magic.
+
+*new
+Heart of the Cursed.(mage only)
+-10 intelligence.
+-50% mana regeneration.
+Use: AOE Lesser Dark Curse around caster.
+
+
+ULTILITY ITEMS:
+Pocket Robo Engineers are now charged. Gold cost reduced to 400. Mana cost reduced to 0.
+Lock Down Missile is now charged. Gold cost reduced to 200. Mana cost reduced to 0.
+Land Mines gold cost reduced to 100. Now have 10 charges. Mana cost reduced to 0.
+
+POTIONS ITEMS:
+Clarity Potion - Now has 4 charges.
+Healing Potion added.
+Mana Potion added.
+
+Sell back % changed to 90%.
+Transfering to other players enabled with 10% tax.
+
+Now Protecting now also buffs all allied units with a shield at absorbs 500 spell damage.
+
+Holy Crusader - Level 6 Revamp.
+
+New Hero - The Vicious
+New Hero - Mind Assassin
+
+
+Death Knight - Level 6 Revamp.
+
+Blast Wave - Fire damge + stun nova.
+
+Frost Threads
+--Increases Damage by 10%.
+--Frost shot reduces movement / attack speed.
+
+Spell Threads
+--Increases Damage by 10%.
+--Active - Mana Arrow - Burns mana and deals damage
+

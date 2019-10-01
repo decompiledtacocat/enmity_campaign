@@ -1,0 +1,27 @@
+function Trig_AssassinMark_Conditions takes nothing returns boolean
+return GetBooleanAnd(IsUnitType(GetAttacker(), UNIT_TYPE_MELEE_ATTACKER) == true,GetBooleanAnd(IsTeamKill(GetAttacker(),GetAttackedUnitBJ())==false,UnitHasItemOfTypeBJ(GetAttacker(), 'I053') == true ))
+endfunction
+
+function Trig_AssassinMark_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local unit picked=GetAttackedUnitBJ()
+local real a1=GetUnitFacing(caster)
+local real a2=GetUnitFacing(picked)
+local integer damage=GetRandomInt(150,300)
+if a2< a1+45 or a2> a1-45 then
+call FadingText(I2S(damage)+"!", 255,00,000, GetUnitX(picked), GetUnitY(picked))
+call SpellEffectXY('A0HN', EFFECT_TYPE_SPECIAL,GetUnitX(picked), GetUnitY(picked))
+call UnitDamageTargetBJ(caster, picked, damage, ATTACK_TYPE_NORMAL,DAMAGE_TYPE_NORMAL )
+endif
+set owner=null
+set caster=null
+set picked=null
+endfunction
+
+//===========================================================================
+function InitTrig_AssassinMark takes nothing returns nothing
+    set gg_trg_AssassinMark = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Devastator, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_Devastator, Condition( function Trig_AssassinMark_Conditions ) )
+    call TriggerAddAction( gg_trg_Devastator, function Trig_AssassinMark_Actions )
+endfunction

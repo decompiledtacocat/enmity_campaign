@@ -1,0 +1,36 @@
+function TrueBoltConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A09P' )
+endfunction
+function TrueBoltActions takes nothing returns nothing
+    local unit tbolter=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    local location boltloc=GetUnitLoc(tbolter)
+    local location targetloc=GetUnitLoc(target)
+    local player tplayer=GetOwningPlayer(tbolter)
+    local real wait=(DistanceBetweenPoints(boltloc,targetloc)/1000)
+    local unit buffer
+    call PolledWait( wait )
+    call RemoveLocation(targetloc)
+    set targetloc=GetUnitLoc(target)
+    set buffer = CreateRabbit(tplayer,targetloc)
+    call UnitAddAbilityBJ( 'A09Y',buffer )
+    call SetUnitAbilityLevelSwapped( 'A09Y', buffer , GetUnitAbilityLevelSwapped('A09P',tbolter) )
+    call IssueImmediateOrderBJ( buffer , "thunderclap" )
+    call RemoveLocation(targetloc)
+    call RemoveLocation(boltloc)
+    set boltloc=null
+    set target=null
+    set tbolter=null
+    set targetloc=null
+    set tplayer=null
+    set buffer=null
+endfunction
+
+//===========================================================================
+function InitTrig_TrueBolt takes nothing returns nothing
+    set gg_trg_TrueBolt = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_TrueBolt, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_TrueBolt, Condition( function TrueBoltConditions ) )
+    call TriggerAddAction( gg_trg_TrueBolt, function TrueBoltActions  )
+endfunction
+

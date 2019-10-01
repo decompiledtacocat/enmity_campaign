@@ -1,0 +1,17 @@
+function PossessionCanceledCondition takes nothing returns boolean
+return (GetSpellAbilityId() == 'A04O') 
+endfunction
+function PossessionCanceledActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetHandleUnit(caster,"possession")
+call SetUnitInvulnerable(target, false )
+set caster=null
+set target=null
+endfunction
+//===========================================================================
+function InitTrig_PossessionCanceled takes nothing returns nothing
+    set gg_trg_PossessionCanceled = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PossessionCanceled, EVENT_PLAYER_UNIT_SPELL_ENDCAST )
+    call TriggerAddCondition( gg_trg_PossessionCanceled, Condition( function PossessionCanceledCondition  ) )
+    call TriggerAddAction( gg_trg_PossessionCanceled, function PossessionCanceledActions )
+endfunction

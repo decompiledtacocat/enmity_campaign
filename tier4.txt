@@ -1,0 +1,105 @@
+1.)
+Iron maiden (Cat Tooth + Shock Absorber) 7150+3600+1200=11950
+20 armor
+Returns 95 damage to melee attackers.
+Reduces damage by 40.
+Fan of Spikes - Provokes units to attack the user and deals 375 damage to near by enemy units.
+
+2.)
+Raging Bull (Juggernaut + Rabbid Cat Face) 6200+3750+1200=11150
+35% spell and magic reduction.
+45 strength
+15% life leach
+Bash - 15% chance attacks will deal 80 bonus damage, and stun units for 1 second.
+Rage - Movement speed by 75%, attack speed by 50%, and reduces damage to 0 for 15 seconds.
+
+3.)
+Vicious Hands (Assassin Mark + Bracer of Agility + Cat tooth ) 5950 +3600+2900+1200=13650
+30% increased attack speed.
+80 damage.
+20 Agility.
+Poison - Deals 15 damage per second over 120 seconds.
+Flicker - teleport.
+Track - 25% to track unit on attack providing shared vision.
+Backstab - Deals 150 - 300 bonus damage when attacking units from behind.
+Ruin - 10% chance to reduce target armor by 7.
+
+4.)
+Aegis Preserverence (Aegis Reflector + mana stone) 6525+3450 + 1200 =11175
+45% pierce, spell and magic reduction.
+900 bonus mana.
+450% mana regeneration.
+Mana shield - Absorbs 100% damage costing .5 mana  per 1 point of damage absorbed.
+Preserverence - 15% chance to banish attacking units for 3 seconnds.
+Reflector - 25% chance to deal 200 damage to spell attackers.
+
+
+10.) pets.
+
+
+
+
+
+5.)
+Stone of Creation
+1000 mana.
+Mana Regeneration Aura - Increases mana regenertation by 400% to nearby friendly units.
+Gods Kitchen - Increases summoned units' damage by 50%, 10 armor, 30 life regen, life by 1000. Also grants summons spell immunity.
+Summon Restoration - Restores a summons life and mana to full.
+
+6.)
+The gate-crasher
+60 agility
+50% Increased movement speed
+6 armor
+Full Stealth - Turns the user invisible, and reduces movement. Attacks will deal 300 bonus damage. 
+Parry - 15% chance to stun a melee attacker when attacked.
+Counter Attack - 15% chance to deal 100 damage when attacked.
+
+7.)
+Axe of Anihilation
+65 strength
+65 damage
+Execute - 25% chance an attack will instantly kill target.
+Shockwave - 20% chance to launches 3 shockwaves in front of user destroying trees and dealing <A08R,DataA1> damage to all in shockwaves' path. 
+Devastate - 15% chance that attacks will deal 150 damage to nearby enemy units. 
+Power Volcano - Creates volcano which sends a tremor that launches units into the air and stuns them for 2 seconds then erupts deal 50 damage per rock! 
+
+8.)
+Cloak of the Darkness - Cloak + infiltrator
+45 agility
+True Shot - 35% increased damage to nearby friendly ranged units.
+Shadow Meld - Turns user invisible when not moving at night.
+Dark Curse Arrow - Inflicts target with several curses.
+Perm Invis - 
+
+
+
+9.)
+Ibiza Splash 
+100 Intelligence.
+400% mana regeneration.
+Banish - Turns target unit and nearby enemy units ethereal for 6 seconds. Ethereal units take extra damage from spells and magic attacks.
+Banish Strike - 10% chance to banish when attacking for 2 seconds.
+
+
+10.)
+Trust and Honor (Medalion of the Slayer + Balanced Armor)
+10 armor.
+50 to all stats points.
+50 bonus damage.
+20% critical strike and evasion.
+1% chance to set target life to 1 on attack.
+Restore all nearby allied units life and mana when the wearer is slain.
+Deals 25% of a units max life when slain by the wearer.
+
+
+11.) Heartstone - special skill for each hero.
+
+
+
+
+
+
+
+

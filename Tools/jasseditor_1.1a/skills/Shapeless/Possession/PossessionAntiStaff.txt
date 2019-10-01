@@ -1,0 +1,17 @@
+function PossessionAntiStaffConditions takes nothing returns boolean
+return GetBooleanAnd((GetHandleInt(GetSpellAbilityUnit(),"possessed!")==1),GetBooleanOr(( GetSpellAbilityId() == 'A096' ), ( GetSpellAbilityId() == 'A04S' )))
+endfunction
+function PossessionAntiStaffActions  takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+call IssueImmediateOrderBJ(caster, "stop" )
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_PossessionAntiStaff takes nothing returns nothing
+    set gg_trg_PossessionAntiStaff = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PossessionAntiStaff, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_PossessionAntiStaff, Condition( function PossessionAntiStaffConditions) )
+    call TriggerAddAction( gg_trg_PossessionAntiStaff, function PossessionAntiStaffActions)
+endfunction
+

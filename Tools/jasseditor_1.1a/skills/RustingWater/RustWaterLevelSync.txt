@@ -1,0 +1,30 @@
+function RustWaterSyncConditions takes nothing returns boolean
+return (GetLearnedSkillBJ() == 'A00K' ) 
+endfunction
+
+function RustWaterSyncActions takes nothing returns nothing
+    local unit rustsync=GetLearningUnit()
+    local integer rustlevel=GetUnitAbilityLevelSwapped('A00K', rustsync)
+    local integer currentlevel=GetUnitAbilityLevelSwapped('A00D', rustsync)
+    //A00D Damage modifer
+    //A00K DummySkill
+    if ( rustlevel > 0 ) then
+        call UnitAddAbilityBJ( 'A00D', rustsync )
+        if ( currentlevel != rustlevel) then
+        call SetUnitAbilityLevelSwapped( 'A00D',rustsync, rustlevel )
+        endif
+    endif
+    if ( rustlevel == 0 ) then
+         call UnitRemoveAbilityBJ( 'A00D', rustsync )
+    endif
+    set rustsync=null
+endfunction
+
+//===========================================================================
+function InitTrig_RustWaterSync takes nothing returns nothing
+    set gg_trg_RustWaterSync = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RustWaterSync, EVENT_PLAYER_HERO_SKILL )
+    call TriggerAddCondition( gg_trg_RustWaterSync, Condition( function RustWaterSyncConditions  ) )
+    call TriggerAddAction( gg_trg_RustWaterSync, function RustWaterSyncActions  )
+endfunction
+

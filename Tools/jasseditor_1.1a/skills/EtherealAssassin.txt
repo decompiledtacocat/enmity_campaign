@@ -1,0 +1,28 @@
+function EtherealAssassinCondition takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A063' )
+endfunction
+
+function EtherealAssassinActions takes nothing returns nothing
+    local unit ethassassinunit= GetSpellAbilityUnit()
+    local integer ethassassinlevel=GetUnitAbilityLevelSwapped('A063', ethassassinunit)
+    call SetUnitVertexColorBJ( ethassassinunit, 100, 100, 100, ( 19.00 * I2R(ethassassinlevel) ) )
+    if ( ethassassinlevel >=4 ) then
+        call SetUnitPathing( ethassassinunit, false )
+    endif
+    call PolledWait2(2.0)
+    loop 
+    exitwhen (GetUnitTypeId(ethassassinunit)=='E000')
+    call PolledWait2( 1.0 ) 
+    endloop
+    call SetUnitVertexColorBJ( ethassassinunit, 100, 100, 100, 0.00 )
+    call SetUnitPathing( ethassassinunit, true )
+    set ethassassinunit=null
+endfunction
+
+//===========================================================================
+function InitTrig_Ethereal_Assassin takes nothing returns nothing
+    set gg_trg_Ethereal_Assassin = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Ethereal_Assassin, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_Ethereal_Assassin, Condition( function EtherealAssassinCondition ) )
+    call TriggerAddAction( gg_trg_Ethereal_Assassin, function EtherealAssassinActions )
+endfunction

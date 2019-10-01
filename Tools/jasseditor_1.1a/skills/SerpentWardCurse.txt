@@ -1,0 +1,54 @@
+function SWTrapConditions takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A0A1' )
+endfunction
+function SWTrapActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    local unit sward
+    local integer wardtype
+    local integer swlevel=GetUnitAbilityLevelSwapped('A0A1',caster)
+    local integer swloop
+    local effect swfx
+    local player swplayer=GetOwningPlayer(caster)
+    local location targetloc
+    local location wardloc
+    if ( swlevel==1 ) then
+        set wardtype = 'o00R'
+    endif
+    if (swlevel==2 ) then
+        set wardtype = 'o00S'
+    endif
+    if ( swlevel==3 ) then
+        set wardtype = 'o00T'
+    endif
+    call PolledWait( GetRandomReal(3.00, 10.00) )
+    if (IsUnitAliveBJ(target) == true  ) then
+        call PauseUnitBJ( true, target )
+        set swfx=AddSpecialEffectTargetUnitBJ( "origin", target, "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl" )
+        set targetloc = GetUnitLoc(target)
+        set swloop = 1
+        loop
+            exitwhen swloop > 12
+            set wardloc=PolarProjectionBJ(targetloc , 175.00, ( 30.00 * I2R(swloop) ) )
+            set sward=CreateUnitAtLoc( swplayer, wardtype,  wardloc, AngleBetweenPoints(wardloc,targetloc) )
+            call RemoveLocation (wardloc)
+            call UnitApplyTimedLifeBJ( 7.00, 'BTLF', sward )
+            call IssueTargetOrderBJ(sward, "smart", target )
+            set swloop = swloop + 1
+        endloop
+        call PauseUnitBJ( false, target )
+        call RemoveLocation (targetloc)
+        call PolledWait(1.0)
+        call DestroyEffect(swfx)
+    endif
+        set caster=null
+        set target=null   
+        set swplayer=null
+endfunction
+//===========================================================================
+function InitTrig_SWTrap takes nothing returns nothing
+    set gg_trg_SWTrap = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SWTrap, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SWTrap, Condition( function SWTrapConditions) )
+    call TriggerAddAction( gg_trg_SWTrap, function SWTrapActions)
+endfunction

@@ -1,0 +1,76 @@
+function FootTrapDetection takes nothing returns nothing
+local unit ward
+local player owner
+local location wardloc
+local location targetloc
+local unit picked
+local group temp
+local unit best
+local unit last
+local real dist=300
+local real check
+local group wgroup=CreateGroup()
+
+call GroupAddGroup(udg_wardgroup,wgroup)
+
+loop
+set ward=FirstOfGroup(wgroup)
+exitwhen ward==null
+
+if IsUnitAliveBJ(ward)==true then
+set owner=GetOwningPlayer(ward)
+set wardloc=GetUnitLoc(ward)
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set best=null
+set temp=GetUnitsInRangeOfLocMatching(200.00,wardloc, Condition(function filtercheck))
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null
+                   set last=picked
+                   set targetloc=GetUnitLoc(picked)
+                   set check =DistanceBetweenPoints(wardloc,targetloc)
+                   if check<dist then
+                   set check=dist
+                   set best=picked
+                   endif
+                   call GroupRemoveUnit(temp,picked)  
+                  endloop
+                call DestroyGroup(temp)
+                set temp=null
+                if best==null then
+                set best=last
+                endif
+              call IssueTargetOrder(ward,"magicleash",best)
+              set best=null
+              set last=null
+              set picked=null
+   set owner=null
+   call RemoveLocation(targetloc)
+   set targetloc=null
+   call RemoveLocation(wardloc)
+   set wardloc=null
+else
+call GroupRemoveUnit(udg_wardgroup,ward)
+endif
+call GroupRemoveUnit(wgroup,ward)
+set ward=null   
+endloop
+call DestroyGroup(wgroup)
+set wgroup=null
+
+if CountUnitsInGroup(udg_wardgroup)<=0 then
+call DisableTrigger(gg_trg_FootTrapDetection)
+endif 
+
+
+endfunction
+
+//===========================================================================
+function InitTrig_FootTrapDetection takes nothing returns nothing
+    set gg_trg_FootTrapDetection = CreateTrigger(  )
+    call DisableTrigger( gg_trg_FootTrapDetection )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_FootTrapDetection, 1.00 )
+    call TriggerAddAction( gg_trg_FootTrapDetection, function FootTrapDetection  )
+endfunction
+

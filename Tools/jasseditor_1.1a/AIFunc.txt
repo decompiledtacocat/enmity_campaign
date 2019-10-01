@@ -1,0 +1,243 @@
+PlayerEx takes integer slot returns player
+Trace takes string message returns nothing
+TraceI takes string message, integer val returns nothing
+TraceII takes string message, integer v1, integer v2 returns nothing
+TraceIII takes string message, integer v1, integer v2, integer v3 returns nothing
+InitAI takes nothing returns nothing
+StandardAI takes code heroes, code peons, code attacks returns nothing
+Min takes integer A, integer B returns integer
+Max takes integer A, integer B returns integer
+SetZepNextWave takes nothing returns nothing
+SuicideSleep takes integer seconds returns nothing
+WaitForSignal takes nothing returns integer
+SetWoodPeons takes integer count returns nothing
+SetGoldPeons takes integer count returns nothing
+SetHarvestLumber takes boolean harvest returns nothing
+SetFormGroupTimeouts takes boolean state returns nothing
+DoCampaignFarms takes boolean state returns nothing
+GetMinorCreep takes nothing returns unit
+GetMajorCreep takes nothing returns unit
+GetGold takes nothing returns integer
+GetWood takes nothing returns integer
+InitBuildArray takes nothing returns nothing
+InitAssaultGroup takes nothing returns nothing
+InitDefenseGroup takes nothing returns nothing
+InitMeleeGroup takes nothing returns nothing
+PrepFullSuicide takes nothing returns nothing
+SetReplacements takes integer easy, integer med, integer hard returns nothing
+StartTownBuilder takes code func returns nothing
+SetBuildAll takes integer t, integer qty, integer unitid, integer town returns nothing
+SetBuildUnit takes integer qty, integer unitid returns nothing
+SetBuildNext takes integer qty, integer unitid returns nothing
+SetBuildUnitEx takes integer easy, integer med, integer hard, integer unitid returns nothing
+SecondaryTown takes integer town, integer qty, integer unitid returns nothing
+SecTown takes integer town, integer qty, integer unitid returns nothing
+SetBuildUpgr takes integer qty, integer unitid returns nothing
+SetBuildUpgrEx takes integer easy, integer med, integer hard, integer unitid returns nothing
+SetBuildExpa takes integer qty, integer unitid returns nothing
+StartUpgrade takes integer level, integer upgid returns boolean
+BuildFactory takes integer unitid returns nothing
+HallsCompleted takes integer unitid returns boolean
+GuardSecondary takes integer townid, integer qty, integer unitid returns nothing
+GetUnitCountEx takes integer unitid, boolean only_done, integer townid returns integer
+TownCountEx takes integer unitid, boolean only_done, integer townid returns integer
+TownCountDone takes integer base returns integer
+TownCount takes integer base returns integer
+BasicExpansion takes boolean build_it, integer unitid returns nothing
+UpgradeAll takes integer baseid, integer newid returns nothing
+TownCountTown takes integer base, integer townid returns integer
+FoodPool takes integer food, boolean weak, integer id1, integer use1, boolean strong, integer id2, integer use2 returns nothing
+MeleeTownHall takes integer townid, integer unitid returns nothing
+WaitForUnits takes integer unitid, integer qty returns nothing
+StartUnit takes integer ask_qty, integer unitid, integer town returns boolean
+WaitForTown takes integer towns, integer townid returns nothing
+StartExpansion takes integer qty, integer hall returns boolean
+OneBuildLoop takes nothing returns nothing
+StaggerSleep takes real base, real spread returns nothing
+BuildLoop takes nothing returns nothing
+StartBuildLoop takes nothing returns nothing
+SetInitialWave takes integer seconds returns nothing
+AddSleepSeconds takes integer seconds returns nothing
+SleepForever takes nothing returns nothing
+PlayGame takes nothing returns nothing
+ConvertNeeds takes integer unitid returns nothing
+Conversions takes integer desire, integer unitid returns nothing
+SetAssaultGroup takes integer qty, integer max, integer unitid returns nothing
+Interleave3 takes integer e1, integer m1, integer h1, integer u1, integer e2, integer m2, integer h2, integer u2, integer e3, integer m3, integer h3, integer u3 returns nothing
+SetMeleeGroup takes integer unitid returns nothing
+CampaignDefender takes integer level, integer qty, integer unitid returns nothing
+CampaignDefenderEx takes integer easy, integer med, integer hard, integer unitid returns nothing
+CampaignAttacker takes integer level, integer qty, integer unitid returns nothing
+CampaignAttackerEx takes integer easy, integer med, integer hard, integer unitid returns nothing
+FormGroup takes integer seconds, boolean testReady returns nothing
+WavePrepare takes integer unitid returns integer
+PrepTime takes nothing returns integer
+PrepSuicideOnPlayer takes integer seconds returns boolean
+SleepUntilAtGoal takes nothing returns nothing
+SleepInCombat takes nothing returns nothing
+AttackMoveXYA takes integer x, integer y returns nothing
+SuicideOnPlayerWave takes nothing returns nothing
+CommonSuicideOnPlayer takes boolean standard, boolean bldgs, integer seconds, player p, integer x, integer y returns nothing
+SuicideOnPlayer takes integer seconds, player p returns nothing
+SuicideOnUnits takes integer seconds, player p returns nothing
+SuicideOnPoint takes integer seconds, player p, integer x, integer y returns nothing
+SuicideUntilSignal takes integer seconds, player p returns nothing
+SuicideOnce takes integer easy, integer med, integer hard, integer unitid returns nothing
+SuicideUnitA takes integer unitid returns nothing
+SuicideUnitB takes integer unitid, integer playerid returns nothing
+SuicideUnits takes integer u1, integer u2, integer u3, integer u4, integer u5, integer u6, integer u7, integer u8, integer u9, integer uA returns nothing
+SuicideUnitsEx takes integer playerid, integer u1, integer u2, integer u3, integer u4, integer u5, integer u6, integer u7, integer u8, integer u9, integer uA returns nothing
+SuicideOnPlayerEx takes integer easy, integer med, integer hard, player p returns nothing
+SuicideOnUnitsEx takes integer easy, integer med, integer hard, player p returns nothing
+SuicideOnPointEx takes integer easy, integer med, integer hard, player p, integer x, integer y returns nothing
+ForeverSuicideOnPlayer takes integer seconds, player p returns nothing
+CommonSleepUntilTargetDead takes unit target, boolean reform returns nothing
+SleepUntilTargetDead takes unit target returns nothing
+ReformUntilTargetDead takes unit target returns nothing
+AttackMoveKillA takes unit target returns nothing
+MinorCreepAttack takes nothing returns nothing
+MajorCreepAttack takes nothing returns nothing
+CreepAttackEx takes nothing returns nothing
+AnyPlayerAttack takes nothing returns nothing
+ExpansionAttack takes nothing returns nothing
+AddSiege takes nothing returns nothing
+GetAllyCount takes player whichPlayer returns integer
+SingleMeleeAttack takes boolean needs_exp, boolean has_siege, boolean major_ok, boolean air_units returns nothing
+GetZeppelin takes nothing returns nothing
+FoodUsed takes nothing returns integer
+FoodCap takes nothing returns integer
+FoodSpace takes nothing returns integer
+FoodAvail takes integer base returns integer
+BuildAttackers takes nothing returns nothing
+BuildDefenders takes nothing returns nothing
+CampaignBasicsA takes nothing returns nothing
+CampaignBasics takes nothing returns nothing
+CampaignAI takes integer farms, code heroes returns nothing
+UnsummonAll takes nothing returns nothing
+SkillArrays takes nothing returns integer
+SetSkillArray takes integer index, integer id returns nothing
+AwaitMeleeHeroes takes nothing returns nothing
+PickMeleeHero takes race raceid returns integer
+DebugS takes string str returns nothing
+DebugFI takes string str, integer val returns nothing
+DebugUnitID takes string str, integer val returns nothing
+DisplayText takes integer p, string str returns nothing
+DisplayTextI takes integer p, string str, integer val returns nothing
+DisplayTextII takes integer p, string str, integer v1, integer v2 returns nothing
+DisplayTextIII takes integer p, string str, integer v1, integer v2, integer v3 returns nothing
+DoAiScriptDebug takes nothing returns boolean
+GetAiPlayer takes nothing returns integer
+GetHeroId takes nothing returns integer
+GetHeroLevelAI takes nothing returns integer
+GetUnitCount takes integer unitid returns integer
+GetPlayerUnitTypeCount takes player p, integer unitid returns integer
+GetUnitCountDone takes integer unitid returns integer
+GetTownUnitCount takes integer id, integer tn, boolean dn returns integer
+GetUnitGoldCost takes integer unitid returns integer
+GetUnitWoodCost takes integer unitid returns integer
+GetUnitBuildTime takes integer unitid returns integer
+GetMinesOwned takes nothing returns integer
+GetGoldOwned takes nothing returns integer
+TownWithMine takes nothing returns integer
+TownHasMine takes integer townid returns boolean
+TownHasHall takes integer townid returns boolean
+GetUpgradeLevel takes integer id returns integer
+GetUpgradeGoldCost takes integer id returns integer
+GetUpgradeWoodCost takes integer id returns integer
+GetNextExpansion takes nothing returns integer
+GetMegaTarget takes nothing returns unit
+GetBuilding takes player p returns unit
+GetEnemyPower takes nothing returns integer
+SetAllianceTarget takes unit id returns nothing
+GetAllianceTarget takes nothing returns unit
+SetProduce takes integer qty, integer id, integer town returns boolean
+Unsummon takes unit unitid returns nothing
+SetExpansion takes unit peon, integer id returns boolean
+SetUpgrade takes integer id returns boolean
+SetHeroLevels takes code func returns nothing
+SetNewHeroes takes boolean state returns nothing
+PurchaseZeppelin takes nothing returns nothing
+MergeUnits takes integer qty, integer a, integer b, integer make returns boolean
+ConvertUnits takes integer qty, integer id returns boolean
+SetCampaignAI takes nothing returns nothing
+SetMeleeAI takes nothing returns nothing
+SetTargetHeroes takes boolean state returns nothing
+SetPeonsRepair takes boolean state returns nothing
+SetRandomPaths takes boolean state returns nothing
+SetDefendPlayer takes boolean state returns nothing
+SetHeroesFlee takes boolean state returns nothing
+SetHeroesBuyItems takes boolean state returns nothing
+SetWatchMegaTargets takes boolean state returns nothing
+SetIgnoreInjured takes boolean state returns nothing
+SetHeroesTakeItems takes boolean state returns nothing
+SetUnitsFlee takes boolean state returns nothing
+SetGroupsFlee takes boolean state returns nothing
+SetSlowChopping takes boolean state returns nothing
+SetCaptainChanges takes boolean allow returns nothing
+SetSmartArtillery takes boolean state returns nothing
+SetReplacementCount takes integer qty returns nothing
+GroupTimedLife takes boolean allow returns nothing
+RemoveInjuries takes nothing returns nothing
+RemoveSiege takes nothing returns nothing
+InitAssault takes nothing returns nothing
+AddAssault takes integer qty, integer id returns boolean
+AddDefenders takes integer qty, integer id returns boolean
+GetCreepCamp takes integer min, integer max, boolean flyers_ok returns unit
+StartGetEnemyBase takes nothing returns nothing
+WaitGetEnemyBase takes nothing returns boolean
+GetEnemyBase takes nothing returns unit
+GetExpansionFoe takes nothing returns unit
+GetEnemyExpansion takes nothing returns unit
+GetExpansionX takes nothing returns integer
+GetExpansionY takes nothing returns integer
+SetStagePoint takes real x, real y returns nothing
+AttackMoveKill takes unit target returns nothing
+AttackMoveXY takes integer x, integer y returns nothing
+LoadZepWave takes integer x, integer y returns nothing
+SuicidePlayer takes player id, boolean check_full returns boolean
+SuicidePlayerUnits takes player id, boolean check_full returns boolean
+CaptainInCombat takes boolean attack_captain returns boolean
+IsTowered takes unit target returns boolean
+ClearHarvestAI takes nothing returns nothing
+HarvestGold takes integer town, integer peons returns nothing
+HarvestWood takes integer town, integer peons returns nothing
+GetExpansionPeon takes nothing returns unit
+StopGathering takes nothing returns nothing
+AddGuardPost takes integer id, real x, real y returns nothing
+FillGuardPosts takes nothing returns nothing
+ReturnGuardPosts takes nothing returns nothing
+CreateCaptains takes nothing returns nothing
+SetCaptainHome takes integer which, real x, real y returns nothing
+ResetCaptainLocs takes nothing returns nothing
+ShiftTownSpot takes real x, real y returns nothing
+TeleportCaptain takes real x, real y returns nothing
+ClearCaptainTargets takes nothing returns nothing
+CaptainAttack takes real x, real y returns nothing
+CaptainVsUnits takes player id returns nothing
+CaptainVsPlayer takes player id returns nothing
+CaptainGoHome takes nothing returns nothing
+CaptainIsHome takes nothing returns boolean
+CaptainIsFull takes nothing returns boolean
+CaptainIsEmpty takes nothing returns boolean
+CaptainGroupSize takes nothing returns integer
+CaptainReadiness takes nothing returns integer
+CaptainRetreating takes nothing returns boolean
+CaptainReadinessHP takes nothing returns integer
+CaptainReadinessMa takes nothing returns integer
+CaptainAtGoal takes nothing returns boolean
+CreepsOnMap takes nothing returns boolean
+SuicideUnit takes integer count, integer unitid returns nothing
+SuicideUnitEx takes integer ct, integer uid, integer pid returns nothing
+StartThread takes code func returns nothing
+Sleep takes real seconds returns nothing
+UnitAlive takes unit id returns boolean
+UnitInvis takes unit id returns boolean
+IgnoredUnits takes integer unitid returns integer
+TownThreatened takes nothing returns boolean
+DisablePathing takes nothing returns nothing
+SetAmphibious takes nothing returns nothing
+CommandsWaiting takes nothing returns integer
+GetLastCommand takes nothing returns integer
+GetLastData takes nothing returns integer
+PopLastCommand takes nothing returns nothing
+MeleeDifficulty takes nothing returns integer

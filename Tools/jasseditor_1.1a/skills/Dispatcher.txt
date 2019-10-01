@@ -1,0 +1,89 @@
+function Trig_Dispatcher_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0BV' 
+endfunction
+
+function Trig_Dispatcher_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location targetloc=GetSpellTargetLoc()
+local location castloc=GetUnitLoc(caster)
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local location p1=PolarProjectionBJ(castloc,600,angle+90)
+local location p2=PolarProjectionBJ(castloc,600,angle-90)
+local location p3=PolarProjectionBJ(targetloc,600,angle+90)
+local location p4=PolarProjectionBJ(targetloc,600,angle-90)
+local group temp=CreateGroup()
+local group temp2=CreateGroup()
+local location tloc
+local unit picked
+local real damage=2*(I2R(GetHeroStatBJ(bj_HEROSTAT_AGI, caster, true)) +I2R(GetHeroStatBJ(bj_HEROSTAT_STR, caster, true))) 
+local effect fx
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+call GroupEnumUnitsInQuad(temp,p1,p2,p3,p4, Condition( function filtercheck ))
+call GroupEnumUnitsInQuad(temp2,p1,p2,p3,p4, Condition( function filtercheck ))
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+set tloc=GetUnitLoc(picked)
+set fx=AddSpecialEffectLoc( "Abilities\\Spells\\Orc\\MirrorImage\\MirrorImageCaster.mdl" ,tloc)
+call RemoveLocation(tloc)
+set tloc=null
+call DestroyEffect(fx)
+set fx=null
+call GroupRemoveUnit(temp,picked)
+endloop
+set picked=null
+call PolledWait2(.25)
+loop
+set picked=FirstOfGroup(temp2)
+exitwhen picked==null
+   set  udg_tempecheckunit=null
+   set  udg_tempecheckunit=picked
+ if  IsUnitType(picked, UNIT_TYPE_HERO) == true   then
+  if etherealcheck() then
+  call UnitDamageTargetBJ( caster, picked, damage, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+  else
+  call UnitDamageTargetBJ( caster, picked, damage, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+  endif
+ else
+  if etherealcheck() then
+  call UnitDamageTargetBJ( caster, picked, 9999, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+  else
+  call UnitDamageTargetBJ( caster, picked, 9999, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+  endif
+ endif
+call GroupRemoveUnit(temp2,picked)
+endloop
+set picked=null
+call DestroyEffect(fx)
+set fx=null
+call RemoveLocation(targetloc)
+call RemoveLocation(castloc)
+call RemoveLocation(p1)
+call RemoveLocation(p2)
+call RemoveLocation(p3)
+call RemoveLocation(p4)
+call DestroyGroup(temp)
+call DestroyGroup(temp2)
+set caster=null
+set owner=null
+set targetloc=null
+set castloc=null
+set p1=null
+set p2=null
+set p3=null
+set p4=null
+set temp=null
+set temp2=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_Dispatcher takes nothing returns nothing
+    set gg_trg_Dispatcher = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Dispatcher, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Dispatcher, Condition( function Trig_Dispatcher_Conditions ) )
+    call TriggerAddAction( gg_trg_Dispatcher, function Trig_Dispatcher_Actions )
+endfunction
+

@@ -1,0 +1,46 @@
+SetFilterPlayer takes player owner returns nothing
+FilterCommon takes nothing returns boolean
+UnitAddAbilitySet takes unit whichunit, integer abl, integer level returns nothing
+CreateRabbitOfType takes player whichplayer,integer t, real x, real y returns unit
+CreateRabbit takes player whichplayer,location rabbitloc returns unit
+CreateRabbitXY takes player whichplayer,real x, real y returns unit
+AddAbilityBuff takes player owner, unit target, integer a, integer level returns unit
+ClearInventory takes unit whichUnit returns nothing
+LockAllItems takes unit target returns nothing
+GetItemSlot takes unit caster, item ix returns integer
+ReplaceItemBySlot takes unit caster, item x, integer id returns nothing
+SwapSpecItem takes  unit caster,integer id, integer bad, integer good, integer pv returns boolean
+ItemSwitchingClass takes unit caster, integer id returns nothing
+SwapItemUntilBuff takes unit caster, item x, integer newid, integer bcode returns nothing
+UnitDamageTargetBJ takes unit caster, unit target,real damage, attacktype a, damagetype d
+SpellEffectUnit takes unit caster, integer abl,effecttype t,string attachPoint returns nothing
+SpellEffectXY takes  integer abl,effecttype t,real x, real y returns nothing
+CheckIfEthereal takes unit c returns boolean
+SpellEffectUnitTimed takes unit caster, integer abl,effecttype t,string attachPoint, real time returns nothing
+SpellEffectXYTimed takes  integer abl,effecttype t,real x, real y,real time returns nothing
+SetHandleHandle takes handle subject, string name, handle value returns nothing
+SetHandleInt takes handle subject, string name, integer value returns nothing
+SetHandleReal takes handle subject, string name, real value returns nothing
+SetHandleString takes handle subject, string name, string value returns nothing
+GetHandleGroup takes handle subject, string name returns group
+GetHandleHandle takes handle subject, string name returns handle
+GetHandleInt takes handle subject, string name returns integer
+GetHandleReal takes handle subject, string name returns real
+GetHandleString takes handle subject, string name returns string
+GetHandleUnit takes handle subject, string name returns unit
+GetHandleTimer takes handle subject, string name returns timer
+GetHandleTrigger takes handle subject, string name returns trigger
+GetHandleEffect takes handle subject, string name returns effect
+GetHandleWEffect takes handle subject, string name returns weathereffect
+GetHandleLightning takes handle subject, string name returns lightning
+GetHandleItem takes handle subject, string name returns item
+FlushHandleLocals takes handle subject returns nothing
+DifferenceBetweenAngles takes real a1, real a2 returns real angle
+GetAffinityBonus takes unit caster, integer a, integer ratio, boolean x returns real
+CountAllFireBuffs takes unit c returns integer
+RemoveAllFireBuffs takes unit c returns nothing
+RestoreUnitLifeMana takes unit caster,real life,real mana returns nothing
+ReduceUnitLifeMana takes unit caster,real life,real mana returns nothing
+DebugMsg takes string txt returns nothing
+SetUnitAbilityLevel takes unit c, integer abl, integer level returns nothing
+GetEventAttacktype takes nothing returns attacktype

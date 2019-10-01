@@ -1,0 +1,17 @@
+function PheonixReviveConditions takes nothing returns boolean
+return GetUnitTypeId(GetSummonedUnit()) == 'h00O'  
+endfunction
+function PheonixReviveActions takes nothing returns nothing
+local unit caster=GetSummoningUnit()
+local unit summon=GetSummonedUnit()
+call MaxUnit(caster,summon,"pheonix",3,3)
+endfunction
+
+//===========================================================================
+function InitTrig_PheonixRevive takes nothing returns nothing
+    set gg_trg_PheonixRevive = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PheonixRevive, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_PheonixRevive, Condition( function PheonixReviveConditions ) )
+    call TriggerAddAction( gg_trg_PheonixRevive, function PheonixReviveActions )
+endfunction
+

@@ -1,0 +1,320 @@
+function ItemCraftConditions takes nothing returns boolean
+return  IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true 
+endfunction
+function HasItems2 takes unit x, integer i1, integer i2 returns boolean
+return GetBooleanAnd(UnitHasItemOfTypeBJ(x,i1),UnitHasItemOfTypeBJ(x,i2))
+endfunction
+function HasItems3 takes unit x, integer i1, integer i2, integer i3 returns boolean
+return GetBooleanAnd(UnitHasItemOfTypeBJ(x,i1),GetBooleanAnd(UnitHasItemOfTypeBJ(x,i2),UnitHasItemOfTypeBJ(x,i3)))
+endfunction
+function HasItems4 takes unit x, integer i1, integer i2, integer i3, integer i4 returns boolean
+return GetBooleanAnd(GetBooleanAnd(UnitHasItemOfTypeBJ(x,i4),UnitHasItemOfTypeBJ(x,i1)),GetBooleanAnd(UnitHasItemOfTypeBJ(x,i2),UnitHasItemOfTypeBJ(x,i3)))
+endfunction
+function HasItems5 takes unit x, integer i1, integer i2, integer i3, integer i4, integer i5 returns boolean
+return GetBooleanAnd(UnitHasItemOfTypeBJ(x,i5),GetBooleanAnd(GetBooleanAnd(UnitHasItemOfTypeBJ(x,i4),UnitHasItemOfTypeBJ(x,i1)),GetBooleanAnd(UnitHasItemOfTypeBJ(x,i2),UnitHasItemOfTypeBJ(x,i3))))
+endfunction
+function RemoveReplaceItem takes unit x, integer ix, integer i1, integer i2, integer i3, integer i4, integer i5 returns nothing
+if i1!=0 then
+call RemoveItem( GetItemOfTypeFromUnitBJ(x, i1) )
+endif
+if i2!=0 then
+call RemoveItem( GetItemOfTypeFromUnitBJ(x, i2) )
+endif
+if i3!=0 then
+call RemoveItem( GetItemOfTypeFromUnitBJ(x, i3) )
+endif
+if i4!=0 then
+call RemoveItem( GetItemOfTypeFromUnitBJ(x, i4) )
+endif
+if i5!=0 then
+call RemoveItem( GetItemOfTypeFromUnitBJ(x, i5) )
+endif
+call UnitAddItemById(x,ix)
+endfunction
+
+function ItemCraftActions takes nothing returns nothing
+local unit x=GetTriggerUnit()
+
+//===========Tier 1=========
+
+//Belt of Regeneration
+if HasItems3(x,'I00X','I009','I00K') then
+call RemoveReplaceItem(x,'I01O','I00X','I009','I00K',0,0)
+endif
+//Berserker
+if HasItems3(x,'I015','I00G','I00F') then
+call RemoveReplaceItem(x,'I01R','I015','I00G','I00F',0,0)
+endif
+//Combat Knife
+if HasItems2(x,'I052','I002') then
+call RemoveReplaceItem(x,'I051',0,'I052','I002',0,0)
+endif
+//Crystal Ball
+if HasItems3(x,'I00W','I00C','I008') then
+call RemoveReplaceItem(x,'I00V','I00W','I00C','I008',0,0)
+endif
+//Essence Stone
+if HasItems5(x,'I017','I001','I003','I00B','I009') then
+call RemoveReplaceItem(x,'I016','I017','I001','I003','I00B','I009')
+endif
+//FingerBlades
+if HasItems3(x,'I00Y','I002','I00F') then
+call RemoveReplaceItem(x,'I018','I00Y','I002','I00F',0,0)
+endif
+//Golden Gloves
+if HasItems3(x,'I010','I00J','I01D') then
+call RemoveReplaceItem(x,'I02U','I010','I00J','I01D',0,0)
+endif
+//Protecting Ring
+if HasItems3(x,'I00Z','I006','I00N') then
+call RemoveReplaceItem(x,'I01S','I00Z','I006','I00N',0,0)
+endif
+//Quick Step Boots
+if HasItems4(x,'I013','I00L','I00O','I00D') then
+call RemoveReplaceItem(x,'I01W','I013','I00L','I00O','I00D',0)
+endif
+//Running Boots
+if HasItems3(x,'I004','I00I','I00L') then
+call RemoveReplaceItem(x,'I01P','I004','I00I','I00L',0,0)
+endif
+//Staff of NObility
+if HasItems3(x,'I014','I00H','I00A') then
+call RemoveReplaceItem(x,'I01V','I014','I00H','I00A',0,0)
+endif
+
+//======Tier 2===================
+
+//Balanced Armor
+if HasItems3(x,'I01Z','I02D','I01A') then
+call RemoveReplaceItem(x,'I020','I01Z','I02D','I01A',0,0)
+endif
+
+//Combat Boots
+if HasItems3(x,'I01G','I01W','I01P') then
+call RemoveReplaceItem(x,'I02Q','I01G','I01W','I01P',0,0)
+endif
+
+//Essence Crystal
+if HasItems4(x,'I01F','I00B','I009','I016' ) then
+call RemoveReplaceItem(x,'I021','I01F','I00B','I009','I016',0)
+endif
+
+//Executioner
+if HasItems3(x,'I01J','I01C','I00P') then
+call RemoveReplaceItem(x,'I022','I01J','I01C','I00P',0,0)
+endif
+
+//Life Stone
+if HasItems3(x,'I01K','I00E','I02C') then
+call RemoveReplaceItem(x,'I023','I01K','I00E','I02C',0,0)
+endif
+
+//Mana Stone
+if HasItems3(x,'I01L','I007','I02B') then
+call RemoveReplaceItem(x,'I024','I01L','I007','I02B',0,0)
+endif
+
+//Medalion of the Slayer
+if HasItems3(x,'I01H','I00S','I01B') then
+call RemoveReplaceItem(x,'I02H','I01H','I00S','I01B',0,0)
+endif
+
+//Mystic Robe
+if HasItems5(x,'I01X','I00N','I025','I006','I00M') then
+call RemoveReplaceItem(x,'I02G','I01X','I00N','I025','I006','I00M')
+endif
+
+//Raging Claws
+if HasItems3(x,'I01N','I018','I01Q') then
+call RemoveReplaceItem(x,'I01T','I01N','I018','I01Q',0,0)
+elseif HasItems3(x,'I01N','I018','I02U') then
+call RemoveReplaceItem(x,'I01T','I01N','I018','I02U',0,0)
+endif
+
+//Spiked Armor
+if HasItems3(x,'I01Y','I01B','I01E') then
+call RemoveReplaceItem(x,'I02J','I01Y','I01B','I01E',0,0)
+endif
+
+//Stealth Armor
+if HasItems3(x,'I01U','I019','I00Q') then
+call RemoveReplaceItem(x,'I02K','I01U','I019','I00Q',0,0)
+endif
+
+//============================Tier 3
+
+//Aegis Reflector
+if HasItems3(x,'I011','I02A','I02G') then
+call RemoveReplaceItem(x,'I01I','I011','I02A','I02G',0,0)
+endif
+
+//Devastator
+if HasItems3(x,'I02L','I026','I01C') then
+call RemoveReplaceItem(x,'I02V','I02L','I026','I01C',0,0)
+endif
+
+//Infiltrator
+if HasItems3(x,'I02P','I027','I02K') then
+call RemoveReplaceItem(x,'I02W','I02P','I027','I02K',0,0)
+endif
+
+//Juggernaut
+if HasItems4(x,'I01M','I01Q','I025','I00P') then
+call RemoveReplaceItem(x,'I012','I01M','I01Q','I025','I00P',0)
+elseif HasItems4(x,'I01M','I02U','I025','I00P') then
+call RemoveReplaceItem(x,'I012','I01M','I02U','I025','I00P',0)
+endif
+
+
+//Mind Staff
+if HasItems3(x,'I02O','I028','I02B') then
+call RemoveReplaceItem(x,'I02X','I02O','I028','I02B',0,0)
+endif
+
+//Mystic Spell Book
+if HasItems5(x,'I02M','I00V','I01V','I02F','I02E') then
+call RemoveReplaceItem(x,'I030','I02M','I00V','I01V','I02F','I02E')
+endif
+
+//Rabid Cat Face
+if HasItems3(x,'I02R','I01R','I029') then
+call RemoveReplaceItem(x,'I02S','I02R','I01R','I029',0,0)
+endif
+
+//Ranger's Cloak
+if HasItems4(x,'I00T','I00Q','I027','I00D') then
+call RemoveReplaceItem(x,'I00U','I00T','I00Q','I027','I00D',0)
+endif
+
+//Shock Absorber
+if HasItems3(x,'I02N','I02J','I02A') then
+call RemoveReplaceItem(x,'I02T','I02N','I02J','I02A',0,0)
+endif
+
+//Summoner Stone
+if HasItems3(x,'I02Y','I024','I02B') then
+call RemoveReplaceItem(x,'I02Z','I02Y','I024','I02B',0,0)
+endif
+
+
+//=====Human Items
+
+//Gloves of Supremacy
+if HasItems2(x,'I005','I03V') then
+call RemoveReplaceItem(x,'I03W','I005','I03V',0,0,0)
+endif
+if HasItems2(x,'I005','I03W') then
+call RemoveReplaceItem(x,'I03X','I005','I03W',0,0,0)
+endif
+
+//Holy seal of the pally
+if HasItems3(x,'I042','I03U','I026') then
+call RemoveReplaceItem(x,'I043','I042','I03U','I026',0,0)
+endif
+
+//Mask of the Devourer
+if HasItems3(x,'I044','I03R','I00G') then
+call RemoveReplaceItem(x,'I045','I044','I03R','I00G',0,0)
+endif
+
+//Spell BOmb
+if HasItems2(x,'I041','I03R') then
+call RemoveReplaceItem(x,'I03S','I041','I03R',0,0,0)
+endif
+if HasItems2(x,'I041','I03S') then
+call RemoveReplaceItem(x,'I03T','I041','I03S',0,0,0)
+endif
+if HasItems2(x,'I041','I03T') then
+call RemoveReplaceItem(x,'I03U','I041','I03T',0,0,0)
+endif
+
+
+//====Undead Items
+
+//Crown of The Lich
+if HasItems3(x,'I03J','I03N','I028') then
+call RemoveReplaceItem(x,'I03O','I03J','I03N','I028',0,0)
+endif
+
+//FROST SKULL
+if HasItems2(x,'I03K','I038') then
+call RemoveReplaceItem(x,'I03L','I03K','I038',0,0,0)
+endif
+if HasItems2(x,'I03K','I03L') then
+call RemoveReplaceItem(x,'I03M','I03K','I03L',0,0,0)
+endif
+if HasItems2(x,'I03K','I03M') then
+call RemoveReplaceItem(x,'I03N','I03K','I03M',0,0,0)
+endif
+
+
+//SCEPTOR OF NECROMNNCY
+if HasItems3(x,'I03I','I03F','I038') then
+call RemoveReplaceItem(x,'I03H','I03I','I03F','I038',0,0)
+endif
+
+//Necro wand
+if HasItems3(x,'I03G','I035','I03H') then
+call RemoveReplaceItem(x,'I034','I03G','I035','I03H',0,0)
+endif
+if HasItems3(x,'I03G','I035','I034') then
+call RemoveReplaceItem(x,'I03C','I03G','I035','I034',0,0)
+endif
+if HasItems3(x,'I03G','I035','I03C') then
+call RemoveReplaceItem(x,'I03D','I03G','I035','I03C',0,0)
+endif
+if HasItems3(x,'I03G','I035','I03D') then
+call RemoveReplaceItem(x,'I03E','I03G','I035','I03D',0,0)
+endif
+if HasItems3(x,'I03G','I035','I03E') then
+call RemoveReplaceItem(x,'I03F','I03G','I035','I03E',0,0)
+endif
+
+//====Mechanical
+
+//MISSILE LAUNCHER
+if HasItems2(x,'I04J','I04G') then
+call RemoveReplaceItem(x,'I04R','I04J','I04G',0,0,0)
+endif
+if HasItems2(x,'I04J','I04R') then
+call RemoveReplaceItem(x,'I04S','I04J','I04R',0,0,0)
+endif
+if HasItems2(x,'I04J','I04S') then
+call RemoveReplaceItem(x,'I04T','I04J','I04S',0,0,0)
+endif
+
+//OVERCLOCKED GENERATOR
+if HasItems3(x,'I04H','I04A','I04E') then
+call RemoveReplaceItem(x,'I04V','I04H','I04A','I04E',0,0)
+endif
+
+//POLISH RESTORE
+if HasItems3(x,'I04L','I04C','I046') then
+call RemoveReplaceItem(x,'I04U','I04L','I04C','I046',0,0)
+endif
+
+//REMOTE MINE
+if HasItems2(x,'I04W','I04O') then
+call RemoveReplaceItem(x,'I04P','I04W','I04O',0,0,0)
+endif
+
+//ROBO ENGINEER 
+if HasItems2(x,'I04Y','I04N') then
+call RemoveReplaceItem(x,'I04X','I04Y','I04N',0,0,0)
+endif
+
+//SYNTHETIC FORMULA
+if HasItems3(x,'I04I','I049','I048') then
+call RemoveReplaceItem(x,'I04Q','I04I','I049','I048',0,0)
+endif
+
+endfunction
+
+//===========================================================================
+function InitTrig_Tier1 takes nothing returns nothing
+    set gg_trg_Tier1 = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Tier1, EVENT_PLAYER_UNIT_PICKUP_ITEM )
+    call TriggerAddCondition( gg_trg_Tier1, Condition( function ItemCraftConditions ) )
+    call TriggerAddAction( gg_trg_Tier1, function ItemCraftActions )
+endfunction
+

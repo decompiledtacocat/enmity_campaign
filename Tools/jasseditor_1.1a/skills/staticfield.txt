@@ -1,0 +1,49 @@
+function Trig_StaticField_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0EX' ) 
+endfunction
+
+function Trig_StaticField_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local unit picked
+local group temp
+local integer level=GetUnitAbilityLevel(caster,'A0EX')
+local real damage=level*.05
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocMatching(550.00,castloc, Condition(function filtercheck))
+call PlaySoundOnUnitBJ( gg_snd_PurgeTarget1, 100, caster)
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null
+                   if IsUnitType(picked, UNIT_TYPE_HERO) == true then
+                       if GetBooleanAnd(GetUnitState(picked,UNIT_STATE_LIFE)*(1-damage)<.5*GetUnitState(picked,UNIT_STATE_MAX_LIFE),GetUnitState(picked,UNIT_STATE_LIFE)>.5*GetUnitState(picked,UNIT_STATE_MAX_LIFE)) then
+                       call SetUnitLifeBJ(picked,GetUnitState(picked,UNIT_STATE_MAX_LIFE)*.5)
+                       elseif GetUnitState(picked,UNIT_STATE_LIFE)*(1-damage)>=.5*GetUnitState(picked,UNIT_STATE_MAX_LIFE) then
+                       call SetUnitLifeBJ(picked,GetUnitState(picked,UNIT_STATE_LIFE)*(1-damage))
+                       endif
+                   else
+                   call SetUnitLifeBJ(picked,GetUnitState(picked,UNIT_STATE_LIFE)*(1-damage))
+                   endif
+                   call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl",picked,"overhead"))
+                   call GroupRemoveUnit(temp,picked)  
+                  endloop
+                call DestroyGroup(temp)
+                set temp=null
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+set caster=null
+set picked=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_StaticField takes nothing returns nothing
+    set gg_trg_StaticField = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_StaticField, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_StaticField, Condition( function Trig_StaticField_Conditions ) )
+    call TriggerAddAction( gg_trg_StaticField, function Trig_StaticField_Actions )
+endfunction
+

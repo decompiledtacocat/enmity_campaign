@@ -1,0 +1,65 @@
+function PlayerLeavesControl takes nothing returns nothing
+call SetPlayerAllianceStateBJ( GetTriggerPlayer(), GetEnumPlayer(), bj_ALLIANCE_ALLIED_UNITS )
+endfunction
+function PlayerLeavesGold takes nothing returns nothing
+call SetPlayerStateBJ(GetEnumPlayer(), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetEnumPlayer(), PLAYER_STATE_RESOURCE_GOLD) +udg_givegold))
+endfunction
+
+function PlayerLeavesActions takes nothing returns nothing
+local player stupid=GetTriggerPlayer()
+local force allies
+local string color=GetColor(stupid)
+local string leaver=color+GetPlayerName(stupid)+"|r"
+local string rndtxt
+local integer rnd=GetRandomInt(1,4)
+local integer pcount
+local integer gold=GetPlayerState(stupid, PLAYER_STATE_RESOURCE_GOLD)
+if (rnd==1) then
+set rndtxt = " that silly faggot has left the game."
+elseif (rnd==2) then
+set rndtxt = " has turned off his computer."
+elseif (rnd==3) then
+set rndtxt = " seems to have gotten owned too many times."
+elseif (rnd==4) then
+set rndtxt = " has left the game to cry."
+endif
+if GetConvertedPlayerId(stupid)>6 then
+set allies=GetPlayerForce(7,11)
+else
+set allies=GetPlayerForce(1,5)
+endif
+    call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 0, ( GetConvertedPlayerId(stupid) + 1 ), 40.00, 40.00, 40.00, 0 )
+    call DisplayTextToForce( GetPlayersAll(), ( leaver + rndtxt ) )
+    call ForForce(allies, function PlayerLeavesControl )
+    
+set pcount=CountPlayersInForceBJ(allies)
+if GetBooleanAnd((pcount>0),(gold>0)) then
+set udg_givegold=0
+set udg_givegold= (GetPlayerState(stupid, PLAYER_STATE_RESOURCE_GOLD)/pcount)
+call ForForce( allies, function PlayerLeavesGold)
+call DisplayTextToForce( allies, ( leaver + " had " +I2S(gold) + " before leaving and it has been divided among you and your teammates." ) )
+endif
+call DestroyForce(allies)
+set allies=null
+set stupid=null
+set color=""
+set leaver=""
+set rndtxt=""
+endfunction
+
+//===========================================================================
+function InitTrig_PlayerLeaves takes nothing returns nothing
+    set gg_trg_PlayerLeaves = CreateTrigger(  )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(1) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(2) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(3) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(4) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(5) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(7) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(8) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(9) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(10) )
+    call TriggerRegisterPlayerEventLeave( gg_trg_PlayerLeaves, Player(11) )
+    call TriggerAddAction( gg_trg_PlayerLeaves, function PlayerLeavesActions)
+endfunction
+

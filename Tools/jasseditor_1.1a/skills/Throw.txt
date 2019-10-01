@@ -1,0 +1,54 @@
+function ThrowConditions takes nothing returns boolean
+return  ( GetSpellAbilityId() == 'A05X' )
+endfunction
+
+
+function ThrowActions takes nothing returns nothing
+    local unit caster= GetSpellAbilityUnit()
+    local unit thrower
+    local player tplayer=GetOwningPlayer(caster)
+    local location targetloc=GetUnitLoc(GetSpellTargetUnit())
+    local location castloc=GetUnitLoc(caster)
+    local location throwloc
+    local integer tloop
+    local integer therolevel=GetHeroLevel(caster)
+    local integer tloopend
+    local integer tlevel=GetUnitAbilityLevelSwapped('A05X', caster)
+    local real mod=(3 + (tlevel*2))/120
+    set tloop= 1
+    set tloopend = (3 + (tlevel* 2))
+    loop
+        exitwhen tloop > tloopend 
+        set thrower=CreateUnitAtLoc( tplayer, 'u011', castloc, AngleBetweenPoints(castloc,targetloc))
+        call SetUnitAbilityLevelSwapped( 'A09T', thrower, therolevel )
+        call SetUnitVertexColorBJ( thrower, 100.00, 100.00, 100.00, 100.00 )
+        set throwloc=PolarProjectionBJ(targetloc, GetRandomReal(0, 150.00), ((AngleBetweenPoints(castloc,targetloc)-60)+tloop*mod))
+        call IssuePointOrderLocBJ( thrower, "attackground", throwloc )
+        call RemoveLocation(throwloc)
+        set tloop =tloop + 1
+    endloop
+call RemoveLocation(castloc)
+call RemoveLocation(targetloc)
+set caster=null
+set thrower=null
+set tplayer=null
+endfunction
+//===========================================================================
+function InitTrig_Throw takes nothing returns nothing
+    set gg_trg_Throw = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Throw, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Throw, Condition( function ThrowConditions) )
+    call TriggerAddAction( gg_trg_Throw, function ThrowActions)
+endfunction
+
+
+function PossessionStolenFilter takes nothing returns boolean
+local unit filter=GetFilterUnit()
+local player allied
+if GetConvertedPlayerId(udg_posplayer) >=7 then
+set allied=Player(6)
+else
+set allied=Player(0)
+endif
+return GetBooleanAnd(GetBooleanAnd((IsUnitType(filter,UNIT_TYPE_MECHANICAL) == false ),GetBooleanAnd((IsUnitType(filter,UNIT_TYPE_STRUCTURE) == false ),(IsUnitType(filter,UNIT_TYPE_HERO) == false ))),GetBooleanOr((GetOwningPlayer(filter)==udg_posplayer),(GetOwningPlayer(filter)==allied)))
+endfunction

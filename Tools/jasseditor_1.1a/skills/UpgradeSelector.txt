@@ -1,0 +1,37 @@
+function UpgradeSelectionConditions takes nothing returns boolean
+return GetBooleanOr( GetTriggerUnit() == gg_unit_u003_0213 ,   GetTriggerUnit() == gg_unit_h00P_0211  ) 
+endfunction
+function UpgradeSelectionActions takes nothing returns nothing
+//h00p ws, u003 sh
+local player selector=GetTriggerPlayer()
+local unit stupid=GetTriggerUnit()
+local integer id=GetConvertedPlayerId(selector)
+    if GetBooleanAnd( id>7 ,stupid==gg_unit_u003_0213) then
+      if udg_UndeadUpgrading==false then
+        call SetUnitOwner( gg_unit_u003_0213, selector, false )
+      endif
+    elseif GetBooleanAnd( id<7,stupid==gg_unit_h00P_0211) then
+      if udg_HumanUpgrading==false then
+        call SetUnitOwner( gg_unit_h00P_0211, selector, false )
+      endif
+    endif
+set stupid=null
+set selector=null    
+endfunction
+//===========================================================================
+function InitTrig_UpgradeSelection takes nothing returns nothing
+    set gg_trg_UpgradeSelection = CreateTrigger(  )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(1), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(2), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(3), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(4), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(5), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(7), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(8), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(9), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(10), true )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeSelection, Player(11), true )
+    call TriggerAddCondition( gg_trg_UpgradeSelection, Condition( function UpgradeSelectionConditions) )
+    call TriggerAddAction( gg_trg_UpgradeSelection, function UpgradeSelectionActions  )
+endfunction
+

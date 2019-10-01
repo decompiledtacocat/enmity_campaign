@@ -1,0 +1,38 @@
+function MultiCheck takes unit stupid, boolean onoff returns nothing
+local group temp
+local unit picked
+local integer ploop=0
+local integer id=GetUnitTypeId(stupid)
+if (udg_MultiPick==false) then
+  loop 
+  exitwhen ploop>11
+   if onoff==true then
+   call SetPlayerTechMaxAllowedSwap(id , 0, Player(ploop))
+   else
+   call SetPlayerTechMaxAllowedSwap(id , 100, Player(ploop))
+   endif
+  set ploop=ploop+1
+  endloop
+  set temp=CreateGroup()
+  call GroupAddGroup(udg_heropick,temp)
+
+  loop 
+  set picked=FirstOfGroup(temp)
+  exitwhen picked==null
+  if GetUnitTypeId(picked) == id then
+     if onoff ==true then
+      
+     call SetUnitVertexColorBJ( picked, 100, 100, 100, 45 )
+     call SetUnitUserData(picked, 1 )
+     else
+     call SetUnitVertexColorBJ( picked, 100, 100, 100, 0 )
+     call SetUnitUserData(picked, 0 )
+     endif
+  endif
+  call GroupRemoveUnit(temp,picked)
+  endloop
+endif
+call DestroyGroup(temp)
+set picked=null
+set temp=null
+endfunction

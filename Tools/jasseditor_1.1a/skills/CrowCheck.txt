@@ -1,0 +1,38 @@
+function Trig_CrowCheck_Actions takes nothing returns nothing
+local group temp=CreateGroup()
+local unit picked
+call GroupAddGroup(udg_crowgroup,temp)
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+  if  GetUnitTypeId(GetSpellAbilityUnit()) != 'H00Q' then
+    if GetUnitStateSwap(UNIT_STATE_MANA,picked)<5 then
+      if GetUnitStateSwap(UNIT_STATE_LIFE,picked) < 11 then
+         call SetUnitLifeBJ(picked,1)
+         call IssueImmediateOrderBJ(picked, "unravenform" )
+         call GroupRemoveUnit(udg_crowgroup,picked)
+      else
+         call SetUnitLifeBJ(picked,(GetUnitStateSwap(UNIT_STATE_LIFE,picked)-10))
+      endif
+    endif
+  else
+  call GroupRemoveUnit(udg_crowgroup,picked)
+  endif
+  call GroupRemoveUnit(temp,picked)
+endloop
+call DestroyGroup(temp)
+set temp=null
+set picked=null
+if CountUnitsInGroup(udg_crowgroup)<1 then
+call DisableTrigger(gg_trg_CrowCheck)
+endif
+
+endfunction
+
+//===========================================================================
+function InitTrig_CrowCheck takes nothing returns nothing
+    set gg_trg_CrowCheck = CreateTrigger(  )
+    call TriggerRegisterTimerEventSingle( gg_trg_CrowCheck, 1.00 )
+    call TriggerAddAction( gg_trg_CrowCheck, function Trig_CrowCheck_Actions )
+endfunction
+

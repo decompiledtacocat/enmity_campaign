@@ -1,0 +1,19 @@
+function SilencingDispelStartConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A046' )
+endfunction
+function SilencingDispelStartActions takes nothing returns nothing
+    local unit caster= GetSpellAbilityUnit()
+    local location target= GetSpellTargetLoc()
+    call SetHandleReal(caster,"dispeltargetx",GetLocationX(target))
+    call SetHandleReal(caster,"dispeltargety",GetLocationY(target))
+    set target=null
+    set caster=null
+endfunction
+//===========================================================================
+function InitTrig_SilencingDispelStart takes nothing returns nothing
+    set gg_trg_SilencingDispelStart = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SilencingDispelStart, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SilencingDispelStart, Condition( function SilencingDispelStartConditions ) )
+    call TriggerAddAction( gg_trg_SilencingDispelStart, function SilencingDispelStartActions  )
+endfunction
+

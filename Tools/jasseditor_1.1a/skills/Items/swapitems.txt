@@ -1,0 +1,42 @@
+function SwapItem takes unit caster, integer i1, integer i2 returns nothing
+local integer iloop=1
+local integer notiems=0
+if UnitHasItemOfTypeBJ(caster, i1) == true then
+
+loop
+exitwhen iloop >6
+
+if UnitItemInSlotBJ(caster, iloop) == null  then
+set noitems=noitems+1
+call UnitAddItemById(caster,'I056' )
+
+elseif UnitItemInSlotBJ(caster, iloop)==i1 then
+
+call RemoveItem(GetItemOfTypeFromUnitBJ(caster, i1))
+call UnitAddItemById(caster,i2 )
+set iloop =7
+
+loop
+exitwhen noitems==0
+call RemoveItem(GetItemOfTypeFromUnitBJ(caster, 'I056'))
+set noitems=noitems-1
+endloop
+
+endif
+
+set ilooop=iloop+1
+endloop
+
+endif
+set caster=null
+endfunction
+
+function ManaRegenFix takes unit caster returns nothing
+call SwapItem(caster,'I00B','I00B')
+call SwapItem(caster,'I02B','I02B')
+call SwapItem(caster,'I021','I021')
+call SwapItem(caster,'I016','I016')
+call SwapItem(caster,'I024','I024')
+call SwapItem(caster,'I02X','I02X')
+call SwapItem(caster,'I020','I020')
+endfunction

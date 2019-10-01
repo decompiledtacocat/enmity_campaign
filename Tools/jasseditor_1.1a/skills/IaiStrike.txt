@@ -1,0 +1,38 @@
+function IaiStrikeConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A08U' )
+endfunction
+function IaiStrikeActions takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+local unit target = GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevelSwapped('A08U', caster)
+local integer herolevel=GetHeroLevel(udg_Iaistrikecaster)
+local real damage=(85.00 * I2R(level))+(2.00 * I2R(herolevel))
+local effect ifx = AddSpecialEffectTargetUnitBJ( "weapon",caster, "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl" )
+local effect ifx2
+    call SetUnitAnimation( caster, "attack 2" )
+    call PolledWait2( 0.50 )
+    if ( IsUnitAliveBJ(target) == true  ) then
+        if ( IsUnitType(target, UNIT_TYPE_HERO) == true  ) then
+            call UnitDamageTargetBJ( caster,target, damage, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+        else
+            call UnitDamageTargetBJ( caster, target, 9999.00, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+        endif
+    else
+    endif
+    set ifx2=AddSpecialEffectTargetUnitBJ( "chest", target, "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl" )
+    call DestroyEffectBJ( ifx  )
+    call PolledWait2( 1.00 )
+    call DestroyEffectBJ(ifx2)
+set ifx=null
+set ifx2=null
+set caster=null
+set target=null
+endfunction
+//===========================================================================
+function InitTrig_Iai_Strike takes nothing returns nothing
+    set gg_trg_Iai_Strike = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Iai_Strike, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Iai_Strike, Condition( function IaiStrikeConditions  ) )
+    call TriggerAddAction( gg_trg_Iai_Strike, function IaiStrikeActions  )
+endfunction
+

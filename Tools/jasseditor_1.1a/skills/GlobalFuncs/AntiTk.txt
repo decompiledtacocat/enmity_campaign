@@ -1,0 +1,35 @@
+function AntiTeamKillActions takes nothing returns nothing
+local unit attacker=GetAttacker()
+local unit attacked=GetAttackedUnitBJ()
+local player owner=GetOwningPlayer(attacker)
+local player sadowner=GetOwningPlayer(attacked)
+local integer pnum=GetConvertedPlayerId(owner)//1-12
+local integer utype=GetUnitTypeId(attacked) 
+local integer index=0
+if GetBooleanAnd(GetBooleanOr(( owner== Player(6) ),( owner == Player(0) )),( UnitHasBuffBJ(attacked, 'BUsl') == true )) then//antisleepcomputer
+call IssueImmediateOrderBJ( attacker, "stop" )
+else
+if pnum > 6 then
+set index=6
+endif
+   if GetBooleanAnd(pnum>6,GetBooleanOr(utype=='h00L',utype=='h00M')) then
+     call IssueImmediateOrderBJ( attacker, "stop" )
+   elseif GetBooleanAnd(pnum<7,GetBooleanOr(utype=='h00K',utype=='h00J')) then
+      call IssueImmediateOrderBJ(attacker, "stop" )
+   elseif GetBooleanAnd(sadowner==Player(index),(IsUnitType(attacked, UNIT_TYPE_STRUCTURE)==true)) then 
+      call IssueImmediateOrderBJ(attacker, "stop" )
+   elseif GetBooleanAnd((IsUnitEnemy(attacked,owner) == false),sadowner!=Player(index)) then
+      call IssueImmediateOrderBJ(attacker, "stop" )
+   endif
+endif   
+set attacker=null
+set attacked=null
+set owner=null
+set sadowner=null
+endfunction
+//===========================================================================
+function InitTrig_AntiTeamKill takes nothing returns nothing
+    set gg_trg_AntiTeamKill = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_AntiTeamKill, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddAction( gg_trg_AntiTeamKill, function AntiTeamKillActions )
+endfunction

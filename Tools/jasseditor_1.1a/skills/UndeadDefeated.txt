@@ -1,0 +1,46 @@
+function UdDefeatedActions takes nothing returns nothing
+local integer dloop=1 
+local location camloc=GetUnitLoc(gg_unit_u001_0119)
+local string hplayers=GetPlayerNames(1,5)
+local string uplayers=GetPlayerNames(7,11)
+local force human=GetPlayerForce(1,5)
+local force undead=GetPlayerForce(7,11)
+    loop
+        exitwhen dloop > 11
+        call CameraSetEQNoiseForPlayer(Player(dloop), 3 )
+        call SmartCameraPanBJ(Player(dloop),camloc , 2.00 )
+        call SetCameraTargetControllerNoZForPlayer(Player(dloop), gg_unit_u001_0119, 0, 0, false )
+        set dloop = dloop + 1
+    endloop
+    call CinematicModeBJ( true, undead )
+    call CinematicModeBJ( true, human)
+    call TransmissionFromUnitTypeWithNameBJ(human, Player(0), 'Hjai', "Jania", camloc , null, ( "Good JOB! " + hplayers+ ". You guys were freaking awesome. Go play some more and show some more noobs how its done!"  ), bj_TIMETYPE_ADD, 0.00, true )
+    call TransmissionFromUnitTypeWithNameBJ(undead, Player(6), 'n009', "Warlock", camloc , null, ( "What.. the.. %@^*! You failed to destroy the stupid humans!. Instead you got our black citadel destroyed!!! You got OWNED by " +  hplayers + ". GO REDEEM YOUSELF!!" ), bj_TIMETYPE_ADD, 0.50, true )
+    call CinematicModeBJ( false, human )
+    call CinematicModeBJ( false, undead  )
+    call TriggerSleepAction( 2.00 )
+    set dloop  = 0
+    loop
+        exitwhen dloop   > 11
+        if dloop>5 then
+        call CustomVictoryBJ(Player(dloop), true, true )
+        else
+        call CustomDefeatBJ(Player(dloop), "OWNED!" )
+        endif
+        set dloop = dloop + 1
+    endloop
+call DestroyForce(human)
+call DestroyForce(undead)
+call RemoveLocation(camloc)
+set human=null
+set undead=null
+set camloc=null    
+call DestroyTrigger(GetTriggeringTrigger())    
+endfunction
+
+//===========================================================================
+function InitTrig_UdDefeated takes nothing returns nothing
+    set gg_trg_UdDefeated = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( gg_trg_UdDefeated, gg_unit_u001_0119, EVENT_UNIT_DEATH )
+    call TriggerAddAction( gg_trg_UdDefeated, function UdDefeatedActions)
+endfunction

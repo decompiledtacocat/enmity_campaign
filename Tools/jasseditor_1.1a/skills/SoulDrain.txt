@@ -1,0 +1,69 @@
+function Trig_SoulDrain_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0DR' ) 
+endfunction
+
+function SoulDrainDurationActions takes nothing returns nothing
+local unit caster=GetHandleUnit(GetTriggeringTrigger(),"souldraincaster")
+local unit target=GetHandleUnit(GetTriggeringTrigger(),"souldraintarget")
+local unit check=GetHandleUnit(target,"souldraincaster")
+local integer level=GetHandleInt(GetTriggeringTrigger(),"souldrainlevel")
+local real damage=.25/(13-I2R(level))
+local real life=GetUnitState(caster,UNIT_STATE_LIFE)
+local real mana=GetUnitState(caster,UNIT_STATE_MANA)
+local real targetlife=GetUnitState(target,UNIT_STATE_LIFE)
+local real targetmana=GetUnitState(target,UNIT_STATE_MANA)
+if  GetBooleanOr(GetBooleanOr(caster!=check,UnitHasBuffBJ(target,'B023')==false),IsUnitAliveBJ(caster)==false) then
+if IsUnitAliveBJ(caster)==false then
+call UnitRemoveBuffBJ('B023',target)
+endif
+call DestroyTrigger(GetTriggeringTrigger()) 
+else
+   if GetUnitState(target,UNIT_STATE_LIFE)<=damage*GetUnitState(target,UNIT_STATE_MAX_LIFE) then
+   call SetUnitLifeBJ(caster,life+GetUnitState(target,UNIT_STATE_LIFE))
+   call UnitDamageTargetBJ(caster, target,9999, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+   else
+     call SetUnitLifeBJ(caster,life+damage*GetUnitState(target,UNIT_STATE_MAX_LIFE))
+     call SetUnitLifeBJ(target,targetlife-damage*GetUnitState(target,UNIT_STATE_MAX_LIFE))  
+   endif
+   if GetUnitState(target,UNIT_STATE_MAX_MANA) >1 then
+      if GetUnitState(target,UNIT_STATE_MANA)<=damage*GetUnitState(target,UNIT_STATE_MAX_MANA) then
+     call SetUnitManaBJ(caster,mana+GetUnitState(target,UNIT_STATE_MANA))
+     call SetUnitManaBJ(target,0)
+      else
+     call SetUnitManaBJ(caster,mana+damage*GetUnitState(target,UNIT_STATE_MAX_MANA))
+     call SetUnitManaBJ(target,targetmana-damage*GetUnitState(target,UNIT_STATE_MAX_MANA))  
+      endif
+   endif
+endif
+set caster=null
+set target=null
+set check=null 
+endfunction
+
+
+function Trig_SoulDrain_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0DR')
+local trigger t
+set t= CreateTrigger()
+call SetHandleHandle(t,"souldraincaster",caster)
+call SetHandleHandle(t,"souldraintarget",target)
+call SetHandleInt(t,"souldrainlevel",level)
+call SetHandleHandle(target,"souldraincaster",caster)
+
+    call TriggerRegisterTimerEventPeriodic( t, 1.00 )
+    call TriggerAddAction( t, function SoulDrainDurationActions )
+set caster=null
+set target=null
+set t=null
+endfunction
+
+//===========================================================================
+function InitTrig_SoulDrain takes nothing returns nothing
+    set gg_trg_SoulDrain = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SoulDrain, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SoulDrain, Condition( function Trig_SoulDrain_Conditions ) )
+    call TriggerAddAction( gg_trg_SoulDrain, function Trig_SoulDrain_Actions )
+endfunction
+

@@ -1,0 +1,83 @@
+function Trig_DarkShadowCommands_Conditions takes nothing returns boolean
+return GetBooleanAnd(IsUnitIllusionBJ(GetOrderedUnit()) == false,GetUnitTypeId(GetOrderedUnit()) == 'E00D')
+endfunction
+
+function Trig_DarkShadowCommands_Actions takes nothing returns nothing
+local unit caster=GetOrderedUnit()
+local location loc
+local string order=OrderId2String(GetIssuedOrderIdBJ())
+local location cloc
+local location sloc
+local unit array shadow
+local widget target
+local integer sloop=0
+set shadow[0]=GetHandleUnit(caster,"darkshadow1")
+set shadow[1]=GetHandleUnit(caster,"darkshadow2")
+set shadow[2]=GetHandleUnit(caster,"darkshadow3")
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER then
+set loc=GetOrderPointLoc()
+endif
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER then
+set target=GetOrderTarget()
+endif
+
+set cloc=GetUnitLoc(caster)
+
+loop
+exitwhen sloop>2
+set sloc=GetUnitLoc(shadow[sloop])
+if DistanceBetweenPoints(cloc,sloc)>500 then
+call SetUnitPositionLocFacingBJ(shadow[sloop],cloc,GetUnitFacing(caster))
+endif
+call RemoveLocation(sloc)
+set sloc=null
+set sloop=sloop+1
+endloop
+call RemoveLocation(cloc)
+set cloc=null
+
+set sloop=0
+loop
+exitwhen sloop>2
+if GetBooleanAnd(shadow[sloop]!=null, IsUnitAliveBJ(shadow[sloop])==true) then
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_ORDER then
+ if GetBooleanOr(order=="stop",order=="holdposition") then
+call TriggerSleepAction(0)
+call IssueImmediateOrder(shadow[sloop],order)
+ endif
+endif
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER then
+  if GetBooleanOr(GetBooleanOr(order=="move",order=="attack"),order=="smart") then
+  call TriggerSleepAction(0)
+  call IssuePointOrderLoc(shadow[sloop],order,loc)
+  endif
+ 
+endif
+if GetTriggerEventId()==EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER then
+ if GetBooleanOr(order=="move",order=="attack") then
+call TriggerSleepAction(0)
+  call IssueTargetOrder (shadow[sloop],order,target)
+ endif
+endif
+endif
+set sloop=sloop+1
+endloop
+call RemoveLocation(loc) 
+set caster=null
+set loc=null
+set target=null
+set shadow[0]=null
+set shadow[1]=null
+set shadow[2]=null
+endfunction
+
+//===========================================================================
+function InitTrig_DarkShadowCommands takes nothing returns nothing
+    set gg_trg_DarkShadowCommands = CreateTrigger( )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DarkShadowCommands, EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DarkShadowCommands, EVENT_PLAYER_UNIT_ISSUED_ORDER )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DarkShadowCommands, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER )
+    call TriggerAddCondition( gg_trg_DarkShadowCommands, Condition( function Trig_DarkShadowCommands_Conditions ) )
+    call TriggerAddAction( gg_trg_DarkShadowCommands, function Trig_DarkShadowCommands_Actions )
+endfunction
+

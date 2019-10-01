@@ -1,0 +1,28 @@
+function MysticSpellBookDupeConditions takes nothing returns boolean
+return GetBooleanAnd(( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true ),( GetItemTypeId(GetManipulatedItem()) == 'I030' )) 
+endfunction
+function MysticSpellBookDupeActions takes nothing returns nothing
+local integer bloop=1
+local integer count=0
+local unit owner=GetTriggerUnit()
+    loop
+        exitwhen bloop >6
+        if ( GetItemTypeId(UnitItemInSlotBJ(owner, bloop)) == 'I030'  ) then
+            set count = ( count + 1 )
+                if ( bloop==2 ) then
+                call UnitRemoveItemSwapped(UnitItemInSlotBJ(owner, bloop), owner )
+                set bloop=1
+                endif
+        endif
+        set bloop=bloop + 1
+    endloop
+endfunction
+
+//===========================================================================
+function InitTrig_Mystic_Spell_Book_Dupe takes nothing returns nothing
+    set gg_trg_Mystic_Spell_Book_Dupe = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Mystic_Spell_Book_Dupe, EVENT_PLAYER_UNIT_PICKUP_ITEM )
+    call TriggerAddCondition( gg_trg_Mystic_Spell_Book_Dupe, Condition( function MysticSpellBookDupeConditions ) )
+    call TriggerAddAction( gg_trg_Mystic_Spell_Book_Dupe, function MysticSpellBookDupeActions  )
+endfunction
+

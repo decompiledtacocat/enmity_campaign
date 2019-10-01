@@ -1,0 +1,97 @@
+function DogsConditions takes nothing returns boolean
+return (GetSpellAbilityId() == 'A0AY' )
+endfunction
+function DogsActions takes nothing returns nothing
+    local unit caster= GetSpellAbilityUnit()
+    local unit spitz=GetHandleUnit(caster,"spitz")
+    local unit joy=GetHandleUnit(caster,"joy")
+    local player owner=GetOwningPlayer(caster)
+    local location castloc=GetUnitLoc(caster)
+    local location dogloc
+    local integer doglevel=GetUnitAbilityLevelSwapped('A0AY',caster)
+    local effect dfx
+    local effect dfx2
+    local effect dfx3
+    local effect dfx4
+    
+    
+    
+    if IsUnitAliveBJ(spitz)==true then
+    set dogloc=GetUnitLoc(spitz)
+    set dfx=AddSpecialEffectLocBJ(dogloc, "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl" )
+    call KillUnit(spitz)
+    call RemoveUnit( spitz )
+    call RemoveLocation(dogloc)
+    endif
+    if IsUnitAliveBJ(joy)==true then
+    set dogloc=GetUnitLoc(joy)
+    set dfx2=AddSpecialEffectLocBJ(dogloc, "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl" )
+    call KillUnit(joy)
+    call RemoveUnit(joy)
+    call RemoveLocation(dogloc)
+    endif
+    set dogloc=PolarProjectionBJ(castloc, 175.00, GetUnitFacing(caster))
+    set joy=CreateUnitAtLoc( owner, 'o00U', dogloc, bj_UNIT_FACING )
+    call RemoveLocation(dogloc)
+    set dogloc=GetUnitLoc(joy)
+    set dfx3=AddSpecialEffectLocBJ( dogloc, "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl" )
+    call RemoveLocation(dogloc)
+    if ( doglevel>1 ) then
+    call UnitAddAbilityBJ( 'A0AW', joy )
+    endif
+    if ( doglevel>2) then
+    call UnitAddAbilityBJ( 'A05J', joy )
+    endif
+    if ( doglevel>3 ) then
+    call UnitAddAbilityBJ( 'ACrk', joy )
+    endif
+    if ( doglevel>4 ) then
+    call UnitAddAbilityBJ( 'A0AZ', joy)
+    endif
+    
+    set dogloc=PolarProjectionBJ(castloc, 175.00, GetUnitFacing(caster))
+    set spitz=CreateUnitAtLoc( owner, 'o00N', dogloc, bj_UNIT_FACING )
+    call RemoveLocation(dogloc)
+    set dogloc=GetUnitLoc(spitz)
+    set dfx4= AddSpecialEffectLocBJ( dogloc, "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl" )
+    call RemoveLocation(dogloc)
+    if ( doglevel>1 ) then
+    call UnitAddAbilityBJ( 'A0AW',spitz )
+    endif
+    if ( doglevel>2 ) then
+    call UnitAddAbilityBJ( 'A05J',spitz )
+    endif
+    if ( doglevel>3 ) then
+    call UnitAddAbilityBJ( 'ACrk',spitz )
+    endif
+    if (doglevel>4 ) then
+    call UnitAddAbilityBJ( 'A0AX',spitz )
+    endif
+call SetHandleHandle(caster,"spitz",spitz )
+call SetHandleHandle(caster,"joy",joy)
+call TriggerSleepAction(0.5)
+
+call RemoveLocation(castloc)
+call DestroyEffect(dfx4)
+call DestroyEffect(dfx3)
+call DestroyEffect(dfx2)
+call DestroyEffect(dfx)
+set caster=null
+set spitz=null
+set joy=null
+set owner=null
+set castloc=null
+set dogloc=null
+set dfx=null
+set dfx2=null
+set dfx3=null
+set dfx4=null
+endfunction
+//===========================================================================
+function InitTrig_Dogs takes nothing returns nothing
+    set gg_trg_Dogs = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Dogs, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Dogs, Condition( function DogsConditions) )
+    call TriggerAddAction( gg_trg_Dogs, function DogsActions )
+endfunction
+

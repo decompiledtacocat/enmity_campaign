@@ -1,0 +1,18 @@
+function InjectStartConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A04G' ) 
+endfunction
+function InjectStartActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    call SetHandleHandle(caster,"target",target)
+    set caster=null
+    set target=null
+endfunction
+//===========================================================================
+function InitTrig_InjectStart takes nothing returns nothing
+    set gg_trg_InjectStart = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_InjectStart, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_InjectStart, Condition( function InjectStartConditions ) )
+    call TriggerAddAction( gg_trg_InjectStart, function InjectStartActions )
+endfunction
+

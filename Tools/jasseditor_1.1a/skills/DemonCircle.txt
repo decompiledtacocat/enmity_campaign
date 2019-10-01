@@ -1,0 +1,122 @@
+function DemonCircleConditions takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A060' )
+endfunction
+
+function DemonCircleActions takes nothing returns nothing
+//notes n00T n00U sfx grpahic. n00G shadow unit.
+    local unit array dcunits
+    local unit array dcattacks
+    local player dcplayer 
+    local location dcastpos
+    local location dtargetpos
+    local location dshadowpos
+    local location dshadowmovep
+    local integer dcircleindex
+    local real damage
+    set dcunits[0]=null
+    set dcattacks[0]=null
+    set dcunits[1]=GetSpellAbilityUnit()
+    set dcunits[2]=GetSpellTargetUnit()
+    set dcunits[3]=GetSpellAbilityUnit()
+    set dcplayer=GetOwningPlayer(dcunits[1])
+    call PolledWait( 0.5 )
+    if ( (IsUnitAliveBJ(dcunits[1]) == false ) ) then
+    set dcunits[1]=null
+    set dcunits[2]=null
+    set dcunits[3]=null
+    set dcplayer=null
+    call RemoveLocation (dcastpos)
+    call RemoveLocation (dtargetpos)
+    call RemoveLocation (dshadowpos)
+    call RemoveLocation (dshadowmovep)
+    return
+    endif
+    
+    set damage=( ((45.00 + I2R( GetHeroLevel(dcunits[1]) ))  + GetRandomReal(1.00, 6.00) ) + ( I2R(GetUnitAbilityLevelSwapped('A060', dcunits[1])) * 5.00 ))
+    set dcastpos=GetUnitLoc(dcunits[1])
+    set dtargetpos=GetUnitLoc(dcunits[2])
+    call PauseUnitBJ( true, dcunits[2] )
+    call SetUnitInvulnerable (dcunits[2],true)
+    call ShowUnitHide(dcunits[1] )
+    call PauseUnitBJ( true, dcunits[1] )
+    set dcattacks[9]=CreateUnitAtLoc(dcplayer, 'n00T', dtargetpos , AngleBetweenPoints (dcastpos,dtargetpos ))
+    set dcattacks[10]=CreateUnitAtLoc(dcplayer, 'n00U', dtargetpos ,AngleBetweenPoints (dcastpos,dtargetpos ))
+    set dshadowmovep = PolarProjectionBJ(dtargetpos, 300.00, AngleBetweenPoints(dcastpos, dtargetpos))
+    set dcunits[3]=CreateUnitAtLoc( dcplayer, 'h00G', dshadowmovep ,  AngleBetweenPoints(dshadowmovep, dtargetpos) )
+    call RemoveLocation (dshadowmovep)
+    set dcircleindex = 1
+    loop
+        exitwhen dcircleindex > 8
+        set dshadowpos = GetUnitLoc(dcunits[3])
+        set dshadowmovep = PolarProjectionBJ(dtargetpos, 300.00, ( AngleBetweenPoints(dshadowpos, dtargetpos) + 45.00 ))
+        call SetUnitPositionLoc( dcunits[3], dshadowmovep)
+        set dcattacks[dcircleindex ]= CreateUnitAtLoc(dcplayer, 'h00G', dshadowpos,  AngleBetweenPoints(dshadowpos, dtargetpos) )
+        call RemoveLocation (dshadowpos)//dshadowclean
+        call RemoveLocation (dshadowmovep)//dshadowmovep cleaned
+        call IssueImmediateOrderBJ( dcattacks[dcircleindex ], "channel" )
+        call TriggerSleepAction( 0 )
+        set dcircleindex  = dcircleindex  + 1
+    endloop
+    call KillUnit(dcunits[3])
+    call RemoveUnit( dcunits[3] )
+    call TriggerSleepAction( 0 )
+    call SetUnitInvulnerable (dcunits[2],false)
+    set dcircleindex = 1
+    loop
+        exitwhen dcircleindex > 8
+        call SetUnitPositionLoc( dcattacks[dcircleindex], dtargetpos )
+        call SetUnitTimeScalePercent( dcattacks[dcircleindex], 200.00 )
+        call SetUnitAnimation( dcattacks[dcircleindex], "attack" )
+        call QueueUnitAnimationBJ( dcattacks[dcircleindex], "stand" )
+        if (GetBooleanOr((UnitHasBuffBJ(dcunits[2], 'BHbn') == true ), (IsUnitType(dcunits[2], UNIT_TYPE_SAPPER) == true )) ) then
+            call UnitDamageTargetBJ( dcattacks[dcircleindex], dcunits[2], damage, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+        else
+            call UnitDamageTargetBJ( dcattacks[dcircleindex], dcunits[2], damage, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+       endif
+        call PlaySoundOnUnitBJ( gg_snd_MetalHeavySliceFlesh2, 100, dcattacks[dcircleindex] )
+        call KillSoundWhenDone(GetLastPlayedSound())
+        set dcircleindex = dcircleindex + 1
+    endloop
+    call TriggerSleepAction( 0 )
+    call PauseUnitBJ( false, dcunits[2] )
+    set dcircleindex  = 1
+       loop
+        exitwhen dcircleindex  > 8
+        call KillUnit(dcattacks[dcircleindex])
+        call RemoveUnit(dcattacks[dcircleindex])
+        set dcattacks[dcircleindex]=null//clean
+        set dcircleindex = dcircleindex + 1
+    endloop
+    call SetUnitPositionLoc( dcunits[1], dcastpos )
+    call PauseUnitBJ( false, dcunits[1] )
+    call ShowUnitShow( dcunits[1] )
+    call SelectUnitAddForPlayer( dcunits[1], dcplayer )
+    set dcircleindex = 1
+    loop
+        exitwhen dcircleindex > 6
+        call TriggerSleepAction( 0.05 )
+        call SetUnitVertexColorBJ( dcattacks[9], 100, 100, 100, ( 15.00 * I2R(GetForLoopIndexB()) ) )
+        call SetUnitVertexColorBJ( dcattacks[10], 100, 100, 100, ( 15.00 * I2R(GetForLoopIndexB()) ) )
+        set dcircleindex  = dcircleindex  + 1
+    endloop
+    call KillUnit( dcattacks[9] )
+    call KillUnit( dcattacks[10] )
+    call RemoveUnit( dcattacks[9] )
+    call RemoveUnit( dcattacks[10] )
+    set dcunits[1]=null
+    set dcunits[2]=null
+    set dcunits[3]=null
+    set dcattacks[9]=null
+    set dcattacks[10]=null
+    set dcplayer=null
+    call RemoveLocation (dcastpos)
+    call RemoveLocation (dtargetpos)
+endfunction
+
+//===========================================================================
+function InitTrig_DemonCircle takes nothing returns nothing
+    set gg_trg_DemonCircle = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DemonCircle, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DemonCircle, Condition( function DemonCircleConditions ) )
+    call TriggerAddAction( gg_trg_DemonCircle, function DemonCircleActions )
+endfunction

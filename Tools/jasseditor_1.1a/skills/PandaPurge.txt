@@ -1,0 +1,29 @@
+function PandaPurgeConditions takes nothing returns boolean
+return (GetSpellAbilityId() == 'A0AM' )
+endfunction
+function PandaPurgeActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target= GetSpellTargetUnit()
+local player owner=GetOwningPlayer(caster)
+local real damage
+local real mana=GetUnitStateSwap(UNIT_STATE_MANA,target)
+if (GetUnitPointValue(target)==101) then
+set damage=( 3 * I2R(GetHeroStatBJ(bj_HEROSTAT_INT, caster, true)))
+else
+set damage=( 1 * I2R(GetHeroStatBJ(bj_HEROSTAT_INT, caster, true)))
+endif
+    if ( IsUnitEnemy(target, owner) == true ) then
+        call SetUnitManaBJ(target,mana -damage )
+    endif
+set caster=null
+set target=null
+set owner=null    
+endfunction
+
+//===========================================================================
+function InitTrig_PandaPurge takes nothing returns nothing
+    set gg_trg_PandaPurge = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PandaPurge, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_PandaPurge, Condition( function PandaPurgeConditions ) )
+    call TriggerAddAction( gg_trg_PandaPurge, function PandaPurgeActions  )
+endfunction

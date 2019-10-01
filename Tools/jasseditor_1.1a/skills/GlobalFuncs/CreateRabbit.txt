@@ -1,0 +1,7 @@
+function CreateRabbit takes player whichplayer,location rabbitloc returns unit
+//creates an empty casting rabbit at no face
+local unit rabbit
+set rabbit=CreateUnitAtLoc( whichplayer, 'n011',rabbitloc , bj_UNIT_FACING)
+call SetUnitVertexColorBJ( rabbit, 100.00, 100.00, 100.00, 100.00 )
+return rabbit
+endfunction

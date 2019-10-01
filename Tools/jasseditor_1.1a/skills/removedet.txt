@@ -1,0 +1,19 @@
+function Trig_RemoveMineDet_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0G0' ) 
+endfunction
+
+function Trig_RemoveMineDet_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+call UnitAddAbility(caster,'A0FZ')
+call KillUnit(caster)
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_RemoveMineDet takes nothing returns nothing
+    set gg_trg_RemoveMineDet = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RemoveMineDet, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_RemoveMineDet, Condition( function Trig_RemoveMineDet_Conditions ) )
+    call TriggerAddAction( gg_trg_RemoveMineDet, function Trig_RemoveMineDet_Actions )
+endfunction
+

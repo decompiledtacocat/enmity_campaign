@@ -1,0 +1,30 @@
+function ItsDayLightConditions takes nothing returns boolean
+return GetBooleanAnd((CountUnitsInGroup(udg_nightstalkers)>0),GetBooleanOr(( GetTimeOfDay()< 18.00  ),( GetTimeOfDay()  >= 6.00)))
+endfunction
+function ItsDayLightActions takes nothing returns nothing
+local unit picked
+local group temp=CreateGroup()
+call GroupAddGroup(udg_nightstalkers,temp)
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+if ( GetUnitAbilityLevelSwapped('A00M', picked)>0) then//bonus regen
+call UnitRemoveAbility(picked,'A00M' )
+endif
+if (GetUnitAbilityLevelSwapped('A00E', picked)>0) then
+call  UnitRemoveAbility(picked,'A00E')
+endif  
+call GroupRemoveUnit(temp,picked)
+endloop
+call DestroyGroup(temp)
+set temp=null
+set picked=null
+endfunction
+//===========================================================================
+function InitTrig_Its_DayLight takes nothing returns nothing
+    set gg_trg_Its_DayLight = CreateTrigger(  )
+    call TriggerRegisterGameStateEventTimeOfDay( gg_trg_Its_DayLight, GREATER_THAN_OR_EQUAL, 6.00 )
+    call TriggerRegisterGameStateEventTimeOfDay( gg_trg_Its_DayLight, LESS_THAN_OR_EQUAL, 18.00 )
+    call TriggerAddCondition( gg_trg_Its_DayLight, Condition( function ItsDayLightConditions ) )
+    call TriggerAddAction( gg_trg_Its_DayLight, function ItsDayLightActions  )
+endfunction

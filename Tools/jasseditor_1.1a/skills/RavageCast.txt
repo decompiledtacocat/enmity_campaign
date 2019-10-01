@@ -1,0 +1,27 @@
+function Trig_RavageCast_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0D2' ) 
+endfunction
+
+function Trig_RavageCast_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0D2')
+call SetHandleInt(target,"ravage",(level*5))
+
+call PolledWait2(1)
+loop
+call TriggerSleepAction(0)
+exitwhen UnitHasBuffBJ(target,'B00Q')==false
+endloop
+call UnitRemoveAbility(target,'A0D3')
+
+endfunction
+
+//===========================================================================
+function InitTrig_RavageCast takes nothing returns nothing
+    set gg_trg_RavageCast = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RavageCast, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_RavageCast, Condition( function Trig_RavageCast_Conditions ) )
+    call TriggerAddAction( gg_trg_RavageCast, function Trig_RavageCast_Actions )
+endfunction
+

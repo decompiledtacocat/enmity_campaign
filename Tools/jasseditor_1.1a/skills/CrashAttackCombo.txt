@@ -1,0 +1,80 @@
+
+function CrashActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetUnitLoc(target)
+local integer id=GetSpellAbilityId()
+local integer level=GetUnitAbilityLevel(caster,id )
+local integer telelevel=GetUnitAbilityLevel(caster,'A0HD' )
+local real damage
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local trigger t
+local timer tim
+local unit rabbit=CreateRabbit(owner,targetloc)
+local unit movecaster=null
+call UnitAddAbility(rabbit,'A0H9')
+if id=='A0HB' then //right
+call SetUnitAbilityLevel(rabbit,'A0H9',2)
+set angle=angle+80
+set damage=level*30+GetHeroStatBJ(bj_HEROSTAT_STR, caster, true)
+     if telelevel>1 then
+     call DestroyEffect(AddSpellEffectByIdLoc('A0HD' , EFFECT_TYPE_SPECIAL, castloc))
+     call ShowUnitHide(caster)
+     set movecaster=caster
+     endif
+elseif id=='A0HA' then//left
+call SetUnitAbilityLevel(rabbit,'A0H9',1)
+set angle=angle-80
+set damage=level*20+GetHeroStatBJ(bj_HEROSTAT_STR, caster, true)
+     if telelevel>0 then
+     call DestroyEffect(AddSpellEffectByIdLoc('A0HD' , EFFECT_TYPE_SPECIAL, castloc))
+     call ShowUnitHide(caster)
+     set movecaster=caster
+     endif
+else
+call SetUnitAbilityLevel(rabbit,'A0H9',3)
+set damage=level*40+GetHeroStatBJ(bj_HEROSTAT_STR, caster, true)
+     if telelevel>2 then
+     call DestroyEffect(AddSpellEffectByIdLoc('A0HD' , EFFECT_TYPE_SPECIAL, castloc))
+     call ShowUnitHide(caster)
+     set movecaster=caster
+     endif 
+endif
+call IssueTargetOrder(rabbit,"stormbolt",target)
+
+call UnitDamageTargetBJ( caster, target, damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+call DestroyEffect( AddSpecialEffectLocBJ(targetloc, "Abilities\\Spells\\Human\\ThunderClap\\ThunderClapCaster.mdl" ))
+
+set t= CreateTrigger()
+call SetHandleHandle(t,"CrashCaster",caster)
+call SetHandleHandle(t,"CrashTarget",target)
+call SetHandleReal(t,"CrashAngle",angle)
+call SetHandleReal(t,"CrashTreeDamage",damage)
+call SetHandleReal(t,"CrashMoveCaster",movecaster)
+call TriggerRegisterTimerEventPeriodic(t, 0.02 )
+call TriggerAddAction(t, function ShoveActions )
+
+set tim=CreateTimer()
+call TimerStart( tim, 1, false, null)
+loop
+        exitwhen (TimerGetRemaining(tim)<=0)
+        call TriggerSleepAction(0)
+endloop
+call DestroyTimer(tim)
+set tim=null
+
+call FlushHandleLocals(t)
+call DestroyTrigger(t)
+call ShowUnitShow(caster)
+call DestroyEffect(AddSpellEffectById('A0HD' , EFFECT_TYPE_SPECIAL, GetUnitX(caster),GetUnitY(caster)))
+call SelectUnitForPlayerSingle(caster,owner)
+set caster=null
+set target=null
+call RemoveLocation(castloc)
+call RemoveLocation(targetloc)
+set castloc=null
+set targetloc=null
+set t=null
+endfunction

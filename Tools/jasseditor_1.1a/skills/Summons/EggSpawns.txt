@@ -1,0 +1,21 @@
+function EggSpawnsConditions takes nothing returns boolean
+return ( GetUnitTypeId(GetSummonedUnit()) == 'n01D' ) 
+endfunction
+function EggSpawnsActions takes nothing returns nothing
+local unit caster=GetSummoningUnit()
+local unit summon=GetSummonedUnit()
+local string cat="eggs"
+local integer max=3
+local integer maxlimit=3
+call MaxUnit(caster,summon,cat,max,maxlimit)
+set caster=null
+set summon=null
+endfunction
+//===========================================================================
+function InitTrig_EggSpawns takes nothing returns nothing
+    set gg_trg_EggSpawns = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_EggSpawns, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_EggSpawns, Condition( function EggSpawnsConditions ) )
+    call TriggerAddAction( gg_trg_EggSpawns, function EggSpawnsActions )
+endfunction
+

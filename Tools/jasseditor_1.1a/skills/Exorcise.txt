@@ -1,0 +1,35 @@
+function Trig_Exorcise_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A04N' ) 
+
+endfunction
+
+function Trig_Exorcise_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local unit rabbit
+local unit target=GetSpellTargetUnit()
+local location castloc=GetUnitLoc(target)
+
+if UnitHasBuffBJ(target, 'B01V') == true then
+set rabbit=CreatRabbit(owner,castloc)
+call UnitAddAbility(rabbit,'A08X')
+call UnitRemoveBuffBJ('B01V',target)
+call IssueTargetOrder(rabbit,"cripple",target)
+
+endif
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+set caster=null
+set target=null
+set rabbit=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_Exorcise takes nothing returns nothing
+    set gg_trg_Exorcise = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Exorcise, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Exorcise, Condition( function Trig_Exorcise_Conditions ) )
+    call TriggerAddAction( gg_trg_Exorcise, function Trig_Exorcise_Actions )
+endfunction

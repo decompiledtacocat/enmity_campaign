@@ -1,0 +1,33 @@
+function ForcePunchConditions takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr(( GetSpellAbilityId() == 'A042' ),( GetSpellAbilityId() == 'A03L' )),GetBooleanOr(GetBooleanOr(( GetSpellAbilityId() == 'A03Z' ),( GetSpellAbilityId() == 'A040' )),GetBooleanOr(( GetSpellAbilityId() == 'A03O' ),( GetSpellAbilityId() == 'A041' ))))
+
+endfunction
+
+function ForcePunchActions takes nothing returns nothing
+        local unit fpunched =GetSpellTargetUnit()
+        local unit forcepunchunit=GetSpellAbilityUnit()
+        local unit fpunchrabbit
+        local integer fpunchlevel= GetUnitAbilityLevelSwapped(GetSpellAbilityId(),forcepunchunit)
+        local player fpunchplayer= GetOwningPlayer(forcepunchunit)
+        local location fpunchloc
+        call TriggerSleepAction( 0.30 )
+        set fpunchloc=GetUnitLoc(fpunched)
+        set fpunchrabbit=CreateUnitAtLoc( fpunchplayer, 'n00Q', fpunchloc,bj_UNIT_FACING )
+        call RemoveLocation(fpunchloc)
+        call SetUnitAbilityLevelSwapped( 'A03Y', fpunchrabbit,fpunchlevel)
+        call SetUnitPathing( fpunchrabbit, false )
+        call SetUnitVertexColorBJ( fpunchrabbit, 100, 100, 100, 100.00 )
+        call IssueImmediateOrderBJ( fpunchrabbit, "stomp" )
+        set forcepunchunit=null
+        set fpunched =null
+        set fpunchrabbit=null
+        set fpunchplayer=null
+endfunction
+
+//===========================================================================
+function InitTrig_ForcePunch takes nothing returns nothing
+    set gg_trg_ForcePunch = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ForcePunch, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_ForcePunch, Condition( function ForcePunchConditions) )
+    call TriggerAddAction( gg_trg_ForcePunch, function ForcePunchActions)
+endfunction

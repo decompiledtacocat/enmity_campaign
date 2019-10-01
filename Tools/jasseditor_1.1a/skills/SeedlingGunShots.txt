@@ -1,0 +1,46 @@
+function SeedlingGunShotsConditions takes nothing returns boolean
+return ( GetUnitTypeId(GetAttacker())  == 'u019' ) 
+endfunction
+function SeedlingGunShotsActions takes nothing returns nothing
+    local unit attacker=GetAttacker()
+    local unit shooter=GetHandleUnit(attacker, "shooter")
+    local unit starget=GetHandleUnit(attacker, "target")
+    local unit treant
+    local integer shotcount=GetHandleInt(attacker, "shotcount")
+    local integer maxshot=GetHandleInt(attacker, "maxshot")
+    local location targetloc
+    local player splayer= GetOwningPlayer(shooter)
+   
+    if (IsUnitAliveBJ(starget) == false ) then
+        call RemoveUnit(shooter)
+        call FlushHandleLocals(shooter)
+   else
+      if (shotcount<=maxshot) then
+        set targetloc=GetUnitLoc(starget)
+        set treant=CreateUnitAtLoc( splayer, 'e00A', targetloc, bj_UNIT_FACING )
+        call SetUnitAnimation( treant, "birth" )
+        call UnitApplyTimedLifeBJ( 45.00, 'BTLF', treant )
+        set shotcount=shotcount +1
+        call RemoveLocation(targetloc)
+        set targetloc=null
+        call SetHandleInt(shooter, "shotcount", shotcount)
+      else 
+        call RemoveUnit(shooter)
+        call FlushHandleLocals(shooter)
+      endif 
+   endif 
+    set attacker=null
+    set shooter=null
+    set starget=null
+    set treant=null
+    set splayer=null
+endfunction
+
+//===========================================================================
+function InitTrig_SeedlingGunShots takes nothing returns nothing
+    set gg_trg_SeedlingGunShots = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SeedlingGunShots, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_SeedlingGunShots, Condition( function SeedlingGunShotsConditions  ) )
+    call TriggerAddAction( gg_trg_SeedlingGunShots, function SeedlingGunShotsActions  )
+endfunction
+

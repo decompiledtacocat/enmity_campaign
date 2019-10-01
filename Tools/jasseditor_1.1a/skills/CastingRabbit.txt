@@ -1,0 +1,18 @@
+function CastingRabbitConditions takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr((GetUnitTypeId(GetSpellAbilityUnit()) == 'n00Q' ),(GetUnitTypeId(GetSpellAbilityUnit()) == 'n00S' )),(GetUnitTypeId(GetSpellAbilityUnit()) == 'n011' ))
+endfunction
+
+function CastingRabbitActions takes nothing returns nothing
+//'n00Q' = castrabbit n00S castrabbit2 n011 emptyrabbit
+call KillUnit(GetSpellAbilityUnit())
+call RemoveUnit(GetSpellAbilityUnit())
+endfunction
+
+//===========================================================================
+function InitTrig_CastingRabbit takes nothing returns nothing
+    set gg_trg_CastingRabbit = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_CastingRabbit, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_CastingRabbit, Condition( function CastingRabbitConditions  ) )
+    call TriggerAddAction( gg_trg_CastingRabbit, function CastingRabbitActions  )
+endfunction
+

@@ -1,0 +1,30 @@
+function FlameShieldConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0BE' )
+endfunction
+function FlameShieldActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevelSwapped( 'A0BD', caster )
+
+if GetUnitAbilityLevelSwapped( 'A0BD', target )==0 then
+call UnitAddAbility(target, 'A0BD')
+call SetUnitAbilityLevelSwapped( 'A0BD', target, level)
+call PolledWait2(2.0)
+loop
+exitwhen (UnitHasBuffBJ(target, 'B01O') == false )
+call TriggerSleepAction(1.0)
+endloop
+else
+call SetUnitAbilityLevelSwapped( 'A0BD', target, level)
+endif
+set caster=null
+set target=null
+endfunction
+
+//===========================================================================
+function InitTrig_FlameShield takes nothing returns nothing
+    set gg_trg_FlameShield= CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_FlameShield, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_FlameShield, Condition( function FlameShieldConditions  ) )
+    call TriggerAddAction( gg_trg_FlameShield, function FlameShieldActions  )
+endfunction

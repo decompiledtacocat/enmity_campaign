@@ -1,0 +1,32 @@
+function ExecuteItemConditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanAnd(GetBooleanAnd(attackednothero(),attackednotstructure()),attackednotsummon()),GetBooleanOr((UnitHasItemOfTypeBJ(GetAttacker(), 'I022') == true ),(UnitHasItemOfTypeBJ(GetAttacker(), 'I02V') == true )))
+endfunction
+
+function NotGolem takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr((GetUnitTypeId(GetAttackedUnitBJ()) == 'n017' ),GetBooleanOr((GetUnitTypeId(GetAttackedUnitBJ()) == 'n01C' ),(GetUnitTypeId(GetAttackedUnitBJ()) == 'n01B' ))),GetBooleanOr((GetUnitTypeId(GetAttackedUnitBJ()) == 'n018' ),GetBooleanOr((GetUnitTypeId(GetAttackedUnitBJ()) == 'n01A' ),(GetUnitTypeId(GetAttackedUnitBJ()) == 'n019' ))))
+endfunction
+
+
+function ExecuteItemActions takes nothing returns nothing
+    local effect tempeffect
+    if ( NotGolem() ) then
+    else
+        if ( GetRandomInt(1, 100) >= 80 ) then
+            call AddSpecialEffectTargetUnitBJ( "overhead", GetAttackedUnitBJ(), "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl" )
+            set tempeffect=GetLastCreatedEffectBJ()
+            if ( attackingnotillusion() ) then
+                call UnitDamageTargetBJ( GetAttacker(), GetAttackedUnitBJ(), 9999.00, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL )
+            endif
+            call TriggerSleepAction( 0.20 )
+            call DestroyEffect( tempeffect )
+        endif
+    endif
+endfunction
+
+//===========================================================================
+function InitTrig_ExecuteItems takes nothing returns nothing
+    set gg_trg_ExecuteItems = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ExecuteItems, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_ExecuteItems, Condition( function ExecuteItemConditions) )
+    call TriggerAddAction( gg_trg_ExecuteItems, function ExecuteItemActions )
+endfunction

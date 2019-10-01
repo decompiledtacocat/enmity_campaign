@@ -1,0 +1,38 @@
+HEROS
+
+Human
+------
+2 Heavy Hero
+2 Light Melee
+1 Ranger
+1 Support
+
+Undead
+1 Ranger.
+1 Support
+
+
+Items
+
+Crystal Generator - 
+Cloaking Generator -
+WP Nade - Nade effect.
+Flash Bang - nade effect
+Land Mine - Upgrades
+
+
+Issues
+-----------------
+BBE - Standing Drag.
+Quick Scope - Vs Air
+Executioner - Ranged
+Repick at 0 gold.
+Armada - Turrets.
+
+
+Replace Skills
+------------------
+
+Ninja - Throw
+Void Lord - Mana pull
+Destroyer - Absorb mana.

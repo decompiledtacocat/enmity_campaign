@@ -1,0 +1,182 @@
+function DemonShadowConditions takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A03D' )
+endfunction
+
+function DSCastFilter takes nothing returns boolean 
+//requires preset udg_temptargetunit,udg_fplayer
+return GetBooleanAnd(filtercheck(),( GetFilterUnit() != udg_temptargetunit ))
+endfunction
+
+function DSCastTargetCount takes nothing returns boolean
+//requires preset udg_temppoint,udg_temptargetunit,udg_fplayer
+set udg_tempgroup=GetUnitsInRangeOfLocMatching(700.00, udg_temppoint, Condition(function DSCastFilter))
+return (CountUnitsInGroup(udg_tempgroup) <= 1 )
+endfunction
+
+function DSCastSingleTarget  takes nothing returns boolean
+//requires preset udg_temppoint,udg_temptargetunit,udg_fplayer
+set udg_tempgroup=GetUnitsInRangeOfLocMatching(700.00, udg_temppoint, Condition(function filtercheck))
+return ( CountUnitsInGroup(udg_tempgroup) == 1 )
+endfunction
+
+function DSMoveAttack takes nothing returns nothing
+//requires preset udg_temptargetunit,udg_tempdamage,udg_tempunit
+    local location dsmapos
+    set dsmapos= GetUnitLoc(GetEnumUnit())
+    if ( DSCastSingleTarget() ) then
+        set udg_temptargetunit = udg_tempunit
+    else
+        set udg_temptargetunit = GetEnumUnit()
+    endif
+    call DestroyGroup(udg_tempgroup)
+    call SetUnitPositionLocFacingLocBJ( udg_tempunit, dsmapos, dsmapos )
+    call RemoveLocation (dsmapos)
+    call SetUnitTimeScalePercent( udg_tempunit, 200.00 )
+    call SetUnitAnimation( udg_tempunit, "attack" )
+    call QueueUnitAnimationBJ( udg_tempunit, "stand" )
+    set udg_echeck=GetEnumUnit()
+    if ( etherealcheck() ) then
+        call UnitDamageTargetBJ( udg_tempunit, GetEnumUnit(), udg_tempdamage, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+    else
+        call UnitDamageTargetBJ( udg_tempunit, GetEnumUnit(), udg_tempdamage, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+    endif
+    call PlaySoundOnUnitBJ( gg_snd_MetalHeavySliceFlesh2, 100, udg_tempunit)
+endfunction
+
+function DemonShadowActions takes nothing returns nothing
+    local unit dscastunit=GetSpellAbilityUnit()
+    local unit array dsatkunit
+    local location dscastpos=GetUnitLoc(dscastunit)
+    local integer dsatkcount=0
+    local integer dloopindex=1
+    local group dstargetgroup
+    local group dstargetsubgroup
+    local player dscastplayer=GetOwningPlayer(dscastunit)
+    local real dsdamageamount=(( 10.00 * I2R(GetUnitAbilityLevelSwapped('A03D', dscastunit)) ) + ( GetRandomReal(1.00, 6.00) + ( 4.00 * I2R(GetHeroLevel(dscastunit)) ) ) )
+    local effect array dsfxhr
+    local effect array dsfxhl
+    local effect array dsfxfr
+    local effect array dsfxfl
+    local effect array dsfxchest
+    local effect array dsfxhead
+    set udg_temppoint=dscastpos
+    if ( DSCastTargetCount() ) then
+        set dsatkcount = 4
+    else
+        set dsatkcount = 8
+    endif
+    call DestroyGroup(udg_tempgroup)
+    call RemoveLocation(udg_temppoint)
+    set dscastpos=GetUnitLoc(dscastunit)
+    call ShowUnitHide( dscastunit )
+    call PauseUnitBJ( true, dscastunit ) 
+    set dloopindex = 0
+    loop
+        exitwhen dloopindex >= dsatkcount
+        call CreateNUnitsAtLoc( 1, 'h00G', dscastplayer, dscastpos, GetRandomDirectionDeg() )
+        set dsatkunit[dloopindex] = GetLastCreatedUnit()
+        call IssueImmediateOrderBJ( dsatkunit[dloopindex], "channel" )
+        call AddSpecialEffectTargetUnitBJ( "hand right", dsatkunit[dloopindex], "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl" )
+        set dsfxhr[dloopindex]=GetLastCreatedEffectBJ()
+        call AddSpecialEffectTargetUnitBJ( "hand left", dsatkunit[dloopindex], "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl" )
+        set dsfxhl[dloopindex]=GetLastCreatedEffectBJ()
+        call AddSpecialEffectTargetUnitBJ( "foot right", dsatkunit[dloopindex], "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl" )
+        set dsfxfr[dloopindex]=GetLastCreatedEffectBJ()
+        call AddSpecialEffectTargetUnitBJ( "foot left", dsatkunit[dloopindex], "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl" )
+        set dsfxfl[dloopindex]=GetLastCreatedEffectBJ()
+        call AddSpecialEffectTargetUnitBJ( "chest", dsatkunit[dloopindex], "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl" )
+        set dsfxchest[dloopindex]=GetLastCreatedEffectBJ()
+        call AddSpecialEffectTargetUnitBJ( "head", dsatkunit[dloopindex], "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl" )
+        set dsfxhead[dloopindex]=GetLastCreatedEffectBJ()
+        set dloopindex = dloopindex + 1
+    endloop 
+    
+    call TriggerSleepAction( 0.05 )
+    set dloopindex = 0
+        set udg_tempdamage=dsdamageamount
+        set udg_temptargetunit=dscastunit
+        set udg_temppoint=dscastpos
+        set udg_fplayer=dscastplayer
+    loop
+        exitwhen dloopindex >= dsatkcount
+        set udg_tempunit=dsatkunit[dloopindex]
+        set dstargetsubgroup=GetUnitsInRangeOfLocMatching(700.00, dscastpos, Condition(function DSCastFilter))
+        set dstargetgroup=GetRandomSubGroup(1, dstargetsubgroup) 
+        call ForGroupBJ( dstargetgroup , function DSMoveAttack)
+        call DestroyGroup(dstargetgroup)
+        call DestroyGroup(dstargetsubgroup)
+        set dloopindex = dloopindex + 1
+    endloop
+    call RemoveLocation (udg_temppoint)
+    set dscastpos=GetUnitLoc(dscastunit)  
+    call TriggerSleepAction( 0.20 )
+    if ( (dsatkcount > 4 ) ) then
+       set dloopindex = 0
+            set udg_tempdamage=dsdamageamount
+            set udg_temptargetunit=dscastunit
+            set udg_temppoint=dscastpos
+            set udg_fplayer=dscastplayer 
+       loop
+            exitwhen dloopindex >= dsatkcount
+            set udg_tempunit=dsatkunit[dloopindex]
+            set dstargetsubgroup=GetUnitsInRangeOfLocMatching(700.00, dscastpos, Condition(function DSCastFilter))
+            set dstargetgroup=GetRandomSubGroup(1, dstargetsubgroup) 
+            call ForGroupBJ( dstargetgroup , function DSMoveAttack)
+            call DestroyGroup(dstargetgroup)
+            call DestroyGroup(dstargetsubgroup)
+            set dloopindex = dloopindex + 1
+        endloop
+            call RemoveLocation (udg_temppoint)
+            set dscastpos=GetUnitLoc(dscastunit)
+    endif
+  
+    call TriggerSleepAction( 0.20 )
+    set dloopindex = 0
+    
+    loop
+        exitwhen dloopindex >= dsatkcount
+        call SetUnitPositionLocFacingLocBJ( dsatkunit[dloopindex],dscastpos, dscastpos )
+        call IssueImmediateOrderBJ( dsatkunit[dloopindex], "channel" )
+        set dloopindex = dloopindex + 1
+    endloop
+    
+    call TriggerSleepAction( 0.20 )
+    set dloopindex = 0
+    loop
+        exitwhen dloopindex >= dsatkcount
+        call SetUnitPositionLocFacingLocBJ( dsatkunit[dloopindex], dscastpos, dscastpos )
+        call IssueImmediateOrderBJ( dsatkunit[dloopindex], "channel" )
+        set dloopindex = dloopindex + 1
+    endloop
+    call TriggerSleepAction( 0.10 )
+    set dloopindex = 0
+    loop
+        exitwhen dloopindex >= dsatkcount
+        call DestroyEffect(dsfxhr[dloopindex])
+        call DestroyEffect(dsfxhl[dloopindex])
+        call DestroyEffect(dsfxfr[dloopindex])
+        call DestroyEffect(dsfxfl[dloopindex])
+        call DestroyEffect(dsfxchest[dloopindex])
+        call DestroyEffect(dsfxhead[dloopindex])
+        call KillUnit( dsatkunit[dloopindex] )
+        call RemoveUnit( dsatkunit[dloopindex] )
+        set dsatkunit[dloopindex]=null
+        set dloopindex = dloopindex + 1
+    endloop
+    call PauseUnitBJ( false, dscastunit )
+    call ShowUnitShow( dscastunit )
+    call SetUnitPositionLoc( dscastunit, dscastpos)
+    call SelectUnitAddForPlayer( dscastunit, dscastplayer )
+    set dscastunit=null
+    call RemoveLocation (dscastpos)
+    set dscastplayer=null
+endfunction 
+
+
+//===========================================================================
+function InitTrig_DemonShadow takes nothing returns nothing
+    set gg_trg_DemonShadow = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DemonShadow, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DemonShadow, Condition( function DemonShadowConditions ) )
+    call TriggerAddAction( gg_trg_DemonShadow, function DemonShadowActions )
+endfunction

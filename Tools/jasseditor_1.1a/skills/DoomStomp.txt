@@ -1,0 +1,38 @@
+function DoomStompConditions takes nothing returns boolean
+return  ( GetSpellAbilityId() == 'A036' )
+endfunction
+function DoomStompActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit picked
+local player owner=GetOwningPlayer(caster)
+local location casterloc=GetUnitLoc(caster)
+local integer level=GetUnitAbilityLevelSwapped('A036', caster)
+local real area=225.00 + ( 25.00 * I2R(level))
+local real damage=I2R(GetHeroStatBJ(bj_HEROSTAT_STR, caster, true) )
+local group temp
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocMatching(area,casterloc, Condition(function filtercheck))
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+call UnitDamageTargetBJ(caster, picked,damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+call GroupRemoveUnit(temp,picked)
+endloop
+call DestroyGroup(temp)
+set temp=null
+call RemoveLocation(casterloc)
+set casterloc=null
+set picked=null
+set caster=null
+set owner=null
+endfunction
+
+//===========================================================================
+function InitTrig_DoomStomp takes nothing returns nothing
+    set gg_trg_DoomStomp = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DoomStomp, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DoomStomp, Condition( function DoomStompConditions ) )
+    call TriggerAddAction( gg_trg_DoomStomp, function DoomStompActions )
+endfunction
+

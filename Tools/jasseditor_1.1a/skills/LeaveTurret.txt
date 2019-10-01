@@ -1,0 +1,51 @@
+function LeaveTurretConditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanAnd(( IsUnitIllusionBJ(GetLeavingUnit()) == false ), ( IsUnitType(GetLeavingUnit(), UNIT_TYPE_HERO) == true )),( IsUnitAlly(GetLeavingUnit(), Player(0)) == true ))
+endfunction
+function LeaveTurretFilter  takes nothing returns boolean
+return GetBooleanAnd(GetOwningPlayer(GetFilterUnit()) == udg_templayer,GetBooleanOr(GetUnitTypeId(GetFilterUnit()) == 'h00K' ,GetUnitTypeId(GetFilterUnit()) == 'h00J') )
+endfunction
+function LeaveTurretActions takes nothing returns nothing
+    local unit pickedunit
+    local unit leaveunit=GetLeavingUnit()
+    local location unitlocation=GetUnitLoc(leaveunit)
+    local player mplayer=GetOwningPlayer(leaveunit)
+    local group turretgroup
+    set udg_templayer=null
+    set udg_templayer=mplayer
+    set turretgroup=GetUnitsInRangeOfLocMatching(300.00,unitlocation, Condition(function LeaveTurretFilter))
+    call RemoveLocation(unitlocation)
+    loop
+      set pickedunit=FirstOfGroup(turretgroup)
+      exitwhen pickedunit==null
+      call SetUnitOwner( pickedunit,Player(PLAYER_NEUTRAL_PASSIVE), true )
+      call GroupRemoveUnit(turretgroup,pickedunit)
+    endloop
+call DestroyGroup(turretgroup)
+set turretgroup=null
+set pickedunit=null
+set leaveunit=null
+set mplayer =null
+set unitlocation=null
+endfunction
+//===========================================================================
+function InitTrig_LeaveTurret takes nothing returns nothing
+    set gg_trg_LeaveTurret = CreateTrigger(  )
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret1)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret2)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret3)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret4)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret5)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret6)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret7)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret8)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret9)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret10)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret11)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret12)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret13)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret14)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret15)
+    call TriggerRegisterLeaveRectSimple( gg_trg_LeaveTurret , gg_rct_Turret16)
+    call TriggerAddCondition( gg_trg_LeaveTurret, Condition( function LeaveTurretConditions ) )
+    call TriggerAddAction( gg_trg_LeaveTurret, function LeaveTurretActions )
+endfunction

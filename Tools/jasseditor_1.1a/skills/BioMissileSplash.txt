@@ -1,0 +1,31 @@
+function BioMissleSplashCondition takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A03C' )
+endfunction
+function BioMissleSplashActions takes nothing returns nothing
+    local unit buffer
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetHandleUnit(caster,"bmissile")
+    local location loc=GetUnitLoc(caster)
+    local integer level=GetUnitAbilityLevelSwapped('A03C', caster)
+    local player owner= GetOwningPlayer(caster)
+    set buffer=CreateUnitAtLoc( owner, 'n00S', loc , bj_UNIT_FACING )
+    call SetUnitVertexColorBJ( buffer, 100.00, 100.00, 100.00, 100.00 )
+    call UnitAddAbility(buffer,'A06M')
+    call SetUnitAbilityLevelSwapped( 'A06M', buffer,  level)
+    call IssueTargetOrderBJ(buffer, "acidbomb", target)
+    call FlushHandleLocals(caster)
+    call RemoveLocation(loc)
+    set buffer=null
+    set caster=null
+    set target=null
+    set loc=null
+    set owner=null
+endfunction
+//===========================================================================
+function InitTrig_BioMissleSplash takes nothing returns nothing
+    set gg_trg_BioMissleSplash = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_BioMissleSplash, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_BioMissleSplash, Condition( function BioMissleSplashCondition ) )
+    call TriggerAddAction( gg_trg_BioMissleSplash, function BioMissleSplashActions )
+endfunction
+

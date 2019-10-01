@@ -1,0 +1,36 @@
+function Trig_Foot_Trap_Cast_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0EM' ) 
+
+endfunction
+function foottrapkill takes nothing returns nothing
+ call KillUnit( GetEnumUnit() )
+endfunction
+function footfilter takes nothing returns boolean
+return GetBooleanAnd(GetUnitTypeId(GetFilterUnit())==GetUnitTypeId(GetSpellAbilityUnit()),GetOwningPlayer(GetFilterUnit())==udg_tempfilterplayer)
+endfunction
+
+function Trig_Foot_Trap_Cast_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local location castloc=GetUnitLoc(caster)
+local player owner=GetOwningPlayer(caster)
+local group other
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set other=GetUnitsInRangeOfLocMatching(250,castloc,Condition(function footfilter))
+call ForGroup(other, function foottrapkill)
+call DestroyGroup(other)
+set other=null
+set owner=null
+call RemoveLocation(castloc)
+set castloc=null
+set caster
+endfunction
+
+//===========================================================================
+function InitTrig_Foot_Trap_Cast takes nothing returns nothing
+    set gg_trg_Foot_Trap_Cast = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Foot_Trap_Cast, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Foot_Trap_Cast, Condition( function Trig_Foot_Trap_Cast_Conditions ) )
+    call TriggerAddAction( gg_trg_Foot_Trap_Cast, function Trig_Foot_Trap_Cast_Actions )
+endfunction
+

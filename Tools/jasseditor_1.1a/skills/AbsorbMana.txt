@@ -1,0 +1,35 @@
+function AbsorbmanaConditions  takes nothing returns boolean
+return GetBooleanAnd((GetUnitPointValue(GetSpellTargetUnit()) == 101),( GetSpellAbilityId() == 'A0A8' ))
+endfunction
+function AbsorbmanaActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    local integer level=GetUnitAbilityLevelSwapped('A0A8',caster)
+    local real absorb=(50*level)
+    local real damage=(75*level)
+    local real targetmana=GetUnitStateSwap(UNIT_STATE_MANA,target)
+    local real castermana=GetUnitStateSwap(UNIT_STATE_MANA,caster)
+    local real castermax=GetUnitStateSwap(UNIT_STATE_MAX_MANA,caster)
+    local real maxdmg=(castermax-castermana)
+        if ((castermax-castermana)<damage) then
+            call SetUnitManaBJ( caster,castermax)
+            call SetUnitManaBJ( target,targetmana-maxdmg)
+        else
+            if (targetmana - damage)>= 1.00 then
+            call SetUnitManaBJ( caster,castermana+absorb)
+            call SetUnitManaBJ( target,targetmana-absorb) 
+            else
+            call SetUnitManaBJ( caster, castermana+targetmana)
+            call SetUnitManaBJ( target,0.00)
+            endif
+        endif
+    set caster=null
+    set target=null
+endfunction
+//===========================================================================
+function InitTrig_Absorbmana takes nothing returns nothing
+    set gg_trg_Absorbmana = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Absorbmana, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Absorbmana, Condition( function AbsorbmanaConditions) )
+    call TriggerAddAction( gg_trg_Absorbmana, function AbsorbmanaActions )
+endfunction

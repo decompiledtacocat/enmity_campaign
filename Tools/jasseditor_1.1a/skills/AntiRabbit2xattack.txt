@@ -1,0 +1,23 @@
+function Trig_AntiRabbit2xAttack_Conditions takes nothing returns boolean
+    return GetBooleanOr(( GetUnitTypeId(GetDyingUnit()) == 'u012' ),( GetUnitTypeId(GetDyingUnit()) == 'u011' ))
+endfunction
+function Trig_AntiRabbit2xAttack_Actions takes nothing returns nothing
+local unit rabbit=GetDyingUnit()
+local integer data=GetUnitUserData(rabbit)
+
+if data!=1 then
+call SetUnitUserData(rabbit,1)
+elseif data==1 then
+call KillUnit(rabbit)
+endif 
+set rabbit=null
+endfunction
+
+//===========================================================================
+function InitTrig_AntiRabbit2xAttack takes nothing returns nothing
+    set gg_trg_AntiRabbit2xAttack = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_AntiRabbit2xAttack, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_AntiRabbit2xAttack, Condition( function Trig_AntiRabbit2xAttack_Conditions ) )
+    call TriggerAddAction( gg_trg_AntiRabbit2xAttack, function Trig_AntiRabbit2xAttack_Actions )
+endfunction
+

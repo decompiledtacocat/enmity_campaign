@@ -1,0 +1,90 @@
+function Trig_Weaken_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0DS' ) 
+endfunction
+
+function Trig_Weaken_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0DS')
+local integer life
+local integer mana
+
+if GetUnitAbilityLevel(target,'A0DT')>0 then
+call UnitRemoveAbility(target,'A0DT')
+endif
+if GetUnitAbilityLevel(target,'A0DU')>0 then
+call UnitRemoveAbility(target,'A0DU')
+endif
+if GetUnitAbilityLevel(target,'A0DV')>0 then
+call UnitRemoveAbility(target,'A0DV')
+endif
+if GetUnitAbilityLevel(target,'A0DZ')>0 then
+call UnitRemoveAbility(target,'A0DZ')
+endif
+if GetUnitAbilityLevel(target,'A0DW')>0 then
+call UnitRemoveAbility(target,'A0DW')
+endif
+if GetUnitAbilityLevel(target,'A0E0')>0 then
+call UnitRemoveAbility(target,'A0E0')
+endif
+if GetUnitAbilityLevel(target,'A0DX')>0 then
+call UnitRemoveAbility(target,'A0DX')
+endif
+if GetUnitAbilityLevel(target,'A0E1')>0 then
+call UnitRemoveAbility(target,'A0E1')
+endif
+if GetUnitAbilityLevel(target,'A0DY')>0 then
+call UnitRemoveAbility(target,'A0DY')
+endif
+if GetUnitAbilityLevel(target,'A0E2')>0 then
+call UnitRemoveAbility(target,'A0E2')
+endif
+
+if level==1 then
+set life='A0DT'
+set mana='A0DU'
+elseif level==2 then
+set life='A0DV'
+set mana='A0DZ'
+elseif level==3 then
+set life='A0DW'
+set mana='A0E0'
+elseif level==4 then
+set life='A0DX'
+set mana='A0E1'
+elseif level==5 then
+set life='A0DY'
+set mana='A0E2'
+endif
+
+if GetUnitAbilityLevel(target,life)<=0 then
+call UnitAddAbility(target,life)
+endif
+if GetUnitAbilityLevel(target,mana)<=0 then
+call UnitAddAbility(target,mana)
+endif
+call TriggerSleepAction(2)
+loop
+        exitwhen (UnitHasBuffBJ(target,'B026')==false) or (IsUnitDeadBJ(target))
+        call TriggerSleepAction(0)
+endloop
+if GetUnitAbilityLevel(target,life)>0 then
+call UnitRemoveAbility(target,life)
+endif
+if GetUnitAbilityLevel(target,mana)>0 then
+call UnitRemoveAbility(target,mana)
+endif
+
+
+set caster=null
+set target=null
+endfunction
+
+//===========================================================================
+function InitTrig_Weaken takes nothing returns nothing
+    set gg_trg_Weaken = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Weaken, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Weaken, Condition( function Trig_Weaken_Conditions ) )
+    call TriggerAddAction( gg_trg_Weaken, function Trig_Weaken_Actions )
+endfunction
+

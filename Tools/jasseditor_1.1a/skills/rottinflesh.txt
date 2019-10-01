@@ -1,0 +1,45 @@
+function Trig_RottingFlesh_Conditions takes nothing returns boolean
+return  ( GetLearnedSkillBJ() == 'A03B' ) 
+endfunction
+
+function RottingFleshDamageCondition takes nothing returns boolean
+return IsUnitType(GetAttacker(),UNIT_TYPE_MELEE_ATTACKER)
+endfunction
+
+function RottingFleshDamage takes nothing returns nothing
+local unit caster=GetTriggerUnit()
+local unit target=GetAttacker()
+local integer level=GetUnitAbilityLevel(caster,'A03B')
+local unit rabbit
+if level > 0 then
+set rabbit=CreateRabbitXY(Player(15),GetUnitX(target),GetUnitY(target))
+call UnitAddAbility(rabbit,'A08D')
+call IssueTargetOrder(rabbit,"cripple",target)
+else
+set caster=null
+call SetHandleHandle(caster,"RottingFlesh",null)
+call DestroyTrigger(GetTriggeringTrigger())
+endif
+set caster=null
+endfunction
+
+function Trig_RottingFlesh_Actions takes nothing returns nothing
+local unit caster=GetLearningUnit()
+local trigger t=GetHandleTrigger(caster,"RottingFlesh")
+if t==null then
+set t=CreateTrigger()
+call SetHandleHandle(caster,"RottingFlesh",t)
+call TriggerAddAction(t, function RottingFleshDamage)
+call TriggerAddCondition(t, Condition( function RottingFleshDamageCondition ) )
+call TriggerRegisterUnitEvent( t, caster, EVENT_UNIT_ATTACKED )
+endif
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_RottingFlesh takes nothing returns nothing
+    set gg_trg_RottingFlesh= CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RottingFlesh, EVENT_PLAYER_HERO_SKILL )
+    call TriggerAddCondition( gg_trg_RottingFlesh, Condition( function Trig_RottingFlesh_Conditions ) )
+    call TriggerAddAction( gg_trg_RottingFlesh, function Trig_RottingFlesh_Actions )
+endfunction

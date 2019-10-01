@@ -1,0 +1,39 @@
+function UnitSellConditions takes nothing returns boolean
+return ( IsUnitType(GetSoldUnit(), UNIT_TYPE_HERO) == true )
+endfunction
+function UnitSellActions takes nothing returns nothing
+local unit sold=GetSoldUnit()
+local player owner=GetOwningPlayer(sold)
+local integer id=GetConvertedPlayerId(owner)//1-16
+local group temp
+local unit picked
+call MultiCheck(sold,true)
+    if ( id>=7 ) then
+        call PanCameraToTimedLocForPlayer( owner, GetRectCenter(gg_rct_Hero_Revive_Yellow), 0 )
+        call SetUnitPositionLoc(sold, GetRectCenter(gg_rct_Hero_Revive_Yellow) )
+    else
+        call PanCameraToTimedLocForPlayer( owner, GetRectCenter(gg_rct_Hero_Revive_Good), 0 )
+        call SetUnitPositionLoc(sold, GetRectCenter(gg_rct_Hero_Revive_Good) )
+    endif
+    
+  set temp=CreateGroup()
+  call GroupAddGroup(udg_heropick,temp)
+  loop
+  set picked=FirstOfGroup(temp)
+  exitwhen picked==null
+  call SelectUnitRemoveForPlayer(picked,owner)
+  call GroupRemoveUnit(temp,picked)
+  endloop
+  call DestroyGroup(temp)
+
+set sold=null
+set owner=null    
+endfunction
+
+//===========================================================================
+function InitTrig_UnitSell takes nothing returns nothing
+    set gg_trg_UnitSell = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_UnitSell, EVENT_PLAYER_UNIT_SELL )
+    call TriggerAddCondition( gg_trg_UnitSell, Condition( function UnitSellConditions  ) )
+    call TriggerAddAction( gg_trg_UnitSell, function UnitSellActions)
+endfunction

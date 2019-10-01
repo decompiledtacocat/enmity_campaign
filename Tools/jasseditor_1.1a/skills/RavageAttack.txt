@@ -1,0 +1,28 @@
+function Trig_RavageAttack_Conditions takes nothing returns boolean
+return UnitHasBuffBJ(GetAttackedUnitBJ(), 'B00Q') == true 
+endfunction
+function Trig_RavageAttack_Actions takes nothing returns nothing
+local unit target=GetAttackedUnitBJ()
+local unit caster=GetAttacker()
+local integer maxlevel
+local integer current
+if GetUnitTypeId(caster)=='H012' then
+set current=GetUnitAbilityLevel(target,'A0D3')
+set maxlevel=GetHandleInt(target,"ravage")
+    if current<=0 then
+     call UnitAddAbility(target,'A0D3')
+    endif
+     if current<maxlevel then
+     call SetUnitAbilityLevel(target,'A0D3',current+1)
+     endif
+endif
+endfunction
+
+//===========================================================================
+function InitTrig_RavageAttack takes nothing returns nothing
+    set gg_trg_RavageAttack = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RavageAttack, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_RavageAttack, Condition( function Trig_RavageAttack_Conditions ) )
+    call TriggerAddAction( gg_trg_RavageAttack, function Trig_RavageAttack_Actions )
+endfunction
+

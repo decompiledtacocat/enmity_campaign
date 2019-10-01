@@ -1,0 +1,45 @@
+function Trig_BerserkAttack_Conditions takes nothing returns boolean
+return UnitHasBuffBJ(GetAttacker(), 'B01Z') == true 
+endfunction
+
+function Trig_BerserkAttack_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local player owner=GetOwningPlayer(caster)
+local player sadowner=GetOwningPlayer(GetAttackedUnitBJ())
+local integer level=GetHandleInt(caster,"berserk")
+local integer attacklevel=GetUnitAbilityLevel(caster,'A0CZ')
+local integer newlevel=attacklevel+level
+local integer pnum=GetConvertedPlayerId(owner)
+local integer index=0
+if pnum > 6 then
+set index=6
+endif
+
+if then GetBooleanAnd((IsUnitEnemy(attacked,owner) == false),GetBooleanAnd(sadowner!=Player(index),sadowner!=Player(PLAYER_NEUTRAL_PASSIVE))) then
+set caster=null
+set owner=null
+set sadowner=null
+return
+endif
+if newlevel >100 then
+set caster=null
+set owner=null
+set sadowner=null
+return
+endif
+if attacklevel<=0 then
+call UnitAddAbility(caster,'A0CZ')
+call SetUnitAbilityLevel(caster,'A0CZ',level)
+else
+call SetUnitAbilityLevel(caster,'A0CZ',newlevel)
+endif
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_BerserkAttack takes nothing returns nothing
+    set gg_trg_BerserkAttack = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_BerserkAttack, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_BerserkAttack, Condition( function Trig_BerserkAttack_Conditions ) )
+    call TriggerAddAction( gg_trg_BerserkAttack, function Trig_BerserkAttack_Actions )
+endfunction

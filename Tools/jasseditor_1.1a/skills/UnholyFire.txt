@@ -1,0 +1,51 @@
+function UnholyFireConditions takes nothing returns boolean
+return  ( GetSpellAbilityId() == 'A03J' ) 
+endfunction
+
+function UnholyFireActions takes nothing returns nothing
+    local unit unholyfirecaster=GetSpellAbilityUnit()
+    local unit ufdcaster
+    local player unholyfireplayer=GetOwningPlayer(unholyfirecaster)
+    local integer unholyfirelvl=GetUnitAbilityLevel(unholyfirecaster, 'A03J')
+    local integer unholyloop
+    local location unholyfireloc
+    local location ufcasterpos
+    if ( (GetUnitStateSwap(UNIT_STATE_LIFE,unholyfirecaster) > (25.00*I2R(unholyfirelvl))) ) then
+            call SetUnitLifeBJ( unholyfirecaster, ( GetUnitStateSwap(UNIT_STATE_LIFE, unholyfirecaster) - (25.00*I2R(unholyfirelvl))) )
+        else
+            call SetUnitLifeBJ( unholyfirecaster, 1.00 )
+    endif
+    call PolledWait( .9 )
+    set unholyloop = 0
+    set ufcasterpos=GetUnitLoc(unholyfirecaster)//
+    loop
+        exitwhen unholyloop  >= 8
+        set unholyfireloc=GetUnitLoc(unholyfirecaster)//
+        set ufdcaster= CreateUnitAtLoc( unholyfireplayer, 'n00Q',unholyfireloc, (I2R(unholyloop) * 45.00) )
+        call RemoveLocation(unholyfireloc)//
+        call SetUnitAbilityLevelSwapped( 'A03I', ufdcaster, unholyfirelvl )
+        call SetUnitPathing(ufdcaster, false )
+        call SetUnitVertexColorBJ(ufdcaster, 100, 100, 100, 100.00 )
+        call SetUnitPositionLoc(ufdcaster, ufcasterpos )
+        set unholyfireloc=PolarProjectionBJ(ufcasterpos, 450.00, GetUnitFacing(ufdcaster))//
+        call IssuePointOrderLocBJ(ufdcaster, "shockwave", unholyfireloc )
+        call RemoveLocation(unholyfireloc)//
+        set unholyloop = unholyloop + 1
+    endloop
+    call RemoveLocation(ufcasterpos)//
+    call TriggerSleepAction( 0.30 )
+    call ResetUnitAnimation(unholyfirecaster)
+    call TriggerSleepAction( 0.30 )
+    set unholyfirecaster=null
+    set ufdcaster=null
+    set unholyfireplayer=null
+endfunction
+
+//===========================================================================
+function InitTrig_UnholyFire takes nothing returns nothing
+    set gg_trg_UnholyFire = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_UnholyFire, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_UnholyFire, Condition( function UnholyFireConditions  ) )
+    call TriggerAddAction( gg_trg_UnholyFire, function UnholyFireActions  )
+endfunction
+

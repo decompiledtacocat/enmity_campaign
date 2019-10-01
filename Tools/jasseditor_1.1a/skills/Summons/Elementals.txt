@@ -1,0 +1,50 @@
+function ElementalBall takes unit ball, integer level returns nothing
+    local player owner=GetOwningPlayer(ball)
+    local unit array elements
+    local integer eloop=0
+    local location eloc=GetUnitLoc(ball)
+    local location emove
+
+    set emove=PolarProjectionBJ(eloc, 275.00, 0.00 )
+    set elements[0]=CreateUnitAtLoc( owner, 'o00E', emove, bj_UNIT_FACING)
+    call SetUnitAbilityLevelSwapped( 'A053', elements[0], level )
+    call RemoveLocation(emove) 
+    
+    set emove=PolarProjectionBJ(eloc, 275.00, 90.00 )
+    if ( level==1 ) then
+    set elements[1]=CreateUnitAtLoc(owner,'o00J', emove ,bj_UNIT_FACING )
+    elseif ( level==2 ) then
+    set elements[1]=CreateUnitAtLoc(owner,'o00H', emove ,bj_UNIT_FACING )
+    elseif ( level==3 ) then
+    set elements[1]=CreateUnitAtLoc(owner,'o00K', emove ,bj_UNIT_FACING )
+    endif
+    call RemoveLocation(emove)  
+    
+    set emove=PolarProjectionBJ(eloc, 275.00, 180.00 )
+    set elements[2]=CreateUnitAtLoc(owner,'o00F', emove ,bj_UNIT_FACING )
+    call SetUnitAbilityLevelSwapped( 'A051', elements[2],level )
+    
+    call RemoveLocation(emove)
+    set emove=PolarProjectionBJ(eloc, 275.00,-90.00 )  
+    if ( level==1 ) then
+    set elements[3]=CreateUnitAtLoc(owner,'o00M', emove ,bj_UNIT_FACING )
+    elseif (level==2 ) then
+    set elements[3]=CreateUnitAtLoc(owner,'o00G', emove ,bj_UNIT_FACING )
+    elseif (level==3 ) then
+    set elements[3]=CreateUnitAtLoc(owner,'o00L', emove ,bj_UNIT_FACING )
+    endif
+    call RemoveLocation(emove)
+    loop
+    exitwhen eloop>3
+    call SetUnitPathing(elements[eloop], false )
+    call IssuePointOrderLocBJ( elements[eloop], "move", eloc )
+    call SetHandleHandle(ball,("elements"+I2S(eloop)),elements[eloop])
+    set eloop=eloop+1
+    endloop
+    call GroupAddUnit(udg_elementals,ball)
+    call RemoveLocation(eloc)
+    set owner=null
+    if IsTriggerEnabled(gg_trg_ElementalMovement) then
+    call EnableTrigger(gg_trg_ElementalMovement)
+    endif
+endfunction

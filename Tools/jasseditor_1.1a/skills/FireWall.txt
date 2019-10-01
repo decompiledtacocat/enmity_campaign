@@ -1,0 +1,50 @@
+function FirewallConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A038' )
+endfunction
+
+function FirewallActions takes nothing returns nothing
+    local unit array firewallcaster
+    local player firewallplayer=GetOwningPlayer(GetSpellAbilityUnit())
+    local location targetpoint=GetSpellTargetLoc()
+    local location casterpoint=GetUnitLoc(GetSpellAbilityUnit())
+    local location fright
+    local location fleft
+    local integer fireloop
+    local integer firelevel=GetUnitAbilityLevelSwapped('A038', GetSpellAbilityUnit())
+    local real firewallangel
+    set firewallangel=AngleBetweenPoints (casterpoint,targetpoint)
+    set firewallcaster[0]=CreateUnitAtLoc ( firewallplayer, 'n00Q', casterpoint ,firewallangel)
+    set firewallcaster[1]=CreateUnitAtLoc ( firewallplayer, 'n00Q', casterpoint ,firewallangel)
+    call SetUnitVertexColorBJ( firewallcaster[0], 100, 100, 100, 100.00 )
+    call SetUnitVertexColorBJ( firewallcaster[1], 100, 100, 100, 100.00 )
+    call SetUnitAbilityLevelSwapped( 'A039', firewallcaster[1], firelevel )
+    call SetUnitAbilityLevelSwapped( 'A039', firewallcaster[2], firelevel )
+    // Initial Casting
+    call IssuePointOrderLocBJ( firewallcaster[0], "flamestrike", targetpoint )
+    set fireloop = 1
+    loop
+        exitwhen fireloop > firelevel
+        call PolledWait( 0.25 )
+        set fright=PolarProjectionBJ(targetpoint, ( 100.00 * I2R(fireloop) ), ( firewallangel + 90.00 ))
+        set fleft=PolarProjectionBJ(targetpoint, ( 100.00 * I2R(fireloop) ), ( firewallangel - 90.00 ))
+        call IssuePointOrderLocBJ( firewallcaster[0], "flamestrike", fright )
+        call IssuePointOrderLocBJ( firewallcaster[1], "flamestrike", fleft )
+        call RemoveLocation(fright)
+        call RemoveLocation(fleft)
+        set fireloop = fireloop + 1
+    endloop
+call RemoveLocation(targetpoint)
+call RemoveLocation(casterpoint)
+set firewallplayer=null
+set firewallcaster[0]=null
+set firewallcaster[1]=null
+endfunction
+
+//===========================================================================
+function InitTrig_Firewall takes nothing returns nothing
+    set gg_trg_Firewall = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Firewall, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_Firewall, Condition( function FirewallConditions  ) )
+    call TriggerAddAction( gg_trg_Firewall, function FirewallActions  )
+endfunction
+

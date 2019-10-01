@@ -1,0 +1,57 @@
+function RandomConditions takes nothing returns boolean
+return  GetBooleanAnd(GetPlayerState(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_LUMBER) >= 100 ,udg_playercommands==true)
+endfunction
+
+function RandomActions takes nothing returns nothing
+local group temp
+local unit picked
+local player owner=GetTriggerPlayer()
+local integer id=GetConvertedPlayerId(owner)//1-16
+local location tloc
+if (udg_allpick==true) then
+set temp=GetUnitsInRectMatching(gg_rct_HeroSelection, Condition(function RandomFilter))
+else
+   if id >=7 then
+   set temp=GetUnitsInRectMatching(gg_rct_HeroSelection, Condition(function RandomFilterUD))
+   else
+   set temp=GetUnitsInRectMatching(gg_rct_HeroSelection, Condition(function RandomFilterHU))
+   endif
+endif
+
+set picked=GroupPickRandomUnit(temp) 
+call SetPlayerStateBJ( owner, PLAYER_STATE_RESOURCE_LUMBER, 0 )
+    if ( id>=7 ) then
+    set tloc=GetRectCenter(gg_rct_Hero_Revive_Yellow)
+        call PanCameraToTimedLocForPlayer( owner, tloc, 0 )
+        call CreateUnitAtLoc(owner,GetUnitTypeId(picked), tloc, bj_UNIT_FACING )
+    else
+     set tloc=GetRectCenter(gg_rct_Hero_Revive_Good)
+        call PanCameraToTimedLocForPlayer( owner, tloc, 0 )
+        call CreateUnitAtLoc(owner,GetUnitTypeId(picked),tloc, bj_UNIT_FACING  )
+    endif
+call RemoveLocation(tloc)
+call MultiCheck(picked,true)
+call DestroyGroup(temp)
+set owner=null
+set tloc=null
+set picked=null
+set temp=null    
+endfunction
+
+//===========================================================================
+function InitTrig_Random takes nothing returns nothing
+    set gg_trg_Random = CreateTrigger(  )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(1), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(2), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(3), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(4), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(5), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(7), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(8), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(9), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(10), "-random", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_Random, Player(11), "-random", true )
+    call TriggerAddCondition( gg_trg_Random, Condition( function RandomConditions ) )
+    call TriggerAddAction( gg_trg_Random, function RandomActions  )
+endfunction
+

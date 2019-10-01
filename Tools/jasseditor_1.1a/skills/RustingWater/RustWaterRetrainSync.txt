@@ -1,0 +1,20 @@
+function RetrainSyncConditions takes nothing returns boolean
+    return GetBooleanOr(( GetItemTypeId(GetManipulatedItem()) == 'I000' ), ( GetItemTypeId(GetManipulatedItem()) == 'tret' ))
+endfunction
+
+
+function RetrainSyncActions takes nothing returns nothing
+    local unit retrainer =GetManipulatingUnit()
+    local integer rustlevel=GetUnitAbilityLevelSwapped('A00K', retrainer ) 
+    if (rustlevel==0 ) then
+        call UnitRemoveAbilityBJ( 'A00D', retrainer)
+    endif
+endfunction
+
+//===========================================================================
+function InitTrig_RetrainSync takes nothing returns nothing
+    set gg_trg_RetrainSync = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_RetrainSync, EVENT_PLAYER_UNIT_USE_ITEM )
+    call TriggerAddCondition( gg_trg_RetrainSync, Condition( function RetrainSyncConditions ) )
+    call TriggerAddAction( gg_trg_RetrainSync, function RetrainSyncActions )
+endfunction

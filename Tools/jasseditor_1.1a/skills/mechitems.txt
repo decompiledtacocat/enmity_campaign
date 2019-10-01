@@ -1,0 +1,98 @@
+function Trig_Mechanical_Items_Conditions takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr(GetBooleanOr(GetSpellAbilityId()=='A0G4' ,GetSpellAbilityId()=='A0G3' ),GetBooleanOr(GetSpellAbilityId() == 'A0FP',GetSpellAbilityId() == 'A0FN')),GetBooleanOr(GetBooleanOr(GetBooleanOr(GetSpellAbilityId()=='A0FQ',GetSpellAbilityId()=='A0G7'),GetBooleanOr(GetSpellAbilityId()=='A0G8',GetSpellAbilityId()=='A0G9')),GetSpellAbilityId() == 'A0FO'))
+endfunction
+
+function Trig_Mechanical_Items_Actions takes nothing returns nothing
+local integer id=GetSpellAbilityId()
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local location castloc=GetUnitLoc(caster)
+local player owner=GetOwningPlayer(caster)
+local unit rabbit=CreateRabbit(owner,castloc)
+local unit missile
+local integer exit=0
+local integer x=1
+if id=='A0FN' then//motor oil A0FN
+
+call UnitAddAbility(rabbit,'A0FC')
+call IssueTargetOrder(rabbit,"bloodlust",target)
+
+elseif id=='A0FP' then//dispel A0FP
+
+call UnitAddAbility(rabbit,'A0FJ')
+call IssueTargetOrder(rabbit,"autodispel",target)
+call UnitRemoveBuffsEx(target,false,true,false,true,false,false,false)
+
+elseif id=='A0FO' then//A0FO mag coat
+
+if GetBooleanOr(IsUnitType(target, UNIT_TYPE_MELEE_ATTACKER)==true,GetUnitTypeId(target)=='o00D') then
+call UnitAddAbility(rabbit,'A0F9')
+else
+call UnitAddAbility(rabbit,'A0FU')
+endif
+call IssueTargetOrder(rabbit,"innerfire",target)
+
+elseif id=='A0G4' then//A0G4 Formula 51
+
+call UnitAddAbility(rabbit,'A0FC')
+call IssueTargetOrder(rabbit,"bloodlust",target)
+set rabbit=CreateRabbit(owner,castloc)
+if GetBooleanOr(IsUnitType(target, UNIT_TYPE_MELEE_ATTACKER)==true,GetUnitTypeId(target)=='o00D') then
+call UnitAddAbility(rabbit,'A0F9')
+else
+call UnitAddAbility(rabbit,'A0FU')
+endif
+call IssueTargetOrder(rabbit,"innerfire",target)
+
+elseif id=='A0G3' then//A0G3 Clean and polish 
+
+call UnitAddAbility(rabbit,'A0FJ')
+call IssueTargetOrder(rabbit,"autodispel",target)
+call UnitRemoveBuffsEx(target,false,true,false,true,false,false,false)
+set rabbit=CreateRabbit(owner,castloc)
+call UnitAddAbility(rabbit,'A0FI')
+call IssueTargetOrder(rabbit,"rejuvination",target)
+
+elseif GetBooleanOr(GetBooleanOr(id=='A0FQ',id=='A0G7'),GetBooleanOr(id=='A0G8',id=='A0G9')) then//A0FQ missile
+if IsUnitType(caster, UNIT_TYPE_MECHANICAL)==true then
+set exit=0
+if id=='A0FQ' then
+set x=1
+elseif id=='A0G7' then
+set x=2
+elseif id=='A0G8' then
+set x=3
+elseif id=='A0G9' then
+set x=4
+endif
+
+loop
+exitwhen exit>=x
+set missile=CreateUnitAtLoc( owner, 'u002',castloc, bj_UNIT_FACING)
+call SetUnitVertexColorBJ( missile, 100.00, 100.00, 100.00, 100.00 )
+call IssueTargetOrderBJ(missile, "attack", target)
+call PolledWait2(.10)
+set exit=exit+1
+endloop
+
+endif
+
+call SilentKill(rabbit)
+endif
+
+
+call RemoveLocation(castloc)
+set castloc=null
+set caster=null
+set target=null
+set owner=null
+set rabbit=null
+endfunction
+
+//===========================================================================
+function InitTrig_Mechanical_Items takes nothing returns nothing
+    set gg_trg_Mechanical_Items = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Mechanical_Items, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Mechanical_Items, Condition( function Trig_Mechanical_Items_Conditions ) )
+    call TriggerAddAction( gg_trg_Mechanical_Items, function Trig_Mechanical_Items_Actions )
+endfunction

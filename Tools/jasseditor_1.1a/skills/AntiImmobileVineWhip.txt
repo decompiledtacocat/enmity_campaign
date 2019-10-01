@@ -1,0 +1,17 @@
+function AntiImmobileVineWhipConditions takes nothing returns boolean
+return GetBooleanAnd(( GetUnitTypeId(GetSpellAbilityUnit()) == 'O00P' ),GetBooleanAnd(( GetSpellAbilityId() == 'A09L' ), ( GetUnitMoveSpeed(GetSpellTargetUnit()) <= 0.00 )))
+endfunction
+function AntiImmobileVineWhipActions takes nothing returns nothing
+    local unit stupid=GetSpellAbilityUnit()
+    call ResetUnitAnimation(stupid)
+    call IssueImmediateOrderBJ( stupid, "stop" )
+    call ResetUnitAnimation( stupid )
+    call DisplayTextToPlayer(GetOwningPlayer(stupid),0.55,0.55, "|cffffcc00Unable to target immobile units.|r" )
+endfunction
+//===========================================================================
+function InitTrig_AntiImmobileVineWhip takes nothing returns nothing
+    set gg_trg_AntiImmobileVineWhip = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_AntiImmobileVineWhip, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_AntiImmobileVineWhip, Condition( function AntiImmobileVineWhipConditions) )
+    call TriggerAddAction( gg_trg_AntiImmobileVineWhip, function AntiImmobileVineWhipActions)
+endfunction

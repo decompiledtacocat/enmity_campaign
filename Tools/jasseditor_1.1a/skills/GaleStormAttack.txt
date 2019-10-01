@@ -1,0 +1,23 @@
+function GaleStormAttackConditions takes nothing returns boolean
+return GetBooleanOr(( GetUnitAbilityLevelSwapped('A07K', GetAttacker()) > 0 ),( GetUnitAbilityLevelSwapped('A09X', GetAttacker()) > 0 ) ) 
+endfunction
+function GaleStormAttackActions takes nothing returns nothing
+    local unit galecharged=GetAttacker()
+    if ( IsUnitInGroup(galecharged, udg_galestormgroup) == true  ) then
+        call GroupRemoveUnitSimple( galecharged, udg_galestormgroup)
+        call UnitRemoveAbilityBJ( 'A07K', galecharged)
+        call UnitRemoveAbilityBJ( 'A09X', galecharged)
+    else
+        call GroupAddUnitSimple( galecharged, udg_galestormgroup)
+        call TriggerSleepAction( 0.50 )
+        call UnitRemoveBuffBJ( 'B01L', galecharged)
+    endif
+endfunction
+//===========================================================================
+function InitTrig_GaleStormAttack takes nothing returns nothing
+    set gg_trg_GaleStormAttack = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_GaleStormAttack , EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_GaleStormAttack , Condition( function GaleStormConditions) )
+    call TriggerAddAction( gg_trg_GaleStormAttack , function GaleStormActions)
+endfunction
+

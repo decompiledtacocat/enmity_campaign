@@ -1,0 +1,19 @@
+function CopyHeroConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A064' ) 
+endfunction
+function CopyHeroActions takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+local unit target= GetSpellTargetUnit()
+call SetHandleHandle(caster,"xcopy",target)
+set target=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_CopyHero takes nothing returns nothing
+    set gg_trg_CopyHero = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_CopyHero, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_CopyHero, Condition( function CopyHeroConditions  ) )
+    call TriggerAddAction( gg_trg_CopyHero, function CopyHeroActions )
+endfunction
+

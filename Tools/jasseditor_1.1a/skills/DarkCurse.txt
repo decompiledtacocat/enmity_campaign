@@ -1,0 +1,109 @@
+function Trig_DarkCurse_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0DP' )
+endfunction
+
+function Trig_DarkCurse_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location targetloc=GetSpellTargetLoc()
+local unit rabbit
+local integer level=GetUnitAbilityLevel(caster,'A0DP')
+local integer chance=level*15
+local group stupid
+local group stupid2
+local unit picked
+
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set stupid=CreateGroup()
+set stupid2=CreateGroup()
+set stupid=GetUnitsInRangeOfLocMatching(250, targetloc, Condition(function filtercheck ))
+call GroupAddGroup(stupid,stupid2)
+loop
+set picked=FirstOfGroup(stupid)
+exitwhen picked==null
+if GetRandomInt(1,100) <=chance then//sleep
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0DL')
+call SetUnitAbilityLevel(rabbit,'A0DL',level)
+call IssueTargetOrder(rabbit,"sleep",picked)
+set rabbit=null
+endif
+call GroupRemoveUnit(stupid,picked)
+set picked=null
+endloop
+call DestroyGroup(stupid)
+set stupid=null
+
+call TriggerSleepAction(0)
+
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set stupid=CreateGroup()
+set stupid=stupid2
+loop
+set picked=FirstOfGroup(stupid)
+exitwhen picked==null
+
+if GetRandomInt(1,100) <=chance then//Cripple
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0DJ')
+call SetUnitAbilityLevel(rabbit,'A0DJ',level)
+call IssueTargetOrder(rabbit,"cripple",picked)
+set rabbit=null
+endif
+if GetRandomInt(1,100) <=chance then//curse
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0DK')
+call SetUnitAbilityLevel(rabbit,'A0DK',level)
+call IssueTargetOrder(rabbit,"curse",picked)
+set rabbit=null
+endif
+if GetRandomInt(1,100) <=chance then//fairy fire
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0DM')
+call SetUnitAbilityLevel(rabbit,'A0DM',level)
+call IssueTargetOrder(rabbit,"faeriefire",picked)
+set rabbit=null
+endif
+if GetRandomInt(1,100) <=chance then//silence
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0DN')
+call SetUnitAbilityLevel(rabbit,'A0DN',level)
+call IssueTargetOrder(rabbit,"drunkenhaze",picked)
+set rabbit=null
+endif
+if GetRandomInt(1,100) <=chance then//slow
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0DH')
+call SetUnitAbilityLevel(rabbit,'A0DH',level)
+call IssueTargetOrder(rabbit,"slow",picked)
+set rabbit=null
+endif
+if GetRandomInt(1,100) <=chance then//hex
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0DI')
+call SetUnitAbilityLevel(rabbit,'A0DI',level)
+call IssueTargetOrder(rabbit,"hex",picked)
+set rabbit=null
+endif
+
+call GroupRemoveUnit(stupid,picked)
+set picked=null
+endloop
+call DestroyGroup(stupid)
+set stupid=null
+call RemoveLocation(targetloc)
+set targetloc=null
+set owner=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_DarkCurse takes nothing returns nothing
+    set gg_trg_DarkCurse = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DarkCurse, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DarkCurse, Condition( function Trig_DarkCurse_Conditions ) )
+    call TriggerAddAction( gg_trg_DarkCurse, function Trig_DarkCurse_Actions )
+endfunction
+

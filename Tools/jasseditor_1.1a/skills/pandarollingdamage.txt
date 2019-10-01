@@ -1,0 +1,56 @@
+function Trig_PandaRollingDamage_Actions takes nothing returns nothing
+local group temp=CreateGroup()
+local group stupid
+local unit target
+local unit picked
+local location castloc
+local real damage
+call GroupAddGroup(udg_rollgroup,temp)
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+  if  GetUnitTypeId(picked) != 'N02G' then
+  call GroupRemoveUnit(udg_rollgroup,picked)
+  else
+ 
+set damage=I2R(GetHeroStatBJ(bj_HEROSTAT_STR, picked, true))  
+set castloc=GetUnitLoc(picked)  
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=GetOwningPlayer(picked)
+set stupid=CreateGroup()
+set stupid=GetUnitsInRangeOfLocMatching(125, castloc, Condition(function filtercheck ))
+loop
+set target=FirstOfGroup(stupid)
+exitwhen target==null
+call UnitDamageTargetBJ( picked, target, damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+call GroupRemoveUnit(stupid,target)
+set target=null
+endloop
+call DestroyGroup(stupid)
+set stupid=null
+call RemoveLocation(castloc)
+set castloc=null
+  
+  
+  endif
+call GroupRemoveUnit(temp,picked)
+endloop
+call DestroyGroup(temp)
+set temp=null
+set picked=null
+if CountUnitsInGroup(udg_rollgroup)<=0 then
+call DisableTrigger(gg_trg_andaRollingDamage)
+endif
+
+
+
+endfunction
+
+//===========================================================================
+function InitTrig_PandaRollingDamage takes nothing returns nothing
+    set gg_trg_PandaRollingDamage = CreateTrigger(  )
+    call DisableTrigger( gg_trg_PandaRollingDamage )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_PandaRollingDamage, 0.50 )
+    call TriggerAddAction( gg_trg_PandaRollingDamage, function Trig_PandaRollingDamage_Actions )
+endfunction
+

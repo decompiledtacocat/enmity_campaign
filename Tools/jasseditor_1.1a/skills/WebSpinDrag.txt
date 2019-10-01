@@ -1,0 +1,38 @@
+function WebSpinDragConditions takes nothing returns boolean
+return (GetSpellAbilityId() == 'A05K')
+endfunction
+function WebSpinDragActions takes nothing returns nothing
+    local unit caster =GetSpellAbilityUnit()
+    local unit target =GetHandleUnit(caster,"target")
+    local unit rabbit
+    local player owner=GetOwningPlayer(caster)
+    local location targetloc=GetUnitLoc(target)
+    local location casterloc=GetUnitLoc(caster)
+    local location moveloc
+    local real tangle=AngleBetweenPoints(casterloc,targetloc)
+    local integer level=GetUnitAbilityLevelSwapped('A05K', caster )
+    set moveloc=PolarProjectionBJ(casterloc,150.00,tangle)
+    call SetUnitPositionLoc(target ,moveloc)
+    set rabbit=CreateRabbit(owner,casterloc)
+    call UnitAddAbilityBJ( 'A05U', rabbit] )
+    call SetUnitAbilityLevelSwapped( 'A05U', rabbit, level )
+    call IssueTargetOrderBJ(rabbit, "ensnare", target)
+    set caster=null
+    set target=null
+    set rabbit=null
+    set owner=null
+    call RemoveLocation(targetloc)
+    call RemoveLocation(casterloc)
+    call RemoveLocation(moveloc)
+    set targetloc=null
+    set casterloc=null
+    set moveloc=null
+endfunction
+//===========================================================================
+function InitTrig_WebSpinDrag takes nothing returns nothing
+    set gg_trg_WebSpinDrag = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_WebSpinDrag, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_WebSpinDrag, Condition( function WebSpinDragConditions  ) )
+    call TriggerAddAction( gg_trg_WebSpinDrag, function WebSpinDragActions  )
+endfunction
+

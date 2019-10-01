@@ -1,0 +1,92 @@
+function Trig_ChainLighting_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0DF'
+endfunction
+
+function Trig_ChainLighting_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local unit target=GetSpellTargetUnit()
+local location targetloc=GetUnitLoc(target)
+local location newloc
+local unit rabbit
+local unit best
+local unit last=null
+local unit picked
+local group temp
+local group hit=CreateGroup()
+local integer level=GetUnitAbilityLevel(caster,'A0DF')
+local real  maxdamage=level*85
+local real dist=500
+local real check
+local integer chainloop=1
+call GroupAddUnit(hit,target)
+call UnitDamageTargetBJ(caster,target,GetRandomReal(1,maxdamage), ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+set maxdamage=(maxdamage*.85)
+loop
+exitwhen chainloop>2+level
+
+set dist=500
+set check=500
+set best=null
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocMatching(500.00,targetloc, Condition(function filtercheck))
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null
+                   if IsUnitInGroup(picked,hit)==false then
+                   set last=picked
+                   set newloc=GetUnitLoc(picked)
+                   set check =DistanceBetweenPoints(targetloc,newloc)
+                   if check<dist then
+                   set dist=check
+                   set best=picked
+                   endif
+                   call RemoveLocation(newloc)
+                   set newloc=null
+                   endif
+                   call GroupRemoveUnit(temp,picked)  
+                  endloop
+                call DestroyGroup(temp)
+                set temp=null
+                
+                if best==null then
+                set best=last
+                endif
+
+                if best!=null then
+                set rabbit=CreateRabbit(owner,targetloc)
+                call UnitAddAbility(rabbit,'A0EP')
+                call IssueTargetOrderBJ(rabbit,"chainlightning",best)
+                call UnitDamageTargetBJ(caster, best,GetRandomReal(1,maxdamage), ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                set maxdamage=(maxdamage*.85)
+                call RemoveLocation (targetloc)
+                set targetloc=null
+                set targetloc=GetUnitLoc(best)
+                call GroupAddUnit(hit,best)
+                set rabbit=null
+                else
+                call RemoveLocation (targetloc)
+                set targetloc=null   
+                set chainloop=4+level
+                endif
+set chainloop=chainloop+1
+endloop     
+call DestroyGroup(hit)
+set hit=null
+set target=null
+set caster=null
+set owner=null             
+              
+
+
+endfunction
+
+//===========================================================================
+function InitTrig_ChainLighting takes nothing returns nothing
+    set gg_trg_ChainLighting = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ChainLighting, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_ChainLighting, Condition( function Trig_ChainLighting_Conditions ) )
+    call TriggerAddAction( gg_trg_ChainLighting, function Trig_ChainLighting_Actions )
+endfunction
+

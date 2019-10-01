@@ -1,0 +1,37 @@
+function Trig_SummonArmada_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0BQ' 
+endfunction
+
+function Trig_SummonArmada_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local unit armada=GetHandleUnit(caster,"armada")
+local location loc=GetUnitLoc(caster)
+local integer level=GetUnitAbilityLevel(caster,'A0BQ')
+if IsUnitAliveBJ(armada) then
+call KillUnit(armada)
+endif
+if level==1 then
+set armada=CreateUnitAtLoc(owner,'h00V',loc,GetUnitFacing(caster))
+elseif level==2 then
+set armada=CreateUnitAtLoc(owner,'h00T',loc,GetUnitFacing(caster))
+elseif level==3 then
+set armada=CreateUnitAtLoc(owner,'h00U',loc,GetUnitFacing(caster))
+endif
+
+call SetUnitAnimation(armada,"birth")
+call RemoveLocation(loc)
+set loc=null
+set owner=null
+set caster=null
+set armada=null
+endfunction
+
+//===========================================================================
+function InitTrig_SummonArmada takes nothing returns nothing
+    set gg_trg_SummonArmada = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SummonArmada, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SummonArmada, Condition( function Trig_SummonArmada_Conditions ) )
+    call TriggerAddAction( gg_trg_SummonArmada, function Trig_SummonArmada_Actions )
+endfunction
+

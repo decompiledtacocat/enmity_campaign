@@ -1,0 +1,38 @@
+function SlamConditions takes nothing returns boolean
+return GetBooleanOr(( GetSpellAbilityId() == 'A0AI' ),( GetSpellAbilityId() == 'A00O' ))
+endfunction
+function SlamActions takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+local unit picked
+local player owner=GetOwningPlayer(caster)
+local integer slam=GetSpellAbilityId()
+local integer level=GetUnitAbilityLevelSwapped(slam,caster)
+local group stupid=CreateGroup()
+local location casterloc=GetUnitLoc(caster)
+local real area=200.00 +(I2R(level)*50)
+local real damage= 2.50 * I2R(GetHeroStatBJ(bj_HEROSTAT_STR, caster, true))
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set stupid=GetUnitsInRangeOfLocMatching(area, casterloc, Condition(function filtercheck ))
+loop
+set picked=FirstOfGroup(stupid)
+exitwhen picked==null
+call UnitDamageTargetBJ( caster, picked, damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+call GroupRemoveUnit(stupid,picked)
+endloop
+call DestroyGroup(stupid)
+set stupid=null
+set picked=null
+set owner=null
+call RemoveLocation(casterloc)
+set casterloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_Slam takes nothing returns nothing
+    set gg_trg_Slam = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Slam, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Slam, Condition( function SlamConditions ) )
+    call TriggerAddAction( gg_trg_Slam, function SlamActions )
+endfunction
+

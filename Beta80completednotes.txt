@@ -1,0 +1,281 @@
+=================================
+Gameplay
+=================================
+All current recipes have been removed.
+Some of the tier 1-3 items can now be bought directly in new shops in new locations.
+Several Tier 0 items removed. e.g. gauntlets of strength, medalion of honor... etc.
+
+New Shop Set Up:
+Tank Shop - Includes tank only items.
+Assualt Shop - Includes assault only items.
+Ranger Shop - Includes ranger only items.
+Mage Shop - Includes mage only items.
+Support Shop - Includes support and tech only items.
+
+Utility Shops - Includes charges items, eg air nets, grenades, mines etc.
+Potion Shops - Includes new healing potions, mana potions,tome of retraining and etc.
+Shared Shop - Includes items, weapons and armor which can be used by all classes.
+
+Terrain Revamp.
+Mountains
+The Frozen Lake
+The Icey shore.
+Side outpost have been moved closer to the center of the map.
+New Nuetral Towns have been added.
+
+Support Class for Scourge is now called Death Gaurd
+Support Class for Alliance is now called Sentinel
+
+Rangers' now have a new tech skill Percision which increases damage.
+Rangers' starting attack speed have been modified to be slower.
+Rangers' agility per level has been decreased.
+Rangers' Intelligence per level increased.
+
+Assault now have a new tech skill Nimbleness which increases attack speed and movement speed.
+Mages' now have a new tech skill Brilliance which increase mana regeneration.
+Tanks' now have a new tech skill Harden Skin which reduces physical damage taken.
+
+
+*New Upgrade System
+Upgrade cost on Upgradeable Items will now apear on the item's tooltip.
+To upgrade an Item you now have to put the item in your storage altar and hit the upgrade skill.
+
+*New Buff System Implimented.
+Buffs have been classified accordlingly so players will know what buffs override eachother.
+And also what buffs are stackable and what not.
+
+*New Creep System
+Destroying creep buildings of the opposing team now gives 6 bonus gold per building destroyed every 5 seconds
+to your computer ally whom distributes the gold evenly to you and other playing players.
+
+Attributes:
+-----------
+Strength
+1 point of strength increases life by 25 life.
+50 points of  strength increase life regeneration by 1.
+
+Intelligence
+1 point of intel increases mana by 12.5 life.
+50 points of intel increase mana regeneration by 1.
+
+Agility
+1 point of agility increases attack speed by 1%.
+50 points of agility increases armor by 1.
+
+Armor
+----------------------------------------------
+Heavy armor now takes 150% damage from magic attacks down from 200%.
+Heavy armor now reduces melee attacks by 25% down from 30%.
+Medium Armor now reduces pierce attacks by 25% down from 30%
+Unarmored now reduces siege attacks by 25% down from 30%.
+
+
+===============================
+Alliance:
+===============================
+The following heroes are only playable for this version.
+The missing heroes will be readded as the map progresses.
+
+Assualt: Omega Hunter
+Assualt: Blade Master
+Tank: True Mountain King
+Tank: Mechanical Golem
+
+Mage: Blood Mage
+Mage: Transcendant Maiden
+
+Ranger: Glun Slinger
+Ranger: Elite Archer
+ 
+Sentinel: Witch Doctor
+
+Gun Slinger
+*Blast Shot
+-Cooldown increased to 12 seconds from 9 seconds.
+-Now deals 50 damage plus 125% of the Gun slinger's agility.
+-Duration vs units and heros are the same.
+
+*C4
+-Is now a special buff.
+-Fixed an issue causing lag.
+-Cool down increased to 45 seconds.
+
+
+TMK
+*Axearang
+-Now deals 35 damage plus 125% of TMK's strength.
+
+*True Thunder Bolt
+-Now stuns for 2/3/4 seconds.
+-Cool down increased to 45 seconds from 35.
+
+*Bash
+-Now gives 30% chance to deal 25 damage and stun for 1/1.5/2/2.5/3 seconds.
+
+
+
+Omega Hunter
+*Ethereal Assassin
+-No longer increases attack speed or movement speed.
+-No longer changes damage to spell.
+-No longer effects minimap status.
+-Now allows Omega hunter to fade into becoming invisible when not attacking or casting spells.
+-Omega Hunter still has ghosting effects.
+-No longer has a duration.
+-Now drains mana till deactivated.
+
+*Demonic Shadow
+-Now Spawns 8 shadows in an area effect
+-Shadows deal damage as they return to recreate the Omega Hunter
+-Damage increased
+-Mana cost reduced to 50 from 65.
+
+*Instant Hell Murder
+-Now recieves bonus damage from agility.
+-Each shadow recieves bonus damage equal to 10% of the omega hunters agility.
+-Slight changes on shadow animation
+
+Witch Doctor
+*Liquid Fire Removed
+-Healing wave added.
+
+*Voodoo
+-Damage reduced, Hex bonus damage increased to 100% from 50%.
+-Voodoo now consumes Hex debuff to deal more damage.
+-Voodoo cooldown reduced.
+-Damage is instant
+-Now deals spell damage
+
+*Serpent Wards
+-Now deal Spell damage or Hero Damage.
+-Buff is now completely undispellable.
+-Wards now last 30 seconds up from 7.
+-Wards attack speed reduced slightly.
+-Cooldown increased to 60 seconds.
+-Wards now spawn between 4-6 seconds.
+
+Blood Mage
+*Flame Shield
+-Cooldown changed to 4 seconds from 9 seconds.
+
+*Inferno Strike
+-Has been reworked. Now deals high damage instantly then burns.
+-Cooldown changed to 9 seconds from 7.
+
+*Siphon Mana Remove
+*New Skill Added: Combustion
+-Deals damage and consumes all Searing,Flame, Afterburn and Smolder effects and converts them into additional damage.
+
+*Pheonix
+-No Longer revives dead units.
+
+Transcendant Maiden
+*Blink
+-Now cost 40 mana at all levels.
+-Cool down per level is now 15/12/9/6/3 from 9/7/5/3/1.
+
+*Frost Wave
+-Now freezes targets for 4/5/6/7/8 seconds per level.
+
+Elite Archer
+-Removed Summon Hawk
+-Removed Break Shot
+-New Skill Added: Multi-Arrow
+-New Skill Added: Impaling Arrow
+-New Skill Added: Deadly Precision
+
+Blade Master
+*Blade Storm
+-now deals damage then afflicts targets with cyclone effect.
+*Dispatch
+-now deals static damage and has an affinity of agility which means agility will increase damage by %.
+-cool down and mana cost increased.
+
+
+
+===============================
+Scourge:
+===============================
+The Following heros are available for play in this version.. the other hero's will be available again in later versions.
+
+Tank: Doom Guard
+Tank: Faceless
+
+Assualt: Burning Blade Sword
+Assualt: Burning Blade Edge
+
+Ranger: Dark Ranger
+Ranger: M Bone
+
+Mage: Hell Flame
+Mage: Void Lord
+
+Death Guard: Death Knight
+
+Assualt:
+-------------
+Burning Blade Edge
+*Burning Blade
+--Now gives a 35% chance to gain a Burning Blade strike
+--Burning Blade Strike Deals spell damage and then ignites victim with fire dealing damage every 2 seconds for 12 seconds
+*Burning Blade Technique Blaze
+--Instead of dealing damage now adds a smoldering effect which last for 2.5 seconds.
+--Duration reduced to 8 seconds from 10.
+*Rope and Drag
+--Duration changed to 4/6/8 seconds from 4/5/6 seconds.
+--Duration vs units is the same vs heros.
+--Cooldown increased to 60 seconds.
+--Damage per second reduced to 45 from 75.
+
+
+Burning Blade Sword
+*Cross Slash - Removed
+*New Skill added: Burning Crush
+--Burning Blade teleports to target location dealing heavy damage to units inbetween and igniting them on fire.
+*Burning Blade Wraith Now called BTT Inferno
+--No longer adds wraith effect
+--Duration increased to 8 seconds.
+--Mana cost changed to 40 from 35
+
+Ranger:
+-------------
+Dark Ranger
+*Venom Spike
+--Initial Damage is now Pierce and can be boost via Dark Ranger's Agility.
+--Initial damage changed to 33/66/99/132/165
+*Corrosive Arrow 
+--Duration increased to 20 from 15.
+*Mana Curse
+--Name changed to curse of mind.
+--Duration changed to 12 seconds from 20.
+
+M. Bone
+*Blighted Arrow
+--Now Heals 75/150/225/300/375 life and deals half as damage.
+--The Arrow no longer deals pierce damage.
+--Mana cost increased to 60 from 50.
+
+
+Tank:
+-------------
+Doom Guard
+*Meteor
+--Duration is 2 seconds all heros and units now from 2/4.
+*War Stomp
+--Stun duration is now the same for units as for heros.
+--Fixed an issue which caused level 1-4 versions to not hit propperly.
+--Hot key changed to T
+*Tremor
+--Hot key changed to R
+
+
+Mage:
+-------------
+Void Lord
+*Mana Pull Changed to Osmose
+--Mana Drain is now 35/70/105/140/175
+*Gravity Bomb
+--Now % reduced vs heros now increases with level
+--Damage cap vs heros has been added.
+--Cooldown increased to 12 seconds from 9 seconds.
+--Mana cost increased to 140 from 110.

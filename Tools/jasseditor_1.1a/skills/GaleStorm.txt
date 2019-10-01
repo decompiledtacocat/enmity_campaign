@@ -1,0 +1,117 @@
+function GaleStormConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A07J' )
+endfunction
+
+function GaleStormActions takes nothing returns nothing
+    local unit gsunit=GetSpellAbilityUnit()
+    local unit gstargetunit=GetSpellTargetUnit()
+    local unit gsbuffer
+    local unit gspickedunit
+    local integer gsloop
+    local integer gsloopend
+    local integer gsherolevel=GetHeroLevel(gsunit)
+    local integer gslevel=GetUnitAbilityLevelSwapped('A07J', gsunit)
+    local real gsdamage= ( 250.00 + ( 2.00 * I2R(gsherolevel)) )
+    local player gsplayer=GetOwningPlayer(gsunit)
+    local location gstargetloc=GetUnitLoc(gstargetunit)
+    local location gsloc=GetUnitLoc(gsunit)
+    local location gsmoveloc
+    local location p1
+    local location p2
+    local location p3
+    local location p4
+    local group gstargetgroup
+    set gsloop=0
+    set gsloopend=(gslevel+1)
+    loop
+        exitwhen gsloop >= gsloopend
+        call PlaySoundOnUnitBJ( gg_snd_Shockwave, 100, gsunit)
+        set gsbuffer=CreateUnitAtLoc(gsplayer, 'n011', gsloc, bj_UNIT_FACING )
+        call UnitAddAbility(gsbuffer,'A0B1')
+        call SetUnitVertexColorBJ(gsbuffer, 100, 100, 100, 100.00 )
+        call IssueTargetOrder(gsbuffer,"innerfire", gsunit)
+        call TriggerSleepAction( 0 )
+        call PlaySoundOnUnitBJ( gg_snd_ZigguratMissileLaunch2, 100, gsunit)
+        if ( ( IsUnitAliveBJ(gstargetunit) == true ) ) then
+            call RemoveLocation(gstargetloc)
+            set gstargetloc = GetUnitLoc(gstargetunit)
+        endif
+        call RemoveLocation(gsloc)
+        set gsloc=GetUnitLoc(gsunit)
+        if (gsloop==gslevel) then
+        set gsmoveloc=PolarProjectionBJ(gstargetloc, 150.00, AngleBetweenPoints(gsloc,gstargetloc ))
+        else
+        set gsmoveloc=PolarProjectionBJ(gstargetloc, 500.00,  ( AngleBetweenPoints(gsloc,gstargetloc ) + 20.00 ))
+        endif
+        
+        set p1=PolarProjectionBJ(gsloc, 100.00, ( AngleBetweenPoints(gsloc, gstargetloc ) + 90.00 ))
+        set p2=PolarProjectionBJ(gsmoveloc, 100.00, ( AngleBetweenPoints(gsloc, gstargetloc ) + 90.00 ))
+        set p3=PolarProjectionBJ(gsmoveloc, 100.00, ( AngleBetweenPoints(gsloc, gstargetloc ) - 90.00 ))
+        set p4=PolarProjectionBJ(gsloc, 100.00, ( AngleBetweenPoints(gsloc, gstargetloc ) - 90.00 ))
+        
+        
+        set udg_tempfilterplayer=null
+        set udg_tempfilterplayer=gsplayer
+        set gstargetgroup=CreateGroup()
+        call GroupEnumUnitsInQuad(gstargetgroup,p1,p2,p3,p4, Condition( function filtercheck ))
+        call RemoveLocation(gsloc)
+        call RemoveLocation(p1)
+        call RemoveLocation(p2)
+        call RemoveLocation(p3)
+        call RemoveLocation(p4)
+        set gsloc=null
+        set p1=null
+        set p2=null
+        set p3=null
+        set p4=null
+        
+         loop
+         set gspickedunit=FirstOfGroup(gstargetgroup)
+         exitwhen gspickedunit==null
+         set udg_tempecheckunit=null
+         set udg_tempecheckunit=gspickedunit
+         if (etherealcheck()) then
+         call UnitDamageTargetBJ(gsunit, gspickedunit, gsdamage , ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+         else
+         call UnitDamageTargetBJ(gsunit, gspickedunit, gsdamage , ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+         endif
+         call GroupRemoveUnit(gstargetgroup,gspickedunit)
+         set gspickedunit=null
+         endloop
+        call DestroyGroup(gstargetgroup)
+        set gstargetgroup=null        
+        set gsdamage = ( gsdamage * 0.50 )
+        call SetUnitPositionLoc(gsunit, gsmoveloc)
+        call RemoveLocation(gsmoveloc)
+        set gsmoveloc=null
+        set gsloop = gsloop + 1
+    endloop
+    call GroupRemoveUnitSimple( gsunit , udg_galestormgroup)
+    call UnitAddAbilityBJ( 'A07K', gsunit )
+    call UnitAddAbilityBJ( 'A09X', gsunit )
+    call SetUnitAbilityLevelSwapped( 'A09X', gsunit, gsherolevel )
+    call SetUnitAbilityLevelSwapped( 'A07K', gsunit, gslevel )
+    call TriggerSleepAction( 2.00 )
+    if ( UnitHasBuffBJ(gsunit, 'B01L') == true ) then
+        call UnitRemoveAbility(gsunit,'A07K' )
+        call UnitRemoveAbility(gsunit,'A09X' )
+        call UnitRemoveBuffBJ( 'B01L', gsunit)
+       if(IsUnitInGroup(gsunit, udg_galestormgroup) == true) then
+       call GroupRemoveUnitSimple(gsunit, udg_galestormgroup )
+       endif
+    endif
+    set gsunit=null
+    set gstargetunit=null
+    set gsbuffer=null
+    set gspickedunit=null
+    set gsplayer=null
+    call RemoveLocation(gstargetloc)
+endfunction
+
+//===========================================================================
+function InitTrig_GaleStorm takes nothing returns nothing
+    set gg_trg_GaleStorm = CreateTrigger(  )               
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_GaleStorm, EVENT_PLAYER_UNIT_SPELL_EFFECT)
+    call TriggerAddCondition( gg_trg_GaleStorm, Condition( function GaleStormConditions ) )
+    call TriggerAddAction( gg_trg_GaleStorm, function GaleStormActions )
+endfunction

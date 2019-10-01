@@ -1,0 +1,27 @@
+function StopNukeCondition takes nothing returns boolean
+ return ( GetSpellAbilityId() == 'A06K' )
+endfunction
+
+function StopNukeActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit stupid
+    local integer nloop=1
+    loop
+        exitwhen nloop > 5
+        set stupid=GetHandleUnit(caster,("launcher"+I2S(nloop) ))
+        call KillUnit( stupid )
+        call RemoveUnit(stupid)
+        set nloop = nloop + 1
+    endloop
+    call FlushHandleLocals(caster)
+endfunction
+
+//===========================================================================
+function InitTrig_StopNuke takes nothing returns nothing
+    set gg_trg_StopNuke = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_StopNuke, EVENT_PLAYER_UNIT_SPELL_ENDCAST )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_StopNuke, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_StopNuke, Condition( function StopNukeCondition  ) )
+    call TriggerAddAction( gg_trg_StopNuke, function StopNukeActions  )
+endfunction
+

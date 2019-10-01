@@ -1,0 +1,23 @@
+function AirLanceAttackConditions takes nothing returns boolean
+return GetBooleanOr(( GetUnitAbilityLevelSwapped('A07D', GetAttacker()) > 0 ),( GetUnitAbilityLevelSwapped('A09W', GetAttacker()) > 0 ) ) 
+endfunction
+function AirLanceAttackActions takes nothing returns nothing
+    local unit lancercharged=GetAttacker()
+    if ( IsUnitInGroup(lancercharged, udg_airlancergroup) == true  ) then
+        call GroupRemoveUnitSimple( lancercharged, udg_airlancergroup )
+        call UnitRemoveAbilityBJ( 'A07D', lancercharged)
+        call UnitRemoveAbilityBJ( 'A09W', lancercharged)
+    else
+        call GroupAddUnitSimple( lancercharged, udg_airlancergroup )
+        call TriggerSleepAction( 0.50 )
+        call UnitRemoveBuffBJ( 'B01K', lancercharged )
+    endif
+endfunction
+//===========================================================================
+function InitTrig_AirLanceAttack takes nothing returns nothing
+    set gg_trg_AirLanceAttack = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_AirLanceAttack, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_AirLanceAttack, Condition( function AirLanceAttackConditions) )
+    call TriggerAddAction( gg_trg_AirLanceAttack, function AirLanceAttackActions)
+endfunction
+

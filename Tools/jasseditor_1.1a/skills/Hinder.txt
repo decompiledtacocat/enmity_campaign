@@ -1,0 +1,27 @@
+function Trig_HinderReset_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0CU' ) 
+endfunction
+
+function Trig_HinderReset_Actions takes nothing returns nothing
+local unit target=GetSpellTargetUnit()
+local item temp=UnitItemInSlotBJ(target, 1)
+local item hinder
+local integer id=GetItemTypeId(temp)
+call RemoveItem( UnitItemInSlotBJ(target, 1) )
+set hinder=UnitAddItemByIdSwapped( 'I000',target )
+call UnitUseItem(target, hinder)
+call RemoveItem( UnitItemInSlotBJ(target, 1) )
+set temp=UnitAddItemByIdSwapped(id,target )
+set temp=null
+set hinder=null
+set target=null
+endfunction
+
+//===========================================================================
+function InitTrig_HinderReset takes nothing returns nothing
+    set gg_trg_HinderReset = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_HinderReset, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_HinderReset, Condition( function Trig_HinderReset_Conditions ) )
+    call TriggerAddAction( gg_trg_HinderReset, function Trig_HinderReset_Actions )
+endfunction
+

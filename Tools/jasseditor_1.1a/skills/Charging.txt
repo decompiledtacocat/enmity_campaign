@@ -1,0 +1,42 @@
+function Trig_Charge_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0C5' ) 
+endfunction
+
+function Trig_Charge_Actions takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+local integer elevel=GetUnitAbilityLevelSwapped('A03N', caster)
+local real life=GetUnitStateSwap(UNIT_STATE_LIFE,caster)
+local real mana=GetUnitStateSwap(UNIT_STATE_MANA,caster)
+local real newmana=(.15 + (elevel*.15))* GetUnitStateSwap(UNIT_STATE_MAX_MANA,caster) 
+local real newlife=(.15 + (elevel*.15))* GetUnitStateSwap(UNIT_STATE_MAX_LIFE,caster) 
+local effect fx1
+local effect fx2
+call SetUnitAnimation(caster, "death" )
+set fx1=AddSpecialEffectTargetUnitBJ( "chest", caster, "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl" )
+call SetUnitManaBJ( caster,0)
+call PolledWait2( 2.0 ) 
+    loop 
+    exitwhen (GetUnitTypeId(caster)=='O006')
+    call PolledWait2( .35 ) 
+    endloop
+set fx2= AddSpecialEffectTargetUnitBJ( "origin", caster, "Abilities\\Weapons\\Bolt\\BoltImpact.mdl" )
+call SetUnitManaBJ( caster,newmana+mana)
+call SetUnitLifeBJ( caster,newlife+life)
+call ResetUnitAnimation(caster)
+call SetUnitAnimation(caster, "stand ready" )
+call TriggerSleepAction(.5)
+call DestroyEffect(fx1)
+call DestroyEffect(fx2)
+set fx1=null
+set fx2=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_Charge takes nothing returns nothing
+    set gg_trg_Charge = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Charge, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Charge, Condition( function Trig_Charge_Conditions ) )
+    call TriggerAddAction( gg_trg_Charge, function Trig_Charge_Actions )
+endfunction
+

@@ -1,0 +1,34 @@
+function UpgradeDeSelectionConditions takes nothing returns boolean
+return GetBooleanOr(GetTriggerUnit() == gg_unit_u003_0213 ,   GetTriggerUnit() == gg_unit_h00P_0211  ) 
+endfunction
+function UpgradeDeSelectionActions takes nothing returns nothing
+//h00p ws, u003 sh
+local player selector=GetTriggerPlayer()
+local unit stupid=GetTriggerUnit()
+local integer id=GetConvertedPlayerId(selector)
+       if stupid==gg_unit_u003_0213 then
+        call SetUnitOwner( gg_unit_u003_0213, Player(6), false )
+       elseif stupid==gg_unit_h00P_0211 then
+        call SetUnitOwner( gg_unit_h00P_0211, Player(1), false )
+        endif
+set stupid=null
+set selector=null    
+endfunction
+
+//===========================================================================
+function InitTrig_UpgradeDeSelection takes nothing returns nothing
+    set gg_trg_UpgradeDeSelection = CreateTrigger(  )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(1), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(2), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(3), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(4), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(5), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(7), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(8), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(9), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(10), false )
+    call TriggerRegisterPlayerSelectionEventBJ( gg_trg_UpgradeDeSelection , Player(11), false )
+    call TriggerAddCondition( gg_trg_DeSelection, Condition( function UpgradeDeSelectionConditions) )
+    call TriggerAddAction( gg_trg_DeSelection, function UpgradeDeSelectionActions)
+endfunction
+

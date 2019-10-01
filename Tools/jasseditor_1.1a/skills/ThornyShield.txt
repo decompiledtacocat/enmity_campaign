@@ -1,0 +1,35 @@
+function ThornyShieldConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A06T' ) 
+endfunction
+function ThornyShieldActions takes nothing returns nothing
+    local unit tscaster=GetSpellAbilityUnit()
+    local unit impaler=GetHandleUnit(tscaster,"impaler")
+    local player tsplayer=GetOwningPlayer(tscaster)
+    local location tsloc=GetUnitLoc(tscaster)
+    local integer tslevel=GetUnitAbilityLevelSwapped('A06T', tscaster)
+    if (impaler!=null) then
+    call KillUnit(impaler)
+    call RemoveUnit(impaler)
+    endif
+    if ( GetUnitTypeId(tscaster) == 'U00X' ) then
+        set impaler=CreateUnitAtLoc( tsplayer, 'n00X', tsloc, bj_UNIT_FACING )
+        call SetUnitVertexColorBJ( impaler, 100, 100, 100, 100.00 )
+        call SetUnitAbilityLevelSwapped( 'A05G', tscaster, tslevel )
+        call SetHandleHandle(tscaster,"impaler",impaler)
+    else
+        call RemoveUnit(impaler)
+    endif
+    call RemoveLocation(tsloc)
+    set tsloc=null
+    set impaler=null
+    set tsplayer=null
+    set tscaster=null
+endfunction
+//===========================================================================
+function InitTrig_ThornyShield takes nothing returns nothing
+    set gg_trg_ThornyShield = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ThornyShield, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_ThornyShield, Condition( function ThornyShieldConditions) )
+    call TriggerAddAction( gg_trg_ThornyShield, function ThornyShieldActions)
+endfunction
+

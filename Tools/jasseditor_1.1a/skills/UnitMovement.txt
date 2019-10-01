@@ -1,0 +1,36 @@
+function EnterConditions takes nothing returns boolean
+return GetBooleanOr(GetOwningPlayer(GetEnteringUnit()) == Player(6),GetOwningPlayer(GetEnteringUnit()) == Player(0)) 
+endfunction
+
+function Trig_RightofCastle_Actions takes nothing returns nothing
+local unit stupid=GetEnteringUnit()
+call MoveSpawnUnit(stupid,gg_rct_Far_Right,gg_rct_Castle)
+set stupid=null
+endfunction
+
+//===========================================================================
+function InitTrig_RightofCastle takes nothing returns nothing
+    set gg_trg_RightofCastle = CreateTrigger(  )
+    call TriggerRegisterEnterRectSimple( gg_trg_RightofCastle, gg_rct_Right_Castle )
+    call TriggerAddCondition( gg_trg_RightofCastle, Condition( function EnterConditions) )
+    call TriggerAddAction( gg_trg_RightofCastle, function Trig_RightofCastle_Actions )
+endfunction
+
+function MoveSpawnUnit takes unit stupid, rect redmove, rect greenmove returns nothing
+local location movepoint
+local player owner=GetOwningPlayer(stupid)
+    if  owner== Player(0)  then
+        set movepoint = GetRectCenter(redmove)
+        call IssuePointOrderLocBJ(stupid, "attack", movepoint)
+        call RemoveLocation(movepoint)
+    elseif  owner== Player(6)  then
+        set movepoint =GetRectCenter(greenmove)
+        call IssuePointOrderLocBJ(stupid, "attack", movepoint)
+        call RemoveLocation(movepoint) 
+   endif
+set stupid=null
+set greenmove=null
+set redmove=null
+set movepoint=null
+set owner=null
+endfunction

@@ -1,0 +1,18 @@
+function ShapeShifterCastConditions takes nothing returns boolean
+local integer summmon=GetUnitTypeId(GetSummonedUnit())
+return GetBooleanOr(GetBooleanOr(GetBooleanOr(( summmon == 'u00S' ),( summmon == 'u00T' )),GetBooleanOr(( summmon == 'u00R' ),(summmon== 'u00Q' ))),( summmon == 'u00U' ))
+endfunction
+function ShapeShifterCastActions takes nothing returns nothing
+    local unit summon= GetSummonedUnit()
+    local unit caster= GetSummoningUnit() 
+   // call IssueTargetOrderBJ(summon, "move",caster)
+    call MaxUnit(caster,summon,"shapelessspawns",5,5)
+endfunction
+//===========================================================================
+function InitTrig_ShapeShifterCast takes nothing returns nothing
+    set gg_trg_ShapeShifterCast = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ShapeShifterCast, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_ShapeShifterCast, Condition( function ShapeShifterCastConditions) )
+    call TriggerAddAction( gg_trg_ShapeShifterCast, function ShapeShifterCastActions)
+endfunction
+

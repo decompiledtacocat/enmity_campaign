@@ -1,0 +1,90 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil Courier New;}{\f1\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue0;\red0\green136\blue204;\red0\green0\blue128;\red128\green0\blue0;\red120\green120\blue120;\red0\green0\blue255;}
+\viewkind4\uc1\pard\cf1\b\f0\fs18 function\b0  HeroDeathConditions \b takes\b0  \cf2 nothing\cf1  \b returns\b0  \cf2 boolean\cf1 
+\par \cf3 return\cf1  \b (\cf3\b0 IsUnitType\cf1\b (\cf3\b0 GetDyingUnit\cf1\b ()\b0 , \cf4 UNIT_TYPE_HERO\cf1\b )\b0  \cf3 ==\cf1  \cf4 true\cf1  \b )\b0 
+\par \b endfunction\b0 
+\par \b function\b0  HeroDeathActions \b takes\b0  \cf2 nothing\cf1  \b returns\b0  \cf2 nothing\cf1 
+\par \cf5\i //\cf1\i0  \cf5\i Player\cf1\i0  \cf5\i Colors\cf1\i0  \cf5\i of\cf1\i0  \cf5\i killunit\cf1\i0  \cf5\i and\cf1\i0  \cf5\i dieunit\cf1\i0 
+\par \cf3 local\cf1  \cf2 unit\cf1  killer\cf3 =GetKillingUnit\cf1\b ()\b0 
+\par \cf3 local\cf1  \cf2 unit\cf1  dying\cf3 =GetDyingUnit\cf1\b ()\b0 
+\par \cf3\f1 local\cf1  \cf2 unit\cf1  stupid\f0 
+\par \cf3 local\cf1  \cf2 player\cf1  murder\cf3 =GetOwningPlayer\cf1\b (\b0 killer\b )\b0 
+\par \cf3 local\cf1  \cf2 player\cf1  victim\cf3 =GetOwningPlayer\cf1\b (\b0 dying\b )\b0 
+\par \cf3 local\cf1  \cf2 string\cf1  color
+\par \cf3 local\cf1  \cf2 string\cf1  killername
+\par \cf3 local\cf1  \cf2 string\cf1  dyingname
+\par \cf3 local\cf1  \cf2 integer\cf1  revivetime\cf3 =\cf1\b (\cf3\b0 4\cf1  \cf3 *\cf1  \cf3 GetHeroLevel\cf1\b (\b0 dying\b ))\b0 
+\par \cf3 local\cf1  \cf2 integer\cf1  index\cf3 =GetConvertedPlayerId\cf1\b (\b0 victim\b )\b0 
+\par \cf3 local\cf1  \cf2 integer\cf1  killindex\cf3 =GetConvertedPlayerId\cf1\b (\b0 murder\b )\b0 
+\par \cf3 local\cf1  \cf2 integer\cf1  ispossessed\cf3 =\cf1 GetHandleInt\b (\b0 dying,\cf6\i "possessed!"\cf1\b\i0 )\b0 
+\par \cf3 local\cf1  \cf2 unit\cf1  shapeless
+\par \cf3 local\cf1  \cf2 integer\cf1  skeletal\cf3 =\cf1 GetHandleInt\b (\b0 dying,\cf6\i "dead"\cf1\b\i0 )\b0 
+\par \b if\b0  \cf3 GetBooleanAnd\cf1\b (\b0 skeletal\cf3 !=1\cf1 ,\b (\cf3\b0 GetUnitAbilityLevelSwapped\cf1\b (\cf6\b0\i 'A08V'\cf1\i0 , dying\b )\cf3\b0 >0\cf1\b ))\b0  \b then\b0  \cf5\i //sketal\cf1\i0  \cf5\i rivive\cf1\i0 
+\par \cf3 return\cf1 
+\par \b endif
+\par if\b0  \b (\cf3\b0 GetUnitAbilityLevelSwapped\cf1\b (\cf6\b0\i 'A082'\cf1\i0 , dying\b )\cf3\b0 >0\cf1\b )\b0  \b then\cf5\b0\i //reaper\cf1\i0 
+\par \cf3 set\cf1  stupid\cf3 =ReplaceUnitBJ\cf1\b (\b0 dying, \cf6\i 'U00K'\cf1\i0 , \cf4 bj_UNIT_STATE_METHOD_RELATIVE\cf1  \b )\b0 
+\par \cf3 call\cf1  transferward\b (\b0 dying,stupid\b )\b0 
+\par \cf3 call\cf1  PossessionAlt\b (\b0 dying,stupid\b )\b0  
+\par \cf3 call\cf1  FlushHandleLocals\b (\b0 dying\b )\b0 
+\par \cf3 set\cf1  dying\cf3 =\cf4 null\cf1 
+\par \cf3 set\cf1  dying\cf3 =\cf1 stupid
+\par \cf3 set\cf1  stupid\cf3 =\cf4 null\cf1 
+\par \b endif\b0 
+\par 
+\par \cf3 set\cf1  color\cf3 =\cf1 GetColor\b (\b0 murder\b )\b0 
+\par \cf3 set\cf1  killername\cf3 =\cf1 color\cf3 +\cf1  \cf3 GetPlayerName\cf1\b (\b0 murder\b )\cf6\b0\i +"|r"\cf1\i0 
+\par \cf3 set\cf1  color\cf3 =\cf1 GetColor\b (\b0 victim\b )\b0 
+\par \cf3 set\cf1  dyingname\cf3 =\cf1 color\cf3 +\cf1  \cf3 GetPlayerName\cf1\b (\b0 victim\b )\cf6\b0\i +"|r"\cf1\i0 
+\par \b if\b0  ispossessed\cf3 ==1\cf1  \b then\cf5\b0\i //possessed\cf1\i0 
+\par \cf3 set\cf1  shapeless\cf3 =\cf1 GetHandleUnit\b (\b0 dying,\cf6\i "Shapeless"\cf1\b\i0 )\b0 
+\par \cf3 call\cf1  UNPOSSESS\b (\b0 shapeless\b )\b0 
+\par \cf3 call\cf1  UnitDamageTargetBJ\b (\b0 killer, shapeless, \cf3 9999.00\cf1 , ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL\b )\b0 
+\par \cf3 set\cf1  index\cf3 =\cf1 killindex
+\par \cf3 set\cf1  killer\cf3 =\cf4 null\cf1 
+\par \b endif\b0 
+\par \cf3 call\cf1  KillSummons\b (\b0 dying\b )\b0  
+\par \cf3 call\cf1  Taunt\b ()
+\par \b0 
+\par 
+\par 
+\par 
+\par \cf3 call\cf1  \cf3 GroupAddUnit\cf1\b (\b0 udg_revives\b [\b0 index\b ]\b0 ,dying\b )\b0 
+\par \cf5\i //\cf1\i0  \cf5\i Board\cf1\i0  \cf5\i settings\cf1\i0  \cf5\i based\cf1\i0  \cf5\i of\cf1\i0  \cf5\i boardkillunit\cf1\i0  \cf5\i and\cf1\i0  \cf5\i boarddying\cf1\i0  \cf5\i unit\cf1\i0 
+\par     \b if\b0  \b (\b0  killer\cf3 !=\cf4 null\cf1  \b )\b0  \b then\b0 
+\par     \cf3 call\cf1  SetHandleInt\b (\b0 dying,\cf6\i "revive"\cf1\i0 ,revivetime\b )\b0 
+\par     \cf3 set\cf1  udg_Deaths\b [\b0 index\b ]\cf3\b0 =\cf1\b (\b0  udg_Deaths\b [\b0 index\b ]\b0  \cf3 +\cf1  \cf3 1\cf1  \b )\b0 
+\par     \cf3 call\cf1  \cf3 MultiboardSetItemValueBJ\cf1\b (\b0  \cf3 GetLastCreatedMultiboard\cf1\b ()\b0 , \cf3 3\cf1 , \b (\b0  index \cf3 +\cf1  \cf3 1\cf1  \b )\b0 , \b (\b0  \cf3 I2S\cf1\b (\b0 udg_Kills\b [\b0 index\b ])\b0  \cf3 +\cf1  \b (\b0  \cf6\i "/"\cf1\i0  \cf3 +\cf1  \cf3 I2S\cf1\b (\b0 udg_Deaths\b [\b0 index\b ])\b0  \b )\b0  \b )\b0  \b )\b0 
+\par     \cf3 call\cf1  \cf3 SetPlayerStateBJ\cf1\b (\b0 murder, \cf4 PLAYER_STATE_RESOURCE_GOLD\cf1 , \b (\b0  \cf3 GetPlayerState\cf1\b (\b0 murder, \cf4 PLAYER_STATE_RESOURCE_GOLD\cf1\b )\b0  \cf3 +\cf1  udg_Bounty\b [\b0 index\b ]\b0  \b )\b0  \b )\b0 
+\par     \cf3 set\cf1  udg_Kills\b [\b0 killindex\b ]\b0  \cf3 =\cf1  \b (\b0 udg_Kills\b [\b0 killindex\b ]\b0  \cf3 +\cf1  \cf3 1\cf1  \b )\b0 
+\par     \cf3 call\cf1  \cf3 MultiboardSetItemValueBJ\cf1\b (\b0  \cf3 GetLastCreatedMultiboard\cf1\b ()\b0 , \cf3 3\cf1 , \b (\b0 killindex \cf3 +\cf1  \cf3 1\cf1  \b )\b0 , \b (\b0  \cf3 I2S\cf1\b (\b0 udg_Kills\b [\b0 killindex\b ])\b0  \cf3 +\cf1  \b (\b0  \cf6\i "/"\cf1\i0  \cf3 +\cf1  \cf3 I2S\cf1\b (\b0 udg_Deaths\b [\b0 killindex\b ])\b0  \b )\b0  \b )\b0  \b )\b0 
+\par         \b if\b0  \cf3 GetBooleanAnd\cf1\b ((\b0  murder\cf3 !=Player\cf1\b (\cf3\b0 0\cf1\b ))\b0 ,\b (\b0 murder\cf3 !=Player\cf1\b (\cf3\b0 6\cf1\b )))\b0  \b then\b0 
+\par             \cf3 set\cf1  udg_Bounty\b [\b0 killindex\b ]\b0  \cf3 =\cf1  \b (\b0  udg_Bounty\b [\b0 killindex\b ]\b0  \cf3 +\cf1  \cf3 50\cf1  \b )\b0 
+\par             \cf3 call\cf1  \cf3 MultiboardSetItemValueBJ\cf1\b (\b0  \cf3 GetLastCreatedMultiboard\cf1\b ()\b0 , \cf3 4\cf1 , \b (\b0  killindex \cf3 +\cf1  \cf3 1\cf1  \b )\b0 , \cf3 I2S\cf1\b (\b0 udg_Bounty\b [\b0 killindex\b ])\b0  \b )\b0 
+\par             \cf3 call\cf1  \cf3 DisplayTextToForce\cf1\b (\b0  \cf3 GetPlayersAll\cf1\b ()\b0 , \b (\b0 killername \cf3 +\cf1   \cf6\i "\cf1\i0  \cf6\i just\cf1\i0  \cf6\i OWNED\cf1\i0  \cf6\i "\cf1\i0  \cf3 +\cf1   dyingname \cf3 +\cf1   \cf6\i "\cf1\i0  \cf6\i and\cf1\i0  \cf6\i gained\cf1\i0   \cf6\i "\cf1\i0  \cf3 +\cf1  \cf3 I2S\cf1\b (\cf3\b0 100\cf1  \cf3 +\cf1  udg_Bounty\b [\b0 index\b ])\b0  \cf3 +\cf1  \cf6\i "\cf1\i0  \cf6\i gold."\cf1\i0  \cf6\i ))\cf1\i0 
+\par             \cf3 set\cf1  udg_Bounty\b [\b0 index\b ]\cf3\b0 =0\cf1 
+\par         \b else\b0 
+\par            \cf3 call\cf1  \cf3 DisplayTextToForce\cf1\b (\b0  \cf3 GetPlayersAll\cf1\b ()\b0 , \b (\b0 killername \cf3 +\cf1   \cf6\i "\cf1\i0  \cf6\i just\cf1\i0  \cf6\i OWNED\cf1\i0  \cf6\i "\cf1\i0  \cf3 +\cf1   dyingname \cf3 +\cf1   \cf6\i "\cf1\i0  \cf6\i and\cf1\i0  \cf6\i gained\cf1\i0   \cf6\i "\cf1\i0  \cf3 +\cf1  \cf3 I2S\cf1\b (\cf3\b0 100\cf1\b )\b0  \cf3 +\cf1  \cf6\i "\cf1\i0  \cf6\i gold."\cf1\i0  \cf6\i ))\cf1\i0 
+\par         \b endif\b0 
+\par     \cf3 call\cf1  \cf3 MultiboardSetItemValueBJ\cf1\b (\b0  \cf3 GetLastCreatedMultiboard\cf1\b ()\b0 , \cf3 4\cf1 , \b (\b0 index \cf3 +\cf1  \cf3 1\cf1  \b )\b0 , \cf3 I2S\cf1\b (\b0 udg_Bounty\b [\b0 index \b ])\b0  \b )\b0     
+\par     \b else\b0 
+\par         \cf3 set\cf1  revivetime \cf3 =\cf1  \cf3 5\cf1 
+\par         \cf3 call\cf1  SetHandleInt\b (\b0 dying,\cf6\i "revive"\cf1\i0 ,revivetime\b )\b0 
+\par         \cf3 call\cf1  \cf3 DisplayTextToForce\cf1\b (\b0  \cf3 GetPlayersAll\cf1\b ()\b0 , \b (\b0  dyingname  \cf3 +\cf1  \cf6\i "\cf1\i0  \cf6\i has\cf1\i0  \cf6\i died\cf1\i0  \cf6\i a\cf1\i0  \cf6\i techincal\cf1\i0  \cf6\i death,\cf1\i0  \cf6\i no\cf1\i0  \cf6\i bounty\cf1\i0  \cf6\i has\cf1\i0  \cf6\i been\cf1\i0  \cf6\i collected\cf1\i0  \cf6\i and\cf1\i0  \cf6\i revive\cf1\i0  \cf6\i time\cf1\i0  \cf6\i has\cf1\i0  \cf6\i been\cf1\i0  \cf6\i shorten."\cf1\i0  \cf6\i ))\cf1\i0 
+\par     \b endif
+\par \cf3\b0\f1 set\cf1  dying\cf3 =\cf4 null\cf1\b\f0    
+\par \cf3\b0\f1 set \cf1 killer\cf3 =\cf4 null\cf3    \cf1 
+\par \cf3 set \cf1 stupid\cf3 =\cf4 null\cf1    
+\par \cf3 set \cf1 murder\cf3 =\cf4 null\cf3    \cf1 
+\par \cf3 set \cf1 victim\cf3 =\cf4 null\cf3    \cf1\b  
+\par \cf3\b0 set\cf1  shapeless\cf3 =\cf4 null\cf1\f0 
+\par \b endfunction\b0 
+\par \cf5\i //===========================================================================\cf1\i0 
+\par \b function\b0  InitTrig_HeroDeath \b takes\b0  \cf2 nothing\cf1  \b returns\b0  \cf2 nothing\cf1 
+\par     \cf3 set\cf1  gg_trg_HeroDeath \cf3 =\cf1  \cf3 CreateTrigger\cf1\b (\b0   \b )\b0 
+\par     \cf3 call\cf1  \cf3 TriggerRegisterAnyUnitEventBJ\cf1\b (\b0  gg_trg_HeroDeath, \cf4 EVENT_PLAYER_UNIT_DEATH\cf1  \b )\b0 
+\par     \cf3 call\cf1  \cf3 TriggerAddCondition\cf1\b (\b0  gg_trg_HeroDeath, \cf3 Condition\cf1\b (\b0  \b function\b0  HeroDeathConditions \b )\b0  \b )\b0 
+\par     \cf3 call\cf1  \cf3 TriggerAddAction\cf1\b (\b0  gg_trg_HeroDeath, \b function\b0  HeroDeathActions\b )\b0 
+\par \b endfunction\cf0\b0 
+\par }
+ 

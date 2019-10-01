@@ -1,0 +1,108 @@
+function axefiltercheck takes nothing returns boolean
+//uses udg_axefilterplayer to check if filter unit is enemy, alive and not structure
+return (GetBooleanAnd(GetBooleanAnd(( IsUnitAliveBJ(GetFilterUnit()) == true ),( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false )),( IsUnitEnemy(GetFilterUnit(), udg_axefilterplayer) == true )))
+endfunction
+function AxearangDamageActions takes nothing returns nothing
+   local group throwgroup=CreateGroup()
+   local group axes
+   local group tempaxes
+   local group damagegroup
+   local location axeloc
+   local location ownerloc
+   local location targetloc
+   local unit picked
+   local unit pickedaxe
+   local unit picktarget
+   local unit dmgfx
+   local player axeplayer
+   local integer axereturn
+   local real damage
+   local real tx
+   local real ty
+  
+   call GroupAddGroup(udg_axethrowers, throwgroup)
+   loop
+      set picked=FirstOfGroup(throwgroup)
+      exitwhen picked==null
+      set axes=GetHandleGroup(picked,"axes")
+      if (CountUnitsInGroup(axes)==0) then
+      call DestroyGroup(axes)
+      call GroupRemoveUnit(udg_axethrowers,picked)
+      call FlushHandleLocals(picked)
+      else
+         set ownerloc=GetUnitLoc(picked)
+         set axeplayer=GetOwningPlayer(picked)
+         set tempaxes=CreateGroup()
+         call GroupAddGroup(axes,tempaxes)
+           loop
+             set pickedaxe=FirstOfGroup(tempaxes)
+             exitwhen pickedaxe==null
+             set tx=GetHandleReal(pickedaxe,"targetx")
+             set ty=GetHandleReal(pickedaxe,"targety")
+             set targetloc=Location(tx, ty)
+             set axeloc=GetUnitLoc(pickedaxe)
+             set axereturn=GetHandleInt(pickedaxe,"return") 
+             set udg_axefilterplayer=null
+             set udg_axefilterplayer=axeplayer
+             set damagegroup=CreateGroup()
+             set damagegroup=GetUnitsInRangeOfLocMatching(80.00,axeloc, Condition(function axefiltercheck ))
+                  loop
+                   set picktarget=FirstOfGroup(damagegroup)
+                   exitwhen picktarget==null
+                   call PlaySoundOnUnitBJ( gg_snd_MetalHeavySliceFlesh2, 100.0, picktarget )
+                   call KillSoundWhenDone(GetLastPlayedSound())
+                   set dmgfx=CreateRabbit(axeplayer,axeloc)
+                   call UnitAddAbility(dmgfx,'A0B2')
+                   call IssueTargetOrder(dmgfx,"slow",picktarget )
+                   set damage=I2R(GetHeroStatBJ(bj_HEROSTAT_STR, picked, true))
+                   call UnitDamageTargetBJ(pickedaxe, picktarget, damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+                   call GroupRemoveUnit(damagegroup,picktarget)  
+                  endloop
+                call GroupRemoveUnit(tempaxes,pickedaxe) 
+                if (axereturn==1) then
+                call IssuePointOrderLocBJ( pickedaxe, "move", ownerloc)
+                endif
+                if (axereturn==0) then
+                call IssuePointOrderLocBJ( pickedaxe, "move", targetloc)
+                endif 
+                if  GetBooleanAnd((axereturn==0),(DistanceBetweenPoints(axeloc,targetloc) <=100 )) then
+                call SetHandleInt(pickedaxe,"return",1) 
+                call IssuePointOrderLocBJ( pickedaxe, "move", ownerloc)
+                endif
+                if  GetBooleanAnd((axereturn==1),(DistanceBetweenPoints(axeloc,ownerloc) <=100 )) then
+                call GroupRemoveUnit(axes,pickedaxe)
+                call SetHandleHandle(picked,"axes",axes)
+                call KillUnit(pickedaxe)
+                call FlushHandleLocals(pickedaxe)
+                endif
+             call DestroyGroup(damagegroup)
+             call RemoveLocation(axeloc)
+             call RemoveLocation(targetloc) 
+             set targetloc=null
+             set axeloc=null 
+             set damagegroup=null   
+           endloop
+            call DestroyGroup(tempaxes)
+            set tempaxes=null
+            set pickedaxe=null
+      endif   
+call GroupRemoveUnit(throwgroup,picked)    
+endloop
+call DestroyGroup(throwgroup)
+set throwgroup=null
+set picked=null
+
+if (CountUnitsInGroup(udg_axethrowers) == 0 ) then 
+call DisableTrigger(gg_trg_AxearangDamage)
+endif
+endfunction
+
+
+//===========================================================================
+function InitTrig_AxearangDamage takes nothing returns nothing
+    set gg_trg_AxearangDamage = CreateTrigger(  )
+    call DisableTrigger( gg_trg_AxearangDamage )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_AxearangDamage, 0.21 )
+    call TriggerAddAction( gg_trg_AxearangDamage, function AxearangDamageActions  )
+endfunction
+

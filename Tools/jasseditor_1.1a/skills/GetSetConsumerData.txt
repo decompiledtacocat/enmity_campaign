@@ -1,0 +1,119 @@
+function GetConsumerBonus takes unit c returns integer 
+local integer x=0
+local integer f=0
+loop
+exitwhen x>=50
+if udg_Consumer[x]==c then
+set i=udg_ConsumerBonus[x]
+set x=50
+set f=1
+else
+set x=x+1
+endif
+endloop
+
+if f==0 then
+set x=0
+loop
+exitwhen x>=50
+if udg_Consumer[x]==null then
+set udg_Consumer[x]=c
+set i=0
+set x=50
+endif
+set x=x+1
+endloop
+endif
+return i
+endfunction
+
+function SetConsumerBonus takes unit c, integer i returns nothing
+local integer x=0
+local integer f=0
+
+loop
+exitwhen x>=50
+if udg_Consumer[x]==c then
+set udg_ConsumerBonus[x]=i
+set x=50
+set f=1
+else
+set x=x+1
+endif
+endloop
+
+if f==0 then
+set x=0
+loop
+exitwhen x>=50
+if udg_Consumer[x]==null then
+set udg_Consumer[x]=c
+set udg_ConsumerBonus=0
+set x=50
+endif
+set x=x+1
+endloop
+endif
+
+endfunction
+
+
+
+function GetConsumerDmg takes unit c returns real 
+local integer x=0
+local integer f=0
+loop
+exitwhen x>=50
+if udg_Consumer[x]==c then
+set i=udg_ConsumerDmg[x]
+set x=50
+set f=1
+else
+set x=x+1
+endif
+endloop
+
+if f==0 then
+set x=0
+loop
+exitwhen x>=50
+if udg_Consumer[x]==null then
+set udg_Consumer[x]=c
+set i=0
+set x=50
+endif
+set x=x+1
+endloop
+endif
+return i
+endfunction
+
+function SetConsumerDmg takes unit c, real i returns nothing
+local integer x=0
+local integer f=0
+
+loop
+exitwhen x>=50
+if udg_Consumer[x]==c then
+set udg_ConsumerDmg[x]=i
+set x=50
+set f=1
+else
+set x=x+1
+endif
+endloop
+
+if f==0 then
+set x=0
+loop
+exitwhen x>=50
+if udg_Consumer[x]==null then
+set udg_Consumer[x]=c
+set udg_ConsumerDmg=0
+set x=50
+endif
+set x=x+1
+endloop
+endif
+
+endfunction

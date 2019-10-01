@@ -1,0 +1,82 @@
+function Trig_Pillarsofthedamned_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0E6' ) 
+endfunction
+
+function Trig_Pillarsofthedamned_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local location targetloc=GetSpellTargetLoc()
+local location castloc=GetUnitLoc(caster)
+local player owner=GetOwningPlayer(caster)
+local unit picked
+local effect fx
+local effect fx2
+local group temp
+local integer level=GetUnitAbilityLevel(caster,'A0E6')
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local integer ploop=1
+
+call RemoveLocation(targetloc)
+set targetloc=null
+loop
+exitwhen ploop>4*level
+set targetloc=PolarProjectionBJ(castloc,100*ploop,angle)
+set fx=AddSpecialEffectLoc("Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl",targetloc)
+if ModuloInteger(ploop,2)==0 then 
+set temp=CreateGroup()
+set temp=GetUnitsInRangeOfLocAll(200, targetloc)
+call RemoveLocation(targetloc)
+set targetloc=null
+   loop
+    set picked=FirstOfGroup(temp)
+     exitwhen picked==null
+     
+     if GetBooleanAnd(IsUnitType(picked, UNIT_TYPE_STRUCTURE) == false ,IsUnitEnemy(picked,owner) == true ) then
+        if GetBooleanAnd(IsUnitType(picked, UNIT_TYPE_MECHANICAL) == false,GetBooleanAnd(IsUnitType(picked, UNIT_TYPE_UNDEAD) == false,IsUnitType(picked, UNIT_TYPE_HERO) == false)) then
+        call SetUnitOwner( picked,owner, true )
+        call SetUnitPathing(picked, false )
+        call SetUnitVertexColorBJ(picked, 10.00, 10.00, 10.00, 50.00 )
+        call UnitAddTypeBJ( UNIT_TYPE_UNDEAD,picked)
+        set targetloc=GetUnitLoc(picked)
+        set fx2=AddSpecialEffectLocBJ( targetloc, "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl" )
+        call DestroyEffect(fx2)
+        set fx2=null 
+        call RemoveLocation(targetloc)
+        call UnitApplyTimedLifeBJ( 65, 'Brai', picked)
+        set targetloc=null
+        elseif (IsUnitType(picked, UNIT_TYPE_UNDEAD) == false) then
+        call UnitDamageTargetBJ(caster, picked,66*level, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+        endif
+     elseif GetBooleanAnd((IsUnitType(picked, UNIT_TYPE_UNDEAD) == true),picked!=caster) then
+     set targetloc=GetUnitLoc(picked)
+     call SetUnitLifeBJ(picked,GetUnitState(picked,UNIT_STATE_LIFE)+(33*level))
+     set fx2=AddSpecialEffectLocBJ( targetloc, "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl" )
+     call DestroyEffect(fx2)
+     set fx2=null 
+     call RemoveLocation(targetloc)
+     set targetloc=null
+     endif
+        
+     call GroupRemoveUnit(temp,picked)
+   set picked=null
+   endloop
+   call DestroyGroup(temp)
+   set temp=null
+  endif 
+call TriggerSleepAction(0)
+call DestroyEffect(fx)
+set fx=null
+set ploop=ploop+1
+endloop
+
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+endfunction
+
+//===========================================================================
+function InitTrig_Pillarsofthedamned takes nothing returns nothing
+    set gg_trg_Pillarsofthedamned = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Pillarsofthedamned, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Pillarsofthedamned, Condition( function Trig_Pillarsofthedamned_Conditions ) )
+    call TriggerAddAction( gg_trg_Pillarsofthedamned, function Trig_Pillarsofthedamned_Actions )
+endfunction

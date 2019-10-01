@@ -1,0 +1,97 @@
+function ForeverWalkerConditions takes nothing returns boolean
+return (GetUnitAbilityLevelSwapped('A08V', GetDyingUnit())>0)
+endfunction
+function ForeverWalkerActions takes nothing returns nothing
+    local integer array sdlevels
+    local unit dead=GetDyingUnit()
+    local unit newborn
+    local player owner
+    local unit soul
+    local location newloc
+    local integer level=GetUnitAbilityLevelSwapped('A08V', dead)
+    local real wait=(13.00 - ( 3.00 * I2R(level)))
+    local effect sfx
+    local integer isdead=GetHandleInt(dead,"dead")
+    if (isdead==1) then
+    set dead=null
+    return
+    endif
+    
+    set sdlevels[0] = GetUnitAbilityLevelSwapped('A08U', dead)
+    set sdlevels[1] = GetUnitAbilityLevelSwapped('A090', dead)
+    set sdlevels[2] = GetUnitAbilityLevelSwapped('A08T', dead)
+    set sdlevels[3] = GetUnitAbilityLevelSwapped('A08V', dead)
+    set sdlevels[4] = GetUnitAbilityLevelSwapped('A07U', dead)
+    set newborn=ReplaceUnitBJ(dead, 'O005', bj_UNIT_STATE_METHOD_MAXIMUM )
+    call transferward(dead,newborn)
+    call PossessionAlt(dead,newborn)
+    call FlushHandleLocals(dead)  
+    call RemoveUnit(dead)
+    set dead=ReplaceUnitBJ(newborn, 'O005', bj_UNIT_STATE_METHOD_MAXIMUM )
+    call transferward(newborn,dead)
+    call PossessionAlt(newborn,dead)
+    call FlushHandleLocals(newborn)    
+    call RemoveUnit(newborn)
+    set newborn=dead
+    set dead=null
+    set owner=GetOwningPlayer(newborn)
+    set newloc=GetUnitLoc(newborn)
+    call PauseUnitBJ(true, newborn)
+    call ShowUnitHide(newborn)
+    if ( sdlevels[0]>0 ) then
+        call SelectHeroSkill( newborn, 'A08U' )
+        call SetUnitAbilityLevelSwapped( 'A08U', newborn, sdlevels[0] )
+        call ModifyHeroSkillPoints( newborn, bj_MODIFYMETHOD_SUB, (sdlevels[0] - 1 ) )
+    endif
+    if ( sdlevels[1]>0 ) then
+        call SelectHeroSkill( newborn, 'A090' )
+        call SetUnitAbilityLevelSwapped( 'A090', newborn, sdlevels[1] )
+        call ModifyHeroSkillPoints( newborn, bj_MODIFYMETHOD_SUB, ( sdlevels[1] - 1 ) )
+    endif
+    if ( sdlevels[2]>0 ) then
+        call SelectHeroSkill( newborn, 'A08T' )
+        call SetUnitAbilityLevelSwapped( 'A08T', newborn, sdlevels[2] )
+        call ModifyHeroSkillPoints( newborn, bj_MODIFYMETHOD_SUB, ( sdlevels[2] - 1 ) )
+    endif
+    if ( sdlevels[3]>0 ) then
+        call SelectHeroSkill( newborn, 'A08V' )
+        call SetUnitAbilityLevelSwapped( 'A08V', newborn, sdlevels[3] )
+        call ModifyHeroSkillPoints( newborn, bj_MODIFYMETHOD_SUB, ( sdlevels[3] - 1 ) )
+     endif
+    if (sdlevels[4]>0) then
+        call SelectHeroSkill( newborn, 'A07U' )
+        call SetUnitAbilityLevelSwapped( 'A07U', newborn, sdlevels[4] )
+        call ModifyHeroSkillPoints( newborn, bj_MODIFYMETHOD_SUB, ( sdlevels[4] - 1 ) )
+    endif
+    set soul=CreateUnitAtLoc( owner, 'n01Y', newloc, bj_UNIT_FACING )
+    call SetHandleHandle(soul,"newborn",newborn)
+    call PolledWait2(wait)
+    if ( IsUnitAliveBJ(soul) == true ) then
+        call RemoveUnit(soul)
+        set sfx=AddSpecialEffectLocBJ( newloc, "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl" )
+        call SetUnitAnimation( newborn, "birth" )
+        call SetUnitManaPercentBJ( newborn, 100.00 )
+        call SetUnitLifePercentBJ( newborn, 100 )
+        call ShowUnitShow( newborn )
+        call PauseUnitBJ( false, newborn )
+        call SetUnitInvulnerable( newborn, false )
+    endif
+call RemoveLocation (newloc)
+set newloc=null
+set dead=null
+set newborn=null
+set owner=null
+set soul=null
+call PolledWait2(1.5)
+call DestroyEffect(sfx)
+set sfx=null
+endfunction
+
+//===========================================================================
+function InitTrig_ForeverWalker takes nothing returns nothing
+    set gg_trg_ForeverWalker = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ForeverWalker, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_ForeverWalker, Condition( function ForeverWalkerConditions ) )
+    call TriggerAddAction( gg_trg_ForeverWalker, function ForeverWalkerActions )
+endfunction
+

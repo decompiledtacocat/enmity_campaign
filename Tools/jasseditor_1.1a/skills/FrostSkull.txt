@@ -1,0 +1,41 @@
+function Trig_FrostSkull_Conditions takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr(GetSpellAbilityId() == 'A0CM' ,GetSpellAbilityId() == 'A0BO' ),GetBooleanOr(GetSpellAbilityId() == 'A0CO' ,GetSpellAbilityId() == 'A0CN' ))
+endfunction
+
+function Trig_FrostSkull_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetSpellTargetLoc()
+local unit rabbit
+local integer id
+set rabbit=CreateRabbit(owner,castloc)
+if GetSpellAbilityId() == 'A0BO'  then 
+set id='A081'
+elseif GetSpellAbilityId() == 'A0CM' then
+set id='A0CJ'
+elseif GetSpellAbilityId() == 'A0CN' then
+set id='A0CK'
+elseif GetSpellAbilityId() == 'A0CO' then
+set id='A0CL'
+endif
+call UnitAddAbility(rabbit,id)
+call UnitRemoveAbility(rabbit,'Aloc')
+call IssueTargetOrder(rabbit,"frostnova",rabbit)
+call UnitAddAbility(rabbit,'Aloc')
+call RemoveLocation(castloc)
+set rabbit=null
+set castloc=null
+set owner=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_FrostSkull takes nothing returns nothing
+    set gg_trg_FrostSkull = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_FrostSkull, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_FrostSkull, Condition( function Trig_FrostSkull_Conditions ) )
+    call TriggerAddAction( gg_trg_FrostSkull, function Trig_FrostSkull_Actions )
+endfunction
+
+
+

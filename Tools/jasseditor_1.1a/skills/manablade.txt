@@ -1,0 +1,125 @@
+function ManaBladeCondition takes nothing returns boolean
+    return ( GetSpellAbilityId() == 'A0HT' )
+endfunction
+function bladefiltercheck takes nothing returns boolean
+//uses udg_axefilterplayer to check if filter unit is enemy, alive and not structure
+return (GetBooleanAnd(GetBooleanAnd((IsUnitAliveBJ(GetFilterUnit()) == true ),( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false )),( IsUnitEnemy(GetFilterUnit(), udg_axefilterplayer) == true )))
+endfunction
+function ManaBladeDamageActions takes nothing returns nothing
+   local unit blade=GetHandleUnit(GetTriggeringTrigger(),"blade")
+   local unit caster=GetHandleUnit(blade,"bladeowner")
+   local group damagegroup
+   local location bladeloc=GetUnitLoc(blade)
+   local location ownerloc=GetUnitLoc(caster)
+   local location targetloc
+   local unit picked
+   local player owner=GetOwningPlayer(caster)
+   local integer bladereturn=GetHandleInt(blade,"return")
+   local real damage=25
+   local real tx
+   local real ty
+   local integer bladeabsorb=GetHandleInt(blade,"bladeabsorb")
+
+             set tx=GetHandleReal(blade,"targetx")
+             set ty=GetHandleReal(blade,"targety")
+             set targetloc=Location(tx, ty)
+             set udg_axefilterplayer=null
+             set udg_axefilterplayer=owner
+             set damagegroup=GetUnitsInRangeOfLocMatching(100.00,bladeloc, Condition(function bladefiltercheck ))
+                  loop
+                   set picked=FirstOfGroup(damagegroup)
+                   exitwhen picked==null
+                   call PlaySoundOnUnitBJ( gg_snd_MetalHeavySliceFlesh2, 100.0, picked)
+                   
+                   if UnitCountBuffsEx(picked,false,false,true,false,false,false,false)>0  then
+                   call UnitRemoveBuffsEx(picked,false,false,true,false,false,false,false)
+                   call DestroyEffect(AddSpellEffectTargetById('A0HT' , EFFECT_TYPE_SPECIAL,picked,"overhead"))
+                   set bladeabsorb=bladeabsorb+1
+                   call SetHandleInt(blade,"bladeabsorb",bladeabsorb)
+                   endif
+                   
+                   if GetUnitState(picked,UNIT_STATE_MANA) >0 then
+                   if damage>=GetUnitState(picked,UNIT_STATE_MANA) then
+                   call UnitDamageTargetBJ(blade, picked, GetUnitState(picked,UNIT_STATE_MANA), ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                   call FadingText("-"+ I2S(R2I(GetUnitState(picked,UNIT_STATE_MANA))),82,82,255,GetUnitX(picked),GetUnitY(picked))
+                   call SetUnitState(picked,UNIT_STATE_MANA,0)
+                   else
+                   call SetUnitState(picked,UNIT_STATE_MANA,GetUnitState(caster,UNIT_STATE_MANA)-damage)
+                   call FadingText("-"+ I2S(R2I(damage)),82,82,255,GetUnitX(picked),GetUnitY(picked))
+                   call UnitDamageTargetBJ(blade, picked, damage, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                   endif
+                   call DestroyEffect(AddSpellEffectTargetById('A0HT' , EFFECT_TYPE_TARGET,picked,"overhead"))
+                   endif
+                   
+                   call UnitDamageTargetBJ(blade, picked, damage, ATTACK_TYPE_PIERCE, DAMAGE_TYPE_NORMAL )
+                   call GroupRemoveUnit(damagegroup,picked)  
+                  endloop
+                call DestroyGroup(damagegroup)
+                set damagegroup=null
+   
+                if (bladereturn==1) then
+                call IssuePointOrderLocBJ( blade, "move", ownerloc)
+                endif
+                if (bladereturn==0) then
+                call IssuePointOrderLocBJ( blade, "move", targetloc)
+                endif 
+                if  GetBooleanAnd((bladereturn==0),(DistanceBetweenPoints(bladeloc,targetloc) <=100 )) then
+                call SetHandleInt(blade,"return",1) 
+                call IssuePointOrderLocBJ( blade, "move", ownerloc)
+                endif
+                if  GetBooleanAnd((bladereturn==1),(DistanceBetweenPoints(bladeloc,ownerloc) <=100 )) then
+                if bladeabsorb>0 then
+                call SetUnitState(caster,UNIT_STATE_LIFE,GetUnitState(caster,UNIT_STATE_LIFE)+bladeabsorb*25)
+                call SetUnitState(caster,UNIT_STATE_MANA,GetUnitState(caster,UNIT_STATE_MANA)+bladeabsorb*50)
+                call DestroyEffect(AddSpellEffectTargetById('A0HT' , EFFECT_TYPE_EFFECT,caster,"chest"))
+                endif
+                call KillUnit(blade)
+                call FlushHandleLocals(blade)
+                call FlushHandleLocals(GetTriggeringTrigger())
+                call DestroyTrigger(GetTriggeringTrigger())
+                endif
+             call RemoveLocation(bladeloc)
+             call RemoveLocation(targetloc) 
+             call RemoveLocation(ownerloc)
+             set ownerloc=null
+             set targetloc=null
+             set bladeloc=null 
+             set picked=null
+             set blade=null
+             set caster=null
+
+endfunction
+
+function ManaBladeActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit blade
+    local player owner=GetOwningPlayer(caster)
+    local location targetloc=GetSpellTargetLoc()
+    local trigger t
+    set blade=CreateUnit( owner, 'h013', GetUnitX(caster),GetUnitY(caster),bj_UNIT_FACING )
+   // call PlaySoundOnUnitBJ( gg_snd_AxeMissileLaunch1, 100,axe)
+    call IssuePointOrderLocBJ( blade, "move", targetloc)
+    set t=CreateTrigger()
+    call SetHandleHandle(t,"blade",blade)
+    call SetHandleHandle(blade,"bladeowner",caster)
+    call SetHandleReal(blade,"targetx",GetLocationX(targetloc))
+    call SetHandleReal(blade,"targety",GetLocationY(targetloc))
+    call SetHandleInt(blade,"return",0)
+    call SetHandleInt(blade,"level",GetUnitAbilityLevel(caster,'A0HT'))
+    call SetHandleInt(blade,"bladeabsorb",0)
+    call TriggerRegisterTimerEventPeriodic( t, 0.20 )
+    call TriggerAddAction( t, function ManaBladeDamageActions  )
+    
+    call RemoveLocation(targetloc)
+    set owner=null
+set targetloc=null
+    set blade=null
+    set caster=null
+endfunction
+//===========================================================================
+function InitTrig_ManaBlade takes nothing returns nothing
+    set gg_trg_ManaBlade = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ManaBlade, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_ManaBlade, Condition( function ManaBladeCondition  ) )
+    call TriggerAddAction( gg_trg_ManaBlade, function ManaBladeActions  )
+endfunction

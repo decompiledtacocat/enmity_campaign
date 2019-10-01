@@ -1,0 +1,38 @@
+function Trig_PandaRoll_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0DD' )
+endfunction
+
+function Trig_PandaRoll_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetHandleInt(caster,"eskill")
+local integer level6=GetHandleInt(caster,"eskill2")
+local integer revert=GetHandleInt(caster,"revertpanda")
+if (GetUnitTypeId(caster) == 'N02G') then
+   if IsUnitInGroup(caster, udg_rollgroup) == false then
+    call GroupAddUnit(udg_rollgroup,caster)
+      if IsTriggerEnabled(gg_trg_PandaRollingDamage)==false then
+      call EnableTrigger(gg_trg_PandaRollingDamage)
+      endif
+ endif
+endif
+        call SetUnitAbilityLevelSwapped( 'A0DD', caster, level )
+        call SetUnitAbilityLevelSwapped( 'A0AI', caster, level )
+        call SetUnitAbilityLevelSwapped( 'A0AE', caster, level )
+        if (level6 < 1) then
+             call UnitRemoveAbilityBJ( 'A0AS', caster)
+        else
+            call SetUnitAbilityLevelSwapped( 'A0AS', caster,level6)
+        endif
+        if (revert==1) then
+         call UnitAddAbilityBJ('A0AQ', caster)
+        endif
+endfunction
+
+//===========================================================================
+function InitTrig_PandaRoll takes nothing returns nothing
+    set gg_trg_PandaRoll = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PandaRoll, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_PandaRoll, Condition( function Trig_PandaRoll_Conditions ) )
+    call TriggerAddAction( gg_trg_PandaRoll, function Trig_PandaRoll_Actions )
+endfunction
+

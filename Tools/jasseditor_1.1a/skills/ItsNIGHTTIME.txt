@@ -1,0 +1,38 @@
+function ItsNightTimeConditions takes nothing returns boolean
+return GetBooleanAnd((CountUnitsInGroup(udg_nightstalkers)>0),GetBooleanOr(( GetTimeOfDay() >= 18.00 ),( GetTimeOfDay() < 6.00 )))
+endfunction
+function ItsNightTimeActions takes nothing returns nothing
+local unit picked
+local group temp=CreateGroup()
+call GroupAddGroup(udg_nightstalkers,temp)
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+if ( GetUnitAbilityLevelSwapped('A00M', picked)==0) then//bonus regen
+call UnitAddAbility(picked,'A00M' )
+endif
+  if GetBooleanAnd(( GetUnitAbilityLevelSwapped('A00S', picked)==0 ),( GetUnitAbilityLevelSwapped('A00E',picked)!=0)) then
+  call UnitRemoveAbility( picked ,'A00E' )
+   elseif ( GetUnitAbilityLevelSwapped('A00S', picked) >0 ) then
+         if ( GetUnitAbilityLevel(picked,'A00E')==0) then
+             call UnitAddAbility(picked, 'A00E'  )
+         endif  
+   call SetUnitAbilityLevelSwapped( 'A00E', picked, GetUnitAbilityLevelSwapped('A00S', picked) )
+  endif
+call GroupRemoveUnit(temp,picked)
+endloop
+call DestroyGroup(temp)
+set temp=null
+set picked=null
+endfunction
+
+//===========================================================================
+function InitTrig_Its_Night_Time takes nothing returns nothing
+    set gg_trg_Its_Night_Time = CreateTrigger(  )
+    call TriggerRegisterGameStateEventTimeOfDay( gg_trg_Its_Night_Time, GREATER_THAN_OR_EQUAL, 18.00 )
+    call TriggerRegisterGameStateEventTimeOfDay( gg_trg_Its_Night_Time, EQUAL, 0.00 )
+    call TriggerRegisterGameStateEventTimeOfDay( gg_trg_Its_Night_Time, EQUAL, 20.00 )
+    call TriggerRegisterGameStateEventTimeOfDay( gg_trg_Its_Night_Time, LESS_THAN, 6.00 )
+    call TriggerAddCondition( gg_trg_Its_Night_Time, Condition( function ItsNightTimeConditions ) )
+    call TriggerAddAction( gg_trg_Its_Night_Time, function ItsNightTimeActions )
+endfunction

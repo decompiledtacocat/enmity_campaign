@@ -1,0 +1,52 @@
+function Trig_DeathAndDecay_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0E3' )
+endfunction
+function DeathAndDecayDamageActions takes nothing returns nothing
+local unit target=GetHandleUnit(GetTriggeringTrigger(),"deathdecaytarget")
+local integer level=GetHandleInt(target,"deathdecaylevel")
+local real damage=.02*I2R(level)
+local real targetlife=GetUnitState(target,UNIT_STATE_LIFE)
+local real targetmana=GetUnitState(target,UNIT_STATE_MANA)
+if  GetBooleanOr(UnitHasBuffBJ(target,'B027')==false,IsUnitAliveBJ(target)==false) then
+call DestroyTrigger(GetTriggeringTrigger()) 
+else
+   if targetlife<=damage*GetUnitState(target,UNIT_STATE_MAX_LIFE) then
+   call SetUnitLifeBJ(target,1)
+   call UnitRemoveBuffBJ('B027',target)
+   call DestroyTrigger(GetTriggeringTrigger()) 
+   else
+     call SetUnitLifeBJ(target,targetlife-damage*GetUnitState(target,UNIT_STATE_MAX_LIFE))  
+   endif
+   if GetUnitState(target,UNIT_STATE_MAX_MANA) >1 then
+      if GetUnitState(target,UNIT_STATE_MANA)<=damage*GetUnitState(target,UNIT_STATE_MAX_MANA) then
+     call SetUnitManaBJ(target,0)
+      else
+     call SetUnitManaBJ(target,targetmana-damage*GetUnitState(target,UNIT_STATE_MAX_MANA))  
+      endif
+   endif
+endif
+set target=null
+endfunction
+function Trig_DeathAndDecay_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0E3')
+local trigger t
+set t= CreateTrigger()
+call SetHandleHandle(t,"deathdecaytarget",target)
+call SetHandleInt(target,"deathdecaylevel",level)
+    call TriggerRegisterTimerEventPeriodic( t, 1.00 )
+    call TriggerAddAction( t, function DeathAndDecayDamageActions )
+set caster=null
+set target=null
+set t=null
+endfunction
+
+//===========================================================================
+function InitTrig_DeathAndDecay takes nothing returns nothing
+    set gg_trg_DeathAndDecay = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DeathAndDecay, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DeathAndDecay, Condition( function Trig_DeathAndDecay_Conditions ) )
+    call TriggerAddAction( gg_trg_DeathAndDecay, function Trig_DeathAndDecay_Actions )
+endfunction
+

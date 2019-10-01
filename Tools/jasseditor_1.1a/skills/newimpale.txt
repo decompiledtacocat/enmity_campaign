@@ -1,0 +1,61 @@
+function ImpaleActions takes unit caster unit target returns nothing
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetUnitLoc(target)
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local integer abl=''
+local integer level=GetUnitAbilityLevel(caster,abl)
+local location moveloc=PolarProjectionBJ(castloc,1500,angle)
+local location p1=PolarProjectionBJ(castloc, 100.00,  angle + 90.00 )
+local location p2=PolarProjectionBJ(moveloc, 100.00, angle + 90.00 )
+local location p3=PolarProjectionBJ(moveloc, 100.00, angle - 90.00 )
+local location p4=PolarProjectionBJ(castloc, 100.00, angle - 90.00 )
+local unit picked
+local group temp=CreateGroup() 
+local real damage=level*20+GetHeroStatBJ(bj_HEROSTAT_STR, caster, true)
+local integer wave=0
+call TriggerSleepAction(.3)
+call RemoveLocation(moveloc)
+set moveloc=null
+    loop
+    exitwhen wave>=15
+    set moveloc=PolarProjectionBJ(castloc,75*wave,angle)
+    call DestroyEffect(AddSpellEffectByIdLoc(abl, EFFECT_TYPE_CASTER, moveloc))
+    call RemoveLocation(moveloc)
+    set moveloc=null
+    set wave=wave+1
+    endloop
+    
+ 
+    set udg_tempfilterplayer=null
+    set udg_tempfilterplayer=owner
+    call GroupEnumUnitsInQuad(temp,p1,p2,p3,p4, Condition( function FilterGroundAll ))
+    loop
+      set picked=FirstOfGroup(temp)
+      exitwhen picked==null
+      set udg_tempecheckunit=null
+      set udg_tempecheckunit=picked
+
+      call UnitDamageTargetBJ(caster, picked, damage , ATTACK_TYPE_SIEGE,  DAMAGE_TYPE_UNIVERSAL )
+      call DestroyEffect(AddSpellEffectTargetById(abl, EFFECT_TYPE_SPECIAL, picked,"chest"))
+      call GroupRemoveUnit(temp,picked)
+      set picked=null
+    endloop
+    call DestroyGroup(temp)
+    set temp=null
+call RemoveLocation(p1)
+call RemoveLocation(p2)
+call RemoveLocation(p3)
+call RemoveLocation(p4)
+set p1=null
+set p2=null
+set p3=null
+set p4=null    
+set  caster=null
+set  owner=null
+call RemoveLocation(castloc)
+call RemoveLocation(targetloc)
+set  castloc =null
+set  targetloc=null
+endfunction
+

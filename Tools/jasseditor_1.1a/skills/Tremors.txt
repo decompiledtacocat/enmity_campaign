@@ -1,0 +1,111 @@
+function TremorConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0AV' ) 
+endfunction
+
+function TremorFilter takes nothing returns boolean
+return GetBooleanAnd(IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false,GetBooleanOr(GetBooleanOr(( GetOwningPlayer(GetFilterUnit()) == Player(6) ),( GetOwningPlayer(GetFilterUnit()) == Player(0) )),( IsUnitAlly(GetFilterUnit(), udg_tremorfilter) == false )))
+endfunction
+function TremorActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit picked
+local unit rabbit
+local player owner=GetOwningPlayer(caster)
+local integer level=GetUnitAbilityLevelSwapped('A0AV', caster) 
+local integer waves=1+level
+local group temp
+local location casterloc=GetUnitLoc(caster)
+local location targetloc=GetSpellTargetLoc()
+local location newloc
+local location top
+local location bottom
+local location pickedloc
+local location pickedmoveloc
+local rect areafx
+local real angle=AngleBetweenPoints(casterloc,targetloc)
+local real pickedangle
+local real new 
+local real distance
+local real damage=2.00 * I2R(GetHeroStatBJ(bj_HEROSTAT_STR, caster, true)) 
+local integer tloop=1
+local integer mloop
+
+
+    loop
+        exitwhen tloop > waves
+        set newloc=PolarProjectionBJ(casterloc, (200.00 * tloop) , angle )
+        set  rabbit=CreateRabbit(owner, newloc)
+        call UnitAddAbilityBJ( 'A037', rabbit )
+        call SetUnitAbilityLevelSwapped( 'A037',rabbit, level)
+        call IssueImmediateOrderBJ(rabbit, "stomp" )
+        set udg_tremorfilter=null
+        set udg_tremorfilter=owner
+        set temp=GetUnitsInRangeOfLocMatching(100,newloc,Condition(function TremorFilter))
+        loop
+        set picked=FirstOfGroup(temp)
+        exitwhen picked==null
+        call PauseUnitBJ( true, picked )
+        
+        set pickedloc=GetUnitLoc(picked)
+        set pickedangle= AngleBetweenPoints(newloc, pickedloc)
+        set distance = ( ( 300.00 - DistanceBetweenPoints(pickedloc,newloc) ) / 5.00 )
+        call RemoveLocation (pickedloc)
+        set mloop=1
+        loop 
+        exitwhen mloop> 5
+        set pickedloc=GetUnitLoc(picked)
+         if pickedloc==newloc then
+         set pickedmoveloc=PolarProjectionBJ(pickedloc, 50.00, ( 90.00 + angle))
+         call SetUnitPositionLoc(picked,pickedmoveloc )
+         call RemoveLocation(pickedmoveloc)
+         endif
+          if angle < 0 then
+             if GetBooleanOr(GetBooleanAnd((pickedangle >= angle),(angle<0)),GetBooleanAnd(( pickedangle < (180+angle)),(angle>=0))) then
+                 set pickedmoveloc=PolarProjectionBJ(pickedloc, distance , ( angle + 90.00 ))
+                    call SetUnitPositionLoc(picked, pickedmoveloc)
+                 call RemoveLocation(pickedmoveloc)
+                else
+                    set pickedmoveloc=PolarProjectionBJ(pickedloc, distance , ( angle - 90.00 ))
+                    call SetUnitPositionLoc(picked, pickedmoveloc)
+                    call RemoveLocation(pickedmoveloc)
+             endif
+          else
+            if GetBooleanOr(GetBooleanAnd((pickedangle < angle),(angle>=0)),GetBooleanAnd(( pickedangle >= (angle-180)),(pickedangle<0))) then
+                set pickedmoveloc=PolarProjectionBJ(pickedloc, distance , (angle - 90.00 ))
+                    call SetUnitPositionLoc(picked, pickedmoveloc  )
+                    call RemoveLocation(pickedmoveloc)
+                else
+                    set pickedmoveloc=PolarProjectionBJ(pickedloc, distance , (angle + 90.00 ))
+                    call SetUnitPositionLoc( picked, pickedmoveloc  )
+                    call RemoveLocation(pickedmoveloc)
+                endif
+          endif   
+          call RemoveLocation(pickedloc)
+          set mloop=mloop+1
+        endloop
+        
+        if  IsUnitAlly(picked, owner) == false then
+        call UnitDamageTargetBJ(caster,picked , damage, ATTACK_TYPE_SIEGE, DAMAGE_TYPE_NORMAL )
+        endif
+        call RemoveLocation(pickedloc)
+        call PauseUnitBJ( false, picked )
+        call GroupRemoveUnit(temp,picked)
+        
+        endloop
+        call DestroyGroup(temp)
+        set temp=null
+        call RemoveLocation(newloc)
+        call PolledWait2( 0.01 )
+        set tloop  = tloop  + 1
+    endloop
+call RemoveLocation(casterloc)
+
+
+endfunction
+
+//===========================================================================
+function InitTrig_Tremor takes nothing returns nothing
+    set gg_trg_Tremor = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Tremor, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Tremor, Condition( function TremorConditions ) )
+    call TriggerAddAction( gg_trg_Tremor, function TremorActions )
+endfunction

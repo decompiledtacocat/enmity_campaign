@@ -1,0 +1,94 @@
+function AirLancerConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A07C' )
+endfunction
+function AirLancerActions takes nothing returns nothing
+    local unit airlunit =GetSpellAbilityUnit()
+    local unit airbuffunit
+    local unit picklancerunit
+    local player airlplayer=GetOwningPlayer(airlunit)
+    local location airloc = GetUnitLoc(airlunit)
+    local location airloctarget=GetSpellTargetLoc()
+    local location p1
+    local location p2
+    local location p3
+    local location p4
+    local real angle
+    local group lancertargets=CreateGroup() 
+    local real lancerdamage=(50*I2R(GetUnitAbilityLevelSwapped('A07C', airlunit))+2*I2R(GetHeroLevel(airlunit )))
+    call PlaySoundOnUnitBJ( gg_snd_Shockwave, 100, airlunit )
+    set airbuffunit=CreateUnitAtLoc(airlplayer, 'n011', airloc , bj_UNIT_FACING )
+    call UnitAddAbility(airbuffunit,'A0B0')
+    call SetUnitVertexColorBJ(airbuffunit, 100, 100, 100, 100.00 )
+    call IssueTargetOrder(airbuffunit,"innerfire",airlunit )
+    call RemoveLocation (airloc)
+    set airloc=null
+    
+    call TriggerSleepAction( 0 )
+    
+    call PlaySoundOnUnitBJ( gg_snd_ZigguratMissileLaunch2, 100, airlunit )
+    set airloc=GetUnitLoc(airlunit)
+    set angle=AngleBetweenPoints(airloc, airloctarget)
+    set p1=PolarProjectionBJ(airloc, 100.00,  angle + 90.00 )
+    set p2=PolarProjectionBJ(airloctarget, 100.00, angle + 90.00 )
+    set p3=PolarProjectionBJ(airloctarget, 100.00, angle - 90.00 )
+    set p4=PolarProjectionBJ(airloc, 100.00, angle - 90.00 )
+    
+
+    set udg_tempfilterplayer=null
+    set udg_tempfilterplayer=airlplayer
+    call GroupEnumUnitsInQuad(lancertargets,p1,p2,p3,p4, Condition( function filtercheck ))
+    call RemoveLocation(airloc)
+    call RemoveLocation(p1)
+    call RemoveLocation(p2)
+    call RemoveLocation(p3)
+    call RemoveLocation(p4)
+    set p1=null
+    set p2=null
+    set p3=null
+    set p4=null
+    set airloc=null
+    loop
+      set picklancerunit=FirstOfGroup(lancertargets)
+      exitwhen picklancerunit==null
+      set udg_tempecheckunit=null
+      set udg_tempecheckunit=picklancerunit
+      if (etherealcheck()) then
+      call UnitDamageTargetBJ(airlunit, picklancerunit, lancerdamage , ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+      else
+      call UnitDamageTargetBJ(airlunit, picklancerunit, lancerdamage , ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+      endif
+      call GroupRemoveUnit(lancertargets,picklancerunit)
+      set picklancerunit=null
+    endloop
+    call DestroyGroup(lancertargets)
+    set lancertargets=null
+    call GroupRemoveUnitSimple(airlunit , udg_airlancergroup )
+    call SetUnitPositionLoc(airlunit , airloctarget )
+    call RemoveLocation(airloctarget)
+    call UnitAddAbility(airlunit,'A07D')
+    call UnitAddAbility(airlunit,'A09W')
+    call SetUnitAbilityLevelSwapped( 'A09W', airlunit, GetHeroLevel(airlunit ) )
+    call SetUnitAbilityLevelSwapped( 'A07D', airlunit, GetUnitAbilityLevelSwapped('A07C', airlunit) )
+    call TriggerSleepAction( 2.00 )
+    if ( UnitHasBuffBJ(airlunit, 'B01K') == true ) then
+        call UnitRemoveAbility(airlunit,'A09W' )
+        call UnitRemoveAbility(airlunit,'A07D' )
+        call UnitRemoveBuffBJ( 'B01K', airlunit  )
+       if(IsUnitInGroup(airlunit, udg_airlancergroup) == true) then
+       call GroupRemoveUnitSimple(airlunit, udg_airlancergroup )
+       endif
+    endif
+    set airlunit =null
+    set airbuffunit=null
+    set picklancerunit=null
+    set airlplayer=null
+endfunction
+//===========================================================================
+function InitTrig_AirLancer takes nothing returns nothing
+    set gg_trg_AirLancer = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_AirLancer, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_AirLancer, Condition( function AirLancerConditions ) )
+    call TriggerAddAction( gg_trg_AirLancer, function AirLancerActions)
+endfunction
+
+

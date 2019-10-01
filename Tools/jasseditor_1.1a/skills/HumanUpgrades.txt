@@ -1,0 +1,14 @@
+function Trig_HumanUpgrades_Actions takes nothing returns nothing
+local integer start=GetPlayerState(Player(0), PLAYER_STATE_RESOURCE_GOLD) 
+    call SetPlayerStateBJ( Player(0), PLAYER_STATE_RESOURCE_GOLD, start+2000)
+    call IssueUpgradeOrderByIdBJ( gg_unit_h003_0017, GetResearched() )
+    call SetPlayerStateBJ( Player(0), PLAYER_STATE_RESOURCE_GOLD, start)
+endfunction
+
+//===========================================================================
+function InitTrig_HumanUpgrades takes nothing returns nothing
+    set gg_trg_HumanUpgrades = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( gg_trg_HumanUpgrades, gg_unit_h00P_0211, EVENT_UNIT_RESEARCH_FINISH )
+    call TriggerAddAction( gg_trg_HumanUpgrades, function Trig_HumanUpgrades_Actions )
+endfunction
+

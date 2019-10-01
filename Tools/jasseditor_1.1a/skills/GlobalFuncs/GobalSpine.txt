@@ -1,0 +1,510 @@
+function etherealcheck takes nothing returns boolean
+//uses udg_tempecheckunit true return if unit is ethreal
+return (GetBooleanOr((UnitHasBuffBJ(udg_tempecheckunit, 'BHbn') == true ), (IsUnitType(udg_tempecheckunit, UNIT_TYPE_SAPPER) == true ) ) )
+endfunction
+
+function filtercheck takes nothing returns boolean
+//uses udg_tempfilterplayer to check if filter unit is enemy, alive and not structure
+return (GetBooleanAnd(GetBooleanAnd(( IsUnitAliveBJ(GetFilterUnit()) == true ),( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false )),( IsUnitEnemy(GetFilterUnit(), udg_tempfilterplayer) == true )))
+endfunction
+
+
+function attackednotsummon takes nothing returns boolean
+return ( IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_SUMMONED) == false )
+endfunction
+function attackednothero takes nothing returns boolean
+return ( IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_HERO) == false )
+endfunction
+function attackednotstructure takes nothing returns boolean
+return ( IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_STRUCTURE) == false )
+endfunction
+function attackingnotillusion takes nothing returns boolean
+return ( IsUnitIllusionBJ(GetAttacker()) == false )
+endfunction
+
+function CreateRabbit takes player whichplayer,location rabbitloc returns unit
+//creates an empty casting rabbit at no face
+local unit rabbit
+set rabbit=CreateUnitAtLoc( whichplayer, 'n011',rabbitloc , bj_UNIT_FACING)
+call SetUnitVertexColorBJ( rabbit, 100.00, 100.00, 100.00, 100.00 )
+return rabbit
+endfunction
+
+//===========================================================================
+function WaitForUnitEvent_H2G takes handle h returns group
+    return h
+endfunction
+
+function WaitForUnitEvent_H2U takes handle h returns unit
+    return h
+endfunction
+
+function WaitForUnitEvent takes handle whichGroupOrUnit, unitevent whichUnitEvent, boolexpr condition, real interval returns nothing
+    local trigger t
+    local triggercondition c
+    local group whichGroup = WaitForUnitEvent_H2G(whichGroupOrUnit)
+    local unit whichUnit = WaitForUnitEvent_H2U(whichGroupOrUnit)
+    local group g
+    if whichGroupOrUnit == null then
+        set whichUnit = null
+        set whichGroup = null
+        return
+    elseif interval < 0 then
+        set interval = 0
+    endif
+    set t = CreateTrigger()
+    if FirstOfGroup(whichGroup) == null then
+        call TriggerRegisterUnitEvent(t, whichUnit, whichUnitEvent)
+    else
+        set g = CreateGroup()
+        call GroupAddGroup(whichGroup, g)
+        loop
+            set whichUnit = FirstOfGroup(g)
+            exitwhen whichUnit == null
+            call TriggerRegisterUnitEvent(t, whichUnit, whichUnitEvent)
+            call GroupRemoveUnit(g, whichUnit)
+        endloop
+        call DestroyGroup(g)
+        set g = null
+    endif
+    if condition != null then
+        set c = TriggerAddCondition(t, condition)
+    endif
+    loop
+        call TriggerSleepAction(interval)
+        exitwhen GetTriggerExecCount(t) != 0
+    endloop
+    if condition != null then
+        call TriggerRemoveCondition(t, c)
+        set c = null
+    endif
+    call DestroyTrigger(t)
+    set t = null
+    set whichUnit = null
+    set whichGroup = null
+endfunction
+//===========================================================================
+function PolledWait2 takes real duration returns nothing
+    local real timeRemaining
+    local real st=TimerGetElapsed( bj_gameStartedTimer)
+    if st <= 0 then
+        set bj_gameStartedTimer = CreateTimer()
+        call TimerStart(bj_gameStartedTimer, 1000000, false, null)
+    endif
+    if (duration > 0) then
+        loop
+            set timeRemaining = duration - TimerGetElapsed( bj_gameStartedTimer) + st
+            exitwhen timeRemaining <= 0
+            if (timeRemaining > bj_POLLED_WAIT_SKIP_THRESHOLD) then
+                call TriggerSleepAction(0.1 * timeRemaining)
+            else
+                call TriggerSleepAction(bj_POLLED_WAIT_INTERVAL)
+            endif
+        endloop
+    endif
+endfunction
+
+//===============================================================================
+// ===========================
+function H2I takes handle h returns integer
+    return h
+    return 0
+endfunction
+
+// ===========================
+function LocalVars takes nothing returns gamecache
+
+    return InitGameCache("jasslocalvars.w3v")
+endfunction
+
+function SetHandleHandle takes handle subject, string name, handle value returns nothing
+    if value==null then
+        call FlushStoredInteger(LocalVars(),I2S(H2I(subject)),name)
+    else
+        call StoreInteger(LocalVars(), I2S(H2I(subject)), name, H2I(value))
+    endif
+endfunction
+
+function SetHandleInt takes handle subject, string name, integer value returns nothing
+    if value==0 then
+        call FlushStoredInteger(LocalVars(),I2S(H2I(subject)),name)
+    else
+        call StoreInteger(LocalVars(), I2S(H2I(subject)), name, value)
+    endif
+endfunction
+
+function SetHandleReal takes handle subject, string name, real value returns nothing
+    if value==0 then
+        call FlushStoredReal(LocalVars(), I2S(H2I(subject)), name)
+    else
+        call StoreReal(LocalVars(), I2S(H2I(subject)), name, value)
+    endif
+endfunction
+
+function SetHandleString takes handle subject, string name, string value returns nothing
+    if value==null then
+        call FlushStoredString(LocalVars(), I2S(H2I(subject)), name)
+    else
+        call StoreString(LocalVars(), I2S(H2I(subject)), name, value)
+    endif
+endfunction
+
+function GetHandleGroup takes handle subject, string name returns group
+    return GetStoredInteger(LocalVars(), I2S(H2I(subject)), name)
+    return null
+endfunction
+
+function GetHandleHandle takes handle subject, string name returns handle
+    return GetStoredInteger(LocalVars(), I2S(H2I(subject)), name)
+    return null
+endfunction
+function GetHandleInt takes handle subject, string name returns integer
+    return GetStoredInteger(LocalVars(), I2S(H2I(subject)), name)
+endfunction
+function GetHandleReal takes handle subject, string name returns real
+    return GetStoredReal(LocalVars(), I2S(H2I(subject)), name)
+endfunction
+function GetHandleString takes handle subject, string name returns string
+    return GetStoredString(LocalVars(), I2S(H2I(subject)), name)
+endfunction
+
+function GetHandleUnit takes handle subject, string name returns unit
+    return GetStoredInteger(LocalVars(), I2S(H2I(subject)), name)
+    return null
+endfunction
+function GetHandleTimer takes handle subject, string name returns timer
+    return GetStoredInteger(LocalVars(), I2S(H2I(subject)), name)
+    return null
+endfunction
+function GetHandleTrigger takes handle subject, string name returns trigger
+    return GetStoredInteger(LocalVars(), I2S(H2I(subject)), name)
+    return null
+endfunction
+function GetHandleEffect takes handle subject, string name returns effect
+    return GetStoredInteger(LocalVars(), I2S(H2I(subject)), name)
+    return null
+endfunction
+
+function FlushHandleLocals takes handle subject returns nothing
+    call FlushStoredMission(LocalVars(), I2S(H2I(subject)) )
+endfunction
+
+//===========================================================================
+function MaxUnit takes unit caster,unit utype,string cat, integer maxlevel, integer maxlimit returns nothing
+    local unit array picked
+    local unit array temp
+    local integer gloop=1
+    local integer count=0
+    local integer diff
+    loop
+        exitwhen gloop>maxlimit
+        set temp[gloop]=null
+        set picked[count+1]=GetHandleUnit(caster,(cat+I2S(gloop)))
+        if GetBooleanAnd((IsUnitAliveBJ(picked[count+1])==true),(picked[count+1]!=null)) then
+        set count = count+1
+        endif
+        set gloop=gloop+1
+    endloop
+    //count is equal to # of alive units picked 1-count is list size
+    if (count>=maxlevel) then
+       set diff = (count-maxlevel)
+       set gloop=0
+         loop
+          exitwhen gloop>diff 
+          call KillUnit(picked[gloop+1])
+          set gloop=gloop+1
+         endloop
+    endif     
+       set gloop=1
+       set count=1
+         loop
+            exitwhen gloop>maxlimit
+            if GetBooleanAnd((IsUnitAliveBJ(picked[gloop])==true),(picked[gloop]!=null)) then
+            set temp[count]=picked[gloop]
+            set count = count+1
+            endif
+          set gloop=gloop+1
+         endloop
+    set temp[count]=utype
+    set gloop=1
+    loop
+     exitwhen gloop>maxlimit
+     call SetHandleHandle(caster,(cat+I2S(gloop)),temp[gloop])
+     set temp[gloop]=null
+     set picked[gloop]=null
+     set gloop=gloop+1
+    endloop
+set caster=null
+set utype=null    
+endfunction
+//===========================================================================
+
+function KillSummons takes unit target returns nothing
+local unit killsummon
+    if GetUnitTypeId(target)=='U00G' then //Trapmaster
+    call MaxUnit(target,null,"spikebikes",0,12)
+    call MaxUnit(target,null,"core",0,1)
+    call MaxUnit(target,null,"amd",0,2)
+    call MaxUnit(target,null,"guns",0,6)
+    endif
+    if GetUnitTypeId(target)=='E001' then //ranger
+    set killsummon=GetHandleUnit(target,"spitz")
+    call KillUnit(killsummon)
+    call RemoveUnit(killsummon)
+    set killsummon=GetHandleUnit(target,"joy")
+    call KillUnit(killsummon)
+    call RemoveUnit(killsummon)
+    set killsummon=null
+    endif
+set killsummon=null
+endfunction
+
+//===========================================================================
+function DeCopy takes unit xcopy, unit oldcopy returns nothing 
+local integer array copylevels
+local player owner=GetOwningPlayer(xcopy)
+local integer sloop=0
+loop
+exitwhen sloop>4
+set copylevels[sloop]=GetHandleInt(oldcopy,("xcopylevel"+I2S(sloop))) 
+set sloop=sloop+1
+endloop
+    if (copylevels[0]>0 ) then
+        call SelectHeroSkill( xcopy, 'A06C' )
+        call SetUnitAbilityLevelSwapped( 'A06C', xcopy, copylevels[0] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[0] - 1 ) )
+    endif
+    if ( copylevels[1]>0  ) then
+        call SelectHeroSkill( xcopy, 'A061' )
+        call SetUnitAbilityLevelSwapped( 'A061', xcopy, copylevels[1] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[1] - 1 ) )
+    endif
+    if (copylevels[2]>0  ) then
+        call SelectHeroSkill( xcopy, 'A064' )
+        call SetUnitAbilityLevelSwapped( 'A064', xcopy, copylevels[2] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[2] - 1 ) )
+    endif
+    if ( copylevels[3]>0  ) then
+        call SelectHeroSkill( xcopy, 'A04O' )
+        call SetUnitAbilityLevelSwapped( 'A04O', xcopy, copylevels[3] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[3] - 1 ) )
+    endif
+    if ( copylevels[4]>0  ) then
+        call SelectHeroSkill( xcopy, 'A07S' )
+        call SetUnitAbilityLevelSwapped( 'A07S', xcopy, copylevels[4] )
+        call ModifyHeroSkillPoints( xcopy, bj_MODIFYMETHOD_SUB, ( copylevels[4] - 1 ) )
+    endif
+    call UnitRemoveAbilityBJ('A06F', xcopy )
+    call UnitRemoveAbilityBJ('A06G', xcopy )
+    call SelectUnitAddForPlayer( xcopy,owner)
+    call KillSummons(oldcopy)
+    call FlushHandleLocals(oldcopy)
+    set owner=null
+    set xcopy=null
+    set oldcopy=null
+endfunction
+//===========================================================================
+
+function UNPOSSESS takes unit pcaster returns nothing
+local unit target=GetHandleUnit(pcaster ,"possessing")
+local integer flag=GetHandleInt(target,"possessed!")
+local unit caster
+local player possessor
+local player possesse
+local location targetloc
+local location casterloc
+local effect cfx
+local effect cfx2
+local integer ploop
+//check
+if (flag!=1) then
+return
+endif
+//settings
+set caster=pcaster 
+set possessor=GetOwningPlayer(target)
+set possesse=ConvertedPlayer(GetHandleInt(target,"OrignalOwner"))
+set targetloc=GetUnitLoc(target)
+//unpause target
+call SetUnitInvulnerable( target , true )
+call PauseUnitBJ( false, target )
+// Special effects move caster
+    call SetUnitPositionLoc( caster, targetloc )
+    set casterloc=GetUnitLoc(caster)
+    set cfx=AddSpecialEffectLocBJ(targetloc, "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl" )
+    call PolledWait2( 0.30 )
+    set cfx2=AddSpecialEffectLocBJ(casterloc, "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl" )
+    call PolledWait2( 0.30 )
+    //Kill PermSummons if trap master or ranger
+    call KillSummons(target)
+    // Reverse switch
+    call SetUnitOwner(caster,possessor, false )
+    call SetUnitOwner(target,possesse, true )
+    call SetUnitInvulnerable(caster, false )
+    set possessor=GetOwningPlayer(caster)
+    //  unlock items
+    set ploop = 1
+    loop
+        exitwhen ploop > 6
+        call SetItemDroppableBJ( UnitItemInSlotBJ(target, ploop), true )
+        set ploop = ploop + 1
+    endloop
+    // unhide and unpause 
+    call PauseUnitBJ( false, caster)
+    call PauseUnitBJ( false, target)
+    call ShowUnitShow(caster)
+    call SelectUnitAddForPlayer( caster, possessor)
+    call SetUnitInvulnerable( target , false )
+    call SetHandleInt(target,"possessed!",0)
+    call SetHandleInt(target,"OrignalOwner",null)
+    call SetHandleHandle(target,"Shapeless",null)
+call DestroyEffect(cfx)
+call DestroyEffect(cfx2)
+call RemoveLocation(targetloc)
+call RemoveLocation(casterloc)
+set cfx=null
+set cfx2=null
+set caster=null
+set possessor=null
+set possesse=null
+set targetloc=null
+set casterloc=null
+endfunction
+
+//===========================================================================
+
+function PossessionAlt takes unit original, unit new returns nothing
+local integer isposs=GetHandleInt(original,"possessed!")
+local unit shapeless
+local integer owner
+if (isposs==1) then
+set shapeless=GetHandleUnit(original,"Shapeless")
+set owner=GetHandleInt(original,"OrignalOwner")
+call SetHandleInt(original,"possessed!",0)
+call SetHandleHandle(shapeless,"possessing",new)
+call SetHandleHandle(new,"Shapeless",shapeless)
+call SetHandleInt(new,"OrignalOwner",owner)
+call SetHandleInt(new,"possessed!",1)
+endif
+set shapeless=null
+endfunction
+
+//===========================================================================
+
+function LifeBarFilter takes nothing returns boolean
+return GetBooleanAnd((IsUnitAliveBJ(GetFilterUnit())==true ),( IsUnitType(GetFilterUnit(), UNIT_TYPE_HERO)==true ))
+endfunction
+function LifeBar takes nothing returns nothing
+local group playerunits
+local unit hero
+local integer index=0
+local string status=""
+local integer barloop
+local integer maxloop
+local real percent
+loop
+exitwhen index>11
+  if GetBooleanAnd((GetPlayerSlotState(Player(index)) == PLAYER_SLOT_STATE_PLAYING ),GetBooleanAnd((index!=6) ,(index!=0))) then
+  set playerunits=CreateGroup()
+  set playerunits=GetUnitsOfPlayerMatching(Player(index), Condition(function LifeBarFilter))
+  loop
+  set hero=FirstOfGroup(playerunits)
+  exitwhen hero==null
+  set status=""
+    set barloop=1
+    set maxloop=R2I(( GetUnitLifePercent(hero) * 0.20 ))
+    loop
+    exitwhen barloop > maxloop
+    set status=status +"|"
+    set barloop=barloop+1
+    endloop
+  call MultiboardSetItemValueBJ(GetLastCreatedMultiboard(), 2, index+2, status)
+  set percent = GetUnitLifePercent(hero)
+        if (percent >=75 ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+1, 0.00, 100.00, 0.00, 0 )
+        elseif ( percent<75 ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+1, 70.00, 100.00, 20.00, 0 )
+        elseif (percent<65 ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+1, 70.00, 100.00, 20.00, 0 )
+        elseif ( percent<55  ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+1, 100.00, 90.00, 0.00, 0 )
+        elseif ( percent<45  ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+1, 100.00, 45.00, 0.00, 0 )
+        elseif ( percent<25  ) then
+            call MultiboardSetItemColorBJ( GetLastCreatedMultiboard(), 2, index+1, 100.00, 0.00, 0.00, 0 )
+        endif
+  call GroupRemoveUnit(playerunits,hero)
+  endloop
+  call DestroyGroup(playerunits)
+  set playerunits=null
+
+  endif
+
+set index=index+1
+endloop
+endfunction
+
+//===========================================================================
+function GetColor takes player whichPlayer returns string
+    if ( whichPlayer == Player(0) ) then
+        return "|c00FF0000"
+    endif
+    if ( whichPlayer == Player(1) ) then
+        return "|c000000FF"
+    endif
+    if ( whichPlayer == Player(2) ) then
+        return "|c0040E0D0"
+    endif
+    if ( whichPlayer == Player(3) ) then
+        return "|c00A020F0"
+    endif
+    if ( whichPlayer == Player(4) ) then
+        return "|c00FFFF00"
+    endif
+    if ( whichPlayer == Player(5) ) then
+        return "|c00FFA500"
+    endif
+    if ( whichPlayer == Player(6) ) then
+        return "|c0000FF00"
+    endif
+    if ( whichPlayer == Player(7) ) then
+        return "|c00FFC0CB"
+    endif
+    if ( whichPlayer == Player(8) ) then
+        return "|c00BEBEBE"
+    endif
+    if ( whichPlayer == Player(9) ) then
+        return "|c00ADD8E6"
+    endif
+    if ( whichPlayer == Player(10) ) then
+        return "|c00006400"
+    endif
+    if ( whichPlayer == Player(11) ) then
+        return "|c00A52A2A"
+    endif
+    return null
+endfunction
+
+//===========================================================================
+function Taunt takes nothing returns nothing
+local integer rnd=GetRandomInt(1, 8)
+if ( rnd==1 ) then
+call PlaySoundBJ( gg_snd_SargerasLaugh )
+elseif (rnd==2 ) then
+call PlaySoundBJ( gg_snd_MuradinTaunt1 )
+elseif (rnd==3 ) then
+call PlaySoundBJ( gg_snd_MuradinTaunt2 )
+elseif ( rnd==4 ) then
+call PlaySoundBJ( gg_snd_AcolytePissed4 )
+elseif ( rnd==5 ) then
+call PlaySoundBJ( gg_snd_DeathKnightPissed1 )
+elseif ( rnd==6) then
+ call PlaySoundBJ( gg_snd_HeroLichPissed8 )
+elseif (rnd==7 ) then
+ call PlaySoundBJ( gg_snd_ShadowHunterPissed9 )
+elseif ( rnd==8 ) then
+call PlaySoundBJ( gg_snd_ShadowHunterPissed4 )
+endif
+call KillSoundWhenDone(GetLastPlayedSound())
+endfunction
+

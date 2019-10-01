@@ -1,0 +1,57 @@
+function ShapeShifterChannelCondition takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A065' )
+endfunction
+function ShapeShifterChannelActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit taget=GetSpellTargetUnit()
+local unit newborn
+local integer level
+local integer utype=GetUnitTypeId(caster)
+local integer ctype=GetUnitTypeId(taget)
+local effect sfx
+local location newloc
+            if (utype=='u00S') then
+                set level = 1
+            elseif (utype=='u00T') then
+                set level = 2
+            elseif (utype=='u00R') then
+                set level = 3
+            elseif (utype=='u00Q') then
+                set level = 4
+            elseif (utype=='u00U') then
+                set level = 5
+            endif
+   set  newborn = ReplaceUnitBJ( caster, ctype, bj_UNIT_STATE_METHOD_RELATIVE )
+   call UnitApplyTimedLifeBJ( 30.00, 'BTLF', newborn  )
+   set newloc=GetUnitLoc(newborn)
+   set sfx=AddSpecialEffectLocBJ(newloc, "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl" )
+   call UnitAddAbilityBJ( 'A067', newborn )
+   call SetUnitAbilityLevelSwapped( 'A067', newborn, level  )
+   if (level==1) then
+   call UnitAddAbilityBJ( 'A066', newborn )
+   elseif(level==2) then
+   call UnitAddAbilityBJ( 'A06B', newborn )
+   elseif(level==3) then
+   call UnitAddAbilityBJ( 'A068', newborn )
+   elseif(level==4) then
+   call UnitAddAbilityBJ( 'A069', newborn )
+   elseif(level==5) then
+   call UnitAddAbilityBJ( 'A06A', newborn )
+   endif
+   call SelectUnitAddForPlayer(newborn, GetOwningPlayer(newborn) )
+call RemoveLocation(newloc)
+set newloc=null
+set newborn=null
+set caster=null
+call PolledWait2(.5)
+call DestroyEffect(sfx)
+set sfx=null
+endfunction
+//===========================================================================
+function InitTrig_ShapeShifterChannel takes nothing returns nothing
+    set gg_trg_ShapeShifterChannel = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ShapeShifterChannel, EVENT_PLAYER_UNIT_SPELL_CHANNEL )
+    call TriggerAddCondition( gg_trg_ShapeShifterChannel, Condition( function ShapeShifterChannelCondition ) )
+    call TriggerAddAction( gg_trg_ShapeShifterChannel, function ShapeShifterChannelActions)
+endfunction
+

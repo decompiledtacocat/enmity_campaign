@@ -1,0 +1,51 @@
+function Trig_CovertBlight_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0F2' ) 
+endfunction
+function CovertBlightActions takes nothing returns nothing
+local trigger t=GetTriggeringTrigger()
+local unit caster=GetHandleUnit(t,"CovertBlight")
+local location castloc=GetUnitLoc(caster)
+if GetBooleanAnd(UnitHasBuffBJ(caster,'B02H'),IsPointBlightedBJ(castloc))  then
+else
+set t=null
+if UnitHasBuffBJ(caster,'B02H')==true then
+call UnitRemoveBuffBJ('B02H',caster)
+endif
+if GetUnitAbilityLevel(caster,'A0F1')>0 then
+call UnitRemoveAbility(caster,'A0F1')
+endif
+call RemoveLocation(castloc)
+set castloc=null
+set caster=null
+call FlushHandleLocals(GetTriggeringTrigger())
+call DestroyTrigger(GetTriggeringTrigger())
+return
+endif
+call RemoveLocation(castloc)
+set castloc=null
+set t=null
+set caster=null
+endfunction
+
+function Trig_CovertBlight_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local trigger t
+
+set t=CreateTrigger()
+if GetUnitAbilityLevel(caster,'A0F1')==0 then
+call UnitAddAbility(caster,'A0F1')
+endif
+call SetHandleHandle(t,"CovertBlight",caster)
+call TriggerRegisterTimerEventPeriodic( t, 1 )
+call TriggerAddAction( t, function CovertBlightActions )
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_CovertBlight takes nothing returns nothing
+    set gg_trg_CovertBlight = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_CovertBlight, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_CovertBlight, Condition( function Trig_CovertBlight_Conditions ) )
+    call TriggerAddAction( gg_trg_CovertBlight, function Trig_CovertBlight_Actions )
+endfunction
+

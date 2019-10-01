@@ -1,0 +1,17 @@
+function SentryWardItemCondition takes nothing returns boolean
+return GetUnitTypeId(GetSummonedUnit()) == 'o008' 
+endfunction 
+function SentryWardItemActions takes nothing returns nothing
+local unit caster=GetSummoningUnit()
+local unit summon=GetSummonedUnit()
+call MaxUnit(caster,summon,"ward",2,2)
+set caster=null
+set summon=null
+endfunction
+//===========================================================================
+function InitTrig_SentryWardItem takes nothing returns nothing
+    set gg_trg_SentryWardItem = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SentryWardItem, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_SentryWardItem, Condition( function SentryWardItemCondition ) )
+    call TriggerAddAction( gg_trg_SentryWardItem, function SentryWardItemActions )
+endfunction

@@ -1,0 +1,100 @@
+function TrapMasterSummonConditions takes nothing returns boolean
+return GetBooleanOr(GetBooleanOr(( GetUnitTypeId(GetSummonedUnit()) == 'o00A' ),( GetUnitTypeId(GetSummonedUnit()) == 'o00B' )),GetBooleanOr(( GetUnitTypeId(GetSummonedUnit()) == 'o009' ),( GetUnitTypeId(GetSummonedUnit()) =='o00I' )))
+endfunction
+function ElementalBall takes unit ball, integer level returns nothing
+    local player owner=GetOwningPlayer(ball)
+    local unit array elements
+    local integer eloop=0
+    local location eloc=GetUnitLoc(ball)
+    local location emove
+    
+    set emove=PolarProjectionBJ(eloc, 275.00, 0.00 )
+    set elements[0]=CreateUnitAtLoc( owner, 'o00E', emove, bj_UNIT_FACING)
+    call SetUnitAbilityLevelSwapped( 'A053', elements[0], level )
+    call RemoveLocation(emove) 
+    
+    set emove=PolarProjectionBJ(eloc, 275.00, 90.00 )
+    if ( level==1 ) then
+    set elements[1]=CreateUnitAtLoc(owner,'o00J', emove ,bj_UNIT_FACING )
+    elseif ( level==2 ) then
+    set elements[1]=CreateUnitAtLoc(owner,'o00H', emove ,bj_UNIT_FACING )
+    elseif ( level==3 ) then
+    set elements[1]=CreateUnitAtLoc(owner,'o00K', emove ,bj_UNIT_FACING )
+    endif
+    call RemoveLocation(emove)  
+    
+    set emove=PolarProjectionBJ(eloc, 275.00, 180.00 )
+    set elements[2]=CreateUnitAtLoc(owner,'o00F', emove ,bj_UNIT_FACING )
+    call SetUnitAbilityLevelSwapped( 'A051', elements[2],level )
+    
+    call RemoveLocation(emove)
+    set emove=PolarProjectionBJ(eloc, 275.00,-90.00 )  
+    if ( level==1 ) then
+    set elements[3]=CreateUnitAtLoc(owner,'o00M', emove ,bj_UNIT_FACING )
+    elseif (level==2 ) then
+    set elements[3]=CreateUnitAtLoc(owner,'o00G', emove ,bj_UNIT_FACING )
+    elseif (level==3 ) then
+    set elements[3]=CreateUnitAtLoc(owner,'o00L', emove ,bj_UNIT_FACING )
+    endif
+    call RemoveLocation(emove)
+    loop
+    exitwhen eloop>3
+    call SetUnitPathing(elements[eloop], false )
+    call IssuePointOrderLocBJ( elements[eloop], "move", eloc )
+    call SetHandleHandle(ball,("elements"+I2S(eloop)),elements[eloop])
+    set eloop=eloop+1
+    endloop
+    call GroupAddUnit(udg_elementals,ball)
+    call RemoveLocation(eloc)
+    set eloc=null
+    set emove=null
+    set owner=null
+    if IsTriggerEnabled(gg_trg_ElementalMovement) then
+    call EnableTrigger(gg_trg_ElementalMovement)
+    endif
+endfunction
+
+function TrapMasterSummonActions takes nothing returns nothing
+//sentry gun = 'o00A' skill='A04U'
+//AMD = 'o00B' skill='A04Z'
+//SpikeBike = 'o009' skill='A04Y'
+//ElementalTrap='o00I' skill='A04X'
+    local unit caster=GetSummoningUnit()
+    local unit summon=GetSummonedUnit()
+    local string cat
+    local integer max
+    local integer maxlimit
+    local integer elevel
+    if (GetUnitTypeId(summon)=='o00A')then
+    set max =(GetUnitAbilityLevelSwapped('A04U',caster)+1)
+    set cat="guns"
+    set maxlimit=6
+    elseif (GetUnitTypeId(summon)=='o00B') then
+    set max=2
+    set cat="amd"
+    set maxlimit=2
+    //set max=(GetUnitAbilityLevelSwapped('A04Z',caster)+1)
+    elseif (GetUnitTypeId(summon)=='o009') then
+    set max=((GetUnitAbilityLevelSwapped('A04Y',caster)+1)*2)
+    set cat="spikebikes"
+    set maxlimit=12
+    elseif (GetUnitTypeId(summon)=='o00I') then
+    set max=1
+    set cat="core"
+    set maxlimit=1
+    set elevel=GetUnitAbilityLevelSwapped('A04X',caster)
+    call ElementalBall(summon,elevel)
+    endif
+    call MaxUnit(caster,summon,cat,max,maxlimit)
+    set caster=null
+    set summon=null
+    set cat=null
+    // takes unit caster,unit utype,string catagory, integer maxlevel, integer maxlimit 
+endfunction
+//===========================================================================
+function InitTrig_TrapMasterSummon takes nothing returns nothing
+    set gg_trg_TrapMasterSummon= CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_TrapMasterSummon, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_TrapMasterSummon, Condition( function TrapMasterSummonConditions  ) )
+    call TriggerAddAction( gg_trg_TrapMasterSummon, function TrapMasterSummonActions  )
+endfunction

@@ -1,0 +1,71 @@
+function Trig_BloodBlade_Conditions takes nothing returns boolean
+return  GetSpellAbilityId() == 'A08J' 
+endfunction
+
+function Trig_BloodBlade_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetSpellTargetLoc()
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local unit rabbit=CreateUnitAtLoc( Player(15), 'o015', castloc,angle)
+local integer level=GetUnitAbilityLevel(caster,'A0H1')
+local location moveloc=PolarProjectionBJ(castloc,1500,angle)
+    local location p1=PolarProjectionBJ(castloc, 100.00,  angle + 90.00 )
+    local location p2=PolarProjectionBJ(moveloc, 100.00, angle + 90.00 )
+    local location p3=PolarProjectionBJ(moveloc, 100.00, angle - 90.00 )
+    local location p4=PolarProjectionBJ(castloc, 100.00, angle - 90.00 )
+    local unit picked
+    local group temp=CreateGroup() 
+    local real damage=50*level
+    call TriggerSleepAction(.35)
+    call SetUnitPositionLoc(rabbit,moveloc)
+    set udg_tempfilterplayer=null
+    set udg_tempfilterplayer=owner
+    call GroupEnumUnitsInQuad(temp,p1,p2,p3,p4, Condition( function filtercheck ))
+    loop
+      set picked=FirstOfGroup(temp)
+      exitwhen picked==null
+      set udg_tempecheckunit=null
+      set udg_tempecheckunit=picked
+      if (etherealcheck()) then
+      call UnitDamageTargetBJ(caster, picked, damage , ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+      else
+      call UnitDamageTargetBJ(caster, picked, damage , ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+      endif
+      call DestroyEffect(AddSpellEffectTargetById('A08J', EFFECT_TYPE_SPECIAL, picked,"chest"))
+      call GroupRemoveUnit(temp,picked)
+      set picked=null
+    endloop
+    call DestroyGroup(temp)
+    set temp=null
+call RemoveLocation(p1)
+call RemoveLocation(p2)
+call RemoveLocation(p3)
+call RemoveLocation(p4)
+set p1=null
+set p2=null
+set p3=null
+set p4=null    
+call KillUnit(rabbit)
+call RemoveUnit(rabbit)
+set rabbit=null
+set  caster=null
+set target=null
+set  owner=null
+call RemoveLocation(castloc)
+call RemoveLocation(targetloc)
+call RemoveLocation(moveloc)
+set  castloc =null
+set  targetloc=null
+set  moveloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_BloodBlade takes nothing returns nothing
+    set gg_trg_BloodBlade = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_BloodBlade, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_BloodBlade, Condition( function Trig_BloodBlade_Conditions ) )
+    call TriggerAddAction( gg_trg_BloodBlade, function Trig_BloodBlade_Actions )
+endfunction
+

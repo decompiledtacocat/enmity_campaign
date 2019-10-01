@@ -1,0 +1,107 @@
+function Trig_XZone_Conditions takes nothing returns boolean
+return  GetSpellAbilityId() == 'A0HZ'
+endfunction
+function XzoneDestr takes nothing returns nothing
+    call KillDestructable( GetEnumDestructable() )
+    call RemoveDestructable(GetEnumDestructable())
+endfunction    
+function XzoneDamageActions takes nothing returns nothing
+local trigger t
+local unit caster
+local integer level
+local real x
+local real y
+local location targetloc
+local group temp
+local unit picked
+local player owner
+local real area
+local unit rabbit
+local unit rabbit2
+if GetBooleanOr(GetTriggerEventId()==EVENT_UNIT_SPELL_ENDCAST,GetTriggerEventId()==EVENT_UNIT_SPELL_FINISH ) then
+set rabbit=GetHandleUnit(GetTriggeringTrigger(),"rabbit")
+set rabbit2=GetHandleUnit(GetTriggeringTrigger(),"rabbit2")
+ call KillUnit(rabbit)
+ call KillUnit(rabbit2)
+  call KillUnit(GetHandleUnit(GetTriggeringTrigger(),"shadow"))
+ call KillUnit(GetHandleUnit(GetTriggeringTrigger(),"shadow2"))
+ call FlushHandleLocals(GetTriggeringTrigger())
+ call DestroyTrigger(GetTriggeringTrigger())
+else
+set t=GetTriggeringTrigger()
+set caster=GetHandleUnit(t,"caster")
+set level=GetHandleInt(t,"Level")
+set x=GetHandleReal(t,"LocX")
+set y=GetHandleReal(t,"LocY")
+set targetloc=Location(x,y)
+set area=150+level*100
+set owner=GetOwningPlayer(caster)
+
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocMatching(area,targetloc, Condition(function filtercheck))
+          loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null        
+                   if IsUnitType(picked, UNIT_TYPE_HERO)==false then
+                   call DestroyEffect(AddSpellEffectById('A0HZ' , EFFECT_TYPE_SPECIAL, GetUnitX(picked),GetUnitY(picked)))
+                   call UnitDamageTargetBJ(caster, picked,9999, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                   call ShowUnitHide(picked)
+                   endif
+                   call GroupRemoveUnit(temp,picked)  
+          endloop
+         call DestroyGroup(temp)
+         set temp=null
+call EnumDestructablesInCircleBJ(area, targetloc, function XzoneDestr )
+set t=null
+set caster=null
+call RemoveLocation(targetloc)
+set targetloc=null
+set owner=null
+endif
+endfunction
+
+function Trig_XZone_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0HZ')
+local location targetloc=GetSpellTargetLoc()
+local real area=150+level*100
+local player owner=GetOwningPlayer(caster)
+local unit rabbit=CreateRabbitXY(owner,GetUnitX(caster),GetUnitY(caster))
+local unit rabbit2=CreateRabbitXY(owner,GetUnitX(caster),GetUnitY(caster))
+local unit shadow=CreateUnitAtLoc(owner,'o017',targetloc,bj_UNIT_FACING)
+local unit shadow2=CreateUnitAtLoc(owner,'o017',targetloc),bj_UNIT_FACING)
+local trigger t
+call SetUnitPathing(shadow,false)
+call SetUnitPathing(shadow2,false)
+call UnitAddAbility(rabbit2,'A0I1')
+call SetUnitAbilityLevel(rabbit2,'A0I1',level)
+call IssuePointOrderLoc(rabbit2,"blizzard",targetloc)
+call UnitAddAbility(rabbit,'A0I0')
+call SetUnitAbilityLevel(rabbit,'A0I0',level)
+call IssuePointOrderLoc(rabbit,"blizzard",targetloc)
+set t=CreateTrigger()
+call SetHandleReal(t,"LocX",GetLocationX(targetloc))
+call SetHandleReal(t,"LocY",GetLocationY(targetloc))
+call SetHandleInt(t,"Level",level)
+call SetHandleHandle(t,"caster",caster)
+call SetHandleHandle(t,"rabbit",rabbit)
+call SetHandleHandle(t,"rabbit2",rabbit2)
+call SetHandleHandle(t,"shadow",shadow)
+call SetHandleHandle(t,"shadow2",shadow2)
+call TriggerRegisterTimerEventPeriodic(t, 1 )
+call TriggerRegisterUnitEvent( t, caster, EVENT_UNIT_SPELL_ENDCAST )
+call TriggerRegisterUnitEvent( t, caster, EVENT_UNIT_SPELL_FINISH )
+call TriggerAddAction(t, function XzoneDamageActions )
+set caster=null
+call RemoveLocation(targetloc)
+set t=null
+endfunction
+
+//===========================================================================
+function InitTrig_XZone takes nothing returns nothing
+    set gg_trg_XZone = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_XZone, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_XZone, Condition( function Trig_XZone_Conditions ) )
+    call TriggerAddAction( gg_trg_XZone, function Trig_XZone_Actions )
+endfunction

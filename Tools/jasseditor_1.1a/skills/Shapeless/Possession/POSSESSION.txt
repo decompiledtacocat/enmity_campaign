@@ -1,0 +1,114 @@
+function PossessionEndCondition takes nothing returns boolean
+return  ( GetSpellAbilityId() == 'A04O' )
+endfunction
+function PossessionStolenFilter takes nothing returns boolean
+local unit filter=GetFilterUnit()
+local player allied
+if GetConvertedPlayerId(udg_posplayer) >=7 then
+set allied=Player(6)
+else
+set allied=Player(0)
+endif
+return GetBooleanAnd(GetBooleanAnd((IsUnitType(filter,UNIT_TYPE_STRUCTURE) == false ),(IsUnitType(filter,UNIT_TYPE_HERO) == false )),GetBooleanOr((GetOwningPlayer(filter)==udg_posplayer),(GetOwningPlayer(filter)==allied)))
+endfunction
+function PossessionEndActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetHandleUnit(caster,"possession")
+local group stolen
+local effect array stupid
+local effect cfx
+local effect cfx2
+local location casterloc= GetUnitLoc(caster)
+local location targetloc= GetUnitLoc(target)
+local player possessor=GetOwningPlayer(caster)
+local player possesse=GetOwningPlayer(target)
+local integer ploop
+local integer maxfx=0
+local unit picked
+local real duration=( 12.0)
+if (target==null) then 
+return
+endif
+call SetUnitInvulnerable( caster, true )
+// Pause units
+call PauseUnitBJ( true, caster)
+call PauseUnitBJ( true, target)
+// effects
+set cfx=AddSpecialEffectLocBJ( casterloc, "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl" )
+call PolledWait2( 0.30 )
+call ShowUnitHide( caster)
+set cfx2=AddSpecialEffectLocBJ( targetloc, "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl" )
+call PolledWait2( 0.30 )
+call RemoveLocation(casterloc)
+// protecting casters units so they dont get switched on return only for hero possess
+if ( IsUnitType(target, UNIT_TYPE_HERO) == true  ) then
+set udg_posplayer=null
+set udg_posplayer=possesse
+set stolen=GetUnitsInRangeOfLocMatching(800.00,targetloc, Condition(function PossessionStolenFilter))
+call RemoveLocation(targetloc)
+   set ploop=1
+   loop
+   set picked=FirstOfGroup(stolen)
+   exitwhen picked==null 
+   call SetUnitOwner( picked,possessor, false )
+   set targetloc=GetUnitLoc(picked)
+   set stupid[ploop]=AddSpecialEffectLocBJ( targetloc, "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl" )
+   call RemoveLocation(targetloc)
+   set ploop=ploop+1
+   call UnitApplyTimedLifeBJ( 60, 'B01N', picked)
+   call GroupRemoveUnit(stolen,picked)
+   endloop
+   call DestroyGroup(stolen)
+   set stolen=null
+   set maxfx=ploop
+else
+call RemoveLocation(targetloc)
+endif
+
+// unit switches
+call SetUnitOwner( target,possessor, false )
+call SetUnitOwner( caster,possesse, false )
+// locks items
+set ploop = 1
+    loop
+        exitwhen ploop > 6
+        call SetItemDroppableBJ( UnitItemInSlotBJ(target, ploop), false )
+        set ploop = ploop + 1
+    endloop
+// unpause
+call SetUnitInvulnerable( target, false )
+call SelectUnitAddForPlayer( target, possessor )
+//set cache
+call SetHandleInt(target,"possessed!",1)
+call SetHandleHandle(target,"Shapeless",caster)
+call SetHandleInt(target,"OrignalOwner",GetConvertedPlayerId(possesse))
+call SetHandleHandle(caster,"possessing",target)
+
+call PauseUnitBJ( false, target )  
+// duration of possess
+call PolledWait2( duration )
+set ploop = 1
+    loop
+        exitwhen ploop > maxfx
+        call DestroyEffect(stupid[ploop])
+        set stupid[ploop]=null
+        set ploop = ploop + 1
+    endloop
+//unpossess
+call UNPOSSESS(caster)
+set caster=null
+set target=null
+set possessor=null
+set possesse=null
+set picked=null
+endfunction
+
+//===========================================================================
+function InitTrig_PossessionEnd takes nothing returns nothing
+    set gg_trg_PossessionEnd = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_PossessionEnd, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_PossessionEnd, Condition( function PossessionEndCondition ) )
+    call TriggerAddAction( gg_trg_PossessionEnd, function PossessionEndActions )
+endfunction
+
+

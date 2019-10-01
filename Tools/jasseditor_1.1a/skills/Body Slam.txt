@@ -1,0 +1,85 @@
+function Trig_BodySlam_Conditions takes nothing returns boolean
+return  GetSpellAbilityId() == 'A08B' 
+endfunction
+function Trig_BodySlam_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetUnitAbilityLevel(caster,'A08B')
+local real damage=GetUnitState(caster,UNIT_STATE_LIFE)*.5*level
+local location castloc=GetUnitLoc(caster)
+local group temp
+local group mid
+local group in
+local unit picked
+local unit last=null
+local unit last2=null
+local unit last3=null
+local unit rabbit
+local player owner=GetOwningPlayer(caster)
+call BounceUnit(caster,1000,2000,2000)
+call WaitTillLanded(caster,2)
+call SetFilterPlayer(owner)
+set in=GetUnitsInRangeOfLocMatching(200,castloc, Condition(FilterGround))
+set mid=GetUnitsInRangeOfLocMatching(350,castloc, Condition(FilterGround))
+set temp=GetUnitsInRangeOfLocMatching(550,castloc, Condition(FilterGround))
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+
+if IsUnitInGroup(picked,in)==true then
+set last=picked
+call DamageBounceUnit(caster, picked, damage,4,800,1200,1200)
+
+elseif IsUnitInGroup(picked,mid)==true then
+set last2=picked
+call DamageBounceUnit(caster, picked, damage*.66,4,400,1200,1200)
+
+else
+set last3=picked
+call DamageBounceUnit(caster, picked, damage*.33,4,200,1200,1200)
+
+endif
+
+call GroupRemoveUnit(temp,picked)
+endloop
+call DestroyGroup(temp)
+call DestroyGroup(in)
+call DestroyGroup(mid)
+set in=null
+set mid=null
+set temp=null
+if last3!=null then
+call WaitTillLanded(caster,3)
+set rabbit=CreateRabbit(owner,castloc)
+call UnitAddAbility(rabbit,'A08C')
+call SetUnitAbilityLevel(rabbit,'A08C',3)
+call IssueImmediateOrder(rabbit,"stomp")
+endif
+if last2!=null then
+call WaitTillLanded(caster,3)
+set rabbit=CreateRabbit(owner,castloc)
+call UnitAddAbility(rabbit,'A08C')
+call SetUnitAbilityLevel(rabbit,'A08C',2)
+call IssueImmediateOrder(rabbit,"stomp")
+endif
+if last!=null then
+call WaitTillLanded(caster,3)
+set rabbit=CreateRabbit(owner,castloc)
+call UnitAddAbility(rabbit,'A08C')
+call SetUnitAbilityLevel(rabbit,'A08C',1)
+call IssueImmediateOrder(rabbit,"stomp")
+endif
+set rabbit=null
+set caster=null
+call RemoveLocation(castloc)
+set castloc=null
+set owner=null
+endfunction
+//===========================================================================
+function InitTrig_BodySlam takes nothing returns nothing
+    set gg_trg_BodySlam = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_BodySlam, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_BodySlam, Condition( function Trig_BodySlam_Conditions ) )
+    call TriggerAddAction( gg_trg_BodySlam, function Trig_BodySlam_Actions )
+endfunction
+
+

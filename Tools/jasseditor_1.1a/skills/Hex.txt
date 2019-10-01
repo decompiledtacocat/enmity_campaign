@@ -1,0 +1,28 @@
+function HexConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0A0' ) 
+endfunction
+function HexActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    local unit buffer
+    local player owner=GetOwningPlayer(caster)
+    local location targetloc=GetUnitLoc(target)
+    set buffer=CreateUnitAtLoc( owner, 'n011', targetloc, bj_UNIT_FACING )
+    call SetUnitVertexColorBJ( buffer, 100.00, 100.00, 100.00, 100.00 )
+    call UnitAddAbilityBJ( 'A0A2', buffer )
+    call SetUnitAbilityLevelSwapped( 'A0A2', buffer, GetUnitAbilityLevelSwapped('A0A0', caster) )
+    call IssueTargetOrderBJ( buffer, "slow", target )
+    set caster=null
+    set target=null
+    set buffer=null
+    set owner=null
+    call RemoveLocation (targetloc)
+endfunction
+//===========================================================================
+function InitTrig_Hex takes nothing returns nothing
+    set gg_trg_Hex = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Hex, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Hex, Condition( function HexConditions  ) )
+    call TriggerAddAction( gg_trg_Hex, function HexActions )
+endfunction
+

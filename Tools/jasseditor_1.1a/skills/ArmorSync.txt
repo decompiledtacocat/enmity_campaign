@@ -1,0 +1,17 @@
+function ArmorSyncConditions takes nothing returns boolean
+return GetBooleanAnd(( GetLearnedSkillBJ() == 'A06T' ),( GetUnitTypeId(GetLearningUnit()) == 'U00X' ))
+endfunction
+function ArmorSyncActions takes nothing returns nothing
+    local unit stupid=GetLearningUnit()
+    call SetUnitAbilityLevelSwapped( 'A05G', stupid, GetUnitAbilityLevelSwapped('A06T', stupid) )
+    set stupid=null
+endfunction
+
+//===========================================================================
+function InitTrig_ArmorSync takes nothing returns nothing
+    set gg_trg_ArmorSync = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ArmorSync, EVENT_PLAYER_HERO_SKILL )
+    call TriggerAddCondition( gg_trg_ArmorSync, Condition( function ArmorSyncConditions  ) )
+    call TriggerAddAction( gg_trg_ArmorSync, function ArmorSyncActions  )
+endfunction
+

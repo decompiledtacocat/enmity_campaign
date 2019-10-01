@@ -1,0 +1,53 @@
+function GravityBombConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A03A' )
+endfunction
+function GravityBombActions takes nothing returns nothing
+   local unit gbcaster=GetSpellAbilityUnit()
+   local unit gbpicked
+   local player gbplayer=GetOwningPlayer(gbcaster)
+   local integer gblevel=GetUnitAbilityLevelSwapped('A03A', gbcaster)
+   local location gbtarget=GetSpellTargetLoc()
+   local group gbgroup
+   local real gbarea=(175.00 + ( 25.00*I2R(gblevel)))
+   local real gblife
+   local real gbmaxlife
+   local real gbdmgmod
+   set udg_tempfilterplayer=null
+   set udg_tempfilterplayer=gbplayer
+   set gbgroup=GetUnitsInRangeOfLocMatching(gbarea,gbtarget, Condition(function filtercheck))
+   call RemoveLocation (gbtarget)
+   loop
+      set gbpicked=FirstOfGroup(gbgroup)
+      exitwhen gbpicked==null
+      set gblife=GetUnitStateSwap(UNIT_STATE_LIFE,gbpicked)
+      set gbmaxlife=GetUnitStateSwap(UNIT_STATE_MAX_LIFE,gbpicked)
+      if (IsUnitType(gbpicked, UNIT_TYPE_HERO) == true) then
+         if ((gblife-(.15*gbmaxlife)) >= 1.00) then
+         call SetUnitLifeBJ(gbpicked,(gblife-(.15*gbmaxlife)))
+         else
+         call UnitDamageTargetBJ(gbcaster, gbpicked, 9999.00, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL )
+         endif
+      else
+        set gbdmgmod=(0.15 + (0.1*(I2R(gblevel)-1)))
+        if (((gblife-(gbdmgmod*gbmaxlife)) >= 1.00))  then
+        call SetUnitLifeBJ(gbpicked,gblife-(gbdmgmod*gbmaxlife))
+        else
+        call UnitDamageTargetBJ(gbcaster, gbpicked, 9999.00, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL )
+        endif
+      endif
+      call GroupRemoveUnit(gbgroup,gbpicked)
+      set gbpicked=null
+   endloop
+   set gbcaster=null
+   set gbpicked=null
+   call DestroyGroup(gbgroup)
+   set gbgroup=null
+endfunction
+//===========================================================================
+function InitTrig_GravityBomb takes nothing returns nothing
+    set gg_trg_GravityBomb = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_GravityBomb, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_GravityBomb, Condition( function GravityBombConditions) )
+    call TriggerAddAction( gg_trg_GravityBomb, function GravityBombActions)
+endfunction
+

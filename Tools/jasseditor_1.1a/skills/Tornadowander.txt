@@ -1,0 +1,55 @@
+function Trig_TornadoWindWander_Actions takes nothing returns nothing
+local integer tloop=0
+local unit temp
+local unit picked
+local group cgroup=CreateGroup()
+local location movep
+local location castloc
+local rect area
+
+if CountUnitsInGroup(udg_tornadogroup) <=0 then
+call DisableTrigger( gg_trg_TornadoWindWander) 
+endif
+call GroupAddGroup(udg_tornadogroup,cgroup)
+loop
+ set picked=FirstOfGroup(cgroup)
+ exitwhen picked==null
+         set castloc=GetUnitLoc(picked)
+         set area=RectFromCenterSizeBJ(castloc, 500,500)
+     
+     loop
+        exitwhen tloop > 3
+        set temp=GetHandleUnit(picked,"tornado"+I2S(tloop))
+        if GetBooleanAnd(IsUnitAliveBJ(temp)==false,tloop==0) then
+        set tloop=4 
+        call GroupRemoveUnit(udg_tornadogroup,picked)
+        else 
+        set movep=GetRandomLocInRect(area)
+        call IssuePointOrderLocBJ( temp, "move",movep )
+        call RemoveLocation(movep)
+        set movep=null
+        set temp=null   
+        endif
+        set tloop = tloop + 1
+    endloop
+   call RemoveLocation(castloc)
+   call RemoveRect(area)
+   set area=null
+   set castloc=null 
+    
+ call GroupRemoveUnit(cgroup,picked)   
+ set picked=null
+endloop    
+call DestroyGroup(cgroup)
+set cgroup=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_TornadoWindWander takes nothing returns nothing
+    set gg_trg_TornadoWindWander = CreateTrigger(  )
+    call DisableTrigger( gg_trg_TornadoWindWander )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_TornadoWindWander, 2.00 )
+    call TriggerAddAction( gg_trg_TornadoWindWander, function Trig_TornadoWindWander_Actions )
+endfunction
+

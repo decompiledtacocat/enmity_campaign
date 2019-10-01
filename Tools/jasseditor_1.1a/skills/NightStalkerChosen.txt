@@ -1,0 +1,14 @@
+function NightStalkerisChosenCondition takes nothing returns boolean
+return ( GetUnitTypeId(GetEnteringUnit()) == 'U00D' ) 
+endfunction
+function NightStalkerisChosenActions takes nothing returns nothing
+call GroupAddUnit(udg_nightstalkers,GetEnteringUnit())
+endfunction 
+//===========================================================================
+function InitTrig_NightStalkerisChosen takes nothing returns nothing
+    set gg_trg_NightStalkerisChosen = CreateTrigger(  )
+    call TriggerRegisterEnterRectSimple( gg_trg_NightStalkerisChosen, GetPlayableMapRect() )
+    call TriggerAddCondition( gg_trg_NightStalkerisChosen, Condition( function NightStalkerisChosenCondition) )
+    call TriggerAddAction( gg_trg_NightStalkerisChosen, function NightStalkerisChosenActions)
+endfunction
+

@@ -1,0 +1,22 @@
+function WebConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A05F' )
+endfunction
+function WebActions takes nothing returns nothing
+    local player owner=GetOwningPlayer(GetSpellAbilityUnit())
+    local unit web
+    local location targetloc=GetSpellTargetLoc()
+    set web=CreateUnitAtLoc( owner, 'n01F',targetloc , bj_UNIT_FACING )
+    call UnitApplyTimedLifeBJ( 30.00, 'BTLF', web )
+    call SetUnitAnimation(web, "death" )
+    call SetUnitVertexColorBJ(web, 100, 100, 100, 45.00 )
+    set web=null
+    set owner=null
+endfunction
+//===========================================================================
+function InitTrig_Web takes nothing returns nothing
+    set gg_trg_Web = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Web, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Web, Condition( function WebConditions) )
+    call TriggerAddAction( gg_trg_Web, function WebActions)
+endfunction
+

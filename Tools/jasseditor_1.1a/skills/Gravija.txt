@@ -1,0 +1,21 @@
+function GravijaConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A047' )
+endfunction
+
+function GravijaActions takes nothing returns nothing
+    local effect gvfx
+    call AddSpecialEffectTargetUnitBJ( "overhead", GetSpellTargetUnit(), "Abilities\\Spells\\Human\\FlakCannons\\FlakTarget.mdl" )
+    set gvfx = GetLastCreatedEffectBJ()
+    call SetUnitLifeBJ( GetSpellTargetUnit(), ( GetUnitStateSwap(UNIT_STATE_LIFE, GetSpellTargetUnit()) - ( ( 0.25 + ( 0.10 * I2R(GetUnitAbilityLevelSwapped('A047', GetSpellAbilityUnit())) ) ) * GetUnitStateSwap(UNIT_STATE_LIFE, GetSpellTargetUnit()) ) ) )
+    call TriggerSleepAction(0.5)
+    call DestroyEffect(gvfx)
+endfunction
+
+//===========================================================================
+function InitTrig_Gravija takes nothing returns nothing
+    set gg_trg_Gravija = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Gravija, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Gravija, Condition( function GravijaConditions) )
+    call TriggerAddAction( gg_trg_Gravija, function GravijaActions)
+endfunction
+

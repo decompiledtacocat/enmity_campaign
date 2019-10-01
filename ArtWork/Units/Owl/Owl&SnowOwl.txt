@@ -1,0 +1,20 @@
+Owl & Snow Owl
+
+Originally made by: Blizzard
+Modified by: Dan van Ohllus
+
+Description:
+The hi-poly versions of the owls.
+
+I modified the Snowy Owl portrait model so it could be
+used properly. No crappy portrait glow behind them, plus
+three necessary attachments were added. And don't forget
+the best....the models have no custom textures. ;)
+
+Even if it's an easy modified model, you must give
+credits if you use the models in your map.
+
+Enjoy! ;)
+
+Directories:
+No need for directories for these models. ;P

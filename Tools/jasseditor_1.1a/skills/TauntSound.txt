@@ -1,0 +1,21 @@
+function Taunt takes nothing returns nothing
+local integer rnd=GetRandomInt(1, 8)
+if ( rnd==1 ) then
+call PlaySoundBJ( gg_snd_SargerasLaugh )
+elseif (rnd==2 ) then
+call PlaySoundBJ( gg_snd_MuradinTaunt1 )
+elseif (rnd==3 ) then
+call PlaySoundBJ( gg_snd_MuradinTaunt2 )
+elseif ( rnd==4 ) then
+call PlaySoundBJ( gg_snd_AcolytePissed4 )
+elseif ( rnd==5 ) then
+call PlaySoundBJ( gg_snd_DeathKnightPissed1 )
+elseif ( rnd==6) then
+ call PlaySoundBJ( gg_snd_HeroLichPissed8 )
+elseif (rnd==7 ) then
+ call PlaySoundBJ( gg_snd_ShadowHunterPissed9 )
+elseif ( rnd==8 ) then
+call PlaySoundBJ( gg_snd_ShadowHunterPissed4 )
+endif
+call KillSoundWhenDone(GetLastPlayedSound())
+endfunction

@@ -1,0 +1,1774 @@
+Deg2Rad takes real degrees returns real
+Rad2Deg takes real radians returns real
+Sin takes real radians returns real
+Cos takes real radians returns real
+Tan takes real radians returns real
+Asin takes real y returns real
+Acos takes real x returns real
+Atan takes real x returns real
+Atan2 takes real y, real x returns real
+SquareRoot takes real x returns real
+Pow takes real x, real power returns real
+I2R takes integer i returns real
+R2I takes real r returns integer
+I2S takes integer i returns string
+R2S takes real r returns string
+R2SW takes real r, integer width, integer precision returns string
+S2I takes string s returns integer
+S2R takes string s returns real
+SubString takes string source, integer start, integer end returns string
+StringLength takes string s returns integer
+StringCase takes string source, boolean upper returns string
+GetLocalizedString takes string source returns string
+GetLocalizedHotkey takes string source returns integer
+SetMapName takes string name returns nothing
+SetMapDescription takes string description returns nothing
+SetTeams takes integer teamcount returns nothing
+SetPlayers takes integer playercount returns nothing
+DefineStartLocation takes integer whichStartLoc, real x, real y returns nothing
+DefineStartLocationLoc takes integer whichStartLoc, location whichLocation returns nothing
+SetStartLocPrioCount takes integer whichStartLoc, integer prioSlotCount returns nothing
+SetStartLocPrio takes integer whichStartLoc, integer prioSlotIndex, integer otherStartLocIndex, startlocprio priority returns nothing
+GetStartLocPrioSlot takes integer whichStartLoc, integer prioSlotIndex returns integer
+GetStartLocPrio takes integer whichStartLoc, integer prioSlotIndex returns startlocprio
+SetGameTypeSupported takes gametype whichGameType, boolean value returns nothing
+SetMapFlag takes mapflag whichMapFlag, boolean value returns nothing
+SetGamePlacement takes placement whichPlacementType returns nothing
+SetGameSpeed takes gamespeed whichspeed returns nothing
+SetGameDifficulty takes gamedifficulty whichdifficulty returns nothing
+SetResourceDensity takes mapdensity whichdensity returns nothing
+SetCreatureDensity takes mapdensity whichdensity returns nothing
+GetTeams takes nothing returns integer
+GetPlayers takes nothing returns integer
+IsGameTypeSupported takes gametype whichGameType returns boolean
+GetGameTypeSelected takes nothing returns gametype
+IsMapFlagSet takes mapflag whichMapFlag returns boolean
+SetPlayerTeam takes player whichPlayer, integer whichTeam returns nothing
+SetPlayerStartLocation takes player whichPlayer, integer startLocIndex returns nothing
+ForcePlayerStartLocation takes player whichPlayer, integer startLocIndex returns nothing 
+SetPlayerColor takes player whichPlayer, playercolor color returns nothing
+SetPlayerAlliance takes player sourcePlayer, player otherPlayer, alliancetype whichAllianceSetting, boolean value returns nothing
+SetPlayerTaxRate takes player sourcePlayer, player otherPlayer, playerstate whichResource, integer rate returns nothing
+SetPlayerRacePreference takes player whichPlayer, racepreference whichRacePreference returns nothing
+SetPlayerRaceSelectable takes player whichPlayer, boolean value returns nothing
+SetPlayerController takes player whichPlayer, mapcontrol controlType returns nothing
+SetPlayerName takes player whichPlayer, string name returns nothing
+SetPlayerOnScoreScreen takes player whichPlayer, boolean flag returns nothing
+GetPlayerTeam takes player whichPlayer returns integer
+GetPlayerStartLocation takes player whichPlayer returns integer
+GetPlayerColor takes player whichPlayer returns playercolor
+GetPlayerSelectable takes player whichPlayer returns boolean
+GetPlayerController takes player whichPlayer returns mapcontrol
+GetPlayerSlotState takes player whichPlayer returns playerslotstate
+GetPlayerTaxRate takes player sourcePlayer, player otherPlayer, playerstate whichResource returns integer
+IsPlayerRacePrefSet takes player whichPlayer, racepreference pref returns boolean
+GetPlayerName takes player whichPlayer returns string
+CreateTimer takes nothing returns timer
+DestroyTimer takes timer whichTimer returns nothing
+TimerStart takes timer whichTimer, real timeout, boolean periodic, code handlerFunc returns nothing
+TimerGetElapsed takes timer whichTimer returns real
+TimerGetRemaining takes timer whichTimer returns real
+TimerGetTimeout takes timer whichTimer returns real
+PauseTimer takes timer whichTimer returns nothing
+ResumeTimer takes timer whichTimer returns nothing
+GetExpiredTimer takes nothing returns timer
+CreateGroup takes nothing returns group
+DestroyGroup takes group whichGroup returns nothing
+GroupAddUnit takes group whichGroup, unit whichUnit returns nothing
+GroupRemoveUnit takes group whichGroup, unit whichUnit returns nothing
+GroupClear takes group whichGroup returns nothing
+GroupEnumUnitsOfType takes group whichGroup, string unitname, boolexpr filter returns nothing
+GroupEnumUnitsOfPlayer takes group whichGroup, player whichPlayer, boolexpr filter returns nothing
+GroupEnumUnitsOfTypeCounted takes group whichGroup, string unitname, boolexpr filter, integer countLimit returns nothing
+GroupEnumUnitsInRect takes group whichGroup, rect r, boolexpr filter returns nothing
+GroupEnumUnitsInRectCounted takes group whichGroup, rect r, boolexpr filter, integer countLimit returns nothing
+GroupEnumUnitsInRange takes group whichGroup, real x, real y, real radius, boolexpr filter returns nothing
+GroupEnumUnitsInRangeOfLoc takes group whichGroup, location whichLocation, real radius, boolexpr filter returns nothing
+GroupEnumUnitsInRangeCounted takes group whichGroup, real x, real y, real radius, boolexpr filter, integer countLimit returns nothing
+GroupEnumUnitsInRangeOfLocCounted takes group whichGroup, location whichLocation, real radius, boolexpr filter, integer countLimit returns nothing
+GroupEnumUnitsSelected takes group whichGroup, player whichPlayer, boolexpr filter returns nothing
+GroupImmediateOrder takes group whichGroup, string order returns boolean
+GroupImmediateOrderById takes group whichGroup, integer order returns boolean
+GroupPointOrder takes group whichGroup, string order, real x, real y returns boolean
+GroupPointOrderLoc takes group whichGroup, string order, location whichLocation returns boolean
+GroupPointOrderById takes group whichGroup, integer order, real x, real y returns boolean
+GroupPointOrderByIdLoc takes group whichGroup, integer order, location whichLocation returns boolean
+GroupTargetOrder takes group whichGroup, string order, widget targetWidget returns boolean
+GroupTargetOrderById takes group whichGroup, integer order, widget targetWidget returns boolean
+ForGroup takes group whichGroup, code callback returns nothing
+FirstOfGroup takes group whichGroup returns unit
+CreateForce takes nothing returns force
+DestroyForce takes force whichForce returns nothing
+ForceAddPlayer takes force whichForce, player whichPlayer returns nothing
+ForceRemovePlayer takes force whichForce, player whichPlayer returns nothing
+ForceClear takes force whichForce returns nothing
+ForceEnumPlayers takes force whichForce, boolexpr filter returns nothing
+ForceEnumPlayersCounted takes force whichForce, boolexpr filter, integer countLimit returns nothing
+ForceEnumAllies takes force whichForce, player whichPlayer, boolexpr filter returns nothing
+ForceEnumEnemies takes force whichForce, player whichPlayer, boolexpr filter returns nothing
+ForForce takes force whichForce, code callback returns nothing
+Rect takes real minx, real miny, real maxx, real maxy returns rect
+RectFromLoc takes location min, location max returns rect
+RemoveRect takes rect whichRect returns nothing
+SetRect takes rect whichRect, real minx, real miny, real maxx, real maxy returns nothing
+SetRectFromLoc takes rect whichRect, location min, location max returns nothing
+MoveRectTo takes rect whichRect, real newCenterX, real newCenterY returns nothing
+MoveRectToLoc takes rect whichRect, location newCenterLoc returns nothing
+GetRectCenterX takes rect whichRect returns real
+GetRectCenterY takes rect whichRect returns real
+GetRectMinX takes rect whichRect returns real
+GetRectMinY takes rect whichRect returns real
+GetRectMaxX takes rect whichRect returns real
+GetRectMaxY takes rect whichRect returns real
+CreateRegion takes nothing returns region
+RemoveRegion takes region whichRegion returns nothing
+RegionAddRect takes region whichRegion, rect r returns nothing
+RegionClearRect takes region whichRegion, rect r returns nothing
+RegionAddCell takes region whichRegion, real x, real y returns nothing
+RegionAddCellAtLoc takes region whichRegion, location whichLocation returns nothing
+RegionClearCell takes region whichRegion, real x, real y returns nothing
+RegionClearCellAtLoc takes region whichRegion, location whichLocation returns nothing
+Location takes real x, real y returns location
+RemoveLocation takes location whichLocation returns nothing
+MoveLocation takes location whichLocation, real newX, real newY returns nothing
+GetLocationX takes location whichLocation returns real
+GetLocationY takes location whichLocation returns real 
+IsUnitInRegion takes region whichRegion, unit whichUnit returns boolean
+IsPointInRegion takes region whichRegion, real x, real y returns boolean
+IsLocationInRegion takes region whichRegion, location whichLocation returns boolean
+GetWorldBounds takes nothing returns rect
+CreateTrigger takes nothing returns trigger
+DestroyTrigger takes trigger whichTrigger returns nothing
+ResetTrigger takes trigger whichTrigger returns nothing
+EnableTrigger takes trigger whichTrigger returns nothing
+DisableTrigger takes trigger whichTrigger returns nothing
+IsTriggerEnabled takes trigger whichTrigger returns boolean
+TriggerWaitOnSleeps takes trigger whichTrigger, boolean flag returns nothing
+IsTriggerWaitOnSleeps takes trigger whichTrigger returns boolean
+ExecuteFunc takes string funcName returns nothing
+And takes boolexpr operandA, boolexpr operandB returns boolexpr
+Or takes boolexpr operandA, boolexpr operandB returns boolexpr
+Not takes boolexpr operand returns boolexpr
+Condition takes code func returns conditionfunc
+DestroyCondition takes conditionfunc c returns nothing
+Filter takes code func returns filterfunc
+DestroyFilter takes filterfunc f returns nothing
+DestroyBoolExpr takes boolexpr e returns nothing
+TriggerRegisterVariableEvent takes trigger whichTrigger, string varName, limitop opcode, real limitval returns event
+TriggerRegisterTimerEvent takes trigger whichTrigger, real timeout, boolean periodic returns event
+TriggerRegisterTimerExpireEvent takes trigger whichTrigger, timer t returns event
+TriggerRegisterGameStateEvent takes trigger whichTrigger, gamestate whichState, limitop opcode, real limitval returns event
+TriggerRegisterDialogEvent takes trigger whichTrigger, dialog whichDialog returns event
+TriggerRegisterDialogButtonEvent takes trigger whichTrigger, button whichButton returns event
+TriggerRegisterGameEvent takes trigger whichTrigger, gameevent whichGameEvent returns event
+TriggerRegisterEnterRegion takes trigger whichTrigger, region whichRegion, boolexpr filter returns event
+TriggerRegisterLeaveRegion takes trigger whichTrigger, region whichRegion, boolexpr filter returns event
+TriggerRegisterTrackableHitEvent takes trigger whichTrigger, trackable t returns event
+TriggerRegisterTrackableTrackEvent takes trigger whichTrigger, trackable t returns event
+TriggerRegisterPlayerEvent takes trigger whichTrigger, player whichPlayer, playerevent whichPlayerEvent returns event
+TriggerRegisterPlayerUnitEvent takes trigger whichTrigger, player whichPlayer, playerunitevent whichPlayerUnitEvent, boolexpr filter returns event
+TriggerRegisterPlayerAllianceChange takes trigger whichTrigger, player whichPlayer, alliancetype whichAlliance returns event
+TriggerRegisterPlayerStateEvent takes trigger whichTrigger, player whichPlayer, playerstate whichState, limitop opcode, real limitval returns event
+TriggerRegisterPlayerChatEvent takes trigger whichTrigger, player whichPlayer, string chatMessageToDetect, boolean exactMatchOnly returns event
+TriggerRegisterDeathEvent takes trigger whichTrigger, widget whichWidget returns event
+TriggerRegisterUnitStateEvent takes trigger whichTrigger, unit whichUnit, unitstate whichState, limitop opcode, real limitval returns event
+TriggerRegisterUnitEvent takes trigger whichTrigger, unit whichUnit, unitevent whichEvent returns event
+TriggerRegisterFilterUnitEvent takes trigger whichTrigger, unit whichUnit, unitevent whichEvent, boolexpr filter returns event
+TriggerRegisterUnitInRange takes trigger whichTrigger, unit whichUnit, real range, boolexpr filter returns event
+TriggerAddCondition takes trigger whichTrigger, boolexpr condition returns triggercondition
+TriggerRemoveCondition takes trigger whichTrigger, triggercondition whichCondition returns nothing
+TriggerClearConditions takes trigger whichTrigger returns nothing
+TriggerAddAction takes trigger whichTrigger, code actionFunc returns triggeraction
+TriggerRemoveAction takes trigger whichTrigger, triggeraction whichAction returns nothing
+TriggerClearActions takes trigger whichTrigger returns nothing
+TriggerSleepAction takes real timeout returns nothing
+TriggerWaitForSound takes sound s, real offset returns nothing
+TriggerEvaluate takes trigger whichTrigger returns boolean
+TriggerExecute takes trigger whichTrigger returns nothing
+TriggerExecuteWait takes trigger whichTrigger returns nothing
+TriggerSyncStart takes nothing returns nothing
+TriggerSyncReady takes nothing returns nothing
+GetWidgetLife takes widget whichWidget returns real
+SetWidgetLife takes widget whichWidget, real newLife returns nothing
+GetWidgetX takes widget whichWidget returns real
+GetWidgetY takes widget whichWidget returns real
+CreateDestructable takes integer objectid, real x, real y, real face, real scale, integer variation returns destructable
+CreateDestructableZ takes integer objectid, real x, real y, real z, real face, real scale, integer variation returns destructable
+CreateDeadDestructable takes integer objectid, real x, real y, real face, real scale, integer variation returns destructable
+CreateDeadDestructableZ takes integer objectid, real x, real y, real z, real face, real scale, integer variation returns destructable
+RemoveDestructable takes destructable d returns nothing
+KillDestructable takes destructable d returns nothing
+SetDestructableInvulnerable takes destructable d, boolean flag returns nothing
+IsDestructableInvulnerable takes destructable d returns boolean
+EnumDestructablesInRect takes rect r, boolexpr filter, code actionFunc returns nothing
+GetDestructableTypeId takes destructable d returns integer
+GetDestructableX takes destructable d returns real
+GetDestructableY takes destructable d returns real
+SetDestructableLife takes destructable d, real life returns nothing
+GetDestructableLife takes destructable d returns real
+SetDestructableMaxLife takes destructable d, real max returns nothing
+GetDestructableMaxLife takes destructable d returns real
+DestructableRestoreLife takes destructable d, real life, boolean birth returns nothing
+QueueDestructableAnimation takes destructable d, string whichAnimation returns nothing
+SetDestructableAnimation takes destructable d, string whichAnimation returns nothing
+SetDestructableAnimationSpeed takes destructable d, real speedFactor returns nothing
+ShowDestructable takes destructable d, boolean flag returns nothing
+GetDestructableOccluderHeight takes destructable d returns real
+SetDestructableOccluderHeight takes destructable d, real height returns nothing
+GetDestructableName takes destructable d returns string
+CreateItem takes integer itemid, real x, real y returns item
+RemoveItem takes item whichItem returns nothing
+GetItemPlayer takes item whichItem returns player
+GetItemTypeId takes item i returns integer
+GetItemX takes item i returns real
+GetItemY takes item i returns real
+SetItemPosition takes item i, real x, real y returns nothing
+SetItemDropOnDeath takes item whichItem, boolean flag returns nothing
+SetItemDroppable takes item i, boolean flag returns nothing
+SetItemPawnable takes item i, boolean flag returns nothing
+SetItemPlayer takes item whichItem, player whichPlayer, boolean changeColor returns nothing
+SetItemInvulnerable takes item whichItem, boolean flag returns nothing
+IsItemInvulnerable takes item whichItem returns boolean
+SetItemVisible takes item whichItem, boolean show returns nothing
+IsItemVisible takes item whichItem returns boolean
+IsItemOwned takes item whichItem returns boolean
+IsItemPowerup takes item whichItem returns boolean
+IsItemSellable takes item whichItem returns boolean
+IsItemPawnable takes item whichItem returns boolean
+IsItemIdPowerup takes integer itemId returns boolean
+IsItemIdSellable takes integer itemId returns boolean
+IsItemIdPawnable takes integer itemId returns boolean
+EnumItemsInRect takes rect r, boolexpr filter, code actionFunc returns nothing
+GetItemLevel takes item whichItem returns integer
+GetItemType takes item whichItem returns itemtype
+SetItemDropID takes item whichItem, integer unitId returns nothing
+GetItemCharges takes item whichItem returns integer
+SetItemCharges takes item whichItem, integer charges returns nothing
+GetItemUserData takes item whichItem returns integer
+SetItemUserData takes item whichItem, integer data returns nothing
+CreateUnit takes player id, integer unitid, real x, real y, real face returns unit
+CreateUnitByName takes player whichPlayer, string unitname, real x, real y, real face returns unit
+CreateUnitAtLoc takes player id, integer unitid, location whichLocation, real face returns unit
+CreateUnitAtLocByName takes player id, string unitname, location whichLocation, real face returns unit
+CreateCorpse takes player whichPlayer, integer unitid, real x, real y, real face returns unit
+KillUnit takes unit whichUnit returns nothing
+RemoveUnit takes unit whichUnit returns nothing
+ShowUnit takes unit whichUnit, boolean show returns nothing
+SetUnitState takes unit whichUnit, unitstate whichUnitState, real newVal returns nothing
+SetUnitX takes unit whichUnit, real newX returns nothing
+SetUnitY takes unit whichUnit, real newY returns nothing
+SetUnitPosition takes unit whichUnit, real newX, real newY returns nothing
+SetUnitPositionLoc takes unit whichUnit, location whichLocation returns nothing
+SetUnitFacing takes unit whichUnit, real facingAngle returns nothing
+SetUnitFacingTimed takes unit whichUnit, real facingAngle, real duration returns nothing
+SetUnitMoveSpeed takes unit whichUnit, real newSpeed returns nothing
+SetUnitFlyHeight takes unit whichUnit, real newHeight, real rate returns nothing
+SetUnitTurnSpeed takes unit whichUnit, real newTurnSpeed returns nothing
+SetUnitPropWindow takes unit whichUnit, real newPropWindowAngle returns nothing
+SetUnitAcquireRange takes unit whichUnit, real newAcquireRange returns nothing
+SetUnitCreepGuard takes unit whichUnit, boolean creepGuard returns nothing
+GetUnitAcquireRange takes unit whichUnit returns real
+GetUnitTurnSpeed takes unit whichUnit returns real
+GetUnitPropWindow takes unit whichUnit returns real
+GetUnitFlyHeight takes unit whichUnit returns real
+GetUnitDefaultAcquireRange takes unit whichUnit returns real
+GetUnitDefaultTurnSpeed takes unit whichUnit returns real
+GetUnitDefaultPropWindow takes unit whichUnit returns real
+GetUnitDefaultFlyHeight takes unit whichUnit returns real
+SetUnitOwner takes unit whichUnit, player whichPlayer, boolean changeColor returns nothing
+SetUnitColor takes unit whichUnit, playercolor whichColor returns nothing
+SetUnitScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
+SetUnitTimeScale takes unit whichUnit, real timeScale returns nothing
+SetUnitBlendTime takes unit whichUnit, real blendTime returns nothing
+SetUnitVertexColor takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
+QueueUnitAnimation takes unit whichUnit, string whichAnimation returns nothing
+SetUnitAnimation takes unit whichUnit, string whichAnimation returns nothing
+SetUnitAnimationByIndex takes unit whichUnit, integer whichAnimation returns nothing
+SetUnitAnimationWithRarity takes unit whichUnit, string whichAnimation, raritycontrol rarity returns nothing
+AddUnitAnimationProperties takes unit whichUnit, string animProperties, boolean add returns nothing
+SetUnitLookAt takes unit whichUnit, string whichBone, unit lookAtTarget, real offsetX, real offsetY, real offsetZ returns nothing
+ResetUnitLookAt takes unit whichUnit returns nothing
+SetUnitRescuable takes unit whichUnit, player byWhichPlayer, boolean flag returns nothing
+SetUnitRescueRange takes unit whichUnit, real range returns nothing
+SetHeroStr takes unit whichHero, integer newStr, boolean permanent returns nothing
+SetHeroAgi takes unit whichHero, integer newAgi, boolean permanent returns nothing
+SetHeroInt takes unit whichHero, integer newInt, boolean permanent returns nothing
+GetHeroStr takes unit whichHero, boolean includeBonuses returns integer
+GetHeroAgi takes unit whichHero, boolean includeBonuses returns integer
+GetHeroInt takes unit whichHero, boolean includeBonuses returns integer
+UnitStripHeroLevel takes unit whichHero, integer howManyLevels returns boolean
+GetHeroXP takes unit whichHero returns integer
+SetHeroXP takes unit whichHero, integer newXpVal, boolean showEyeCandy returns nothing
+GetHeroSkillPoints takes unit whichHero returns integer
+UnitModifySkillPoints takes unit whichHero, integer skillPointDelta returns boolean
+AddHeroXP takes unit whichHero, integer xpToAdd, boolean showEyeCandy returns nothing
+SetHeroLevel takes unit whichHero, integer level, boolean showEyeCandy returns nothing
+SuspendHeroXP takes unit whichHero, boolean flag returns nothing
+IsSuspendedXP takes unit whichHero returns boolean
+SelectHeroSkill takes unit whichHero, integer abilcode returns nothing
+GetUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
+ReviveHero takes unit whichHero, real x, real y, boolean doEyecandy returns boolean
+ReviveHeroLoc takes unit whichHero, location loc, boolean doEyecandy returns boolean
+SetUnitExploded takes unit whichUnit, boolean exploded returns nothing
+SetUnitInvulnerable takes unit whichUnit, boolean flag returns nothing
+PauseUnit takes unit whichUnit, boolean flag returns nothing
+IsUnitPaused takes unit whichHero returns boolean
+SetUnitPathing takes unit whichUnit, boolean flag returns nothing
+ClearSelection takes nothing returns nothing
+SelectUnit takes unit whichUnit, boolean flag returns nothing
+GetUnitPointValue takes unit whichUnit returns integer
+GetUnitPointValueByType takes integer unitType returns integer
+UnitAddItem takes unit whichUnit, item whichItem returns boolean
+UnitAddItemById takes unit whichUnit, integer itemId returns item
+UnitAddItemToSlotById takes unit whichUnit, integer itemId, integer itemSlot returns boolean
+UnitRemoveItem takes unit whichUnit, item whichItem returns nothing
+UnitRemoveItemFromSlot takes unit whichUnit, integer itemSlot returns item
+UnitHasItem takes unit whichUnit, item whichItem returns boolean
+UnitItemInSlot takes unit whichUnit, integer itemSlot returns item
+UnitUseItem takes unit whichUnit, item whichItem returns boolean
+UnitUseItemPoint takes unit whichUnit, item whichItem, real x, real y returns boolean
+UnitUseItemTarget takes unit whichUnit, item whichItem, widget target returns boolean
+SetUnitUseFood takes unit whichUnit, boolean useFood returns nothing
+UnitShareVision takes unit whichUnit, player whichPlayer, boolean share returns nothing
+UnitSuspendDecay takes unit whichUnit, boolean suspend returns nothing
+UnitAddAbility takes unit whichUnit, integer abilityId returns boolean
+UnitRemoveAbility takes unit whichUnit, integer abilityId returns boolean
+UnitMakeAbilityPermanent takes unit whichUnit, boolean permanent, integer abilityId returns boolean
+UnitRemoveBuffs takes unit whichUnit, boolean removePositive, boolean removeNegative returns nothing
+UnitRemoveBuffsEx takes unit whichUnit, boolean removePositive, boolean removeNegative, boolean magic, boolean physical, boolean timedLife, boolean aura, boolean autoDispel returns nothing
+UnitHasBuffsEx takes unit whichUnit, boolean removePositive, boolean removeNegative, boolean magic, boolean physical, boolean timedLife, boolean aura, boolean autoDispel returns boolean
+UnitCountBuffsEx takes unit whichUnit, boolean removePositive, boolean removeNegative, boolean magic, boolean physical, boolean timedLife, boolean aura, boolean autoDispel returns integer
+UnitAddSleep takes unit whichUnit, boolean add returns nothing
+UnitCanSleep takes unit whichUnit returns boolean
+UnitAddSleepPerm takes unit whichUnit, boolean add returns nothing
+UnitCanSleepPerm takes unit whichUnit returns boolean
+UnitIsSleeping takes unit whichUnit returns boolean
+UnitWakeUp takes unit whichUnit returns nothing
+UnitApplyTimedLife takes unit whichUnit, integer buffId, real duration returns nothing
+UnitIgnoreAlarm takes unit whichUnit, boolean flag returns boolean
+UnitIgnoreAlarmToggled takes unit whichUnit returns boolean
+UnitResetCooldown takes unit whichUnit returns nothing
+UnitSetConstructionProgress takes unit whichUnit, integer constructionPercentage returns nothing
+UnitSetUpgradeProgress takes unit whichUnit, integer upgradePercentage returns nothing
+UnitPauseTimedLife takes unit whichUnit, boolean flag returns nothing
+UnitSetUsesAltIcon takes unit whichUnit, boolean flag returns nothing
+IssueImmediateOrder takes unit whichUnit, string order returns boolean
+IssueImmediateOrderById takes unit whichUnit, integer order returns boolean
+IssuePointOrder takes unit whichUnit, string order, real x, real y returns boolean
+IssuePointOrderLoc takes unit whichUnit, string order, location whichLocation returns boolean
+IssuePointOrderById takes unit whichUnit, integer order, real x, real y returns boolean
+IssuePointOrderByIdLoc takes unit whichUnit, integer order, location whichLocation returns boolean
+IssueTargetOrder takes unit whichUnit, string order, widget targetWidget returns boolean
+IssueTargetOrderById takes unit whichUnit, integer order, widget targetWidget returns boolean
+IssueInstantTargetOrder takes unit whichUnit, string order, widget targetWidget, widget instantTargetWidget returns boolean
+IssueInstantTargetOrderById takes unit whichUnit, integer order, widget targetWidget, widget instantTargetWidget returns boolean
+IssueBuildOrder takes unit whichPeon, string unitToBuild, real x, real y returns boolean
+IssueBuildOrderById takes unit whichPeon, integer unitId, real x, real y returns boolean
+IssueNeutralImmediateOrder takes player forWhichPlayer, unit neutralStructure, string unitToBuild returns boolean
+IssueNeutralImmediateOrderById takes player forWhichPlayer,unit neutralStructure, integer unitId returns boolean
+IssueNeutralPointOrder takes player forWhichPlayer,unit neutralStructure, string unitToBuild, real x, real y returns boolean
+IssueNeutralPointOrderById takes player forWhichPlayer,unit neutralStructure, integer unitId, real x, real y returns boolean
+IssueNeutralTargetOrder takes player forWhichPlayer,unit neutralStructure, string unitToBuild, widget target returns boolean
+IssueNeutralTargetOrderById takes player forWhichPlayer,unit neutralStructure, integer unitId, widget target returns boolean
+GetUnitCurrentOrder takes unit whichUnit returns integer
+SetResourceAmount takes unit whichUnit, integer amount returns nothing
+AddResourceAmount takes unit whichUnit, integer amount returns nothing
+GetResourceAmount takes unit whichUnit returns integer
+WaygateGetDestinationX takes unit waygate returns real
+WaygateGetDestinationY takes unit waygate returns real
+WaygateSetDestination takes unit waygate, real x, real y returns nothing
+WaygateActivate takes unit waygate, boolean activate returns nothing
+WaygateIsActive takes unit waygate returns boolean
+AddItemToAllStock takes integer itemId, integer currentStock, integer stockMax returns nothing
+AddItemToStock takes unit whichUnit, integer itemId, integer currentStock, integer stockMax returns nothing
+AddUnitToAllStock takes integer unitId, integer currentStock, integer stockMax returns nothing
+AddUnitToStock takes unit whichUnit, integer unitId, integer currentStock, integer stockMax returns nothing
+RemoveItemFromAllStock takes integer itemId returns nothing
+RemoveItemFromStock takes unit whichUnit, integer itemId returns nothing
+RemoveUnitFromAllStock takes integer unitId returns nothing
+RemoveUnitFromStock takes unit whichUnit, integer unitId returns nothing
+SetAllItemTypeSlots takes integer slots returns nothing
+SetAllUnitTypeSlots takes integer slots returns nothing
+SetItemTypeSlots takes unit whichUnit, integer slots returns nothing
+SetUnitTypeSlots takes unit whichUnit, integer slots returns nothing
+GetUnitUserData takes unit whichUnit returns integer
+SetUnitUserData takes unit whichUnit, integer data returns nothing
+SetPlayerUnitsOwner takes player whichPlayer, integer newOwner returns nothing
+CripplePlayer takes player whichPlayer, force toWhichPlayers, boolean flag returns nothing
+SetPlayerAbilityAvailable takes player whichPlayer, integer abilid, boolean avail returns nothing
+SetPlayerState takes player whichPlayer, playerstate whichPlayerState, integer value returns nothing
+RemovePlayer takes player whichPlayer, playergameresult gameResult returns nothing
+CachePlayerHeroData takes player whichPlayer returns nothing
+SetFogStateRect takes player forWhichPlayer, fogstate whichState, rect where, boolean useSharedVision returns nothing
+SetFogStateRadius takes player forWhichPlayer, fogstate whichState, real centerx, real centerY, real radius, boolean useSharedVision returns nothing
+SetFogStateRadiusLoc takes player forWhichPlayer, fogstate whichState, location center, real radius, boolean useSharedVision returns nothing
+FogMaskEnable takes boolean enable returns nothing
+IsFogMaskEnabled takes nothing returns boolean
+FogEnable takes boolean enable returns nothing
+IsFogEnabled takes nothing returns boolean
+CreateFogModifierRect takes player forWhichPlayer, fogstate whichState, rect where, boolean useSharedVision, boolean afterUnits returns fogmodifier
+CreateFogModifierRadius takes player forWhichPlayer, fogstate whichState, real centerx, real centerY, real radius, boolean useSharedVision, boolean afterUnits returns fogmodifier
+CreateFogModifierRadiusLoc takes player forWhichPlayer, fogstate whichState, location center, real radius, boolean useSharedVision, boolean afterUnits returns fogmodifier
+DestroyFogModifier takes fogmodifier whichFogModifier returns nothing
+FogModifierStart takes fogmodifier whichFogModifier returns nothing
+FogModifierStop takes fogmodifier whichFogModifier returns nothing
+VersionGet takes nothing returns version
+VersionCompatible takes version whichVersion returns boolean
+VersionSupported takes version whichVersion returns boolean
+EndGame takes boolean doScoreScreen returns nothing
+ChangeLevel takes string newLevel, boolean doScoreScreen returns nothing
+RestartGame takes boolean doScoreScreen returns nothing
+ReloadGame takes nothing returns nothing
+SetCampaignMenuRace takes race r returns nothing
+SetCampaignMenuRaceEx takes integer campaignIndex returns nothing
+ForceCampaignSelectScreen takes nothing returns nothing
+LoadGame takes string saveFileName, boolean doScoreScreen returns nothing
+SaveGame takes string saveFileName returns nothing
+RenameSaveDirectory takes string sourceDirName, string destDirName returns boolean
+RemoveSaveDirectory takes string sourceDirName returns boolean
+CopySaveGame takes string sourceSaveName, string destSaveName returns boolean
+SaveGameExists takes string saveName returns boolean
+SyncSelections takes nothing returns nothing
+SetFloatGameState takes fgamestate whichFloatGameState, real value returns nothing
+SetIntegerGameState takes igamestate whichIntegerGameState, integer value returns nothing
+SetTutorialCleared takes boolean cleared returns nothing
+SetMissionAvailable takes integer campaignNumber, integer missionNumber, boolean available returns nothing
+SetCampaignAvailable takes integer campaignNumber, boolean available returns nothing
+SetOpCinematicAvailable takes integer campaignNumber, boolean available returns nothing
+SetEdCinematicAvailable takes integer campaignNumber, boolean available returns nothing
+GetDefaultDifficulty takes nothing returns gamedifficulty
+SetDefaultDifficulty takes gamedifficulty g returns nothing
+SetCustomCampaignButtonVisible takes integer whichButton, boolean visible returns nothing
+GetCustomCampaignButtonVisible takes integer whichButton returns boolean
+DoNotSaveReplay takes nothing returns nothing
+DialogCreate takes nothing returns dialog
+DialogDestroy takes dialog whichDialog returns nothing
+DialogClear takes dialog whichDialog returns nothing
+DialogSetMessage takes dialog whichDialog, string messageText returns nothing
+DialogAddButton takes dialog whichDialog, string buttonText, integer hotkey returns button
+DialogAddQuitButton takes dialog whichDialog, boolean doScoreScreen, string buttonText, integer hotkey returns button
+DialogDisplay takes player whichPlayer, dialog whichDialog, boolean flag returns nothing
+ReloadGameCachesFromDisk takes nothing returns boolean
+InitGameCache takes string campaignFile returns gamecache
+SaveGameCache takes gamecache whichCache returns boolean
+StoreInteger takes gamecache cache, string missionKey, string key, integer value returns nothing
+StoreReal takes gamecache cache, string missionKey, string key, real value returns nothing
+StoreBoolean takes gamecache cache, string missionKey, string key, boolean value returns nothing
+StoreUnit takes gamecache cache, string missionKey, string key, unit whichUnit returns boolean
+StoreString takes gamecache cache, string missionKey, string key, string value returns boolean
+SyncStoredInteger takes gamecache cache, string missionKey, string key returns nothing
+SyncStoredReal takes gamecache cache, string missionKey, string key returns nothing
+SyncStoredBoolean takes gamecache cache, string missionKey, string key returns nothing
+SyncStoredUnit takes gamecache cache, string missionKey, string key returns nothing
+SyncStoredString takes gamecache cache, string missionKey, string key returns nothing
+GetStoredInteger takes gamecache cache, string missionKey, string key returns integer
+GetStoredReal takes gamecache cache, string missionKey, string key returns real
+GetStoredBoolean takes gamecache cache, string missionKey, string key returns boolean
+GetStoredString takes gamecache cache, string missionKey, string key returns string
+RestoreUnit takes gamecache cache, string missionKey, string key, player forWhichPlayer, real x, real y, real facing returns unit
+HaveStoredInteger takes gamecache cache, string missionKey, string key returns boolean
+HaveStoredReal takes gamecache cache, string missionKey, string key returns boolean
+HaveStoredBoolean takes gamecache cache, string missionKey, string key returns boolean
+HaveStoredUnit takes gamecache cache, string missionKey, string key returns boolean
+HaveStoredString takes gamecache cache, string missionKey, string key returns boolean
+FlushGameCache takes gamecache cache returns nothing
+FlushStoredMission takes gamecache cache, string missionKey returns nothing
+FlushStoredInteger takes gamecache cache, string missionKey, string key returns nothing
+FlushStoredReal takes gamecache cache, string missionKey, string key returns nothing
+FlushStoredBoolean takes gamecache cache, string missionKey, string key returns nothing
+FlushStoredUnit takes gamecache cache, string missionKey, string key returns nothing
+FlushStoredString takes gamecache cache, string missionKey, string key returns nothing
+GetRandomInt takes integer lowBound, integer highBound returns integer
+GetRandomReal takes real lowBound, real highBound returns real
+CreateUnitPool takes nothing returns unitpool
+DestroyUnitPool takes unitpool whichPool returns nothing
+UnitPoolAddUnitType takes unitpool whichPool, integer unitId, real weight returns nothing
+UnitPoolRemoveUnitType takes unitpool whichPool, integer unitId returns nothing
+PlaceRandomUnit takes unitpool whichPool, player forWhichPlayer, real x, real y, real facing returns unit
+CreateItemPool takes nothing returns itempool
+DestroyItemPool takes itempool whichItemPool returns nothing
+ItemPoolAddItemType takes itempool whichItemPool, integer itemId, real weight returns nothing
+ItemPoolRemoveItemType takes itempool whichItemPool, integer itemId returns nothing
+PlaceRandomItem takes itempool whichItemPool, real x, real y returns item
+ChooseRandomCreep takes integer level returns integer
+ChooseRandomNPBuilding takes nothing returns integer
+ChooseRandomItem takes integer level returns integer
+ChooseRandomItemEx takes itemtype whichType, integer level returns integer
+SetRandomSeed takes integer seed returns nothing
+SetTerrainFog takes real a, real b, real c, real d, real e returns nothing
+ResetTerrainFog takes nothing returns nothing
+SetUnitFog takes real a, real b, real c, real d, real e returns nothing
+SetTerrainFogEx takes integer style, real zstart, real zend, real density, real red, real green, real blue returns nothing
+DisplayTextToPlayer takes player toPlayer, real x, real y, string message returns nothing
+DisplayTimedTextToPlayer takes player toPlayer, real x, real y, real duration, string message returns nothing
+DisplayTimedTextFromPlayer takes player toPlayer, real x, real y, real duration, string message returns nothing
+ClearTextMessages takes nothing returns nothing
+SetDayNightModels takes string terrainDNCFile, string unitDNCFile returns nothing
+SetSkyModel takes string skyModelFile returns nothing
+EnableUserControl takes boolean b returns nothing
+EnableUserUI takes boolean b returns nothing
+SuspendTimeOfDay takes boolean b returns nothing
+SetTimeOfDayScale takes real r returns nothing
+GetTimeOfDayScale takes nothing returns real
+ShowInterface takes boolean flag, real fadeDuration returns nothing
+PauseGame takes boolean flag returns nothing
+UnitAddIndicator takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
+AddIndicator takes widget whichWidget, integer red, integer green, integer blue, integer alpha returns nothing
+PingMinimap takes real x, real y, real duration returns nothing
+PingMinimapEx takes real x, real y, real duration, integer red, integer green, integer blue, boolean extraEffects returns nothing
+EnableOcclusion takes boolean flag returns nothing
+SetIntroShotText takes string introText returns nothing
+SetIntroShotModel takes string introModelPath returns nothing
+EnableWorldFogBoundary takes boolean b returns nothing
+PlayModelCinematic takes string modelName returns nothing
+PlayCinematic takes string movieName returns nothing
+ForceUIKey takes string key returns nothing
+ForceUICancel takes nothing returns nothing
+DisplayLoadDialog takes nothing returns nothing
+SetAltMinimapIcon takes string iconPath returns nothing
+DisableRestartMission takes boolean flag returns nothing
+CreateTextTag takes nothing returns texttag
+DestroyTextTag takes texttag t returns nothing
+SetTextTagText takes texttag t, string s, real height returns nothing
+SetTextTagPos takes texttag t, real x, real y, real heightOffset returns nothing
+SetTextTagPosUnit takes texttag t, unit whichUnit, real heightOffset returns nothing
+SetTextTagColor takes texttag t, integer red, integer green, integer blue, integer alpha returns nothing
+SetTextTagVelocity takes texttag t, real xvel, real yvel returns nothing
+SetTextTagVisibility takes texttag t, boolean flag returns nothing
+SetReservedLocalHeroButtons takes integer reserved returns nothing
+GetAllyColorFilterState takes nothing returns integer
+SetAllyColorFilterState takes integer state returns nothing
+GetCreepCampFilterState takes nothing returns boolean
+SetCreepCampFilterState takes boolean state returns nothing
+EnableMinimapFilterButtons takes boolean enableAlly, boolean enableCreep returns nothing
+CreateTrackable takes string trackableModelPath, real x, real y, real facing returns trackable
+CreateQuest takes nothing returns quest
+DestroyQuest takes quest whichQuest returns nothing
+QuestSetTitle takes quest whichQuest, string title returns nothing
+QuestSetDescription takes quest whichQuest, string description returns nothing
+QuestSetIconPath takes quest whichQuest, string iconPath returns nothing
+QuestSetRequired takes quest whichQuest, boolean required returns nothing
+QuestSetCompleted takes quest whichQuest, boolean completed returns nothing
+QuestSetDiscovered takes quest whichQuest, boolean discovered returns nothing
+QuestSetFailed takes quest whichQuest, boolean failed returns nothing
+QuestSetEnabled takes quest whichQuest, boolean enabled returns nothing
+IsQuestRequired takes quest whichQuest returns boolean
+IsQuestCompleted takes quest whichQuest returns boolean
+IsQuestDiscovered takes quest whichQuest returns boolean
+IsQuestFailed takes quest whichQuest returns boolean
+IsQuestEnabled takes quest whichQuest returns boolean
+QuestCreateItem takes quest whichQuest returns questitem
+QuestItemSetDescription takes questitem whichQuestItem, string description returns nothing
+QuestItemSetCompleted takes questitem whichQuestItem, boolean completed returns nothing
+IsQuestItemCompleted takes questitem whichQuestItem returns boolean
+CreateDefeatCondition takes nothing returns defeatcondition
+DestroyDefeatCondition takes defeatcondition whichCondition returns nothing
+DefeatConditionSetDescription takes defeatcondition whichCondition, string description returns nothing
+FlashQuestDialogButton takes nothing returns nothing
+ForceQuestDialogUpdate takes nothing returns nothing
+CreateTimerDialog takes timer t returns timerdialog
+DestroyTimerDialog takes timerdialog whichDialog returns nothing
+TimerDialogSetTitle takes timerdialog whichDialog, string title returns nothing
+TimerDialogSetTitleColor takes timerdialog whichDialog, integer red, integer green, integer blue, integer alpha returns nothing
+TimerDialogSetTimeColor takes timerdialog whichDialog, integer red, integer green, integer blue, integer alpha returns nothing
+TimerDialogSetSpeed takes timerdialog whichDialog, real speedMultFactor returns nothing
+TimerDialogDisplay takes timerdialog whichDialog, boolean display returns nothing
+IsTimerDialogDisplayed takes timerdialog whichDialog returns boolean
+TimerDialogSetRealTimeRemaining takes timerdialog whichDialog, real timeRemaining returns nothing
+CreateLeaderboard takes nothing returns leaderboard
+DestroyLeaderboard takes leaderboard lb returns nothing
+LeaderboardDisplay takes leaderboard lb, boolean show returns nothing
+IsLeaderboardDisplayed takes leaderboard lb returns boolean
+LeaderboardGetItemCount takes leaderboard lb returns integer
+LeaderboardSetSizeByItemCount takes leaderboard lb, integer count returns nothing
+LeaderboardAddItem takes leaderboard lb, string label, integer value, player p returns nothing
+LeaderboardRemoveItem takes leaderboard lb, integer index returns nothing
+LeaderboardRemovePlayerItem takes leaderboard lb, player p returns nothing
+LeaderboardClear takes leaderboard lb returns nothing
+LeaderboardSortItemsByValue takes leaderboard lb, boolean ascending returns nothing
+LeaderboardSortItemsByPlayer takes leaderboard lb, boolean ascending returns nothing
+LeaderboardSortItemsByLabel takes leaderboard lb, boolean ascending returns nothing
+LeaderboardHasPlayerItem takes leaderboard lb, player p returns boolean
+LeaderboardGetPlayerIndex takes leaderboard lb, player p returns integer
+LeaderboardSetLabel takes leaderboard lb, string label returns nothing
+LeaderboardGetLabelText takes leaderboard lb returns string
+PlayerSetLeaderboard takes player toPlayer, leaderboard lb returns nothing
+PlayerGetLeaderboard takes player toPlayer returns leaderboard
+LeaderboardSetLabelColor takes leaderboard lb, integer red, integer green, integer blue, integer alpha returns nothing
+LeaderboardSetValueColor takes leaderboard lb, integer red, integer green, integer blue, integer alpha returns nothing
+LeaderboardSetStyle takes leaderboard lb, boolean showLabel, boolean showNames, boolean showValues, boolean showIcons returns nothing
+LeaderboardSetItemValue takes leaderboard lb, integer whichItem, integer val returns nothing
+LeaderboardSetItemLabel takes leaderboard lb, integer whichItem, string val returns nothing
+LeaderboardSetItemStyle takes leaderboard lb, integer whichItem, boolean showLabel, boolean showValue, boolean showIcon returns nothing
+LeaderboardSetItemLabelColor takes leaderboard lb, integer whichItem, integer red, integer green, integer blue, integer alpha returns nothing
+LeaderboardSetItemValueColor takes leaderboard lb, integer whichItem, integer red, integer green, integer blue, integer alpha returns nothing
+CreateMultiboard takes nothing returns multiboard
+DestroyMultiboard takes multiboard lb returns nothing
+MultiboardDisplay takes multiboard lb, boolean show returns nothing
+IsMultiboardDisplayed takes multiboard lb returns boolean
+MultiboardMinimize takes multiboard lb, boolean minimize returns nothing
+IsMultiboardMinimized takes multiboard lb returns boolean
+MultiboardClear takes multiboard lb returns nothing
+MultiboardSetTitleText takes multiboard lb, string label returns nothing
+MultiboardGetTitleText takes multiboard lb returns string
+MultiboardSetTitleTextColor takes multiboard lb, integer red, integer green, integer blue, integer alpha returns nothing
+MultiboardGetRowCount takes multiboard lb returns integer
+MultiboardGetColumnCount takes multiboard lb returns integer
+MultiboardSetColumnCount takes multiboard lb, integer count returns nothing
+MultiboardSetRowCount takes multiboard lb, integer count returns nothing
+MultiboardSetItemsStyle takes multiboard lb, boolean showValues, boolean showIcons returns nothing
+MultiboardSetItemsValue takes multiboard lb, string value returns nothing
+MultiboardSetItemsValueColor takes multiboard lb, integer red, integer green, integer blue, integer alpha returns nothing
+MultiboardSetItemsWidth takes multiboard lb, real width returns nothing
+MultiboardSetItemsIcon takes multiboard lb, string iconPath returns nothing
+MultiboardGetItem takes multiboard lb, integer row, integer column returns multiboarditem
+MultiboardReleaseItem takes multiboarditem mbi returns nothing
+MultiboardSetItemStyle takes multiboarditem mbi, boolean showValue, boolean showIcon returns nothing
+MultiboardSetItemValue takes multiboarditem mbi, string val returns nothing
+MultiboardSetItemValueColor takes multiboarditem mbi, integer red, integer green, integer blue, integer alpha returns nothing
+MultiboardSetItemWidth takes multiboarditem mbi, real width returns nothing
+MultiboardSetItemIcon takes multiboarditem mbi, string iconFileName returns nothing
+MultiboardSuppressDisplay takes boolean flag returns nothing
+SetCameraPosition takes real x, real y returns nothing
+SetCameraQuickPosition takes real x, real y returns nothing
+SetCameraBounds takes real x1, real y1, real x2, real y2, real x3, real y3, real x4, real y4 returns nothing
+StopCamera takes nothing returns nothing
+ResetToGameCamera takes real duration returns nothing
+PanCameraTo takes real x, real y returns nothing
+PanCameraToTimed takes real x, real y, real duration returns nothing
+PanCameraToWithZ takes real x, real y, real zOffsetDest returns nothing
+PanCameraToTimedWithZ takes real x, real y, real zOffsetDest, real duration returns nothing
+SetCinematicCamera takes string cameraModelFile returns nothing
+SetCameraRotateMode takes real x, real y, real radiansToSweep, real duration returns nothing
+SetCameraField takes camerafield whichField, real value, real duration returns nothing
+AdjustCameraField takes camerafield whichField, real offset, real duration returns nothing
+SetCameraTargetController takes unit whichUnit, real xoffset, real yoffset, boolean inheritOrientation returns nothing
+SetCameraOrientController takes unit whichUnit, real xoffset, real yoffset returns nothing
+CreateCameraSetup takes nothing returns camerasetup
+CameraSetupSetField takes camerasetup whichSetup, camerafield whichField, real value, real duration returns nothing
+CameraSetupGetField takes camerasetup whichSetup, camerafield whichField returns real
+CameraSetupSetDestPosition takes camerasetup whichSetup, real x, real y, real duration returns nothing
+CameraSetupGetDestPositionLoc takes camerasetup whichSetup returns location
+CameraSetupGetDestPositionX takes camerasetup whichSetup returns real
+CameraSetupGetDestPositionY takes camerasetup whichSetup returns real
+CameraSetupApply takes camerasetup whichSetup, boolean doPan, boolean panTimed returns nothing
+CameraSetupApplyWithZ takes camerasetup whichSetup, real zDestOffset returns nothing
+CameraSetupApplyForceDuration takes camerasetup whichSetup, boolean doPan, real forceDuration returns nothing
+CameraSetupApplyForceDurationWithZ takes camerasetup whichSetup, real zDestOffset, real forceDuration returns nothing
+CameraSetTargetNoise takes real mag, real velocity returns nothing
+CameraSetSourceNoise takes real mag, real velocity returns nothing
+CameraSetTargetNoiseEx takes real mag, real velocity, boolean vertOnly returns nothing
+CameraSetSourceNoiseEx takes real mag, real velocity, boolean vertOnly returns nothing
+CameraSetSmoothingFactor takes real factor returns nothing
+SetCineFilterTexture takes string filename returns nothing
+SetCineFilterBlendMode takes blendmode whichMode returns nothing
+SetCineFilterTexMapFlags takes texmapflags whichFlags returns nothing
+SetCineFilterStartUV takes real minu, real minv, real maxu, real maxv returns nothing
+SetCineFilterEndUV takes real minu, real minv, real maxu, real maxv returns nothing
+SetCineFilterStartColor takes integer red, integer green, integer blue, integer alpha returns nothing
+SetCineFilterEndColor takes integer red, integer green, integer blue, integer alpha returns nothing
+SetCineFilterDuration takes real duration returns nothing
+DisplayCineFilter takes boolean flag returns nothing
+IsCineFilterDisplayed takes nothing returns boolean
+SetCinematicScene takes integer portraitUnitId, playercolor color, string speakerTitle, string text, real sceneDuration, real voiceoverDuration returns nothing
+EndCinematicScene takes nothing returns nothing
+ForceCinematicSubtitles takes boolean flag returns nothing
+GetCameraMargin takes integer whichMargin returns real
+NewSoundEnvironment takes string environmentName returns nothing
+CreateSound takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string eaxSetting returns sound
+CreateSoundFilenameWithLabel takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string SLKEntryName returns sound
+CreateSoundFromLabel takes string soundLabel, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate returns sound
+CreateMIDISound takes string soundLabel, integer fadeInRate, integer fadeOutRate returns sound
+SetSoundParamsFromLabel takes sound soundHandle, string soundLabel returns nothing
+SetSoundDistanceCutoff takes sound soundHandle, real cutoff returns nothing
+SetSoundChannel takes sound soundHandle, integer channel returns nothing
+SetSoundVolume takes sound soundHandle, integer volume returns nothing
+SetSoundPitch takes sound soundHandle, real pitch returns nothing
+SetSoundPlayPosition takes sound soundHandle, integer millisecs returns nothing
+SetSoundDistances takes sound soundHandle, real minDist, real maxDist returns nothing
+SetSoundConeAngles takes sound soundHandle, real inside, real outside, integer outsideVolume returns nothing
+SetSoundConeOrientation takes sound soundHandle, real x, real y, real z returns nothing
+SetSoundPosition takes sound soundHandle, real x, real y, real z returns nothing
+SetSoundVelocity takes sound soundHandle, real x, real y, real z returns nothing
+AttachSoundToUnit takes sound soundHandle, unit whichUnit returns nothing
+StartSound takes sound soundHandle returns nothing
+StopSound takes sound soundHandle, boolean killWhenDone, boolean fadeOut returns nothing
+KillSoundWhenDone takes sound soundHandle returns nothing
+SetMapMusic takes string musicName, boolean random, integer index returns nothing
+ClearMapMusic takes nothing returns nothing
+PlayMusic takes string musicName returns nothing
+PlayMusicEx takes string musicName, integer frommsecs, integer fadeinmsecs returns nothing
+StopMusic takes boolean fadeOut returns nothing
+ResumeMusic takes nothing returns nothing
+PlayThematicMusic takes string musicFileName returns nothing
+PlayThematicMusicEx takes string musicFileName, integer frommsecs returns nothing
+EndThematicMusic takes nothing returns nothing
+SetMusicVolume takes integer volume returns nothing
+SetMusicPlayPosition takes integer millisecs returns nothing
+SetThematicMusicPlayPosition takes integer millisecs returns nothing
+SetSoundDuration takes sound soundHandle, integer duration returns nothing
+GetSoundDuration takes sound soundHandle returns integer
+GetSoundFileDuration takes string musicFileName returns integer
+VolumeGroupSetVolume takes volumegroup vgroup, real scale returns nothing
+VolumeGroupReset takes nothing returns nothing
+GetSoundIsPlaying takes sound soundHandle returns boolean
+GetSoundIsLoading takes sound soundHandle returns boolean
+RegisterStackedSound takes sound soundHandle, boolean byPosition, real rectwidth, real rectheight returns nothing
+UnregisterStackedSound takes sound soundHandle, boolean byPosition, real rectwidth, real rectheight returns nothing
+AddWeatherEffect takes rect where, integer effectID returns weathereffect
+RemoveWeatherEffect takes weathereffect whichEffect returns nothing
+EnableWeatherEffect takes weathereffect whichEffect, boolean enable returns nothing
+TerrainDeformCrater takes real x, real y, real radius, real depth, integer duration, boolean permanent returns terraindeformation
+TerrainDeformRipple takes real x, real y, real radius, real depth, integer duration, integer count, real spaceWaves, real timeWaves, real radiusStartPct, boolean limitNeg returns terraindeformation
+TerrainDeformWave takes real x, real y, real dirX, real dirY, real distance, real speed, real radius, real depth, integer trailTime, integer count returns terraindeformation
+TerrainDeformRandom takes real x, real y, real radius, real minDelta, real maxDelta, integer duration, integer updateInterval returns terraindeformation
+TerrainDeformStop takes terraindeformation deformation, integer duration returns nothing
+TerrainDeformStopAll takes nothing returns nothing
+AddSpecialEffect takes string modelName, real x, real y returns effect
+AddSpecialEffectLoc takes string modelName, location where returns effect
+AddSpecialEffectTarget takes string modelName, widget targetWidget, string attachPointName returns effect
+DestroyEffect takes effect whichEffect returns nothing
+AddSpellEffect takes string abilityString, effecttype t, real x, real y returns effect
+AddSpellEffectLoc takes string abilityString, effecttype t,location where returns effect
+AddSpellEffectById takes integer abilityId, effecttype t,real x, real y returns effect
+AddSpellEffectByIdLoc takes integer abilityId, effecttype t,location where returns effect
+AddSpellEffectTarget takes string modelName, effecttype t, widget targetWidget, string attachPoint returns effect
+AddSpellEffectTargetById takes integer abilityId, effecttype t, widget targetWidget, string attachPoint returns effect
+GetTerrainCliffLevel takes real x, real y returns integer
+SetWaterBaseColor takes integer red, integer green, integer blue, integer alpha returns nothing
+SetWaterDeforms takes boolean val returns nothing
+SetBlight takes player whichPlayer, real x, real y, real radius, boolean addBlight returns nothing
+SetBlightRect takes player whichPlayer, rect r, boolean addBlight returns nothing
+SetBlightPoint takes player whichPlayer, real x, real y, boolean addBlight returns nothing
+SetBlightLoc takes player whichPlayer, location whichLocation, real radius, boolean addBlight returns nothing
+CreateBlightedGoldmine takes player id, real x, real y, real face returns unit
+IsPointBlighted takes real x, real y returns boolean
+SetDoodadAnimation takes real x, real y, real radius, integer doodadID, boolean nearestOnly, string animName, boolean animRandom returns nothing
+SetDoodadAnimationRect takes rect r, integer doodadID, string animName, boolean animRandom returns nothing
+StartMeleeAI takes player num, string script returns nothing
+StartCampaignAI takes player num, string script returns nothing
+CommandAI takes player num, integer command, integer data returns nothing
+PauseCompAI takes player p, boolean pause returns nothing
+GetAIDifficulty takes player num returns aidifficulty
+RemoveGuardPosition takes unit hUnit returns nothing
+RecycleGuardPosition takes unit hUnit returns nothing
+RemoveAllGuardPositions takes player num returns nothing
+Cheat takes string cheatStr returns nothing
+IsNoVictoryCheat takes nothing returns boolean
+IsNoDefeatCheat takes nothing returns boolean
+Preload takes string filename returns nothing
+PreloadEnd takes real timeout returns nothing
+PreloadStart takes nothing returns nothing
+PreloadRefresh takes nothing returns nothing
+PreloadEndEx takes nothing returns nothing
+PreloadGenClear takes nothing returns nothing
+PreloadGenStart takes nothing returns nothing
+PreloadGenEnd takes string filename returns nothing
+Preloader takes string filename returns nothing
+ConvertRace takes integer i returns race
+ConvertAllianceType takes integer i returns alliancetype
+ConvertRacePref takes integer i returns racepreference
+ConvertIGameState takes integer i returns igamestate
+ConvertFGameState takes integer i returns fgamestate
+ConvertPlayerState takes integer i returns playerstate
+ConvertPlayerScore takes integer i returns playerscore
+ConvertPlayerGameResult takes integer i returns playergameresult
+ConvertUnitState takes integer i returns unitstate
+ConvertAIDifficulty takes integer i returns aidifficulty
+ConvertGameEvent takes integer i returns gameevent
+ConvertPlayerEvent takes integer i returns playerevent
+ConvertPlayerUnitEvent takes integer i returns playerunitevent
+ConvertWidgetEvent takes integer i returns widgetevent
+ConvertDialogEvent takes integer i returns dialogevent
+ConvertUnitEvent takes integer i returns unitevent
+ConvertLimitOp takes integer i returns limitop
+ConvertUnitType takes integer i returns unittype
+ConvertGameSpeed takes integer i returns gamespeed
+ConvertPlacement takes integer i returns placement
+ConvertStartLocPrio takes integer i returns startlocprio
+ConvertGameDifficulty takes integer i returns gamedifficulty
+ConvertGameType takes integer i returns gametype
+ConvertMapFlag takes integer i returns mapflag
+ConvertMapVisibility takes integer i returns mapvisibility
+ConvertMapSetting takes integer i returns mapsetting
+ConvertMapDensity takes integer i returns mapdensity
+ConvertMapControl takes integer i returns mapcontrol
+ConvertPlayerColor takes integer i returns playercolor
+ConvertPlayerSlotState takes integer i returns playerslotstate
+ConvertVolumeGroup takes integer i returns volumegroup
+ConvertCameraField takes integer i returns camerafield
+ConvertBlendMode takes integer i returns blendmode
+ConvertRarityControl takes integer i returns raritycontrol
+ConvertTexMapFlags takes integer i returns texmapflags
+ConvertFogState takes integer i returns fogstate
+ConvertEffectType takes integer i returns effecttype
+ConvertVersion takes integer i returns version
+ConvertItemType takes integer i returns itemtype
+OrderId takes string orderIdString returns integer
+OrderId2String takes integer orderId returns string
+UnitId takes string unitIdString returns integer
+UnitId2String takes integer unitId returns string
+AbilityId takes string abilityIdString returns integer
+AbilityId2String takes integer abilityId returns string
+GetObjectName takes integer objectId returns string
+GetGamePlacement takes nothing returns placement
+GetGameSpeed takes nothing returns gamespeed
+GetGameDifficulty takes nothing returns gamedifficulty
+GetResourceDensity takes nothing returns mapdensity
+GetCreatureDensity takes nothing returns mapdensity
+GetStartLocationX takes integer whichStartLocation returns real
+GetStartLocationY takes integer whichStartLocation returns real
+GetStartLocationLoc takes integer whichStartLocation returns location
+GetFilterUnit takes nothing returns unit
+GetEnumUnit takes nothing returns unit
+GetFilterDestructable takes nothing returns destructable
+GetEnumDestructable takes nothing returns destructable
+GetFilterItem takes nothing returns item
+GetEnumItem takes nothing returns item
+GetFilterPlayer takes nothing returns player
+GetEnumPlayer takes nothing returns player
+GetTriggeringTrigger takes nothing returns trigger
+GetTriggerEventId takes nothing returns eventid
+GetTriggerEvalCount takes trigger whichTrigger returns integer
+GetTriggerExecCount takes trigger whichTrigger returns integer
+GetEventGameState takes nothing returns gamestate
+GetWinningPlayer takes nothing returns player
+GetTriggeringRegion takes nothing returns region
+GetEnteringUnit takes nothing returns unit
+GetLeavingUnit takes nothing returns unit
+GetTriggeringTrackable takes nothing returns trackable
+GetClickedButton takes nothing returns button
+GetClickedDialog takes nothing returns dialog
+GetTournamentFinishSoonTimeRemaining takes nothing returns real
+GetTournamentFinishNowRule takes nothing returns integer
+GetTournamentFinishNowPlayer takes nothing returns player
+GetTournamentScore takes player whichPlayer returns integer
+GetSaveBasicFilename takes nothing returns string
+GetTriggerPlayer takes nothing returns player
+GetLevelingUnit takes nothing returns unit
+GetLearningUnit takes nothing returns unit
+GetLearnedSkill takes nothing returns integer
+GetLearnedSkillLevel takes nothing returns integer
+GetRevivableUnit takes nothing returns unit
+GetRevivingUnit takes nothing returns unit
+GetAttacker takes nothing returns unit
+GetRescuer takes nothing returns unit
+GetDyingUnit takes nothing returns unit
+GetKillingUnit takes nothing returns unit
+GetDecayingUnit takes nothing returns unit
+GetConstructingStructure takes nothing returns unit
+GetCancelledStructure takes nothing returns unit
+GetConstructedStructure takes nothing returns unit
+GetResearchingUnit takes nothing returns unit
+GetResearched takes nothing returns integer
+GetTrainedUnitType takes nothing returns integer
+GetTrainedUnit takes nothing returns unit
+GetDetectedUnit takes nothing returns unit
+GetSummoningUnit takes nothing returns unit
+GetSummonedUnit takes nothing returns unit
+GetTransportUnit takes nothing returns unit
+GetLoadedUnit takes nothing returns unit
+GetSellingUnit takes nothing returns unit
+GetSoldUnit takes nothing returns unit
+GetBuyingUnit takes nothing returns unit
+GetSoldItem takes nothing returns item
+GetChangingUnit takes nothing returns unit
+GetChangingUnitPrevOwner takes nothing returns player
+GetManipulatingUnit takes nothing returns unit
+GetManipulatedItem takes nothing returns item
+GetOrderedUnit takes nothing returns unit
+GetIssuedOrderId takes nothing returns integer
+GetOrderPointX takes nothing returns real
+GetOrderPointY takes nothing returns real
+GetOrderPointLoc takes nothing returns location
+GetOrderTarget takes nothing returns widget
+GetOrderTargetDestructable takes nothing returns destructable
+GetOrderTargetItem takes nothing returns item
+GetOrderTargetUnit takes nothing returns unit
+GetSpellAbilityUnit takes nothing returns unit
+GetSpellAbilityId takes nothing returns integer
+GetSpellAbility takes nothing returns ability
+GetSpellTargetLoc takes nothing returns location
+GetSpellTargetDestructable takes nothing returns destructable
+GetSpellTargetItem takes nothing returns item
+GetSpellTargetUnit takes nothing returns unit
+GetEventPlayerState takes nothing returns playerstate
+GetEventPlayerChatString takes nothing returns string
+GetEventPlayerChatStringMatched takes nothing returns string
+GetTriggerUnit takes nothing returns unit
+GetEventUnitState takes nothing returns unitstate
+GetEventDamage takes nothing returns real
+GetEventDetectingPlayer takes nothing returns player
+GetEventTargetUnit takes nothing returns unit
+GetTriggerWidget takes nothing returns widget
+GetItemName takes item whichItem returns string
+GetHeroLevel takes unit whichHero returns integer
+GetUnitLevel takes unit whichUnit returns integer
+GetUnitX takes unit whichUnit returns real
+GetUnitY takes unit whichUnit returns real
+GetUnitLoc takes unit whichUnit returns location
+GetUnitFacing takes unit whichUnit returns real
+GetUnitMoveSpeed takes unit whichUnit returns real
+GetUnitDefaultMoveSpeed takes unit whichUnit returns real
+GetUnitState takes unit whichUnit, unitstate whichUnitState returns real
+GetOwningPlayer takes unit whichUnit returns player
+GetUnitTypeId takes unit whichUnit returns integer
+GetUnitRace takes unit whichUnit returns race
+GetUnitName takes unit whichUnit returns string
+GetUnitFoodUsed takes unit whichUnit returns integer
+GetUnitFoodMade takes unit whichUnit returns integer
+GetFoodMade takes integer unitId returns integer
+GetFoodUsed takes integer unitId returns integer
+GetUnitRallyPoint takes unit whichUnit returns location
+GetUnitRallyUnit takes unit whichUnit returns unit
+GetUnitRallyDestructable takes unit whichUnit returns destructable
+IsUnitInGroup takes unit whichUnit, group whichGroup returns boolean
+IsUnitInForce takes unit whichUnit, force whichForce returns boolean
+IsUnitOwnedByPlayer takes unit whichUnit, player whichPlayer returns boolean
+IsUnitAlly takes unit whichUnit, player whichPlayer returns boolean
+IsUnitEnemy takes unit whichUnit, player whichPlayer returns boolean
+IsUnitVisible takes unit whichUnit, player whichPlayer returns boolean
+IsUnitDetected takes unit whichUnit, player whichPlayer returns boolean
+IsUnitInvisible takes unit whichUnit, player whichPlayer returns boolean
+IsUnitFogged takes unit whichUnit, player whichPlayer returns boolean
+IsUnitMasked takes unit whichUnit, player whichPlayer returns boolean
+IsUnitSelected takes unit whichUnit, player whichPlayer returns boolean
+IsUnitRace takes unit whichUnit, race whichRace returns boolean
+IsUnitType takes unit whichUnit, unittype whichUnitType returns boolean
+IsUnit takes unit whichUnit, unit whichSpecifiedUnit returns boolean
+IsUnitInRange takes unit whichUnit, unit otherUnit, real distance returns boolean
+IsUnitInRangeXY takes unit whichUnit, real x, real y, real distance returns boolean
+IsUnitInRangeLoc takes unit whichUnit, location whichLocation, real distance returns boolean
+IsUnitHidden takes unit whichUnit returns boolean
+IsUnitIllusion takes unit whichUnit returns boolean
+IsUnitInTransport takes unit whichUnit, unit whichTransport returns boolean
+IsUnitLoaded takes unit whichUnit returns boolean
+IsHeroUnitId takes integer unitId returns boolean
+IsUnitIdType takes integer unitId, unittype whichUnitType returns boolean
+Player takes integer number returns player
+GetLocalPlayer takes nothing returns player
+IsPlayerAlly takes player whichPlayer, player otherPlayer returns boolean
+IsPlayerEnemy takes player whichPlayer, player otherPlayer returns boolean
+IsPlayerInForce takes player whichPlayer, force whichForce returns boolean
+IsPlayerObserver takes player whichPlayer returns boolean
+IsVisibleToPlayer takes real x, real y, player whichPlayer returns boolean
+IsLocationVisibleToPlayer takes location whichLocation, player whichPlayer returns boolean
+IsFoggedToPlayer takes real x, real y, player whichPlayer returns boolean
+IsLocationFoggedToPlayer takes location whichLocation, player whichPlayer returns boolean
+IsMaskedToPlayer takes real x, real y, player whichPlayer returns boolean
+IsLocationMaskedToPlayer takes location whichLocation, player whichPlayer returns boolean
+GetPlayerRace takes player whichPlayer returns race
+GetPlayerId takes player whichPlayer returns integer
+GetPlayerUnitCount takes player whichPlayer, boolean includeIncomplete returns integer
+GetPlayerTypedUnitCount takes player whichPlayer, string unitName, boolean includeIncomplete, boolean includeUpgrades returns integer
+GetPlayerStructureCount takes player whichPlayer, boolean includeIncomplete returns integer
+GetPlayerState takes player whichPlayer, playerstate whichPlayerState returns integer
+GetPlayerScore takes player whichPlayer, playerscore whichPlayerScore returns integer
+GetPlayerAlliance takes player sourcePlayer, player otherPlayer, alliancetype whichAllianceSetting returns boolean
+GetPlayerHandicap takes player whichPlayer returns real
+GetPlayerHandicapXP takes player whichPlayer returns real
+SetPlayerHandicap takes player whichPlayer, real handicap returns nothing
+SetPlayerHandicapXP takes player whichPlayer, real handicap returns nothing
+SetPlayerTechMaxAllowed takes player whichPlayer, integer techid, integer maximum returns nothing
+GetPlayerTechMaxAllowed takes player whichPlayer, integer techid returns integer
+AddPlayerTechResearched takes player whichPlayer, integer techid, integer levels returns nothing
+SetPlayerTechResearched takes player whichPlayer, integer techid, integer setToLevel returns nothing
+GetPlayerTechResearched takes player whichPlayer, integer techid, boolean specificonly returns boolean
+GetPlayerTechCount takes player whichPlayer, integer techid, boolean specificonly returns integer
+GetFloatGameState takes fgamestate whichFloatGameState returns real
+GetIntegerGameState takes igamestate whichIntegerGameState returns integer
+GetCameraBoundMinX takes nothing returns real
+GetCameraBoundMinY takes nothing returns real
+GetCameraBoundMaxX takes nothing returns real
+GetCameraBoundMaxY takes nothing returns real
+GetCameraField takes camerafield whichField returns real
+GetCameraTargetPositionX takes nothing returns real
+GetCameraTargetPositionY takes nothing returns real
+GetCameraTargetPositionZ takes nothing returns real
+GetCameraTargetPositionLoc takes nothing returns location
+GetCameraEyePositionX takes nothing returns real
+GetCameraEyePositionY takes nothing returns real
+GetCameraEyePositionZ takes nothing returns real
+GetCameraEyePositionLoc takes nothing returns location
+BJDebugMsg takes string msg returns nothing
+RMinBJ takes real a, real b returns real
+RMaxBJ takes real a, real b returns real
+RAbsBJ takes real a returns real
+RSignBJ takes real a returns real
+IMinBJ takes integer a, integer b returns integer
+IMaxBJ takes integer a, integer b returns integer
+IAbsBJ takes integer a returns integer
+ISignBJ takes integer a returns integer
+SinBJ takes real degrees returns real
+CosBJ takes real degrees returns real
+TanBJ takes real degrees returns real
+AsinBJ takes real degrees returns real
+AcosBJ takes real degrees returns real
+AtanBJ takes real degrees returns real
+Atan2BJ takes real y, real x returns real
+AngleBetweenPoints takes location locA, location locB returns real
+DistanceBetweenPoints takes location locA, location locB returns real
+PolarProjectionBJ takes location source, real dist, real angle returns location
+GetRandomDirectionDeg takes nothing returns real
+GetRandomPercentageBJ takes nothing returns real
+GetRandomLocInRect takes rect whichRect returns location
+ModuloInteger takes integer dividend, integer divisor returns integer
+ModuloReal takes real dividend, real divisor returns real
+OffsetLocation takes location loc, real dx, real dy returns location
+OffsetRectBJ takes rect r, real dx, real dy returns rect
+RectFromCenterSizeBJ takes location center, real width, real height returns rect
+RectContainsCoords takes rect r, real x, real y returns boolean
+RectContainsLoc takes rect r, location loc returns boolean
+RectContainsUnit takes rect r, unit whichUnit returns boolean
+RectContainsItem takes item whichItem, rect r returns boolean
+ConditionalTriggerExecute takes trigger trig returns nothing
+TriggerExecuteBJ takes trigger trig, boolean checkConditions returns boolean
+PostTriggerExecuteBJ takes trigger trig, boolean checkConditions returns boolean
+QueuedTriggerCheck takes nothing returns nothing
+QueuedTriggerGetIndex takes trigger trig returns integer
+QueuedTriggerRemoveByIndex takes integer trigIndex returns boolean
+QueuedTriggerAttemptExec takes nothing returns boolean
+QueuedTriggerAddBJ takes trigger trig, boolean checkConditions returns boolean
+QueuedTriggerRemoveBJ takes trigger trig returns nothing
+QueuedTriggerDoneBJ takes nothing returns nothing
+QueuedTriggerClearBJ takes nothing returns nothing
+QueuedTriggerClearInactiveBJ takes nothing returns nothing
+QueuedTriggerCountBJ takes nothing returns integer
+IsTriggerQueueEmptyBJ takes nothing returns boolean
+IsTriggerQueuedBJ takes trigger trig returns boolean
+GetForLoopIndexA takes nothing returns integer
+SetForLoopIndexA takes integer newIndex returns nothing
+GetForLoopIndexB takes nothing returns integer
+SetForLoopIndexB takes integer newIndex returns nothing
+PolledWait takes real duration returns nothing
+IntegerTertiaryOp takes boolean flag, integer valueA, integer valueB returns integer
+DoNothing takes nothing returns nothing
+CommentString takes string commentString returns nothing
+StringIdentity takes string theString returns string
+GetBooleanAnd takes boolean valueA, boolean valueB returns boolean
+GetBooleanOr takes boolean valueA, boolean valueB returns boolean
+PercentToInt takes real percentage, integer max returns integer
+PercentTo255 takes real percentage returns integer
+GetTimeOfDay takes nothing returns real
+SetTimeOfDay takes real whatTime returns nothing
+SetTimeOfDayScalePercentBJ takes real scalePercent returns nothing
+GetTimeOfDayScalePercentBJ takes nothing returns real
+PlaySound takes string soundName returns nothing
+CompareLocationsBJ takes location A, location B returns boolean
+CompareRectsBJ takes rect A, rect B returns boolean
+GetRectFromCircleBJ takes location center, real radius returns rect
+GetCurrentCameraSetup takes nothing returns camerasetup
+CameraSetupApplyForPlayer takes boolean doPan, camerasetup whichSetup, player whichPlayer, real duration returns nothing
+CameraSetupGetFieldSwap takes camerafield whichField, camerasetup whichSetup returns real
+SetCameraFieldForPlayer takes player whichPlayer, camerafield whichField, real value, real duration returns nothing
+SetCameraTargetControllerNoZForPlayer takes player whichPlayer, unit whichUnit, real xoffset, real yoffset, boolean inheritOrientation returns nothing
+SetCameraPositionForPlayer takes player whichPlayer, real x, real y returns nothing
+SetCameraPositionLocForPlayer takes player whichPlayer, location loc returns nothing
+RotateCameraAroundLocBJ takes real degrees, location loc, player whichPlayer, real duration returns nothing
+PanCameraToForPlayer takes player whichPlayer, real x, real y returns nothing
+PanCameraToLocForPlayer takes player whichPlayer, location loc returns nothing
+PanCameraToTimedForPlayer takes player whichPlayer, real x, real y, real duration returns nothing
+PanCameraToTimedLocForPlayer takes player whichPlayer, location loc, real duration returns nothing
+PanCameraToTimedLocWithZForPlayer takes player whichPlayer, location loc, real zOffset, real duration returns nothing
+SmartCameraPanBJ takes player whichPlayer, location loc, real duration returns nothing
+SetCinematicCameraForPlayer takes player whichPlayer, string cameraModelFile returns nothing
+ResetToGameCameraForPlayer takes player whichPlayer, real duration returns nothing
+CameraSetSourceNoiseForPlayer takes player whichPlayer, real magnitude, real velocity returns nothing
+CameraSetTargetNoiseForPlayer takes player whichPlayer, real magnitude, real velocity returns nothing
+CameraSetEQNoiseForPlayer takes player whichPlayer, real magnitude returns nothing
+CameraClearNoiseForPlayer takes player whichPlayer returns nothing
+GetCurrentCameraBoundsMapRectBJ takes nothing returns rect
+GetCameraBoundsMapRect takes nothing returns rect
+GetPlayableMapRect takes nothing returns rect
+GetEntireMapRect takes nothing returns rect
+SetCameraBoundsToRect takes rect r returns nothing
+SetCameraBoundsToRectForPlayerBJ takes player whichPlayer, rect r returns nothing
+AdjustCameraBoundsBJ takes integer adjustMethod, real dxWest, real dxEast, real dyNorth, real dySouth returns nothing
+AdjustCameraBoundsForPlayerBJ takes integer adjustMethod, player whichPlayer, real dxWest, real dxEast, real dyNorth, real dySouth returns nothing
+SetCameraQuickPositionForPlayer takes player whichPlayer, real x, real y returns nothing
+SetCameraQuickPositionLocForPlayer takes player whichPlayer, location loc returns nothing
+SetCameraQuickPositionLoc takes location loc returns nothing
+StopCameraForPlayerBJ takes player whichPlayer returns nothing
+SetCameraOrientControllerForPlayerBJ takes player whichPlayer, unit whichUnit, real xoffset, real yoffset returns nothing
+CameraSetSmoothingFactorBJ takes real factor returns nothing
+CameraResetSmoothingFactorBJ takes nothing returns nothing
+DisplayTextToForce takes force toForce, string message returns nothing
+DisplayTimedTextToForce takes force toForce, real duration, string message returns nothing
+ClearTextMessagesBJ takes force toForce returns nothing
+SubStringBJ takes string source, integer start, integer end returns string
+TriggerRegisterTimerEventPeriodic takes trigger trig, real timeout returns event
+TriggerRegisterTimerEventSingle takes trigger trig, real timeout returns event
+TriggerRegisterTimerExpireEventBJ takes trigger trig, timer t returns event
+TriggerRegisterPlayerUnitEventSimple takes trigger trig, player whichPlayer, playerunitevent whichEvent returns event
+TriggerRegisterAnyUnitEventBJ takes trigger trig, playerunitevent whichEvent returns nothing
+TriggerRegisterPlayerSelectionEventBJ takes trigger trig, player whichPlayer, boolean selected returns event
+TriggerRegisterPlayerKeyEventBJ takes trigger trig, player whichPlayer, integer keType, integer keKey returns event
+TriggerRegisterPlayerEventVictory takes trigger trig, player whichPlayer returns event
+TriggerRegisterPlayerEventDefeat takes trigger trig, player whichPlayer returns event
+TriggerRegisterPlayerEventLeave takes trigger trig, player whichPlayer returns event
+TriggerRegisterPlayerEventAllianceChanged takes trigger trig, player whichPlayer returns event
+TriggerRegisterPlayerEventEndCinematic takes trigger trig, player whichPlayer returns event
+TriggerRegisterGameStateEventTimeOfDay takes trigger trig, limitop opcode, real limitval returns event
+TriggerRegisterEnterRegionSimple takes trigger trig, region whichRegion returns event
+TriggerRegisterLeaveRegionSimple takes trigger trig, region whichRegion returns event
+TriggerRegisterEnterRectSimple takes trigger trig, rect r returns event
+TriggerRegisterLeaveRectSimple takes trigger trig, rect r returns event
+TriggerRegisterDistanceBetweenUnits takes trigger trig, unit whichUnit, boolexpr condition, real range returns event
+TriggerRegisterUnitInRangeSimple takes trigger trig, real range, unit whichUnit returns event
+TriggerRegisterUnitLifeEvent takes trigger trig, unit whichUnit, limitop opcode, real limitval returns event
+TriggerRegisterUnitManaEvent takes trigger trig, unit whichUnit, limitop opcode, real limitval returns event
+TriggerRegisterDialogEventBJ takes trigger trig, dialog whichDialog returns event
+TriggerRegisterShowSkillEventBJ takes trigger trig returns event
+TriggerRegisterBuildSubmenuEventBJ takes trigger trig returns event
+TriggerRegisterGameLoadedEventBJ takes trigger trig returns event
+TriggerRegisterGameSavedEventBJ takes trigger trig returns event
+RegisterDestDeathInRegionEnum takes nothing returns nothing
+TriggerRegisterDestDeathInRegionEvent takes trigger trig, rect r returns event
+AddWeatherEffectSaveLast takes rect where, integer effectID returns weathereffect
+GetLastCreatedWeatherEffect takes nothing returns weathereffect
+RemoveWeatherEffectBJ takes weathereffect whichWeatherEffect returns nothing
+TerrainDeformationCraterBJ takes real duration, boolean permanent, location where, real radius, real depth returns terraindeformation
+TerrainDeformationRippleBJ takes real duration, boolean limitNeg, location where, real startRadius, real endRadius, real depth, real wavePeriod, real waveWidth returns terraindeformation
+TerrainDeformationWaveBJ takes real duration, location source, location target, real radius, real depth, real trailDelay returns terraindeformation
+TerrainDeformationRandomBJ takes real duration, location where, real radius, real minDelta, real maxDelta, real updateInterval returns terraindeformation
+TerrainDeformationStopBJ takes terraindeformation deformation, real duration returns nothing
+GetLastCreatedTerrainDeformation takes nothing returns terraindeformation
+GetTerrainCliffLevelBJ takes location where returns integer
+SetWaterBaseColorBJ takes real red, real green, real blue, real transparency returns nothing
+CreateFogModifierRectSimple takes player whichPlayer, fogstate whichFogState, rect r, boolean afterUnits returns fogmodifier
+CreateFogModifierRadiusLocSimple takes player whichPlayer, fogstate whichFogState, location center, real radius, boolean afterUnits returns fogmodifier
+CreateFogModifierRectBJ takes boolean enabled, player whichPlayer, fogstate whichFogState, rect r returns fogmodifier
+CreateFogModifierRadiusLocBJ takes boolean enabled, player whichPlayer, fogstate whichFogState, location center, real radius returns fogmodifier
+GetLastCreatedFogModifier takes nothing returns fogmodifier
+FogEnableOn takes nothing returns nothing
+FogEnableOff takes nothing returns nothing
+FogMaskEnableOn takes nothing returns nothing
+FogMaskEnableOff takes nothing returns nothing
+UseTimeOfDayBJ takes boolean flag returns nothing
+SetTerrainFogExBJ takes integer style, real zstart, real zend, real density, real red, real green, real blue returns nothing
+ResetTerrainFogBJ takes nothing returns nothing
+SetDoodadAnimationBJ takes string animName, integer doodadID, real radius, location center returns nothing
+SetDoodadAnimationRectBJ takes string animName, integer doodadID, rect r returns nothing
+AddUnitAnimationPropertiesBJ takes boolean add, string animProperties, unit whichUnit returns nothing
+PlaySoundBJ takes sound soundHandle returns nothing
+StopSoundBJ takes sound soundHandle, boolean fadeOut returns nothing
+SetSoundVolumeBJ takes sound soundHandle, real volumePercent returns nothing
+SetSoundOffsetBJ takes real newOffset, sound soundHandle returns nothing
+SetSoundDistanceCutoffBJ takes sound soundHandle, real cutoff returns nothing
+SetSoundPitchBJ takes sound soundHandle, real pitch returns nothing
+SetSoundPositionLocBJ takes sound soundHandle, location loc, real z returns nothing
+AttachSoundToUnitBJ takes sound soundHandle, unit whichUnit returns nothing
+SetSoundConeAnglesBJ takes sound soundHandle, real inside, real outside, real outsideVolumePercent returns nothing
+KillSoundWhenDoneBJ takes sound soundHandle returns nothing
+PlaySoundAtPointBJ takes sound soundHandle, real volumePercent, location loc, real z returns nothing
+PlaySoundOnUnitBJ takes sound soundHandle, real volumePercent, unit whichUnit returns nothing
+PlaySoundFromOffsetBJ takes sound soundHandle, real volumePercent, real startingOffset returns nothing
+PlayMusicBJ takes string musicFileName returns nothing
+PlayMusicExBJ takes string musicFileName, real startingOffset, real fadeInTime returns nothing
+SetMusicOffsetBJ takes real newOffset returns nothing
+PlayThematicMusicBJ takes string musicName returns nothing
+PlayThematicMusicExBJ takes string musicName, real startingOffset returns nothing
+SetThematicMusicOffsetBJ takes real newOffset returns nothing
+EndThematicMusicBJ takes nothing returns nothing
+StopMusicBJ takes boolean fadeOut returns nothing
+ResumeMusicBJ takes nothing returns nothing
+SetMusicVolumeBJ takes real volumePercent returns nothing
+GetSoundDurationBJ takes sound soundHandle returns real
+GetSoundFileDurationBJ takes string musicFileName returns real
+GetLastPlayedSound takes nothing returns sound
+GetLastPlayedMusic takes nothing returns string
+VolumeGroupSetVolumeBJ takes volumegroup vgroup, real percent returns nothing
+SetCineModeVolumeGroupsImmediateBJ takes nothing returns nothing
+SetCineModeVolumeGroupsBJ takes nothing returns nothing
+SetSpeechVolumeGroupsImmediateBJ takes nothing returns nothing
+SetSpeechVolumeGroupsBJ takes nothing returns nothing
+VolumeGroupResetImmediateBJ takes nothing returns nothing
+VolumeGroupResetBJ takes nothing returns nothing
+GetSoundIsPlayingBJ takes sound soundHandle returns boolean
+WaitForSoundBJ takes sound soundHandle, real offset returns nothing
+SetMapMusicIndexedBJ takes string musicName, integer index returns nothing
+SetMapMusicRandomBJ takes string musicName returns nothing
+ClearMapMusicBJ takes nothing returns nothing
+SetStackedSoundBJ takes boolean add, sound soundHandle, rect r returns nothing
+StartSoundForPlayerBJ takes player whichPlayer, sound soundHandle returns nothing
+VolumeGroupSetVolumeForPlayerBJ takes player whichPlayer, volumegroup vgroup, real scale returns nothing
+EnableDawnDusk takes boolean flag returns nothing
+IsDawnDuskEnabled takes nothing returns boolean
+SetAmbientDaySound takes string inLabel returns nothing
+SetAmbientNightSound takes string inLabel returns nothing
+AddSpecialEffectLocBJ takes location where, string modelName returns effect
+AddSpecialEffectTargetUnitBJ takes string attachPointName, widget targetWidget, string modelName returns effect
+DestroyEffectBJ takes effect whichEffect returns nothing
+GetLastCreatedEffectBJ takes nothing returns effect
+GetItemLoc takes item whichItem returns location
+GetItemLifeBJ takes widget whichWidget returns real
+SetItemLifeBJ takes widget whichWidget, real life returns nothing
+AddHeroXPSwapped takes integer xpToAdd, unit whichHero, boolean showEyeCandy returns nothing
+SetHeroLevelBJ takes unit whichHero, integer newLevel, boolean showEyeCandy returns nothing
+GetUnitAbilityLevelSwapped takes integer abilcode, unit whichUnit returns integer
+UnitHasBuffBJ takes unit whichUnit, integer buffcode returns boolean
+UnitRemoveBuffBJ takes integer buffcode, unit whichUnit returns boolean
+UnitAddItemSwapped takes item whichItem, unit whichHero returns boolean
+UnitAddItemByIdSwapped takes integer itemId, unit whichHero returns item
+UnitRemoveItemSwapped takes item whichItem, unit whichHero returns nothing
+UnitRemoveItemFromSlotSwapped takes integer itemSlot, unit whichHero returns item
+CreateItemLoc takes integer itemId, location loc returns item
+GetLastCreatedItem takes nothing returns item
+GetLastRemovedItem takes nothing returns item
+SetItemPositionLoc takes item whichItem, location loc returns nothing
+GetLearnedSkillBJ takes nothing returns integer
+SuspendHeroXPBJ takes boolean flag, unit whichHero returns nothing
+SetPlayerHandicapXPBJ takes player whichPlayer, real handicapPercent returns nothing
+GetPlayerHandicapXPBJ takes player whichPlayer returns real
+SetPlayerHandicapBJ takes player whichPlayer, real handicapPercent returns nothing
+GetPlayerHandicapBJ takes player whichPlayer returns real
+GetHeroStatBJ takes integer whichStat, unit whichHero, boolean includeBonuses returns integer
+SetHeroStat takes unit whichHero, integer whichStat, integer value returns nothing
+ModifyHeroStat takes integer whichStat, unit whichHero, integer modifyMethod, integer value returns nothing
+ModifyHeroSkillPoints takes unit whichHero, integer modifyMethod, integer value returns boolean
+UnitUseItemDestructable takes unit whichUnit, item whichItem, widget target returns boolean
+UnitUseItemPointLoc takes unit whichUnit, item whichItem, location loc returns boolean
+UnitItemInSlotBJ takes unit whichUnit, integer itemSlot returns item
+GetInventoryIndexOfItemTypeBJ takes unit whichUnit, integer itemId returns integer
+GetItemOfTypeFromUnitBJ takes unit whichUnit, integer itemId returns item
+UnitHasItemOfTypeBJ takes unit whichUnit, integer itemId returns boolean
+UnitInventoryCount takes unit whichUnit returns integer
+SetItemInvulnerableBJ takes item whichItem, boolean flag returns nothing
+SetItemDropOnDeathBJ takes item whichItem, boolean flag returns nothing
+SetItemDroppableBJ takes item whichItem, boolean flag returns nothing
+SetItemPlayerBJ takes item whichItem, player whichPlayer, boolean changeColor returns nothing
+SetItemVisibleBJ takes boolean show, item whichItem returns nothing
+IsItemHiddenBJ takes item whichItem returns boolean
+ChooseRandomItemBJ takes integer level returns integer
+ChooseRandomItemExBJ takes integer level, itemtype whichType returns integer
+ChooseRandomNPBuildingBJ takes nothing returns integer
+ChooseRandomCreepBJ takes integer level returns integer
+EnumItemsInRectBJ takes rect r, code actionFunc returns nothing
+RandomItemInRectBJEnum takes nothing returns nothing
+RandomItemInRectBJ takes rect r, boolexpr filter returns item
+RandomItemInRectSimpleBJ takes rect r returns item
+CheckItemStatus takes item whichItem, integer status returns boolean
+CheckItemcodeStatus takes integer itemId, integer status returns boolean
+UnitId2OrderIdBJ takes integer unitId returns integer
+String2UnitIdBJ takes string unitIdString returns integer
+UnitId2StringBJ takes integer unitId returns string
+String2OrderIdBJ takes string orderIdString returns integer
+OrderId2StringBJ takes integer orderId returns string
+GetIssuedOrderIdBJ takes nothing returns integer
+GetKillingUnitBJ takes nothing returns unit
+CreateUnitAtLocSaveLast takes player id, integer unitid, location loc, real face returns unit
+GetLastCreatedUnit takes nothing returns unit
+CreateNUnitsAtLoc takes integer count, integer unitId, player whichPlayer, location loc, real face returns group
+CreateNUnitsAtLocFacingLocBJ takes integer count, integer unitId, player whichPlayer, location loc, location lookAt returns group
+GetLastCreatedGroupEnum takes nothing returns nothing
+GetLastCreatedGroup takes nothing returns group
+CreateCorpseLocBJ takes integer unitid, player whichPlayer, location loc returns unit
+UnitSuspendDecayBJ takes boolean suspend, unit whichUnit returns nothing
+DelayedSuspendDecayStopAnimEnum takes nothing returns nothing
+DelayedSuspendDecayBoneEnum takes nothing returns nothing
+DelayedSuspendDecayFleshEnum takes nothing returns nothing
+DelayedSuspendDecay takes nothing returns nothing
+DelayedSuspendDecayCreate takes nothing returns nothing
+CreatePermanentCorpseLocBJ takes integer style, integer unitid, player whichPlayer, location loc, real facing returns unit
+GetUnitStateSwap takes unitstate whichState, unit whichUnit returns real
+GetUnitStatePercent takes unit whichUnit, unitstate whichState, unitstate whichMaxState returns real
+GetUnitLifePercent takes unit whichUnit returns real
+GetUnitManaPercent takes unit whichUnit returns real
+SelectUnitSingle takes unit whichUnit returns nothing
+SelectGroupBJEnum takes nothing returns nothing
+SelectGroupBJ takes group g returns nothing
+SelectUnitAdd takes unit whichUnit returns nothing
+SelectUnitRemove takes unit whichUnit returns nothing
+ClearSelectionForPlayer takes player whichPlayer returns nothing
+SelectUnitForPlayerSingle takes unit whichUnit, player whichPlayer returns nothing
+SelectGroupForPlayerBJ takes group g, player whichPlayer returns nothing
+SelectUnitAddForPlayer takes unit whichUnit, player whichPlayer returns nothing
+SelectUnitRemoveForPlayer takes unit whichUnit, player whichPlayer returns nothing
+SetUnitLifeBJ takes unit whichUnit, real newValue returns nothing
+SetUnitManaBJ takes unit whichUnit, real newValue returns nothing
+SetUnitLifePercentBJ takes unit whichUnit, real percent returns nothing
+SetUnitManaPercentBJ takes unit whichUnit, real percent returns nothing
+IsUnitDeadBJ takes unit whichUnit returns boolean
+IsUnitAliveBJ takes unit whichUnit returns boolean
+IsUnitGroupDeadBJEnum takes nothing returns nothing
+IsUnitGroupDeadBJ takes group g returns boolean
+IsUnitGroupEmptyBJEnum takes nothing returns nothing
+IsUnitGroupEmptyBJ takes group g returns boolean
+IsUnitGroupInRectBJEnum takes nothing returns nothing
+IsUnitGroupInRectBJ takes group g, rect r returns boolean
+IsUnitHiddenBJ takes unit whichUnit returns boolean
+ShowUnitHide takes unit whichUnit returns nothing
+ShowUnitShow takes unit whichUnit returns nothing
+IssueHauntOrderAtLocBJFilter takes nothing returns boolean
+IssueHauntOrderAtLocBJ takes unit whichPeon, location loc returns boolean
+IssueBuildOrderByIdLocBJ takes unit whichPeon, integer unitId, location loc returns boolean
+IssueTrainOrderByIdBJ takes unit whichUnit, integer unitId returns boolean
+GroupTrainOrderByIdBJ takes group g, integer unitId returns boolean
+IssueUpgradeOrderByIdBJ takes unit whichUnit, integer techId returns boolean
+GetAttackedUnitBJ takes nothing returns unit
+SetUnitFlyHeightBJ takes unit whichUnit, real newHeight, real rate returns nothing
+SetUnitTurnSpeedBJ takes unit whichUnit, real turnSpeed returns nothing
+SetUnitPropWindowBJ takes unit whichUnit, real propWindow returns nothing
+GetUnitPropWindowBJ takes unit whichUnit returns real
+GetUnitDefaultPropWindowBJ takes unit whichUnit returns real
+SetUnitBlendTimeBJ takes unit whichUnit, real blendTime returns nothing
+SetUnitAcquireRangeBJ takes unit whichUnit, real acquireRange returns nothing
+UnitSetCanSleepBJ takes unit whichUnit, boolean canSleep returns nothing
+UnitCanSleepBJ takes unit whichUnit returns boolean
+UnitWakeUpBJ takes unit whichUnit returns nothing
+UnitIsSleepingBJ takes unit whichUnit returns boolean
+WakePlayerUnitsEnum takes nothing returns nothing
+WakePlayerUnits takes player whichPlayer returns nothing
+EnableCreepSleepBJ takes boolean enable returns nothing
+UnitGenerateAlarms takes unit whichUnit, boolean generate returns boolean
+DoesUnitGenerateAlarms takes unit whichUnit returns boolean
+PauseAllUnitsBJEnum takes nothing returns nothing
+PauseAllUnitsBJ takes boolean pause returns nothing
+PauseUnitBJ takes boolean pause, unit whichUnit returns nothing
+IsUnitPausedBJ takes unit whichUnit returns boolean
+UnitPauseTimedLifeBJ takes boolean flag, unit whichUnit returns nothing
+UnitApplyTimedLifeBJ takes real duration, integer buffId, unit whichUnit returns nothing
+UnitShareVisionBJ takes boolean share, unit whichUnit, player whichPlayer returns nothing
+UnitRemoveBuffsBJ takes integer buffType, unit whichUnit returns nothing
+UnitRemoveBuffsExBJ takes integer polarity, integer resist, unit whichUnit, boolean bTLife, boolean bAura returns nothing
+UnitCountBuffsExBJ takes integer polarity, integer resist, unit whichUnit, boolean bTLife, boolean bAura returns integer
+UnitRemoveAbilityBJ takes integer abilityId, unit whichUnit returns boolean
+UnitAddAbilityBJ takes integer abilityId, unit whichUnit returns boolean
+UnitMakeAbilityPermanentBJ takes boolean permanent, integer abilityId, unit whichUnit returns boolean
+SetUnitExplodedBJ takes unit whichUnit, boolean exploded returns nothing
+ExplodeUnitBJ takes unit whichUnit returns nothing
+GetTransportUnitBJ takes nothing returns unit
+GetLoadedUnitBJ takes nothing returns unit
+IsUnitInTransportBJ takes unit whichUnit, unit whichTransport returns boolean
+IsUnitLoadedBJ takes unit whichUnit returns boolean
+IsUnitIllusionBJ takes unit whichUnit returns boolean
+ReplaceUnitBJ takes unit whichUnit, integer newUnitId, integer unitStateMethod returns unit
+GetLastReplacedUnitBJ takes nothing returns unit
+SetUnitPositionLocFacingBJ takes unit whichUnit, location loc, real facing returns nothing
+SetUnitPositionLocFacingLocBJ takes unit whichUnit, location loc, location lookAt returns nothing
+AddItemToStockBJ takes integer itemId, unit whichUnit, integer currentStock, integer stockMax returns nothing
+AddUnitToStockBJ takes integer unitId, unit whichUnit, integer currentStock, integer stockMax returns nothing
+RemoveItemFromStockBJ takes integer itemId, unit whichUnit returns nothing
+RemoveUnitFromStockBJ takes integer unitId, unit whichUnit returns nothing
+SetUnitUseFoodBJ takes boolean enable, unit whichUnit returns nothing
+CreateDestructableLoc takes integer objectid, location loc, real facing, real scale, integer variation returns destructable
+CreateDeadDestructableLocBJ takes integer objectid, location loc, real facing, real scale, integer variation returns destructable
+GetLastCreatedDestructable takes nothing returns destructable
+ShowDestructableBJ takes boolean flag, destructable d returns nothing
+SetDestructableInvulnerableBJ takes destructable d, boolean flag returns nothing
+IsDestructableInvulnerableBJ takes destructable d returns boolean
+GetDestructableLoc takes destructable whichDestructable returns location
+EnumDestructablesInRectAll takes rect r, code actionFunc returns nothing
+EnumDestructablesInCircleBJFilter takes nothing returns boolean
+IsDestructableDeadBJ takes destructable d returns boolean
+IsDestructableAliveBJ takes destructable d returns boolean
+RandomDestructableInRectBJEnum takes nothing returns nothing
+RandomDestructableInRectBJ takes rect r, boolexpr filter returns destructable
+RandomDestructableInRectSimpleBJ takes rect r returns destructable
+EnumDestructablesInCircleBJ takes real radius, location loc, code actionFunc returns nothing
+SetDestructableLifePercentBJ takes destructable d, real percent returns nothing
+SetDestructableMaxLifeBJ takes destructable d, real max returns nothing
+ModifyGateBJ takes integer gateOperation, destructable d returns nothing
+GetElevatorHeight takes destructable d returns integer
+ChangeElevatorHeight takes destructable d, integer newHeight returns nothing
+NudgeUnitsInRectEnum takes nothing returns nothing
+NudgeItemsInRectEnum takes nothing returns nothing
+NudgeObjectsInRect takes rect nudgeArea returns nothing
+NearbyElevatorExistsEnum takes nothing returns nothing
+NearbyElevatorExists takes real x, real y returns boolean
+FindElevatorWallBlockerEnum takes nothing returns nothing
+ChangeElevatorWallBlocker takes real x, real y, real facing, boolean open returns nothing
+ChangeElevatorWalls takes boolean open, integer walls, destructable d returns nothing
+WaygateActivateBJ takes boolean activate, unit waygate returns nothing
+WaygateIsActiveBJ takes unit waygate returns boolean
+WaygateSetDestinationLocBJ takes unit waygate, location loc returns nothing
+WaygateGetDestinationLocBJ takes unit waygate returns location
+UnitSetUsesAltIconBJ takes boolean flag, unit whichUnit returns nothing
+ForceUIKeyBJ takes player whichPlayer, string key returns nothing
+ForceUICancelBJ takes player whichPlayer returns nothing
+ForGroupBJ takes group whichGroup, code callback returns nothing
+GroupAddUnitSimple takes unit whichUnit, group whichGroup returns nothing
+GroupRemoveUnitSimple takes unit whichUnit, group whichGroup returns nothing
+GroupAddGroupEnum takes nothing returns nothing
+GroupAddGroup takes group sourceGroup, group destGroup returns nothing
+GroupRemoveGroupEnum takes nothing returns nothing
+GroupRemoveGroup takes group sourceGroup, group destGroup returns nothing
+ForceAddPlayerSimple takes player whichPlayer, force whichForce returns nothing
+ForceRemovePlayerSimple takes player whichPlayer, force whichForce returns nothing
+GroupPickRandomUnitEnum takes nothing returns nothing
+GroupPickRandomUnit takes group whichGroup returns unit
+ForcePickRandomPlayerEnum takes nothing returns nothing
+ForcePickRandomPlayer takes force whichForce returns player
+EnumUnitsSelected takes player whichPlayer, boolexpr enumFilter, code enumAction returns nothing
+GetUnitsInRectMatching takes rect r, boolexpr filter returns group
+GetUnitsInRectAll takes rect r returns group
+GetUnitsInRectOfPlayerFilter takes nothing returns boolean
+GetUnitsInRectOfPlayer takes rect r, player whichPlayer returns group
+GetUnitsInRangeOfLocMatching takes real radius, location whichLocation, boolexpr filter returns group
+GetUnitsInRangeOfLocAll takes real radius, location whichLocation returns group
+GetUnitsOfTypeIdAllFilter takes nothing returns boolean
+GetUnitsOfTypeIdAll takes integer unitid returns group
+GetUnitsOfPlayerMatching takes player whichPlayer, boolexpr filter returns group
+GetUnitsOfPlayerAll takes player whichPlayer returns group
+GetUnitsOfPlayerAndTypeIdFilter takes nothing returns boolean
+GetUnitsOfPlayerAndTypeId takes player whichPlayer, integer unitid returns group
+GetUnitsSelectedAll takes player whichPlayer returns group
+GetForceOfPlayer takes player whichPlayer returns force
+GetPlayersAll takes nothing returns force
+GetPlayersByMapControl takes mapcontrol whichControl returns force
+GetPlayersAllies takes player whichPlayer returns force
+GetPlayersEnemies takes player whichPlayer returns force
+GetPlayersMatching takes boolexpr filter returns force
+CountUnitsInGroupEnum takes nothing returns nothing
+CountUnitsInGroup takes group g returns integer
+CountPlayersInForceEnum takes nothing returns nothing
+CountPlayersInForceBJ takes force f returns integer
+GetRandomSubGroupEnum takes nothing returns nothing
+GetRandomSubGroup takes integer count, group sourceGroup returns group
+LivingPlayerUnitsOfTypeIdFilter takes nothing returns boolean
+CountLivingPlayerUnitsOfTypeId takes integer unitId, player whichPlayer returns integer
+ResetUnitAnimation takes unit whichUnit returns nothing
+SetUnitTimeScalePercent takes unit whichUnit, real percentScale returns nothing
+SetUnitScalePercent takes unit whichUnit, real percentScaleX, real percentScaleY, real percentScaleZ returns nothing
+SetUnitVertexColorBJ takes unit whichUnit, real red, real green, real blue, real transparency returns nothing
+UnitAddIndicatorBJ takes unit whichUnit, real red, real green, real blue, real transparency returns nothing
+DestructableAddIndicatorBJ takes destructable whichDestructable, real red, real green, real blue, real transparency returns nothing
+ItemAddIndicatorBJ takes item whichItem, real red, real green, real blue, real transparency returns nothing
+SetUnitFacingToFaceLocTimed takes unit whichUnit, location target, real duration returns nothing
+SetUnitFacingToFaceUnitTimed takes unit whichUnit, unit target, real duration returns nothing
+QueueUnitAnimationBJ takes unit whichUnit, string whichAnimation returns nothing
+SetDestructableAnimationBJ takes destructable d, string whichAnimation returns nothing
+QueueDestructableAnimationBJ takes destructable d, string whichAnimation returns nothing
+SetDestAnimationSpeedPercent takes destructable d, real percentScale returns nothing
+DialogDisplayBJ takes boolean flag, dialog whichDialog, player whichPlayer returns nothing
+DialogSetMessageBJ takes dialog whichDialog, string message returns nothing
+DialogAddButtonBJ takes dialog whichDialog, string buttonText returns button
+DialogAddButtonWithHotkeyBJ takes dialog whichDialog, string buttonText, integer hotkey returns button
+DialogClearBJ takes dialog whichDialog returns nothing
+GetLastCreatedButtonBJ takes nothing returns button
+GetClickedButtonBJ takes nothing returns button
+GetClickedDialogBJ takes nothing returns dialog
+SetPlayerAllianceBJ takes player sourcePlayer, alliancetype whichAllianceSetting, boolean value, player otherPlayer returns nothing
+SetPlayerAllianceStateAllyBJ takes player sourcePlayer, player otherPlayer, boolean flag returns nothing
+SetPlayerAllianceStateVisionBJ takes player sourcePlayer, player otherPlayer, boolean flag returns nothing
+SetPlayerAllianceStateControlBJ takes player sourcePlayer, player otherPlayer, boolean flag returns nothing
+SetPlayerAllianceStateFullControlBJ takes player sourcePlayer, player otherPlayer, boolean flag returns nothing
+SetPlayerAllianceStateBJ takes player sourcePlayer, player otherPlayer, integer allianceState returns nothing
+SetForceAllianceStateBJ takes force sourceForce, force targetForce, integer allianceState returns nothing
+PlayersAreCoAllied takes player playerA, player playerB returns boolean
+ShareEverythingWithTeamAI takes player whichPlayer returns nothing
+ShareEverythingWithTeam takes player whichPlayer returns nothing
+ConfigureNeutralVictim takes nothing returns nothing
+MakeUnitsPassiveForPlayerEnum takes nothing returns nothing
+MakeUnitsPassiveForPlayer takes player whichPlayer returns nothing
+MakeUnitsPassiveForTeam takes player whichPlayer returns nothing
+AllowVictoryDefeat takes playergameresult gameResult returns boolean
+EndGameBJ takes nothing returns nothing
+MeleeVictoryDialogBJ takes player whichPlayer, boolean leftGame returns nothing
+MeleeDefeatDialogBJ takes player whichPlayer, boolean leftGame returns nothing
+GameOverDialogBJ takes player whichPlayer, boolean leftGame returns nothing
+RemovePlayerPreserveUnitsBJ takes player whichPlayer, playergameresult gameResult, boolean leftGame returns nothing
+CustomVictoryOkBJ takes nothing returns nothing
+CustomVictoryQuitBJ takes nothing returns nothing
+CustomVictoryDialogBJ takes player whichPlayer returns nothing
+CustomVictorySkipBJ takes player whichPlayer returns nothing
+CustomVictoryBJ takes player whichPlayer, boolean showDialog, boolean showScores returns nothing
+CustomDefeatRestartBJ takes nothing returns nothing
+CustomDefeatReduceDifficultyBJ takes nothing returns nothing
+CustomDefeatLoadBJ takes nothing returns nothing
+CustomDefeatQuitBJ takes nothing returns nothing
+CustomDefeatDialogBJ takes player whichPlayer, string message returns nothing
+CustomDefeatBJ takes player whichPlayer, string message returns nothing
+SetNextLevelBJ takes string nextLevel returns nothing
+SetPlayerOnScoreScreenBJ takes boolean flag, player whichPlayer returns nothing
+CreateQuestBJ takes integer questType, string title, string description, string iconPath returns quest
+DestroyQuestBJ takes quest whichQuest returns nothing
+QuestSetEnabledBJ takes boolean enabled, quest whichQuest returns nothing
+QuestSetTitleBJ takes quest whichQuest, string title returns nothing
+QuestSetDescriptionBJ takes quest whichQuest, string description returns nothing
+QuestSetCompletedBJ takes quest whichQuest, boolean completed returns nothing
+QuestSetFailedBJ takes quest whichQuest, boolean failed returns nothing
+QuestSetDiscoveredBJ takes quest whichQuest, boolean discovered returns nothing
+GetLastCreatedQuestBJ takes nothing returns quest
+CreateQuestItemBJ takes quest whichQuest, string description returns questitem
+QuestItemSetDescriptionBJ takes questitem whichQuestItem, string description returns nothing
+QuestItemSetCompletedBJ takes questitem whichQuestItem, boolean completed returns nothing
+GetLastCreatedQuestItemBJ takes nothing returns questitem
+CreateDefeatConditionBJ takes string description returns defeatcondition
+DestroyDefeatConditionBJ takes defeatcondition whichCondition returns nothing
+DefeatConditionSetDescriptionBJ takes defeatcondition whichCondition, string description returns nothing
+GetLastCreatedDefeatConditionBJ takes nothing returns defeatcondition
+FlashQuestDialogButtonBJ takes nothing returns nothing
+QuestMessageBJ takes force f, integer messageType, string message returns nothing
+StartTimerBJ takes timer t, boolean periodic, real timeout returns timer
+CreateTimerBJ takes boolean periodic, real timeout returns timer
+DestroyTimerBJ takes timer whichTimer returns nothing
+PauseTimerBJ takes boolean pause, timer whichTimer returns nothing
+GetLastCreatedTimerBJ takes nothing returns timer
+CreateTimerDialogBJ takes timer t, string title returns timerdialog
+DestroyTimerDialogBJ takes timerdialog td returns nothing
+TimerDialogSetTitleBJ takes timerdialog td, string title returns nothing
+TimerDialogSetTitleColorBJ takes timerdialog td, real red, real green, real blue, real transparency returns nothing
+TimerDialogSetTimeColorBJ takes timerdialog td, real red, real green, real blue, real transparency returns nothing
+TimerDialogSetSpeedBJ takes timerdialog td, real speedMultFactor returns nothing
+TimerDialogDisplayForPlayerBJ takes boolean show, timerdialog td, player whichPlayer returns nothing
+TimerDialogDisplayBJ takes boolean show, timerdialog td returns nothing
+GetLastCreatedTimerDialogBJ takes nothing returns timerdialog
+LeaderboardResizeBJ takes leaderboard lb returns nothing
+LeaderboardSetPlayerItemValueBJ takes player whichPlayer, leaderboard lb, integer val returns nothing
+LeaderboardSetPlayerItemLabelBJ takes player whichPlayer, leaderboard lb, string val returns nothing
+LeaderboardSetPlayerItemStyleBJ takes player whichPlayer, leaderboard lb, boolean showLabel, boolean showValue, boolean showIcon returns nothing
+LeaderboardSetPlayerItemLabelColorBJ takes player whichPlayer, leaderboard lb, real red, real green, real blue, real transparency returns nothing
+LeaderboardSetPlayerItemValueColorBJ takes player whichPlayer, leaderboard lb, real red, real green, real blue, real transparency returns nothing
+LeaderboardSetLabelColorBJ takes leaderboard lb, real red, real green, real blue, real transparency returns nothing
+LeaderboardSetValueColorBJ takes leaderboard lb, real red, real green, real blue, real transparency returns nothing
+LeaderboardSetLabelBJ takes leaderboard lb, string label returns nothing
+LeaderboardSetStyleBJ takes leaderboard lb, boolean showLabel, boolean showNames, boolean showValues, boolean showIcons returns nothing
+LeaderboardGetItemCountBJ takes leaderboard lb returns integer
+LeaderboardHasPlayerItemBJ takes leaderboard lb, player whichPlayer returns boolean
+ForceSetLeaderboardBJ takes leaderboard lb, force toForce returns nothing
+CreateLeaderboardBJ takes force toForce, string label returns leaderboard
+DestroyLeaderboardBJ takes leaderboard lb returns nothing
+LeaderboardDisplayBJ takes boolean show, leaderboard lb returns nothing
+LeaderboardAddItemBJ takes player whichPlayer, leaderboard lb, string label, integer value returns nothing
+LeaderboardRemovePlayerItemBJ takes player whichPlayer, leaderboard lb returns nothing
+LeaderboardSortItemsBJ takes leaderboard lb, integer sortType, boolean ascending returns nothing
+LeaderboardSortItemsByPlayerBJ takes leaderboard lb, boolean ascending returns nothing
+LeaderboardSortItemsByLabelBJ takes leaderboard lb, boolean ascending returns nothing
+LeaderboardGetPlayerIndexBJ takes player whichPlayer, leaderboard lb returns integer
+LeaderboardGetIndexedPlayerBJ takes integer position, leaderboard lb returns player
+PlayerGetLeaderboardBJ takes player whichPlayer returns leaderboard
+GetLastCreatedLeaderboard takes nothing returns leaderboard
+CreateMultiboardBJ takes integer cols, integer rows, string title returns multiboard
+DestroyMultiboardBJ takes multiboard mb returns nothing
+GetLastCreatedMultiboard takes nothing returns multiboard
+MultiboardDisplayBJ takes boolean show, multiboard mb returns nothing
+MultiboardMinimizeBJ takes boolean minimize, multiboard mb returns nothing
+MultiboardSetTitleTextColorBJ takes multiboard mb, real red, real green, real blue, real transparency returns nothing
+MultiboardAllowDisplayBJ takes boolean flag returns nothing
+MultiboardSetItemStyleBJ takes multiboard mb, integer col, integer row, boolean showValue, boolean showIcon returns nothing
+MultiboardSetItemValueBJ takes multiboard mb, integer col, integer row, string val returns nothing
+MultiboardSetItemColorBJ takes multiboard mb, integer col, integer row, real red, real green, real blue, real transparency returns nothing
+MultiboardSetItemWidthBJ takes multiboard mb, integer col, integer row, real width returns nothing
+MultiboardSetItemIconBJ takes multiboard mb, integer col, integer row, string iconFileName returns nothing
+TextTagSize2Height takes real size returns real
+TextTagSpeed2Velocity takes real speed returns real
+SetTextTagColorBJ takes texttag tt, real red, real green, real blue, real transparency returns nothing
+CreateTextTagLocBJ takes string s, location loc, real zOffset, real size, real red, real green, real blue, real transparency returns texttag
+CreateTextTagUnitBJ takes string s, unit whichUnit, real zOffset, real size, real red, real green, real blue, real transparency returns texttag
+DestroyTextTagBJ takes texttag tt returns nothing
+SetTextTagVelocityBJ takes texttag tt, real speed, real angle returns nothing
+ShowTextTagForceBJ takes boolean show, texttag tt, force whichForce returns nothing
+GetLastCreatedTextTag takes nothing returns texttag
+PauseGameOn takes nothing returns nothing
+PauseGameOff takes nothing returns nothing
+SetUserControlForceOn takes force whichForce returns nothing
+SetUserControlForceOff takes force whichForce returns nothing
+ShowInterfaceForceOn takes force whichForce, real fadeDuration returns nothing
+ShowInterfaceForceOff takes force whichForce, real fadeDuration returns nothing
+PingMinimapForForce takes force whichForce, real x, real y, real duration returns nothing
+PingMinimapLocForForce takes force whichForce, location loc, real duration returns nothing
+PingMinimapForPlayer takes player whichPlayer, real x, real y, real duration returns nothing
+PingMinimapLocForPlayer takes player whichPlayer, location loc, real duration returns nothing
+PingMinimapForForceEx takes force whichForce, real x, real y, real duration, integer style, real red, real green, real blue returns nothing
+PingMinimapLocForForceEx takes force whichForce, location loc, real duration, integer style, real red, real green, real blue returns nothing
+EnableWorldFogBoundaryBJ takes boolean enable, force f returns nothing
+EnableOcclusionBJ takes boolean enable, force f returns nothing
+CancelCineSceneBJ takes nothing returns nothing
+TryInitCinematicBehaviorBJ takes nothing returns nothing
+SetCinematicSceneBJ takes sound soundHandle, integer portraitUnitId, playercolor color, string speakerTitle, string text, real sceneDuration, real voiceoverDuration returns nothing
+GetTransmissionDuration takes sound soundHandle, integer timeType, real timeVal returns real
+WaitTransmissionDuration takes sound soundHandle, integer timeType, real timeVal returns nothing
+DoTransmissionBasicsXYBJ takes integer unitId, playercolor color, real x, real y, sound soundHandle, string unitName, string message, real duration returns nothing
+TransmissionFromUnitWithNameBJ takes force toForce, unit whichUnit, string unitName, sound soundHandle, string message, integer timeType, real timeVal, boolean wait returns nothing
+TransmissionFromUnitTypeWithNameBJ takes force toForce, player fromPlayer, integer unitId, string unitName, location loc, sound soundHandle, string message, integer timeType, real timeVal, boolean wait returns nothing
+GetLastTransmissionDurationBJ takes nothing returns real
+ForceCinematicSubtitlesBJ takes boolean flag returns nothing
+CinematicModeExBJ takes boolean cineMode, force forForce, real interfaceFadeTime returns nothing
+CinematicModeBJ takes boolean cineMode, force forForce returns nothing
+DisplayCineFilterBJ takes boolean flag returns nothing
+CinematicFadeCommonBJ takes real red, real green, real blue, real duration, string tex, real startTrans, real endTrans returns nothing
+FinishCinematicFadeBJ takes nothing returns nothing
+FinishCinematicFadeAfterBJ takes real duration returns nothing
+ContinueCinematicFadeBJ takes nothing returns nothing
+ContinueCinematicFadeAfterBJ takes real duration, real red, real green, real blue, real trans, string tex returns nothing
+AbortCinematicFadeBJ takes nothing returns nothing
+CinematicFadeBJ takes integer fadetype, real duration, string tex, real red, real green, real blue, real trans returns nothing
+CinematicFilterGenericBJ takes real duration, blendmode bmode, string tex, real red0, real green0, real blue0, real trans0, real red1, real green1, real blue1, real trans1 returns nothing
+RescueUnitBJ takes unit whichUnit, player rescuer, boolean changeColor returns nothing
+TriggerActionUnitRescuedBJ takes nothing returns nothing
+TryInitRescuableTriggersBJ takes nothing returns nothing
+SetRescueUnitColorChangeBJ takes boolean changeColor returns nothing
+SetRescueBuildingColorChangeBJ takes boolean changeColor returns nothing
+MakeUnitRescuableToForceBJEnum takes nothing returns nothing
+MakeUnitRescuableToForceBJ takes unit whichUnit, boolean isRescuable, force whichForce returns nothing
+InitRescuableBehaviorBJ takes nothing returns nothing
+SetPlayerTechResearchedSwap takes integer techid, integer levels, player whichPlayer returns nothing
+SetPlayerTechMaxAllowedSwap takes integer techid, integer maximum, player whichPlayer returns nothing
+SetPlayerMaxHeroesAllowed takes integer maximum, player whichPlayer returns nothing
+GetPlayerTechCountSimple takes integer techid, player whichPlayer returns integer
+GetPlayerTechMaxAllowedSwap takes integer techid, player whichPlayer returns integer
+SetPlayerAbilityAvailableBJ takes boolean avail, integer abilid, player whichPlayer returns nothing
+SetCampaignMenuRaceBJ takes integer campaignNumber returns nothing
+SetMissionAvailableBJ takes boolean available, integer missionIndex returns nothing
+SetCampaignAvailableBJ takes boolean available, integer campaignNumber returns nothing
+SetCinematicAvailableBJ takes boolean available, integer cinematicIndex returns nothing
+InitGameCacheBJ takes string campaignFile returns gamecache
+SaveGameCacheBJ takes gamecache cache returns boolean
+GetLastCreatedGameCacheBJ takes nothing returns gamecache
+StoreRealBJ takes real value, string key, string missionKey, gamecache cache returns nothing
+StoreIntegerBJ takes integer value, string key, string missionKey, gamecache cache returns nothing
+StoreBooleanBJ takes boolean value, string key, string missionKey, gamecache cache returns nothing
+StoreStringBJ takes string value, string key, string missionKey, gamecache cache returns boolean
+StoreUnitBJ takes unit whichUnit, string key, string missionKey, gamecache cache returns boolean
+GetStoredRealBJ takes string key, string missionKey, gamecache cache returns real
+GetStoredIntegerBJ takes string key, string missionKey, gamecache cache returns integer
+GetStoredBooleanBJ takes string key, string missionKey, gamecache cache returns boolean
+GetStoredStringBJ takes string key, string missionKey, gamecache cache returns string
+RestoreUnitLocFacingAngleBJ takes string key, string missionKey, gamecache cache, player forWhichPlayer, location loc, real facing returns unit
+RestoreUnitLocFacingPointBJ takes string key, string missionKey, gamecache cache, player forWhichPlayer, location loc, location lookAt returns unit
+GetLastRestoredUnitBJ takes nothing returns unit
+FlushGameCacheBJ takes gamecache cache returns nothing
+FlushStoredMissionBJ takes string missionKey, gamecache cache returns nothing
+HaveStoredValue takes string key, integer valueType, string missionKey, gamecache cache returns boolean
+ShowCustomCampaignButton takes boolean show, integer whichButton returns nothing
+IsCustomCampaignButtonVisibile takes integer whichButton returns boolean
+LoadGameBJ takes string loadFileName, boolean doScoreScreen returns nothing
+SaveAndChangeLevelBJ takes string saveFileName, string newLevel, boolean doScoreScreen returns nothing
+SaveAndLoadGameBJ takes string saveFileName, string loadFileName, boolean doScoreScreen returns nothing
+RenameSaveDirectoryBJ takes string sourceDirName, string destDirName returns boolean
+RemoveSaveDirectoryBJ takes string sourceDirName returns boolean
+CopySaveGameBJ takes string sourceSaveName, string destSaveName returns boolean
+GetPlayerStartLocationX takes player whichPlayer returns real
+GetPlayerStartLocationY takes player whichPlayer returns real
+GetPlayerStartLocationLoc takes player whichPlayer returns location
+GetRectCenter takes rect whichRect returns location
+IsPlayerSlotState takes player whichPlayer, playerslotstate whichState returns boolean
+GetFadeFromSeconds takes real seconds returns integer
+AdjustPlayerStateSimpleBJ takes player whichPlayer, playerstate whichPlayerState, integer delta returns nothing
+AdjustPlayerStateBJ takes integer delta, player whichPlayer, playerstate whichPlayerState returns nothing
+SetPlayerStateBJ takes player whichPlayer, playerstate whichPlayerState, integer value returns nothing
+SetPlayerFlagBJ takes playerstate whichPlayerFlag, boolean flag, player whichPlayer returns nothing
+IsPlayerFlagSetBJ takes playerstate whichPlayerFlag, player whichPlayer returns boolean
+AddResourceAmountBJ takes integer delta, unit whichUnit returns nothing
+GetConvertedPlayerId takes player whichPlayer returns integer
+ConvertedPlayer takes integer convertedPlayerId returns player
+GetRectWidthBJ takes rect r returns real
+GetRectHeightBJ takes rect r returns real
+BlightGoldMineForPlayerBJ takes unit goldMine, player whichPlayer returns unit
+BlightGoldMineForPlayer takes unit goldMine, player whichPlayer returns unit
+GetLastHauntedGoldMine takes nothing returns unit
+IsPointBlightedBJ takes location where returns boolean
+SetPlayerColorBJEnum takes nothing returns nothing
+SetPlayerColorBJ takes player whichPlayer, playercolor color, boolean changeExisting returns nothing
+SetPlayerUnitAvailableBJ takes integer unitId, boolean allowed, player whichPlayer returns nothing
+LockGameSpeedBJ takes nothing returns nothing
+UnlockGameSpeedBJ takes nothing returns nothing
+IssueTargetOrderBJ takes unit whichUnit, string order, widget targetWidget returns boolean
+IssuePointOrderLocBJ takes unit whichUnit, string order, location whichLocation returns boolean
+IssueTargetDestructableOrder takes unit whichUnit, string order, widget targetWidget returns boolean
+IssueImmediateOrderBJ takes unit whichUnit, string order returns boolean
+GroupTargetOrderBJ takes group whichGroup, string order, widget targetWidget returns boolean
+GroupPointOrderLocBJ takes group whichGroup, string order, location whichLocation returns boolean
+GroupImmediateOrderBJ takes group whichGroup, string order returns boolean
+GroupTargetDestructableOrder takes group whichGroup, string order, widget targetWidget returns boolean
+GetDyingDestructable takes nothing returns destructable
+SetUnitRallyPoint takes unit whichUnit, location targPos returns nothing
+SetUnitRallyUnit takes unit whichUnit, unit targUnit returns nothing
+SetUnitRallyDestructable takes unit whichUnit, destructable targDest returns nothing
+SaveDyingWidget takes nothing returns nothing
+SetBlightRectBJ takes boolean addBlight, player whichPlayer, rect r returns nothing
+SetBlightRadiusLocBJ takes boolean addBlight, player whichPlayer, location loc, real radius returns nothing
+GetAbilityName takes integer abilcode returns string
+MeleeStartingVisibility takes nothing returns nothing
+MeleeStartingResources takes nothing returns nothing
+ReducePlayerTechMaxAllowed takes player whichPlayer, integer techId, integer limit returns nothing
+MeleeStartingHeroLimit takes nothing returns nothing
+MeleeTrainedUnitIsHeroBJFilter takes nothing returns boolean
+MeleeGrantItemsToHero takes unit whichUnit returns nothing
+MeleeGrantItemsToTrainedHero takes nothing returns nothing
+MeleeGrantItemsToHiredHero takes nothing returns nothing
+MeleeGrantHeroItems takes nothing returns nothing
+MeleeClearExcessUnit takes nothing returns nothing
+MeleeClearNearbyUnits takes real x, real y, real range returns nothing
+MeleeClearExcessUnits takes nothing returns nothing
+MeleeEnumFindNearestMine takes nothing returns nothing
+MeleeFindNearestMine takes location src, real range returns unit
+MeleeRandomHeroLoc takes player p, integer id1, integer id2, integer id3, integer id4, location loc returns unit
+MeleeGetProjectedLoc takes location src, location targ, real distance, real deltaAngle returns location
+MeleeGetNearestValueWithin takes real val, real minVal, real maxVal returns real
+MeleeGetLocWithinRect takes location src, rect r returns location
+MeleeStartingUnitsHuman takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
+MeleeStartingUnitsOrc takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
+MeleeStartingUnitsUndead takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
+MeleeStartingUnitsNightElf takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
+MeleeStartingUnitsUnknownRace takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
+MeleeStartingUnits takes nothing returns nothing
+MeleeStartingUnitsForPlayer takes race whichRace, player whichPlayer, location loc, boolean doHeroes returns nothing
+PickMeleeAI takes player num, string s1, string s2, string s3 returns nothing
+MeleeStartingAI takes nothing returns nothing
+LockGuardPosition takes unit targ returns nothing
+MeleePlayerIsOpponent takes integer playerIndex, integer opponentIndex returns boolean
+MeleeGetAllyStructureCount takes player whichPlayer returns integer
+MeleeGetAllyCount takes player whichPlayer returns integer
+MeleeGetAllyKeyStructureCount takes player whichPlayer returns integer
+MeleeDoDrawEnum takes nothing returns nothing
+MeleeDoVictoryEnum takes nothing returns nothing
+MeleeDoDefeat takes player whichPlayer returns nothing
+MeleeDoDefeatEnum takes nothing returns nothing
+MeleeDoLeave takes player whichPlayer returns nothing
+MeleeRemoveObservers takes nothing returns nothing
+MeleeCheckForVictors takes nothing returns force
+MeleeCheckForLosersAndVictors takes nothing returns nothing
+MeleeGetCrippledWarningMessage takes player whichPlayer returns string
+MeleeGetCrippledTimerMessage takes player whichPlayer returns string
+MeleeGetCrippledRevealedMessage takes player whichPlayer returns string
+MeleeExposePlayer takes player whichPlayer, boolean expose returns nothing
+MeleeExposeAllPlayers takes nothing returns nothing
+MeleeCrippledPlayerTimeout takes nothing returns nothing
+MeleePlayerIsCrippled takes player whichPlayer returns boolean
+MeleeCheckForCrippledPlayers takes nothing returns nothing
+MeleeCheckLostUnit takes unit lostUnit returns nothing
+MeleeCheckAddedUnit takes unit addedUnit returns nothing
+MeleeTriggerActionConstructCancel takes nothing returns nothing
+MeleeTriggerActionUnitDeath takes nothing returns nothing
+MeleeTriggerActionUnitConstructionStart takes nothing returns nothing
+MeleeTriggerActionPlayerDefeated takes nothing returns nothing
+MeleeTriggerActionPlayerLeft takes nothing returns nothing
+MeleeTriggerActionAllianceChange takes nothing returns nothing
+MeleeTriggerTournamentFinishSoon takes nothing returns nothing
+MeleeWasUserPlayer takes player whichPlayer returns boolean
+MeleeTournamentFinishNowRuleA takes integer multiplier returns nothing
+MeleeTriggerTournamentFinishNow takes nothing returns nothing
+MeleeInitVictoryDefeat takes nothing returns nothing
+CheckInitPlayerSlotAvailability takes nothing returns nothing
+SetPlayerSlotAvailable takes player whichPlayer, mapcontrol control returns nothing
+TeamInitPlayerSlots takes integer teamCount returns nothing
+MeleeInitPlayerSlots takes nothing returns nothing
+FFAInitPlayerSlots takes nothing returns nothing
+OneOnOneInitPlayerSlots takes nothing returns nothing
+InitGenericPlayerSlots takes nothing returns nothing
+SetDNCSoundsDawn takes nothing returns nothing
+SetDNCSoundsDusk takes nothing returns nothing
+SetDNCSoundsDay takes nothing returns nothing
+SetDNCSoundsNight takes nothing returns nothing
+InitDNCSounds takes nothing returns nothing
+InitBlizzardGlobals takes nothing returns nothing
+InitQueuedTriggers takes nothing returns nothing
+InitMapRects takes nothing returns nothing
+InitSummonableCaps takes nothing returns nothing
+UpdateStockAvailability takes item whichItem returns nothing
+UpdateEachStockBuildingEnum takes nothing returns nothing
+UpdateEachStockBuilding takes itemtype iType, integer iLevel returns nothing
+PerformStockUpdates takes nothing returns nothing
+StartStockUpdates takes nothing returns nothing
+RemovePurchasedItem takes nothing returns nothing
+InitNeutralBuildings takes nothing returns nothing
+MarkGameStarted takes nothing returns nothing
+DetectGameStarted takes nothing returns nothing
+InitBlizzard takes nothing returns nothing
+RandomDistReset takes nothing returns nothing
+RandomDistAddItem takes integer inID, integer inChance returns nothing
+RandomDistChoose takes nothing returns integer
+UnitDropItem takes unit inUnit, integer inItemID returns item
+WidgetDropItem takes widget inWidget, integer inItemID returns item

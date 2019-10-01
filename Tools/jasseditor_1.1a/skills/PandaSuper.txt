@@ -1,0 +1,76 @@
+function SuperActionConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0AR' ) 
+endfunction
+function SuperActionActions takes nothing returns nothing
+local unit panda=GetSpellAbilityUnit()
+local unit target=GetHandleUnit(panda,"super")
+local unit array trio
+local player owner=GetOwningPlayer(panda)
+local location pandaloc=GetUnitLoc(panda)
+local location targetloc=GetUnitLoc(target)
+local location moveloc
+local integer level=( GetUnitAbilityLevelSwapped('A0AR', udg_ESFUnits[1]) + 2 )
+local real wait=(DistanceBetweenPoints(pandaloc,targetloc)/1000)
+    call ShowUnitHide( panda)
+    call PauseUnitBJ( true, panda)
+    call PolledWait2(wait)
+    if IsUnitAliveBJ(target)==true then
+    call RemoveLocation(targetloc)
+    call RemoveLocation(pandaloc)
+    set pandaloc=GetUnitLoc(panda)
+    set targetloc=GetUnitLoc(target)
+    
+    call SetUnitPositionLocFacingLocBJ(panda,targetloc, targetloc)
+    set moveloc= PolarProjectionBJ(targetloc, 200.00, ( 90.00 + AngleBetweenPoints(pandaloc, targetloc) ))
+    set trio[0]=CreateUnitAtLoc( owner, 'n01X', moveloc, (90.00 +AngleBetweenPoints(targetloc, pandaloc)) )
+    call RemoveLocation(moveloc)
+    
+    set moveloc= PolarProjectionBJ(targetloc, 200.00, (AngleBetweenPoints(pandaloc, targetloc)-90))
+    set trio[1]=CreateUnitAtLoc( owner, 'n01W', moveloc, (AngleBetweenPoints(targetloc, pandaloc)-90) )
+    call RemoveLocation(moveloc)
+    
+    set moveloc= PolarProjectionBJ(targetloc, 125.00, AngleBetweenPoints(pandaloc, targetloc))
+    set trio[2]=CreateUnitAtLoc( owner, 'n01V', moveloc, AngleBetweenPoints(targetloc, pandaloc))
+    call RemoveLocation(moveloc)
+
+    call PolledWait2( 0.50 )
+    call SetUnitAbilityLevelSwapped( 'A0AN',trio[0], level)
+    call SetUnitAbilityLevelSwapped( 'A0AJ',trio[1], level)
+    call SetUnitAbilityLevelSwapped( 'A0AI',trio[2], level)
+    set moveloc=PolarProjectionBJ(targetloc, 200.00, GetUnitFacing(trio[0]))
+    call IssuePointOrderLocBJ(trio[0], "breathoffrost", moveloc)
+    call IssueTargetOrderBJ( trio[1], "chainlightning", target )
+    call IssueImmediateOrderBJ(trio[2], "creepthunderclap" )
+    call RemoveLocation(moveloc)
+    call RemoveLocation(targetloc)
+    call RemoveLocation(pandaloc)
+    set pandaloc=null
+    set targetloc=null
+    set moveloc=null
+    call PolledWait2( 2.00 )
+    call KillUnit(trio[0])
+    call RemoveUnit(trio[0])
+    call KillUnit(trio[1])
+    call RemoveUnit(trio[1])
+    call KillUnit(trio[2])
+    call RemoveUnit(trio[2])
+    set trio[0]=null
+    set trio[1]=null
+    set trio[2]=null
+    endif
+  call ShowUnitShow( panda)
+  call PauseUnitBJ( false, panda)
+  call SelectUnitAddForPlayer(panda, owner)
+set panda=null
+set target=null
+set owner=null
+endfunction
+
+//===========================================================================
+function InitTrig_SuperAction takes nothing returns nothing
+    set gg_trg_SuperAction = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SuperAction, EVENT_PLAYER_UNIT_SPELL_FINISH )
+    call TriggerAddCondition( gg_trg_SuperAction, Condition( function SuperActionConditions ) )
+    call TriggerAddAction( gg_trg_SuperAction, function SuperActionActions )
+endfunction
+

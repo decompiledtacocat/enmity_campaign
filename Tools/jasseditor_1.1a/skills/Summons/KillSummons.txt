@@ -1,0 +1,19 @@
+function KillSummons takes unit target returns nothing
+local unit killsummon
+    if GetUnitTypeId(target)=='U00G' then //Trapmaster
+    call MaxUnit(target,null,"spikebikes",0,12)
+    call MaxUnit(target,null,"core",0,1)
+    call MaxUnit(target,null,"amd",0,2)
+    call MaxUnit(target,null,"guns",0,6)
+    endif
+    if GetUnitTypeId(target)=='E001' then //ranger
+    set killsummon=GetHandleUnit(target,"spitz")
+    call KillUnit(killsummon)
+    call RemoveUnit(killsummon)
+    set killsummon=GetHandleUnit(target,"joy")
+    call KillUnit(killsummon)
+    call RemoveUnit(killsummon)
+    set killsummon=null
+    endif
+set killsummon=null
+endfunction

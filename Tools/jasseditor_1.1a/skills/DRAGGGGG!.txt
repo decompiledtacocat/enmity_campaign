@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil Courier New;}}
+{\colortbl ;\red0\green0\blue128;\red0\green0\blue0;\red0\green136\blue204;\red0\green0\blue255;\red128\green0\blue0;\red120\green120\blue120;}
+\viewkind4\uc1\pard\cf1\f0\fs18 function Trig_RopeAndDrag_Conditions takes nothing returns boolean
+\par return GetSpellAbilityId() == 'A0A4' 
+\par endfunction
+\par 
+\par \cf2\b function\cf1\b0  \cf2 DragRollActions\cf1  \cf2\b takes\cf1\b0  \cf3 nothing\cf1  \cf2\b returns\cf1\b0  \cf3 nothing\cf1 
+\par local \cf3 trigger\cf1  \cf2 t\cf1 =GetTriggeringTrigger\cf2\b ()\cf1\b0 
+\par local \cf3 unit\cf1  \cf2 caster\cf1 =\cf2 GetHandleUnit\b (\b0 t,\cf4\i "DragCaster"\cf2\b\i0 )\cf1\b0 
+\par local \cf3 unit\cf1  \cf2 target\cf1 =\cf2 GetHandleUnit\b (\b0 t,\cf4\i "DragTarget"\cf2\b\i0 )\cf1\b0 
+\par local \cf3 real\cf1  \cf2 damage\cf1 =\cf2 GetHandleReal\b (\b0 t,\cf4\i "DragDamage"\cf2\b\i0 )\cf1\b0 
+\par local \cf3 location\cf1  \cf2 targetloc\cf1 =GetUnitLoc\cf2\b (\b0 target\b )\cf1\b0 
+\par local \cf3 location\cf1  \cf2 castloc\cf1 =GetUnitLoc\cf2\b (\b0 caster\b )\cf1\b0 
+\par local \cf3 real\cf1  \cf2 angle\cf1 =GetUnitFacing\cf2\b (\b0 caster\b )\cf1\b0 -180
+\par local \cf3 real\cf1  \cf2 anglenow\cf1 =AngleBetweenPoints\cf2\b (\b0 castloc,targetloc\b )\cf1\b0 
+\par local \cf3 location\cf1  \cf2 moveloc\cf1 
+\par local \cf2 lightning\cf1  \cf2 rope\cf1 =\cf2 GetHandleLightning\b (\cf1\b0 GetTriggeringTrigger\cf2\b ()\b0 ,\cf4\i "DragRope"\cf2\b\i0 )\cf1\b0 
+\par local \cf3 integer\cf1  \cf2 lastx\cf1 ==\cf2 GetHandleReal\b (\b0 t,\cf4\i "DragX"\cf2\b\i0 )\cf1\b0 
+\par local \cf3 integer\cf1  \cf2 lasty\cf1 ==\cf2 GetHandleReal\b (\b0 t,\cf4\i "DragY"\cf2\b\i0 )\cf1\b0 
+\par local \cf3 boolean\cf1  \cf2 notmoving\cf1 =\cf5 false\cf1 
+\par \cf2\b if\cf1\b0  GetBooleanAnd\cf2\b (\b0 lastx\cf1 =GetUnitX\cf2\b (\b0 caster\b )\b0 ,lasty\cf1 =GetUnitY\cf2\b (\b0 caster\b ))\cf1\b0  \cf2\b then\cf1\b0 
+\par set \cf2 notmoving\cf1 =\cf5 true\cf1 
+\par \cf2\b else\cf1\b0 
+\par \cf2\b if\cf1\b0  \cf2 anglenow\cf1  >\cf2 angle\cf1  \cf2\b then\cf1\b0  
+\par set \cf2 moveloc\cf1 =PolarProjectionBJ\cf2\b (\b0 castloc,\cf1  250.00\cf2 ,\cf1  \cf2 anglenow\cf1 -5 \cf2\b )\cf1\b0  
+\par \cf2\b elseif\cf1\b0  \cf2 anglenow\cf1 <\cf2 angle\cf1  \cf2\b then\cf1\b0 
+\par set \cf2 moveloc\cf1 =PolarProjectionBJ\cf2\b (\b0 castloc,\cf1  250.00\cf2 ,\cf1  \cf2 anglenow\cf1 +5\cf2\b )\cf1\b0  
+\par \cf2\b else\cf1\b0 
+\par set \cf2 moveloc\cf1 =PolarProjectionBJ\cf2\b (\b0 castloc,\cf1  250.00\cf2 ,\cf1  \cf2 angle\cf1 +GetRandomReal\cf2\b (\cf1\b0 -10\cf2 ,\cf1 10\cf2\b ))\cf1\b0  
+\par \cf2\b endif\cf1\b0 
+\par \cf2\b endif\cf1\b0 
+\par 
+\par \cf2\b if\cf1\b0  GetBooleanAnd\cf2\b (\cf1\b0 UnitHasBuffBJ\cf2\b (\b0 target,\cf4\i 'B036'\cf2\b\i0 )\cf1\b0 ==\cf5 true\cf2 ,IsUnitAlive\b (\b0 caster\b )\cf1\b0 ==\cf5 true\cf2\b )\cf1\b0  \cf2\b then\cf1\b0 
+\par \cf2\b if\cf1\b0  \cf2 notmoving\cf1 =\cf5 false\cf1  \cf2\b then\cf1\b0 
+\par call SetUnitPositionLoc\cf2\b (\b0 target,\cf1  \cf2 moveloc\b )\cf1\b0 
+\par call \cf2 MoveLightningLoc\b (\b0 rope,\cf1  \cf2 castloc,\cf1  \cf2 targetloc\cf1  \cf2\b )\cf1\b0 
+\par call DestroyEffectBJ\cf2\b (\cf1\b0 AddSpecialEffectLocBJ\cf2\b (\b0 targetloc,\cf1  \cf4\i "Abilities\\\\Weapons\\\\AncientProtectorMissile\\\\AncientProtectorMissile.mdl"\cf1\i0  \cf2\b ))\cf1\b0 
+\par call \cf2 UnitDamageTargetBJ\b (\cf1\b0  \cf2 caster,\cf1  \cf2 target,\cf1  \cf2 damage,\cf1  \cf2 ATTACK_TYPE_SIEGE,\cf1  \cf2 DAMAGE_TYPE_UNKNOWN\cf1  \cf2\b )\cf1\b0 
+\par \cf2\b endif\cf1\b0 
+\par call \cf2 SetHandleReal\b (\b0 t,\cf4\i "DragX"\cf2\i0 ,\cf1 GetUnitX\cf2\b (\b0 caster\b ))\cf1\b0 
+\par call \cf2 SetHandleReal\b (\b0 t,\cf4\i "DragY"\cf2\i0 ,\cf1 GetUnitY\cf2\b (\b0 caster\b ))\cf1\b0 
+\par \cf2\b else\cf1\b0 
+\par call RemoveLocation\cf2\b (\b0 moveloc\b )\cf1\b0 
+\par call RemoveLocation\cf2\b (\b0 targetloc\b )\cf1\b0 
+\par call RemoveLocation\cf2\b (\b0 castloc\b )\cf1\b0 
+\par set \cf2 targetloc\cf1 =\cf5 null\cf1 
+\par set \cf2 moveloc\cf1 =\cf5 null\cf1 
+\par set \cf2 caster\cf1 =\cf5 null\cf1 
+\par set \cf2 target\cf1 =\cf5 null\cf1 
+\par set \cf2 castloc\cf1 =\cf5 null\cf1 
+\par call \cf2 SetHandleHandle\b (\b0 target,\cf4\i "Dragged"\cf2\i0 ,\cf5 null\cf2\b )\cf1\b0 
+\par call \cf2 DestroyLightning\b (\b0 rope\b )\cf1\b0 
+\par call \cf2 FlushHandleLocals\b (\b0 t\b )\cf1\b0 
+\par call DestroyTrigger\cf2\b (\b0 t\b )\cf1\b0 
+\par \cf2\b endif\cf1\b0 
+\par call RemoveLocation\cf2\b (\b0 moveloc\b )\cf1\b0 
+\par call RemoveLocation\cf2\b (\b0 targetloc\b )\cf1\b0 
+\par call RemoveLocation\cf2\b (\b0 castloc\b )\cf1\b0 
+\par set \cf2 castloc\cf1 =\cf5 null\cf1 
+\par set \cf2 targetloc\cf1 =\cf5 null\cf1 
+\par set \cf2 moveloc\cf1 =\cf5 null\cf1 
+\par set \cf2 caster\cf1 =\cf5 null\cf1 
+\par set \cf2 target\cf1 =\cf5 null\cf1 
+\par \cf2\b endfunction\cf1\b0  
+\par   
+\par \cf2\b function\cf1\b0  \cf2 DragActions\cf1  \cf2\b takes\cf1\b0  \cf3 nothing\cf1  \cf2\b returns\cf1\b0  \cf3 nothing\cf1 
+\par local \cf3 unit\cf1  \cf2 caster\cf1 =GetSpellAbilityUnit\cf2\b ()\cf1\b0 
+\par local \cf3 unit\cf1  \cf2 target\cf1 =GetSpellTargetUnit\cf2\b ()\cf1\b0 
+\par local \cf3 location\cf1  \cf2 castloc\cf1 =GetUnitLoc\cf2\b (\b0 caster\b )\cf1\b0 
+\par local \cf3 location\cf1  \cf2 targetloc\cf1 =GetUnitLoc\cf2\b (\b0 target\b )\cf1\b0 
+\par local \cf3 integer\cf1  \cf2 level\cf1 =GetUnitAbilityLevel\cf2\b (\b0 caster,\cf4\i 'A0A4'\cf1\i0  \cf2\b )\cf1\b0 
+\par local \cf3 real\cf1  \cf2 damage\cf1 =.25*\cf2 level\cf1 
+\par local \cf3 real\cf1  \cf2 angle\cf1 =AngleBetweenPoints\cf2\b (\b0 castloc,targetloc\b )\cf1\b0 
+\par local \cf2 lightning\cf1  \cf2 rope\cf1 
+\par local \cf3 trigger\cf1  \cf2 t\cf1 =\cf2 GetHandleTrigger\b (\b0 target,\cf4\i "Dragged"\cf2\b\i0 )\cf1\b0 
+\par call \cf2 PolledWait2\b (\cf1\b0 1\cf2\b )\cf1\b0 
+\par \cf2\b if\cf1\b0  \cf2 t\cf1 !=\cf5 null\cf1  \cf2\b then\cf1\b0 
+\par call DisableTrigger\cf2\b (\b0 t\b )\cf1\b0 
+\par set \cf2 rope\cf1 =\cf2 GetHandleLightning\b (\cf1\b0 GetTriggeringTrigger\cf2\b ()\b0 ,\cf4\i "DragRope"\cf2\b\i0 )\cf1\b0 
+\par call \cf2 DestroyLightning\b (\b0 rope\b )\cf1\b0 
+\par call \cf2 FlushHandleLocals\b (\b0 t\b )\cf1\b0 
+\par call DestroyTrigger\cf2\b (\b0 t\b )\cf1\b0 
+\par set \cf2 t\cf1 =\cf5 null\cf1 
+\par \cf2\b endif\cf1\b0 
+\par set \cf2 rope\cf1 =\cf2 AddLightningLoc\b (\cf1\b0  \cf4\i "SPLK"\cf2\i0 ,\cf1  \cf2 castloc,\cf1  \cf2 targetloc\cf1  \cf2\b )\cf1\b0 
+\par call SetUnitFacingTimed\cf2\b (\b0 caster,angle\cf1 -180\cf2 ,\cf1 1\cf2\b )\cf1\b0 
+\par set \cf2 t\cf1 = CreateTrigger\cf2\b ()\cf1\b0 
+\par call \cf2 SetHandleHandle\b (\b0 target,\cf4\i "Dragged"\cf2\i0 ,t\b )\cf1\b0 
+\par call \cf2 SetHandleReal\b (\b0 t,\cf4\i "DragX"\cf2\i0 ,\cf1 GetUnitX\cf2\b (\b0 caster\b ))\cf1\b0 
+\par call \cf2 SetHandleReal\b (\b0 t,\cf4\i "DragY"\cf2\i0 ,\cf1 GetUnitY\cf2\b (\b0 caster\b ))\cf1\b0 
+\par call \cf2 SetHandleHandle\b (\b0 t,\cf4\i "DragCaster"\cf2\i0 ,caster\b )\cf1\b0 
+\par call \cf2 SetHandleHandle\b (\b0 t,\cf4\i "DragTarget"\cf2\i0 ,target\b )\cf1\b0 
+\par call \cf2 SetHandleHandle\b (\b0 t,\cf4\i "DragRope"\cf2\i0 ,rope\b )\cf1\b0 
+\par call \cf2 SetHandleReal\b (\b0 t,\cf4\i "DragDamage"\cf2\i0 ,damage\b )\cf1\b0 
+\par call TriggerRegisterTimerEventPeriodic\cf2\b (\b0 t,\cf1  0.02 \cf2\b )\cf1\b0 
+\par call TriggerAddAction\cf2\b (\b0 t,\cf1  \cf2\b function\cf1\b0  \cf2 DragRollActions\cf1  \cf2\b )\cf1\b0 
+\par 
+\par call RemoveLocation\cf2\b (\b0 targetloc\b )\cf1\b0 
+\par call RemoveLocation\cf2\b (\b0 castloc\b )\cf1\b0 
+\par set \cf2 targetloc\cf1 =\cf5 null\cf1 
+\par set \cf2 caster\cf1 =\cf5 null\cf1 
+\par set \cf2 target\cf1 =\cf5 null\cf1 
+\par set \cf2 castloc\cf1 =\cf5 null\cf1 
+\par \cf2\b endfunction\cf1\b0 
+\par 
+\par \cf6\i //===========================================================================\cf1\i0 
+\par \cf2\b function\cf1\b0  \cf2 InitTrig_RopeAndDrag\cf1  \cf2\b takes\cf1\b0  \cf3 nothing\cf1  \cf2\b returns\cf1\b0  \cf3 nothing\cf1 
+\par     set \cf2 gg_trg_RopeAndDrag\cf1  = CreateTrigger\cf2\b (\cf1\b0   \cf2\b )\cf1\b0 
+\par     call TriggerRegisterAnyUnitEventBJ\cf2\b (\cf1\b0  \cf2 gg_trg_RopeAndDrag,\cf1  \cf5 EVENT_PLAYER_UNIT_SPELL_EFFECT\cf1  \cf2\b )\cf1\b0 
+\par     call TriggerAddCondition\cf2\b (\cf1\b0  \cf2 gg_trg_RopeAndDrag,\cf1  Condition\cf2\b (\cf1\b0  \cf2\b function\cf1\b0  \cf2 Trig_RopeAndDrag_Conditions\cf1  \cf2\b )\cf1\b0  \cf2\b )\cf1\b0 
+\par     call TriggerAddAction\cf2\b (\cf1\b0  \cf2 gg_trg_RopeAndDrag,\cf1  \cf2\b function\cf1\b0  \cf2 DragActions\cf1   \cf2\b )\cf1\b0 
+\par \cf2\b endfunction\cf0\b0 
+\par }
+ 

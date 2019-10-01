@@ -1,0 +1,34 @@
+function InfernoConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0BB' )
+endfunction
+function InfernoActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local unit buffer
+local location targetloc=GetSpellTargetLoc()
+local integer firelevel=GetUnitAbilityLevelSwapped('A0BB', caster)
+    set buffer=CreateRabbit(owner,targetloc)
+    call UnitAddAbility(buffer, 'A0F6')
+    call SetUnitAbilityLevelSwapped( 'A0F6', buffer, firelevel )
+    call IssuePointOrderLocBJ(buffer, "flamestrike", targetloc)    
+    set buffer=CreateRabbit(owner,targetloc)
+    call UnitAddAbility(buffer, 'A0BC')
+    call SetUnitAbilityLevelSwapped( 'A0BC', buffer, firelevel )
+    call IssuePointOrderLocBJ(buffer, "flamestrike", targetloc)   
+    set buffer=CreateRabbit(owner,targetloc)
+    call UnitAddAbility(buffer, 'A0F5')
+    call SetUnitAbilityLevelSwapped( 'A0F5', buffer, firelevel )
+    call IssuePointOrderLocBJ(buffer, "flamestrike", targetloc)    
+call RemoveLocation(targetloc)
+set buffer=null
+set owner=null
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_Inferno takes nothing returns nothing
+    set gg_trg_Inferno = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Inferno , EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_Inferno , Condition( function InfernoConditions  ) )
+    call TriggerAddAction( gg_trg_Inferno , function InfernoActions  )
+endfunction

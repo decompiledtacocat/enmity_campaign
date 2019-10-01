@@ -1,0 +1,65 @@
+function UNPOSSESS takes unit pcaster returns nothing
+local unit target=GetHandleUnit(pcaster ,"possessing")
+local integer flag=GetHandleInt(target,"possessed!")
+local unit caster
+local player possessor
+local player possesse
+local location targetloc
+local location casterloc
+local effect cfx
+local effect cfx2
+local integer ploop
+//check
+if (flag!=1) then
+return
+endif
+//settings
+set caster=pcaster
+set possessor=GetOwningPlayer(target)
+set possesse=ConvertedPlayer(GetHandleInt(target,"OrignalOwner"))
+set targetloc=GetUnitLoc(target)
+//unpause target
+call SetUnitInvulnerable( target , true )
+call PauseUnitBJ( false, target )
+// Special effects move caster
+    call SetUnitPositionLoc( caster, targetloc )
+    set casterloc=GetUnitLoc(caster)
+    set cfx=AddSpecialEffectLocBJ(targetloc, "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl" )
+    call PolledWait2( 0.30 )
+    set cfx2=AddSpecialEffectLocBJ(casterloc, "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl" )
+    call PolledWait2( 0.30 )
+    //Kill PermSummons if trap master or ranger
+    call KillSummons(target)
+    // Reverse switch
+    call SetUnitOwner(caster,possessor, false )
+    call SetUnitOwner(target,possesse, true )
+    call SetUnitInvulnerable(caster, false )
+    set possessor=GetOwningPlayer(caster)
+    //  unlock items
+    set ploop = 1
+    loop
+        exitwhen ploop > 6
+        call SetItemDroppableBJ( UnitItemInSlotBJ(target, ploop), true )
+        set ploop = ploop + 1
+    endloop
+    // unhide and unpause 
+    call PauseUnitBJ( false, caster)
+    call PauseUnitBJ( false, target)
+    call ShowUnitShow(caster)
+    call SelectUnitAddForPlayer( caster, possessor)
+    call SetUnitInvulnerable( target , false )
+    call SetHandleInt(target,"possessed!",0)
+    call SetHandleInt(target,"OrignalOwner",null)
+    call SetHandleHandle(target,"Shapeless",null)
+call DestroyEffect(cfx)
+call DestroyEffect(cfx2)
+call RemoveLocation(targetloc)
+call RemoveLocation(casterloc)
+set cfx=null
+set cfx2=null
+set caster=null
+set possessor=null
+set possesse=null
+set targetloc=null
+set casterloc=null
+endfunction

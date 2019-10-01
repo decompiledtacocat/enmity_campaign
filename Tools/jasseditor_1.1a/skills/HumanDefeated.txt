@@ -1,0 +1,47 @@
+function HuDefeatedActions takes nothing returns nothing
+local integer dloop=1
+local location camloc=GetUnitLoc(gg_unit_h003_0017)
+local string hplayers=GetPlayerNames(1,5)
+local string uplayers=GetPlayerNames(7,11)
+local force human=GetPlayerForce(1,5)
+local force undead=GetPlayerForce(7,11)
+    loop
+        exitwhen dloop > 11
+        call CameraSetEQNoiseForPlayer(Player(dloop), 3 )
+        call SmartCameraPanBJ(Player(dloop),camloc , 2.00 )
+        call SetCameraTargetControllerNoZForPlayer(Player(dloop), gg_unit_h003_0017, 0, 0, false )
+        set dloop = dloop + 1
+    endloop
+    call CinematicModeBJ( true,human)
+    call CinematicModeBJ( true,undead)
+    call TransmissionFromUnitTypeWithNameBJ(human, Player(0), 'n004', "Alchemist",camloc, null, ( "What.. the.. %@^*! You failed to kill the scourge. Instead you got the castle destroyed!!! You got OWNED by  " +  uplayers + ". GO REDEEM YOUR SELF! AND PLAY AGAIN!"  ), bj_TIMETYPE_ADD, 0.00, true )
+    call TransmissionFromUnitTypeWithNameBJ(undead, Player(6), 'ndqt', "Vile Temptress",camloc, null, ( "Moohahahahaha!! " +  uplayers+ ". You guys PWNED those humans so badly! Go play some more and show  more noobies how its done! "  ), bj_TIMETYPE_ADD, 0.50, true )
+    call CinematicModeBJ(false, human)
+    call CinematicModeBJ(false, undead)
+    call TriggerSleepAction( 2.00 )
+    set dloop  = 0
+    loop
+        exitwhen dloop   > 11
+        if dloop>5 then
+        call CustomVictoryBJ(Player(dloop), true, true )
+        else
+        call CustomDefeatBJ(Player(dloop), "OWNED!" )
+        endif
+        set dloop = dloop + 1
+    endloop
+call DestroyForce(human)
+call DestroyForce(undead)
+call RemoveLocation(camloc)
+set human=null
+set undead=null
+set camloc=null
+call DestroyTrigger(GetTriggeringTrigger())    
+endfunction
+
+//===========================================================================
+function InitTrig_HuDefeated takes nothing returns nothing
+    set gg_trg_HuDefeated = CreateTrigger(  )
+    call TriggerRegisterUnitEvent( gg_trg_HuDefeated, gg_unit_h003_0017, EVENT_UNIT_DEATH )
+    call TriggerAddAction( gg_trg_HuDefeated, function HuDefeatedActions)
+endfunction
+

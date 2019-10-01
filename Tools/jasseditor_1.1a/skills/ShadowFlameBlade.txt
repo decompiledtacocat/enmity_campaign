@@ -1,0 +1,110 @@
+function Trig_FlameScar_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0H6' 
+endfunction
+
+function Trig_FlameScar_Conditions takes nothing returns boolean
+return GetSpellAbilityId() == 'A0H6' 
+endfunction
+
+function ShadowFlameEffect takes nothing returns nothing
+ local trigger t=GetTriggeringTrigger()
+ local unit s2=GetHandleUnit(t,"ShadowFlameS2")
+ local unit s1=GetHandleUnit(t,"ShadowFlameS1")
+ local unit caster=GetHandleUnit(t,"ShadowFlameBolt")
+ local player owner=GetOwningPlayer(caster)
+ local integer level=GetHandleInt(t,"ShadowFlameLevel")
+ local integer damage=15*level
+ local timer tim=GetHandleTimer(t,"ShadowFlameTimer")
+ local location castloc
+ local group temp
+ local unit picked
+
+
+if (TimerGetRemaining(tim)<=0) or (IsUnitDeadBJ(caster)) then
+            call TriggerSleepAction(0)
+            call RemoveUnit(s2)
+            call TriggerSleepAction(0)
+            call RemoveUnit(s1)
+            call KillUnit(caster)
+call FlushHandleLocals(t)
+set s2=null
+set s1=null
+set caster=null
+set owner=null         
+call DestroyTimer(tim)   
+set tim=null
+call DestroyTrigger(t)
+else
+            call RemoveUnit(s2)
+            set s2=s1
+            set s1=CreateUnit( Player(15), GetUnitTypeId(caster), 0,0, GetUnitFacing(caster))
+            call UnitAddAbility( s1, 'Aloc' )
+            call SetUnitColor( s1, GetPlayerColor( GetOwningPlayer(caster) ) )
+            call SetUnitPosition(s1, GetUnitX(caster), GetUnitY(caster) )
+            call SetUnitVertexColor(s1, 200,200,200,127)
+            call SetUnitVertexColor(s2, 200,200,200,63)
+            call SetUnitTimeScale( s1,0)
+            
+            set castloc=GetUnitLoc(caster)
+            set udg_tempfilterplayer=null
+            set udg_tempfilterplayer=owner
+            set temp=GetUnitsInRangeOfLocMatching(200,castloc, Condition(function filtercheck))
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null        
+                   call UnitDamageTargetBJ(caster, picked,damage, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                   call DestroyEffect(AddSpellEffectTargetById('A0H6' , EFFECT_TYPE_SPECIAL, picked,"chest"))
+                   call GroupRemoveUnit(temp,picked)  
+                  endloop
+            call RemoveLocation(castloc)
+            set castloc=null
+            call DestroyGroup(temp)
+            set temp=null
+           call SetHandleHandle(t,"ShadowFlameS1",s1)
+           call SetHandleHandle(t,"ShadowFlameS2",s2)
+endif
+set s2=null
+set s1=null
+set caster=null
+set owner=null   
+set tim=null
+endfunction
+
+function Trig_FlameScar_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetSpellTargetLoc()
+local player owner=GetOwningPlayer(caster)
+local integer level=GetUnitAbilityLevelSwapped('A0H6', caster)
+local real angle=AngleBetweenPoints(castloc,targetloc)
+local location moveloc=PolarProjectionBJ(castloc,3000,angle)
+local unit dummy=CreateUnitAtLoc(owner,'o013',castloc,angle)
+local trigger t=CreateTrigger()
+local timer tim=CreateTimer()
+call SetHandleHandle(t,"ShadowFlameTimer",tim)
+call SetHandleInt(t,"ShadowFlameLevel",level)
+call SetHandleHandle(t,"ShadowFlameBolt",dummy)
+call SetHandleHandle(t,"ShadowFlameS1",null)
+call SetHandleHandle(t,"ShadowFlameS2",null)
+call IssuePointOrderLoc(dummy,"move", moveloc)
+call TimerStart( tim, 4, false, null)
+call TriggerRegisterTimerEventPeriodic( t, .25 )
+call TriggerAddAction( t, function ShadowFlameEffect)
+call RemoveLocation(castloc)
+call RemoveLocation(targetloc)
+call RemoveLocation(moveloc)
+set moveloc=null
+set caster=null
+set castloc=null
+set targetloc=null
+set owner=null
+set dummy=null
+endfunction
+
+//===========================================================================
+function InitTrig_FlameScar takes nothing returns nothing
+    set gg_trg_FlameScar = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_FlameScar, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_FlameScar, Condition( function Trig_FlameScar_Conditions ) )
+    call TriggerAddAction( gg_trg_FlameScar, function Trig_FlameScar_Actions )
+endfunction

@@ -1,0 +1,4937 @@
+﻿STRING 10
+{
+Player 1
+}
+
+STRING 11
+{
+Player 2
+}
+
+STRING 14
+{
+Force 1
+}
+
+STRING 20
+{
+Turtle Rock Naga v0.7 Beta
+}
+
+STRING 21
+{
+1v1 or 2v2
+}
+
+STRING 22
+{
+Turtle Rock with add Naga Race, by TekkVicious.
+Email Tekshadodemon@aol.com for comments/suggestions/bugs/balance.
+See Quest for more information.
+}
+
+STRING 23
+{
+Customs by TekkVicious
+}
+
+STRING 24
+// Units: n001 (Temple of Tides(Tier 3)), Name (Name)
+{
+Temple of Tides(Tier 3)
+}
+
+STRING 25
+// Units: n001 (Temple of Tides(Tier 3)), Tip (Tooltip - Basic)
+{
+|cffffcc00U|rpgrade to Tier 3
+}
+
+STRING 26
+// Units: n001 (Temple of Tides(Tier 3)), Hotkey (Hotkey)
+{
+U
+}
+
+STRING 27
+// Units: n001 (Temple of Tides(Tier 3)), Ubertip (Tooltip - Extended)
+{
+Upgrade to Tier 3 to enable the production of additional types of structures and units.
+}
+
+STRING 28
+// Units: n001 (Temple of Tides(Tier 3)), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 29
+// Units: n000 (Temple of Tides(Tier 2)), Name (Name)
+{
+Temple of Tides(Tier 2)
+}
+
+STRING 30
+// Units: n000 (Temple of Tides(Tier 2)), Tip (Tooltip - Basic)
+{
+|cffffcc00U|rpgrade to Tier 2
+}
+
+STRING 31
+// Units: n000 (Temple of Tides(Tier 2)), Hotkey (Hotkey)
+{
+U
+}
+
+STRING 32
+// Units: n000 (Temple of Tides(Tier 2)), Ubertip (Tooltip - Extended)
+{
+Upgrade to Tier 2 to enable the production of additional types of structures and units.
+}
+
+STRING 33
+// Units: n000 (Temple of Tides(Tier 2)), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 34
+// Units: n003 (Serpent Spire), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 35
+// Units: n003 (Serpent Spire), Name (Name)
+{
+Serpent Spire
+}
+
+STRING 36
+// Units: n003 (Serpent Spire), Tip (Tooltip - Basic)
+{
+Build S|cffffcc00e|rrpent Spire
+}
+
+STRING 37
+// Units: n003 (Serpent Spire), Ubertip (Tooltip - Extended)
+{
+Provides attack and armor upgrades for Naga units. Also serves as a drop-off point for harvested lumber.
+}
+
+STRING 38
+// Units: n003 (Serpent Spire), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 39
+// Units: n004 (Swamp Pit), Name (Name)
+{
+Swamp Pit
+}
+
+STRING 40
+// Units: n004 (Swamp Pit), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 41
+// Units: n004 (Swamp Pit), Tip (Tooltip - Basic)
+{
+Build S|cffffcc00w|ramp Pit
+}
+
+STRING 42
+// Units: n004 (Swamp Pit), Ubertip (Tooltip - Extended)
+{
+Trains AcidTurtles and Dragon Turtles. 
+}
+
+STRING 43
+// Units: n004 (Swamp Pit), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 44
+// Units: n006 (Frost Ray), Name (Name)
+{
+Frost Ray
+}
+
+STRING 45
+// Units: n006 (Frost Ray), Tip (Tooltip - Basic)
+{
+Train Frost |cffffcc00R|ray
+}
+
+STRING 46
+// Units: n006 (Frost Ray), Ubertip (Tooltip - Extended)
+{
+Powerful Anti Air ranged flying unit. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 47
+// Units: n006 (Frost Ray), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 48
+// Units: n006 (Frost Ray), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 49
+// Units: o000 (Plague), Name (Name)
+{
+Plague
+}
+
+STRING 50
+// Units: n008 (Dragon Turtle), EditorSuffix (Name - Editor Suffix)
+{
+(Armor)
+}
+
+STRING 51
+// Units: n009 (Acid Turtle), Name (Name)
+{
+Acid Turtle
+}
+
+STRING 52
+// Units: n009 (Acid Turtle), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 53
+// Units: n009 (Acid Turtle), Tip (Tooltip - Basic)
+{
+Train A|cffffcc00c|rid Turtle
+}
+
+STRING 54
+// Units: n009 (Acid Turtle), Ubertip (Tooltip - Extended)
+{
+A powerful Turtle good at destroying enemy buildings. Can learn acid breath. |n|n|cffffcc00Attacks land units.
+}
+
+STRING 55
+// Units: n009 (Acid Turtle), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 56
+// Units: h000 (Sea Vault), Name (Name)
+{
+Sea Vault
+}
+
+STRING 57
+// Units: h000 (Sea Vault), Tip (Tooltip - Basic)
+{
+Build Sea |cffffcc00V|rault
+}
+
+STRING 58
+// Units: h000 (Sea Vault), Ubertip (Tooltip - Extended)
+{
+Creates a shop with purchasable items. The items available depend upon what level of upgrade your Temple of Tides has (Temple of Tides, Tier 2, or Tier 3) and which buildings you have.
+}
+
+STRING 59
+// Units: h000 (Sea Vault), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 60
+// Units: n00A (Ancient Hydra), EditorSuffix (Name - Editor Suffix)
+{
+SUMMON
+}
+
+STRING 61
+// Units: u000 (Plague Ward(passive ward skill)), Name (Name)
+{
+Plague Ward(passive ward skill)
+}
+
+STRING 63
+// Upgrades: R00G (Abolish Magic), Hotkey (Hotkey)
+{
+P
+}
+
+STRING 68
+// Units: U001 (Sea Medusa), Hotkey (Hotkey)
+{
+M
+}
+
+STRING 69
+// Units: U001 (Sea Medusa), Name (Name)
+{
+Sea Medusa
+}
+
+STRING 70
+// Units: U001 (Sea Medusa), Awakentip (Tooltip - Awaken)
+{
+Revive Sea |cffffcc00M|redusa
+}
+
+STRING 71
+// Units: U001 (Sea Medusa), Tip (Tooltip - Basic)
+{
+Summon Sea |cffffcc00M|redusa
+}
+
+STRING 72
+// Units: U001 (Sea Medusa), Revivetip (Tooltip - Revive)
+{
+Revive Sea |cffffcc00M|redusa
+}
+
+STRING 74
+// Units: U002 (Lord of the Depths), Name (Name)
+{
+Lord of the Depths
+}
+
+STRING 75
+// Units: U002 (Lord of the Depths), Awakentip (Tooltip - Awaken)
+{
+Revive Lord of the |cffffcc00D|repths.
+}
+
+STRING 76
+// Units: U002 (Lord of the Depths), Tip (Tooltip - Basic)
+{
+Summon Lord of the |cffffcc00D|repths.
+}
+
+STRING 77
+// Units: U002 (Lord of the Depths), Revivetip (Tooltip - Revive)
+{
+Revive Lord of the |cffffcc00D|repths.
+}
+
+STRING 78
+// Units: U002 (Lord of the Depths), Ubertip (Tooltip - Extended)
+{
+Warrior Hero, adept at supporting units. Can learn Lancer, Watery Minion,  Aura of the depths, and Ancient Hydra. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 79
+// Units: U002 (Lord of the Depths), Propernames (Proper Names)
+{
+Lord Nightsorrow,Lord Soulrender,Lord Crush,Lord Titan,Lord Myr,Lord Landstalker
+}
+
+STRING 80
+// Units: n002 (Dragon Turtle), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 81
+// Units: n00B (Acid Turtle), Name (Name)
+{
+Acid Turtle
+}
+
+STRING 82
+// Units: n00B (Acid Turtle), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 83
+// Units: n00B (Acid Turtle), Tip (Tooltip - Basic)
+{
+Train A|cffffcc00c|rid Turtle
+}
+
+STRING 84
+// Units: n00B (Acid Turtle), Ubertip (Tooltip - Extended)
+{
+A powerful Turtle good at destroying enemy buildings. Can learn acid breath. |n|n|cffffcc00Attacks land units.
+}
+
+STRING 85
+// Units: n00B (Acid Turtle), EditorSuffix (Name - Editor Suffix)
+{
+(breath)
+}
+
+STRING 86
+// Units: n00F (Medusa's Tentacles), Name (Name)
+{
+Medusa's Tentacles
+}
+
+STRING 87
+// Units: n00F (Medusa's Tentacles), Ubertip (Tooltip - Extended)
+{
+A gnarly tentacle from the depths. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 89
+// Units: n00G (Great Manta), Name (Name)
+{
+Great Manta
+}
+
+STRING 91
+// Units: n00I (Couatl), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 92
+// Units: n00J (Mur'gul Reaver), Casterupgradename (Caster Upgrade Names)
+{
+Initiate, Adept, Master
+}
+
+STRING 93
+// Units: n00J (Mur'gul Reaver), Casterupgradetip (Caster Upgrade Tips)
+{
+- Parasite,- Parasite|n- Tarnish,- Parasite|n- Tarnish|n- Plague
+}
+
+STRING 94
+// Units: n00J (Mur'gul Reaver), Ubertip (Tooltip - Extended)
+{
+Offensive spellcaster. Can initially cast parasite. Can also learn Tarnish, and Plague. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 95
+// Units: n00J (Mur'gul Reaver), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 96
+// Units: n00K (Naga Siren), Casterupgradetip (Caster Upgrade Tips)
+{
+- Healing Water,- Healing Water|n- Water Image,- Healing Water|n- Water Image|n- Stop
+}
+
+STRING 97
+// Units: n00K (Naga Siren), Ubertip (Tooltip - Extended)
+{
+Powerful spellcaster. Can initially cast Healing Water which heals units over time. Can also learn Water Image, and Stop. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 98
+// Units: n00K (Naga Siren), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 99
+// Units: n00L (Snap Dragon), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 100
+// Units: n00M (Naga Myrmidon), Hotkey (Hotkey)
+{
+G
+}
+
+STRING 101
+// Units: n00M (Naga Myrmidon), Tip (Tooltip - Basic)
+{
+Train Na|cffffcc00g|ra Myrmidon
+}
+
+STRING 102
+// Units: n00M (Naga Myrmidon), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 103
+// Units: n00Y (Submerged Naga Myrmidon), Ubertip (Tooltip - Extended)
+{
+Powerful melee unit. Has the Submerge ability, which allows this unit to hide in water.  |n|n|cffffcc00Attacks land units.
+}
+
+STRING 104
+// Units: n00N (Naga Royal Myrmidon), Name (Name)
+{
+Naga Royal Myrmidon
+}
+
+STRING 105
+// Units: n00N (Naga Royal Myrmidon), Tip (Tooltip - Basic)
+{
+Train N|cffffcc00a|rga Royal Myrmidon
+}
+
+STRING 107
+// Units: n00N (Naga Royal Myrmidon), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 108
+// Units: n00N (Naga Royal Myrmidon), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 109
+// Units: n00O (Mur'gul Slave), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 110
+// Units: n00P (Altar of the Depths), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 111
+// Units: n00P (Altar of the Depths), Tip (Tooltip - Basic)
+{
+Build |cffffcc00A|rltar of Depths.
+}
+
+STRING 112
+// Units: n00P (Altar of the Depths), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 113
+// Units: n00Q (Coral Bed), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 114
+// Units: n00R (Shrine of Azshara), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 115
+// Units: n00R (Shrine of Azshara), Tip (Tooltip - Basic)
+{
+Build Sh|cffffcc00r|rine of Azshara
+}
+
+STRING 116
+// Units: n00R (Shrine of Azshara), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 117
+// Units: n00R (Shrine of Azshara), Ubertip (Tooltip - Extended)
+{
+Trains Naga Sirens, Mur'gul Reavers and Makrura Magi-Crushers. Also contains spell upgrades.
+}
+
+STRING 118
+// Units: n00S (Spawning Grounds), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 119
+// Units: n00S (Spawning Grounds), Ubertip (Tooltip - Extended)
+{
+Trains Naga Myrmidons, Snap Dragons, and Royal Myrmidon. Also contains upgrades.
+}
+
+STRING 120
+// Units: n00T (Tidal Ground Guardian), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 122
+// Units: o001 (Temple of Tides), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 123
+// Units: o001 (Temple of Tides), Name (Name)
+{
+Temple of Tides
+}
+
+STRING 124
+// Units: o001 (Temple of Tides), Tip (Tooltip - Basic)
+{
+Build |cffffcc00T|remple of Tides
+}
+
+STRING 125
+// Units: o001 (Temple of Tides), Ubertip (Tooltip - Extended)
+{
+Primary structure, used to train Mur'gul Slaves, and receive gathered resources. 
+}
+
+STRING 126
+// Units: o001 (Temple of Tides), Hotkey (Hotkey)
+{
+T
+}
+
+STRING 127
+// Units: n00U (Deep Sea Gate), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 128
+// Units: n00U (Deep Sea Gate), Name (Name)
+{
+Deep Sea Gate
+}
+
+STRING 129
+// Units: n00T (Tidal Ground Guardian), Hotkey (Hotkey)
+{
+G
+}
+
+STRING 130
+// Units: n00U (Deep Sea Gate), Tip (Tooltip - Basic)
+{
+Build Deep Sea |cffffcc00G|rate
+}
+
+STRING 132
+// Units: n00V (Manta), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 133
+// Units: n00V (Manta), Name (Name)
+{
+Manta
+}
+
+STRING 134
+// Units: n00V (Manta), Hotkey (Hotkey)
+{
+T
+}
+
+STRING 135
+// Units: n00V (Manta), Tip (Tooltip - Basic)
+{
+Train Man|cffffcc00t|ra
+}
+
+STRING 136
+// Units: n00X (Submerged Snap Dragon), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 137
+// Units: n00V (Manta), Ubertip (Tooltip - Extended)
+{
+Heavy ranged flying unit. Learn Deep Velocity. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 138
+// Units: e002 (Naga Sea Crystal), Name (Name)
+{
+Naga Sea Crystal
+}
+
+STRING 139
+// Units: e002 (Naga Sea Crystal), Hotkey (Hotkey)
+{
+N
+}
+
+STRING 140
+// Units: e002 (Naga Sea Crystal), Tip (Tooltip - Basic)
+{
+Create |cffffcc00N|raga Sea Crystal
+}
+
+STRING 142
+// Units: o002 (Submerged Mur'gul Slave), EditorSuffix (Name - Editor Suffix)
+{
+ (Hide)
+}
+
+STRING 144
+// Units: n00H (Makrura Magi-Crusher), Name (Name)
+{
+Makrura Magi-Crusher
+}
+
+STRING 145
+// Units: n00H (Makrura Magi-Crusher), Tip (Tooltip - Basic)
+{
+Train |cffffcc00M|rakrura Magi-Crusher
+}
+
+STRING 146
+// Units: n00H (Makrura Magi-Crusher), Hotkey (Hotkey)
+{
+M
+}
+
+STRING 147
+// Units: n00H (Makrura Magi-Crusher), Ubertip (Tooltip - Extended)
+{
+Spell immune unit. Can learn Concentrated Anti-Magic and Anti-Magic Wave. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 148
+// Units: n00Y (Submerged Naga Myrmidon), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 149
+// Units: n00Y (Submerged Naga Myrmidon), Tip (Tooltip - Basic)
+{
+Train Na|cffffcc00g|ra Myrmidon
+}
+
+STRING 151
+// Units: n00U (Deep Sea Gate), Hotkey (Hotkey)
+{
+G
+}
+
+STRING 152
+// Units: n00Z (Submerged Naga Royal Myrmidon), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 153
+// Units: n00Z (Submerged Naga Royal Myrmidon), Name (Name)
+{
+Submerged Naga Royal Myrmidon
+}
+
+STRING 154
+// Units: n00Z (Submerged Naga Royal Myrmidon), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 155
+// Units: n00Z (Submerged Naga Royal Myrmidon), Tip (Tooltip - Basic)
+{
+Train N|cffffcc00a|rga Royal Myrmidon
+}
+
+STRING 156
+// Units: n00Z (Submerged Naga Royal Myrmidon), Ubertip (Tooltip - Extended)
+{
+Train N|cffffcc00a|rga Royal Myrmidon
+}
+
+STRING 157
+// Units: n00W (Tidal Air Guardian), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 158
+// Items: I004 (Scroll of Protection), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 159
+// Items: I004 (Scroll of Protection), Tip (Tooltip - Basic)
+{
+Purchase |cffffcc00S|rcroll of Potection
+}
+
+STRING 160
+// Abilities: A000 (Cleaving Attack), Researchubertip (Tooltip - Learn - Extended)
+{
+The Naga Royal Mrymidon strikes with such force that he damages multiple enemies with his attack. 25% damage is splash.
+}
+
+STRING 161
+// Abilities: A000 (Cleaving Attack), Ubertip (Tooltip - Normal - Extended)
+{
+Allows 15% of Naga Royal Myrmidon damage to strikes through to enemies near the primary attacked unit.
+}
+
+STRING 162
+// Abilities: A000 (Cleaving Attack), Tip (Tooltip - Normal)
+{
+Cleaving Attack
+}
+
+STRING 164
+// Abilities: A002 (Mana Poison), Name (Name)
+{
+Mana Poison
+}
+
+STRING 165
+// Abilities: A002 (Mana Poison), Hotkey (Hotkey - Normal)
+{
+N
+}
+
+STRING 166
+// Abilities: A002 (Mana Poison), Tip (Tooltip - Normal)
+{
+Ma|cffffcc00n|ra Poison - [|cffffcc00Level 1|r]
+}
+
+STRING 167
+// Abilities: A002 (Mana Poison), Tip (Tooltip - Normal)
+{
+Ma|cffffcc00n|ra Poison - [|cffffcc00Level 1|r]
+}
+
+STRING 168
+// Abilities: A002 (Mana Poison), Tip (Tooltip - Normal)
+{
+Ma|cffffcc00n|ra Poison - [|cffffcc00Level 1|r]
+}
+
+STRING 171
+// Abilities: A002 (Mana Poison), Researchtip (Tooltip - Learn)
+{
+Learn Ma|cffffcc00n|ra Poison - [|cffffcc00Level %d|r]
+}
+
+STRING 173
+// Abilities: A003 (Shadowsight), Name (Name)
+{
+Shadowsight
+}
+
+STRING 174
+// Abilities: A003 (Shadowsight), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 175
+// Abilities: A003 (Shadowsight), Tip (Tooltip - Normal)
+{
+Sha|cffffcc00d|row Sight
+}
+
+STRING 177
+// Abilities: A004 (Anti-Magic Wave), Name (Name)
+{
+Anti-Magic Wave
+}
+
+STRING 179
+// Items: I000 (Orb of Water), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 181
+// Abilities: A005 (Spiked Shell Armor (+6)), Ubertip (Tooltip - Normal - Extended)
+{
+Razor-sharp spikes on the Turtle's shell deal 15% of an enemy unit's melee attack damage back to it and increases armor by 8.
+}
+
+STRING 182
+// Abilities: A005 (Spiked Shell Armor (+6)), Name (Name)
+{
+Spiked Shell Armor (+6)
+}
+
+STRING 183
+// Abilities: A005 (Spiked Shell Armor (+6)), Tip (Tooltip - Normal)
+{
+Spiked Shell Armor
+}
+
+STRING 184
+// Abilities: A001 (Parasite (naga)), Name (Name)
+{
+Parasite (naga)
+}
+
+STRING 187
+// Units: n014 (Omega Hunter X), EditorSuffix (Name - Editor Suffix)
+{
+(naga)
+}
+
+STRING 189
+// Abilities: A01D (Vanish), Hotkey (Hotkey - Normal)
+{
+V
+}
+
+STRING 191
+// Abilities: A008 (Healing Water), Name (Name)
+{
+Healing Water
+}
+
+STRING 193
+// Abilities: A008 (Healing Water), Tip (Tooltip - Normal)
+{
+H|cffffcc00e|raling Water
+}
+
+STRING 194
+// Abilities: A008 (Healing Water), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 195
+// Abilities: A00A (Water Image), Name (Name)
+{
+Water Image
+}
+
+STRING 196
+// Abilities: A00A (Water Image), Tip (Tooltip - Normal)
+{
+|cffffcc00W|rater Image
+}
+
+STRING 198
+// Abilities: A00A (Water Image), Hotkey (Hotkey - Normal)
+{
+W
+}
+
+STRING 203
+// Abilities: A00D (Spell Shield), EditorSuffix (Editor Suffix)
+{
+ (naga)
+}
+
+STRING 205
+// Abilities: A00D (Spell Shield), Ubertip (Tooltip - Normal - Extended)
+{
+Blocks one spell for 20 seconds.
+}
+
+STRING 206
+// Upgrades: R001 (Ghoul Frenzy), Hotkey (Hotkey)
+{
+I
+}
+
+STRING 207
+// Abilities: A00D (Spell Shield), Ubertip (Tooltip - Normal - Extended)
+{
+Blocks one spell for 40 seconds.
+}
+
+STRING 208
+// Abilities: A00D (Spell Shield), Ubertip (Tooltip - Normal - Extended)
+{
+Blocks one spell for 60 seconds.
+}
+
+STRING 214
+// Abilities: A00H (Crushing Wave), EditorSuffix (Editor Suffix)
+{
+(hero)
+}
+
+STRING 215
+// Abilities: A00I (Monsoon), Researchubertip (Tooltip - Learn - Extended)
+{
+Calls a storm of lightning bolts to strike enemy units for <ANmo,DataA1> damage. |nLasts <ANmo,Dur1> seconds. |n|n|cffffcc00Level 1|r - Slow rate of lighting. |n|cffffcc00Level 2|r - Fast rate of lighting.  |n|cffffcc00Level 3|r - Very fast rate of lighting. 
+}
+
+STRING 216
+// Abilities: A00I (Monsoon), Ubertip (Tooltip - Normal - Extended)
+{
+Calls down a storm of lightning to striking enemy units quickly for 20 damage in a small target area. |nLasts 15 seconds.
+}
+
+STRING 217
+// Abilities: A00I (Monsoon), Ubertip (Tooltip - Normal - Extended)
+{
+Calls down a storm of lightning to striking enemy units very quickly for 20 damage in a small target area. |nLasts 15 seconds.
+}
+
+STRING 218
+// Abilities: A00I (Monsoon), EditorSuffix (Editor Suffix)
+{
+(naga)
+}
+
+STRING 219
+// Abilities: A00J (Ice Breath), Name (Name)
+{
+Ice Breath
+}
+
+STRING 220
+// Abilities: A00K (Ice Breath), Name (Name)
+{
+Ice Breath
+}
+
+STRING 221
+// Abilities: A00K (Ice Breath), EditorSuffix (Editor Suffix)
+{
+ground
+}
+
+STRING 222
+// Abilities: A00L (Ice Spikes), Name (Name)
+{
+Ice Spikes
+}
+
+STRING 223
+// Abilities: A00L (Ice Spikes), Tip (Tooltip - Normal)
+{
+Ice Spikes
+}
+
+STRING 224
+// Abilities: A00L (Ice Spikes), Ubertip (Tooltip - Normal - Extended)
+{
+Fires froze ice spikes at nearby enemy air units, dealing <hrtt,mindmg2> - <hrtt,maxdmg2> damage per hit.
+}
+
+STRING 226
+// Abilities: A02E (Stop), Tip (Tooltip - Normal)
+{
+S|cffffcc00t|rop
+}
+
+STRING 227
+// Abilities: A02E (Stop), Name (Name)
+{
+Stop
+}
+
+STRING 228
+// Abilities: A00V (Medusa Tentacles), Researchhotkey (Hotkey - Learn)
+{
+T
+}
+
+STRING 230
+// Abilities: S001 (Spiked Shell Armor Upgrade), Name (Name)
+{
+Spiked Shell Armor Upgrade
+}
+
+STRING 231
+// Abilities: A00O (Acid Breath), Name (Name)
+{
+Acid Breath
+}
+
+STRING 232
+// Abilities: A00O (Acid Breath), Tip (Tooltip - Normal)
+{
+Acid Breath
+}
+
+STRING 233
+// Abilities: A00O (Acid Breath), Ubertip (Tooltip - Normal - Extended)
+{
+Acid turtles add their own bodily fliud to their attacks, causing attacks to burn the ground and burn enemy units with corrosive acids.
+}
+
+STRING 234
+// Abilities: A00R (Poison Sting), Name (Name)
+{
+Poison Sting
+}
+
+STRING 235
+// Abilities: A00R (Poison Sting), Tip (Tooltip - Normal)
+{
+Poison Sting
+}
+
+STRING 236
+// Abilities: A00Y (Poison Sting), Ubertip (Tooltip - Normal - Extended)
+{
+Deals 4 poison damage per second. |nLasts 7seconds.
+}
+
+STRING 237
+// Abilities: A00R (Poison Sting), EditorSuffix (Editor Suffix)
+{
+(naga)
+}
+
+STRING 239
+// Abilities: A00S (Lancer), Name (Name)
+{
+Lancer
+}
+
+STRING 240
+// Abilities: A00S (Lancer), Tip (Tooltip - Normal)
+{
+Lan|cffffcc00c|rer - [|cffffcc00Level 1|r]
+}
+
+STRING 241
+// Abilities: A00S (Lancer), Tip (Tooltip - Normal)
+{
+Lan|cffffcc00c|rer - [|cffffcc00Level 2|r]
+}
+
+STRING 242
+// Abilities: A00S (Lancer), Tip (Tooltip - Normal)
+{
+Lan|cffffcc00c|rer - [|cffffcc00Level 3|r]
+}
+
+STRING 247
+// Abilities: A00W (Plague), Name (Name)
+{
+Plague
+}
+
+STRING 248
+// Abilities: A00W (Plague), EditorSuffix (Editor Suffix)
+{
+(passive Wardskill)
+}
+
+STRING 249
+// Abilities: A00M (Acid Breath), Name (Name)
+{
+Acid Breath
+}
+
+STRING 250
+// Abilities: A00M (Acid Breath), EditorSuffix (Editor Suffix)
+{
+(Building skill)
+}
+
+STRING 251
+// Abilities: A01D (Vanish), EditorSuffix (Editor Suffix)
+{
+(naga)
+}
+
+STRING 252
+// Abilities: A01K (Tarnish), Hotkey (Hotkey - Normal)
+{
+T
+}
+
+STRING 253
+// Abilities: A00V (Medusa Tentacles), Name (Name)
+{
+Medusa Tentacles
+}
+
+STRING 254
+// Abilities: A00V (Medusa Tentacles), Tip (Tooltip - Normal)
+{
+Medusa |cffffcc00T|rentacles
+}
+
+STRING 255
+// Abilities: A00V (Medusa Tentacles), Researchtip (Tooltip - Learn)
+{
+Learn Medusa |cffffcc00T|rentacles
+}
+
+STRING 258
+// Abilities: S002 (Acid Breath Upgrade), Name (Name)
+{
+Acid Breath Upgrade
+}
+
+STRING 259
+// Abilities: A00T (Aura of the Depths), Researchtip (Tooltip - Learn)
+{
+Learn A|cffffcc00u|rra of the Depths - [|cffffcc00Level %d|r]
+}
+
+STRING 260
+// Abilities: A00T (Aura of the Depths), Researchubertip (Tooltip - Learn - Extended)
+{
+Increases the life regeneration rate of nearby friendly units. Allowing naga to heal off shallow water. |n|n|cffffcc00Level 1|r - minor regeneration bonus. |n|cffffcc00Level 2|r - moderate regeneration bonus. |n|cffffcc00Level 3|r - greater regeneration bonus.
+}
+
+STRING 261
+// Abilities: A00T (Aura of the Depths), Tip (Tooltip - Normal)
+{
+A|cffffcc00u|rra of the Depths - [|cffffcc00Level 1|r]
+}
+
+STRING 262
+// Abilities: A00T (Aura of the Depths), Tip (Tooltip - Normal)
+{
+A|cffffcc00u|rra of the Depths - [|cffffcc00Level 2|r]
+}
+
+STRING 263
+// Abilities: A00T (Aura of the Depths), Tip (Tooltip - Normal)
+{
+A|cffffcc00u|rra of the Depths - [|cffffcc00Level 3|r]
+}
+
+STRING 264
+// Abilities: A00T (Aura of the Depths), Ubertip (Tooltip - Normal - Extended)
+{
+Increases nearby friendly units' life regeneration rate.
+}
+
+STRING 265
+// Abilities: A00T (Aura of the Depths), Ubertip (Tooltip - Normal - Extended)
+{
+Increases nearby friendly units' life regeneration rate.
+}
+
+STRING 266
+// Abilities: A00T (Aura of the Depths), Ubertip (Tooltip - Normal - Extended)
+{
+Increases nearby friendly units' life regeneration rate.
+}
+
+STRING 267
+// Abilities: A00T (Aura of the Depths), Name (Name)
+{
+Aura of the Depths
+}
+
+STRING 268
+// Abilities: A00X (Watery Minions), Tip (Tooltip - Normal)
+{
+|cffffcc00W|rater Minions - [|cffffcc00Level 1|r]
+}
+
+STRING 269
+// Abilities: A00X (Watery Minions), Ubertip (Tooltip - Normal - Extended)
+{
+Summons 2 minions to do their master's bidding. |nLasts 60 seconds.
+}
+
+STRING 270
+// Abilities: A00X (Watery Minions), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00W|rater Minions - [|cffffcc00Level %d|r]
+}
+
+STRING 271
+// Abilities: A00X (Watery Minions), Researchubertip (Tooltip - Learn - Extended)
+{
+Summons 2 minions to do their master's bidding. |nLasts 60 seconds. |n|n|cffffcc00Level 1|r - 2 weak minions. |n|cffffcc00Level 2|r - 2 stronger minions. |n|cffffcc00Level 3|r - 2 greater minions.
+}
+
+STRING 272
+// Abilities: A00X (Watery Minions), Tip (Tooltip - Normal)
+{
+|cffffcc00W|rater Minions - [|cffffcc00Level 2|r]
+}
+
+STRING 273
+// Abilities: A00X (Watery Minions), Tip (Tooltip - Normal)
+{
+|cffffcc00W|rater Minions - [|cffffcc00Level 3|r]
+}
+
+STRING 274
+// Abilities: A00X (Watery Minions), Ubertip (Tooltip - Normal - Extended)
+{
+Summons 2 minions to do their master's bidding. |nLasts 60 seconds.
+}
+
+STRING 275
+// Abilities: A00X (Watery Minions), Ubertip (Tooltip - Normal - Extended)
+{
+Summons 2 minions to do their master's bidding. |nLasts 60 seconds.
+}
+
+STRING 276
+// Abilities: A00X (Watery Minions), Name (Name)
+{
+Watery Minions
+}
+
+STRING 277
+// Abilities: A00X (Watery Minions), Researchhotkey (Hotkey - Learn)
+{
+W
+}
+
+STRING 278
+// Abilities: A00Y (Poison Sting), Name (Name)
+{
+Poison Sting
+}
+
+STRING 279
+// Abilities: A00Y (Poison Sting), Tip (Tooltip - Normal)
+{
+Poison Sting
+}
+
+STRING 281
+// Abilities: A00Y (Poison Sting), EditorSuffix (Editor Suffix)
+{
+(naga hydra)
+}
+
+STRING 282
+// Abilities: A026 (Vacuum Aura), Name (Name)
+{
+Vacuum Aura
+}
+
+STRING 283
+// Abilities: A026 (Vacuum Aura), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00V|racuum Aura - [|cffffcc00Level %d|r]
+}
+
+STRING 285
+// Abilities: A026 (Vacuum Aura), Tip (Tooltip - Normal)
+{
+|cffffcc00V|racuum Aura - [|cffffcc00Level 1|r]
+}
+
+STRING 286
+// Abilities: A026 (Vacuum Aura), Tip (Tooltip - Normal)
+{
+|cffffcc00V|racuum Aura - [|cffffcc00Level 2|r]
+}
+
+STRING 287
+// Abilities: A026 (Vacuum Aura), Tip (Tooltip - Normal)
+{
+|cffffcc00V|racuum Aura - [|cffffcc00Level 3|r]
+}
+
+STRING 291
+// Abilities: A026 (Vacuum Aura), Researchhotkey (Hotkey - Learn)
+{
+V
+}
+
+STRING 292
+// Upgrades: R00B (Vorpal Blades), Hotkey (Hotkey)
+{
+V
+}
+
+STRING 294
+// Abilities: A010 (Disable), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00D|risable - [|cffffcc00Level %d|r]
+}
+
+STRING 295
+// Abilities: A010 (Disable), Tip (Tooltip - Normal)
+{
+|cffffcc00D|risable - [|cffffcc00Level 1|r]
+}
+
+STRING 296
+// Abilities: A010 (Disable), Tip (Tooltip - Normal)
+{
+|cffffcc00D|risable - [|cffffcc00Level 2|r]
+}
+
+STRING 297
+// Abilities: A010 (Disable), Tip (Tooltip - Normal)
+{
+|cffffcc00D|risable - [|cffffcc00Level 3|r]
+}
+
+STRING 300
+// Abilities: A010 (Disable), Name (Name)
+{
+Disable
+}
+
+STRING 301
+// Abilities: A00D (Spell Shield), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 302
+// Abilities: A00D (Spell Shield), Researchhotkey (Hotkey - Learn)
+{
+D
+}
+
+STRING 304
+// Abilities: A012 (Poison Blades), Name (Name)
+{
+Poison Blades
+}
+
+STRING 305
+// Abilities: A012 (Poison Blades), Tip (Tooltip - Normal)
+{
+Poison |cffffcc00B|rlades - [|cffffcc00Level 1|r]
+}
+
+STRING 306
+// Abilities: A012 (Poison Blades), Ubertip (Tooltip - Normal - Extended)
+{
+A poison attack that deals 5 damage per second for 10 seconds
+}
+
+STRING 307
+// Abilities: A012 (Poison Blades), Hotkey (Hotkey - Normal)
+{
+B
+}
+
+STRING 308
+// Abilities: A012 (Poison Blades), Researchhotkey (Hotkey - Learn)
+{
+B
+}
+
+STRING 309
+// Abilities: A012 (Poison Blades), Researchtip (Tooltip - Learn)
+{
+Learn Poison |cffffcc00B|rlades - [|cffffcc00Level %d|r]
+}
+
+STRING 310
+// Abilities: A012 (Poison Blades), Tip (Tooltip - Normal)
+{
+Poison |cffffcc00B|rlades - [|cffffcc00Level 2|r]
+}
+
+STRING 311
+// Abilities: A012 (Poison Blades), Tip (Tooltip - Normal)
+{
+Poison |cffffcc00B|rlades - [|cffffcc00Level 3|r]
+}
+
+STRING 312
+// Abilities: A012 (Poison Blades), Ubertip (Tooltip - Normal - Extended)
+{
+A poison attack that deals 10 damage per second for 10 seconds
+}
+
+STRING 313
+// Abilities: A012 (Poison Blades), Ubertip (Tooltip - Normal - Extended)
+{
+A poison attack that deals 15 damage per second for 10 seconds
+}
+
+STRING 315
+// Abilities: A011 (Adrenaline), Name (Name)
+{
+Adrenaline
+}
+
+STRING 316
+// Abilities: A010 (Disable), Researchhotkey (Hotkey - Learn)
+{
+D
+}
+
+STRING 317
+// Abilities: A010 (Disable), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 318
+// Abilities: A011 (Adrenaline), Researchtip (Tooltip - Learn)
+{
+Learn A|cffffcc00d|rrenaline - [|cffffcc00Level %d|r]
+}
+
+STRING 320
+// Abilities: A011 (Adrenaline), Tip (Tooltip - Normal)
+{
+A|cffffcc00d|rrenaline - [|cffffcc00Level 1|r]
+}
+
+STRING 321
+// Abilities: A011 (Adrenaline), Tip (Tooltip - Normal)
+{
+A|cffffcc00d|rrenaline - [|cffffcc00Level 2|r]
+}
+
+STRING 322
+// Abilities: A011 (Adrenaline), Tip (Tooltip - Normal)
+{
+A|cffffcc00d|rrenaline - [|cffffcc00Level 3|r]
+}
+
+STRING 326
+// Abilities: A01E (True Sight), EditorSuffix (Editor Suffix)
+{
+(naga)
+}
+
+STRING 327
+// Abilities: A013 (Dark Calling), EditorSuffix (Editor Suffix)
+{
+dark summong
+}
+
+STRING 328
+// Abilities: A013 (Dark Calling), Name (Name)
+{
+Dark Calling
+}
+
+STRING 329
+// Abilities: A013 (Dark Calling), Tip (Tooltip - Normal)
+{
+|cffffcc00D|rark calling
+}
+
+STRING 330
+// Abilities: A013 (Dark Calling), Ubertip (Tooltip - Normal - Extended)
+{
+Summons <AUds,DataA1> friendly units from a target area to Great Marsh Manta.
+}
+
+STRING 332
+// Units: n00Y (Submerged Naga Myrmidon), Hotkey (Hotkey)
+{
+G
+}
+
+STRING 333
+// Units: n012 (Submerged Naga Myrmidon), Hotkey (Hotkey)
+{
+G
+}
+
+STRING 334
+// Abilities: A015 (Great Manta), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00G|rreat Manta
+}
+
+STRING 335
+// Abilities: A015 (Great Manta), Tip (Tooltip - Normal)
+{
+Summon |cffffcc00G|rreat Manta
+}
+
+STRING 338
+// Abilities: A016 (Ancient Hydra), Researchtip (Tooltip - Learn)
+{
+Learn Ancient |cffffcc00H|ryrda
+}
+
+STRING 339
+// Abilities: A011 (Adrenaline), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 340
+// Abilities: A011 (Adrenaline), Researchhotkey (Hotkey - Learn)
+{
+D
+}
+
+STRING 341
+// Abilities: A016 (Ancient Hydra), Tip (Tooltip - Normal)
+{
+Ancient Hy|cffffcc00d|rra
+}
+
+STRING 342
+// Abilities: A016 (Ancient Hydra), Researchubertip (Tooltip - Learn - Extended)
+{
+Opens a gate of water from which an  Ancient Hydra from the deep emerges. Units caught within the gate opening will take 75 damage and become stunned for 2 seconds.The Ancient Hydra lasts <AUin,DataB1> seconds.
+}
+
+STRING 343
+// Abilities: A016 (Ancient Hydra), Ubertip (Tooltip - Normal - Extended)
+{
+Opens a gate of water from which an  Ancient Hydra from the deep emerges. Units caught within the gate opening will take 75 damage and become stunned for 2 seconds.The Ancient Hydra lasts <AUin,DataB1> seconds.
+}
+
+STRING 344
+// Abilities: A016 (Ancient Hydra), Name (Name)
+{
+Ancient Hydra
+}
+
+STRING 345
+// Abilities: A016 (Ancient Hydra), EditorSuffix (Editor Suffix)
+{
+Summon
+}
+
+STRING 346
+// Abilities: A00F (Concentrated Anti-Magic), Name (Name)
+{
+Concentrated Anti-Magic
+}
+
+STRING 347
+// Abilities: A004 (Anti-Magic Wave), Hotkey (Hotkey - Normal)
+{
+C
+}
+
+STRING 349
+// Abilities: A00F (Concentrated Anti-Magic), Ubertip (Tooltip - Normal - Extended)
+{
+Concentrated Dispel. Removes all buffs from a target unit.  |n|cffffcc00Deals 550 damage to summoned units.|r
+}
+
+STRING 350
+// Abilities: A00U (Monsoon), Researchubertip (Tooltip - Learn - Extended)
+{
+Calls a storm of lightning bolts to strike enemy units for <ANmo,DataA1> damage. |nLasts <ANmo,Dur1> seconds. |n|n|cffffcc00Level 1|r - Slow rate of lighting. |n|cffffcc00Level 2|r - Fast rate of lighting.  |n|cffffcc00Level 3|r - Very fast rate of lighting. 
+}
+
+STRING 351
+// Abilities: A00U (Monsoon), Ubertip (Tooltip - Normal - Extended)
+{
+Calls down a storm of lightning to striking enemy units quickly for 20 damage in a small target area. |nLasts 15 seconds.
+}
+
+STRING 352
+// Abilities: A00U (Monsoon), Ubertip (Tooltip - Normal - Extended)
+{
+Calls down a storm of lightning to striking enemy units very quickly for 20 damage in a small target area. |nLasts 15 seconds.
+}
+
+STRING 353
+// Abilities: A00U (Monsoon), EditorSuffix (Editor Suffix)
+{
+(naga unit)
+}
+
+STRING 354
+// Abilities: A00U (Monsoon), Tip (Tooltip - Normal)
+{
+Monsoo|cffffcc00n|r
+}
+
+STRING 355
+// Abilities: A00U (Monsoon), Ubertip (Tooltip - Normal - Extended)
+{
+Calls down a storm of lightning to strike enemy units for <ACmo,DataA1> damage in a target area. |nLasts <ACmo,Dur1> seconds.
+}
+
+STRING 356
+// Abilities: A014 (Gaurdian Tentacles), EditorSuffix (Editor Suffix)
+{
+ (naga worker)
+}
+
+STRING 357
+// Abilities: A014 (Gaurdian Tentacles), Name (Name)
+{
+Gaurdian Tentacles
+}
+
+STRING 358
+// Abilities: A014 (Gaurdian Tentacles), Tip (Tooltip - Normal)
+{
+|cffffcc00G|raurdian Tentacle
+}
+
+STRING 359
+// Abilities: A015 (Great Manta), Researchhotkey (Hotkey - Learn)
+{
+G
+}
+
+STRING 360
+// Abilities: A014 (Gaurdian Tentacles), Ubertip (Tooltip - Normal - Extended)
+{
+Run to the nearest Temple of Tides to turn Murloc Slaves into Gaurdian Tentacles to defend. |nLasts <Amil,Dur1> seconds.
+}
+
+STRING 361
+// Abilities: A014 (Gaurdian Tentacles), Unubertip (Tooltip - Turn Off - Extended)
+{
+Disarm the Gaurdian Tentacles, and allow Murloc Slaves to go back to work.
+}
+
+STRING 362
+// Abilities: A017 (Gaurdian Tentacle), EditorSuffix (Editor Suffix)
+{
+ (Temple of tidesl)
+}
+
+STRING 363
+// Abilities: A017 (Gaurdian Tentacle), Name (Name)
+{
+Gaurdian Tentacle
+}
+
+STRING 364
+// Abilities: A015 (Great Manta), Hotkey (Hotkey - Normal)
+{
+G
+}
+
+STRING 365
+// Abilities: A017 (Gaurdian Tentacle), Tip (Tooltip - Normal)
+{
+|cffffcc00G|raurdian Tentacle
+}
+
+STRING 366
+// Abilities: A017 (Gaurdian Tentacle), Ubertip (Tooltip - Normal - Extended)
+{
+Call nearby Murloc Slaves to the nearest Temple of Tides to turn into Gaurdian Tentacles to defend. |nLasts <Amil,Dur1> seconds.
+}
+
+STRING 367
+// Abilities: A017 (Gaurdian Tentacle), Unubertip (Tooltip - Turn Off - Extended)
+{
+Disarm the Gaurdian Tentacles, and allow Murloc Slaves to go back to work.
+}
+
+STRING 368
+// Abilities: A018 (Plague), EditorSuffix (Editor Suffix)
+{
+(PW)
+}
+
+STRING 369
+// Abilities: A018 (Plague), Tip (Tooltip - Normal)
+{
+Pla|cffffcc00g|rue
+}
+
+STRING 370
+// Abilities: A018 (Plague), Ubertip (Tooltip - Normal - Extended)
+{
+Summons a poisonous gas, so bad that it cause minor stun to units in target area. Deals 1 damage per second. Lasts 30 seconds. For each time a unit is effected by plage it will take additionally damage.
+}
+
+STRING 371
+// Abilities: A018 (Plague), Name (Name)
+{
+Plague
+}
+
+STRING 372
+// Abilities: A014 (Gaurdian Tentacles), Hotkey (Hotkey - Normal)
+{
+G
+}
+
+STRING 373
+// Abilities: A00P (Manta Breath), Name (Name)
+{
+Manta Breath
+}
+
+STRING 374
+// Abilities: A01A (Healing Essence), Name (Name)
+{
+Healing Essence
+}
+
+STRING 375
+// Abilities: A01A (Healing Essence), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 376
+// Abilities: A01A (Healing Essence), Unhotkey (Hotkey - Turn Off)
+{
+E
+}
+
+STRING 377
+// Abilities: A01A (Healing Essence), Tip (Tooltip - Normal)
+{
+H|cffffcc00e|raling Essence
+}
+
+STRING 378
+// Abilities: A01A (Healing Essence), Ubertip (Tooltip - Normal - Extended)
+{
+Restores <A01A:Arpl,DataA1> hit points to nearby friendly units.
+}
+
+STRING 379
+// Abilities: A01B (Spirit Essence), Name (Name)
+{
+Spirit Essence
+}
+
+STRING 380
+// Abilities: A01B (Spirit Essence), Tip (Tooltip - Normal)
+{
+Spirit Essen|cffffcc00c|re
+}
+
+STRING 381
+// Abilities: A01B (Spirit Essence), Ubertip (Tooltip - Normal - Extended)
+{
+Restores <A01B:Arpm,DataB1> mana to nearby friendly units.
+}
+
+STRING 382
+// Upgrades: R00F (Backpack), EditorSuffix (Editor Suffix)
+{
+ (Naga)
+}
+
+STRING 383
+// Abilities: A01D (Vanish), Name (Name)
+{
+Vanish
+}
+
+STRING 384
+// Upgrades: R00E (Berserker Upgrade), Hotkey (Hotkey)
+{
+V
+}
+
+STRING 385
+// Upgrades: R00C (Naga Siren Adept Training,Naga Siren Master Training), EditorSuffix (Editor Suffix)
+{
+(naga)
+}
+
+STRING 386
+// Abilities: A01D (Vanish), Tip (Tooltip - Normal)
+{
+|cffffcc00V|ranish
+}
+
+STRING 388
+// Upgrades: R00D (Submerge), EditorSuffix (Editor Suffix)
+{
+(naga)
+}
+
+STRING 389
+// Abilities: A01F (Submerge), EditorSuffix (Editor Suffix)
+{
+ (Myrmidon) naga
+}
+
+STRING 390
+// Abilities: A01G (Submerge), EditorSuffix (Editor Suffix)
+{
+ (Royal Guard) naga
+}
+
+STRING 391
+// Abilities: A01H (Submerge), EditorSuffix (Editor Suffix)
+{
+ (Snap Dragon) naga
+}
+
+STRING 392
+// Abilities: A01I (Unit Inventory), EditorSuffix (Editor Suffix)
+{
+ (naga)
+}
+
+STRING 394
+// Abilities: A01Q (Medusa Tentacle), Researchhotkey (Hotkey - Learn)
+{
+T
+}
+
+STRING 395
+// Abilities: A01K (Tarnish), Name (Name)
+{
+Tarnish
+}
+
+STRING 396
+// Abilities: A01K (Tarnish), Tip (Tooltip - Normal)
+{
+|cffffcc00T|rarnish
+}
+
+STRING 397
+// Abilities: A01K (Tarnish), Ubertip (Tooltip - Normal - Extended)
+{
+Reduces damage by <A01K:Acri,DataC1,%>% of a target enemy unit. |nLasts <A01K:Acri,Dur1> seconds.
+}
+
+STRING 398
+// Buffs/Effects: B000 (), Bufftip (Tooltip)
+{
+Shadowsight
+}
+
+STRING 399
+// Buffs/Effects: B000 (), Buffubertip (Tooltip - Extended)
+{
+This unit was hit by Shadowsight; it is revealed to an enemy player.
+}
+
+STRING 400
+// Buffs/Effects: B001 (), Bufftip (Tooltip)
+{
+Mana Poison
+}
+
+STRING 401
+// Buffs/Effects: B001 (), Buffubertip (Tooltip - Extended)
+{
+This unit has been hit with Mana Poison; it is losing mana over time.
+}
+
+STRING 402
+// Buffs/Effects: B002 (), Bufftip (Tooltip)
+{
+Healing Water
+}
+
+STRING 403
+// Buffs/Effects: B002 (), Buffubertip (Tooltip - Extended)
+{
+This unit will regenerate life over time.
+}
+
+STRING 404
+// Buffs/Effects: B003 (), EditorSuffix (Editor Suffix)
+{
+naga
+}
+
+STRING 405
+// Buffs/Effects: B004 (), Bufftip (Tooltip)
+{
+Chilled
+}
+
+STRING 406
+// Buffs/Effects: B004 (), Buffubertip (Tooltip - Extended)
+{
+This unit is chilled; it moves more slowly than it normally does.
+}
+
+STRING 407
+// Buffs/Effects: B005 (), Bufftip (Tooltip)
+{
+Plague
+}
+
+STRING 408
+// Buffs/Effects: B006 (Plague Cloud), EditorName (Name (Editor Only))
+{
+Plague Cloud
+}
+
+STRING 409
+// Buffs/Effects: B008 (), Bufftip (Tooltip)
+{
+Stop
+}
+
+STRING 410
+// Buffs/Effects: B008 (), Buffubertip (Tooltip - Extended)
+{
+This unit has been hit by stop; it cannot move or attack.
+}
+
+STRING 411
+// Buffs/Effects: B009 (), Bufftip (Tooltip)
+{
+Acid Breath
+}
+
+STRING 412
+// Buffs/Effects: B009 (), Buffubertip (Tooltip - Extended)
+{
+This unit is caught in acid breath acid; it will take damage over time.
+}
+
+STRING 413
+// Buffs/Effects: B00A (), Buffubertip (Tooltip - Extended)
+{
+This unit is poisoned, and will take damage over time.
+}
+
+STRING 414
+// Buffs/Effects: B00A (), Bufftip (Tooltip)
+{
+Poison Sting
+}
+
+STRING 415
+// Buffs/Effects: B00B (), Bufftip (Tooltip)
+{
+Poison Sting
+}
+
+STRING 416
+// Buffs/Effects: B00B (), Buffubertip (Tooltip - Extended)
+{
+This unit is poisoned, and will take damage over time.
+}
+
+STRING 417
+// Buffs/Effects: B00C (), Bufftip (Tooltip)
+{
+Acid Breath
+}
+
+STRING 418
+// Buffs/Effects: B00C (), Buffubertip (Tooltip - Extended)
+{
+Buildings hit by in acid breath; have armor reduced by 5.
+}
+
+STRING 419
+// Buffs/Effects: B00C (), EditorSuffix (Editor Suffix)
+{
+( Building effect )
+}
+
+STRING 420
+// Buffs/Effects: X000 (Acid Breath (Effect)), EditorName (Name (Editor Only))
+{
+Acid Breath (Effect)
+}
+
+STRING 421
+// Buffs/Effects: B007 (), Bufftip (Tooltip)
+{
+Aura of the Depths
+}
+
+STRING 422
+// Buffs/Effects: B007 (), Buffubertip (Tooltip - Extended)
+{
+This unit is under the effects ofAura of the Depths; it has a bonus to hit point regeneration.
+}
+
+STRING 423
+// Buffs/Effects: B00D (), Bufftip (Tooltip)
+{
+Vacuum Aura
+}
+
+STRING 425
+// Buffs/Effects: B00E (), Bufftip (Tooltip)
+{
+Disable
+}
+
+STRING 426
+// Buffs/Effects: B00E (), Buffubertip (Tooltip - Extended)
+{
+This unit is under effects of chilling glare; it can only move.
+}
+
+STRING 427
+// Buffs/Effects: B00F (), Bufftip (Tooltip)
+{
+Adrenaline
+}
+
+STRING 428
+// Buffs/Effects: B00F (), Buffubertip (Tooltip - Extended)
+{
+This unit is pumped with Adrenaline; it will deal more damage and move faster.
+}
+
+STRING 429
+// Buffs/Effects: B019 (), Bufftip (Tooltip)
+{
+Ancient Hydra
+}
+
+STRING 430
+// Buffs/Effects: B019 (), Buffubertip (Tooltip - Extended)
+{
+This Summoned units is invulnerable to dispels.
+}
+
+STRING 431
+// Abilities: A015 (Great Manta), Name (Name)
+{
+Great Manta
+}
+
+STRING 432
+// Buffs/Effects: B00H (), Buffubertip (Tooltip - Extended)
+{
+This Summoned unit is invulnerable to dispels.
+}
+
+STRING 433
+// Buffs/Effects: B00I (), Bufftip (Tooltip)
+{
+Concentrated Anti-Magic
+}
+
+STRING 434
+// Buffs/Effects: B00I (), Buffubertip (Tooltip - Extended)
+{
+This unit is hit with Concentrated Anti-Magic; it has had all buffs removed.
+}
+
+STRING 435
+// Buffs/Effects: B00J (), Bufftip (Tooltip)
+{
+Anti-Magic Wave
+}
+
+STRING 436
+// Buffs/Effects: B00J (), Buffubertip (Tooltip - Extended)
+{
+This unit is hit with Anti-Magic Wave; it has had all buffs removed.
+}
+
+STRING 437
+// Buffs/Effects: B00K (), Bufftip (Tooltip)
+{
+Striker
+}
+
+STRING 438
+// Buffs/Effects: B00K (), Buffubertip (Tooltip - Extended)
+{
+This unit is chilled; it moves more slowly than it normally does.
+}
+
+STRING 439
+// Buffs/Effects: B00L (), Bufftip (Tooltip)
+{
+Healing Essence
+}
+
+STRING 440
+// Buffs/Effects: B00L (), Buffubertip (Tooltip - Extended)
+{
+This unit has been hit by Healing Essence; some of its hit points have been restored.
+}
+
+STRING 441
+// Buffs/Effects: B00M (), Bufftip (Tooltip)
+{
+Spirit Essence
+}
+
+STRING 442
+// Buffs/Effects: B00M (), Buffubertip (Tooltip - Extended)
+{
+This unit has been hit by Spirit Essence; some of its mana has been restored.
+}
+
+STRING 443
+// Buffs/Effects: B00N (), Bufftip (Tooltip)
+{
+Vanish
+}
+
+STRING 444
+// Buffs/Effects: B00N (), Buffubertip (Tooltip - Extended)
+{
+This unit is Vanished; it is invisible, moves faster.
+}
+
+STRING 445
+// Buffs/Effects: B00O (), Bufftip (Tooltip)
+{
+Tarnish
+}
+
+STRING 446
+// Buffs/Effects: B00O (), Buffubertip (Tooltip - Extended)
+{
+This unit has been Tarnished; it will deal reduced damage.
+}
+
+STRING 447
+// Upgrades: Rnat (Coral Blades,Chitinous Blades,Razorspine Blades), Ubertip (Tooltip - Extended)
+{
+Increases the attack damage of Naga Mymridon attack units.
+}
+
+STRING 448
+// Upgrades: Rnat (Coral Blades,Chitinous Blades,Razorspine Blades), Ubertip (Tooltip - Extended)
+{
+Further increases the attack damage of Naga Mymridon attack units.
+}
+
+STRING 449
+// Upgrades: Rnat (Coral Blades,Chitinous Blades,Razorspine Blades), Ubertip (Tooltip - Extended)
+{
+Further increases the attack damage of Naga Mymridon attack units.
+}
+
+STRING 450
+// Upgrades: R000 (Storm Hammers), Name (Name)
+{
+Cleave
+}
+
+STRING 451
+// Upgrades: R000 (Storm Hammers), Tip (Tooltip)
+{
+Research |cffffcc00C|rleave.
+}
+
+STRING 452
+// Upgrades: R000 (Storm Hammers), Ubertip (Tooltip - Extended)
+{
+Allows 15% of Naga Royal Myrmidon damage to strikes through to enemies near the primary attacked unit.
+}
+
+STRING 453
+// Upgrades: R000 (Storm Hammers), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 455
+// Upgrades: R001 (Ghoul Frenzy), Name (Name)
+{
+Increase Myrmidon Speed
+}
+
+STRING 456
+// Upgrades: R001 (Ghoul Frenzy), Tip (Tooltip)
+{
+Research |cffffcc00I|rncrease Myrmidon Speed.
+}
+
+STRING 457
+// Upgrades: R001 (Ghoul Frenzy), Ubertip (Tooltip - Extended)
+{
+Increases Myrmidon and Royal Myrmidon movement speed.
+}
+
+STRING 458
+// Abilities: A00F (Concentrated Anti-Magic), Hotkey (Hotkey - Normal)
+{
+N
+}
+
+STRING 459
+// Upgrades: R003 (Abolish Magic), Name (Name)
+{
+Anti-Magic Upgrade
+}
+
+STRING 460
+// Upgrades: R003 (Abolish Magic), Tip (Tooltip)
+{
+Research A|cffffcc00n|rti Magic
+}
+
+STRING 462
+// Upgrades: R003 (Abolish Magic), effect1 (Effect 1)
+{
+rmnx
+}
+
+STRING 463
+// Upgrades: R003 (Abolish Magic), effect2 (Effect 2)
+{
+rmnr
+}
+
+STRING 464
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Name (Name)
+{
+Mur'gul Reaver Adept Training
+}
+
+STRING 465
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Tip (Tooltip)
+{
+Research |cffffcc00M|rur'gul Reaver Adept Training
+}
+
+STRING 466
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Tip (Tooltip)
+{
+Research |cffffcc00M|rur'gul Reaver Master Training
+}
+
+STRING 467
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Name (Name)
+{
+Mur'gul Reaver Master Training
+}
+
+STRING 470
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Hotkey (Hotkey)
+{
+M
+}
+
+STRING 471
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Hotkey (Hotkey)
+{
+M
+}
+
+STRING 472
+// Upgrades: R006 (Berserker Upgrade), Name (Name)
+{
+Spiked Shell Armor
+}
+
+STRING 473
+// Upgrades: R006 (Berserker Upgrade), Tip (Tooltip)
+{
+Research Spiked Shell |cffffcc00A|rrmor
+}
+
+STRING 474
+// Upgrades: R006 (Berserker Upgrade), Ubertip (Tooltip - Extended)
+{
+Razor-sharp spikes on the Turtle's shell deal 15% of an enemy unit's melee attack damage back to it and increases armor by 8.
+}
+
+STRING 475
+// Units: n00W (Tidal Air Guardian), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 476
+// Abilities: A01Q (Medusa Tentacle), Hotkey (Hotkey - Normal)
+{
+T
+}
+
+STRING 477
+// Upgrades: R005 (Ultravision), Name (Name)
+{
+Poison Sting
+}
+
+STRING 478
+// Upgrades: R005 (Ultravision), Tip (Tooltip)
+{
+Poison S|cffffcc00t|ring
+}
+
+STRING 480
+// Abilities: A02E (Stop), Hotkey (Hotkey - Normal)
+{
+T
+}
+
+STRING 481
+// Upgrades: R007 (Ghoul Frenzy), Name (Name)
+{
+Turtle Speed
+}
+
+STRING 482
+// Upgrades: R007 (Ghoul Frenzy), Tip (Tooltip)
+{
+Research |cffffcc00T|rurtle Speed.
+}
+
+STRING 483
+// Upgrades: R007 (Ghoul Frenzy), Ubertip (Tooltip - Extended)
+{
+Increases Turtles movement speed.
+}
+
+STRING 484
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Name (Name)
+{
+Strength of the deep
+}
+
+STRING 485
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Name (Name)
+{
+Greater Strength of the deep
+}
+
+STRING 486
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Name (Name)
+{
+Ultimate Strength of the deep
+}
+
+STRING 487
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Tip (Tooltip)
+{
+Upgrade to Strength of |cffffcc00D|reep
+}
+
+STRING 488
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Tip (Tooltip)
+{
+Upgrade to Greater Strength of the |cffffcc00D|reep
+}
+
+STRING 489
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Tip (Tooltip)
+{
+Upgrade to Ultimate Strength of the |cffffcc00D|reep
+}
+
+STRING 490
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Ubertip (Tooltip - Extended)
+{
+Increases the attack damage of Naga Creature attack units.
+}
+
+STRING 491
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Ubertip (Tooltip - Extended)
+{
+Further increases the attack damage of Naga Creature attack units.
+}
+
+STRING 492
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Ubertip (Tooltip - Extended)
+{
+Further increases the attack damage of Naga Creature attack units.
+}
+
+STRING 493
+// Abilities: A016 (Ancient Hydra), Researchhotkey (Hotkey - Learn)
+{
+D
+}
+
+STRING 494
+// Abilities: A016 (Ancient Hydra), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 495
+// Abilities: A019 (Demon Shadow), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 496
+// Upgrades: R009 (Berserker Upgrade), Name (Name)
+{
+Acid Breath
+}
+
+STRING 497
+// Upgrades: R009 (Berserker Upgrade), Tip (Tooltip)
+{
+Acid |cffffcc00B|rreath
+}
+
+STRING 498
+// Upgrades: R009 (Berserker Upgrade), Ubertip (Tooltip - Extended)
+{
+Upgrades Acid turtles to attack with acid adding extra damage to nearby units. Attacks also reduce building armor by 5.
+}
+
+STRING 499
+// Units: n011 (Submerged Naga Royal Myrmidon), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 500
+// Abilities: A01N (Shrink), Hotkey (Hotkey - Normal)
+{
+N
+}
+
+STRING 501
+// Upgrades: R002 (Ghoul Frenzy), Name (Name)
+{
+Snap Dragon Speed
+}
+
+STRING 502
+// Upgrades: R002 (Ghoul Frenzy), Tip (Tooltip)
+{
+Research S|cffffcc00n|rap Dragon Speed.
+}
+
+STRING 503
+// Upgrades: R002 (Ghoul Frenzy), Ubertip (Tooltip - Extended)
+{
+Increases Snap Dragon movement speed.
+}
+
+STRING 504
+// Upgrades: R00A (Marksmanship), Name (Name)
+{
+Light Water Weapons
+}
+
+STRING 505
+// Upgrades: R00A (Marksmanship), Hotkey (Hotkey)
+{
+L
+}
+
+STRING 506
+// Upgrades: R00A (Marksmanship), Tip (Tooltip)
+{
+Research |cffffcc00L|right Water Weapons
+}
+
+STRING 507
+// Upgrades: R00A (Marksmanship), Ubertip (Tooltip - Extended)
+{
+Increases damage of Myrmridon and Royal Myrmridon by 5.
+}
+
+STRING 508
+// Upgrades: R00B (Vorpal Blades), Name (Name)
+{
+Deep Velocity
+}
+
+STRING 510
+// Upgrades: R00B (Vorpal Blades), Tip (Tooltip)
+{
+Research Deep |cffffcc00V|relocity
+}
+
+STRING 511
+// Upgrades: R00B (Vorpal Blades), Ubertip (Tooltip - Extended)
+{
+Makes Mantas attack with more force allowing attacks to go through more targets and have wider range.
+}
+
+STRING 514
+// Upgrades: R00E (Berserker Upgrade), Name (Name)
+{
+Vanish
+}
+
+STRING 515
+// Upgrades: R00E (Berserker Upgrade), Tip (Tooltip)
+{
+|cffffcc00V|ranish
+}
+
+STRING 519
+// Upgrades: R00F (Backpack), Ubertip (Tooltip - Extended)
+{
+Gives specific Naga ground units the ability to carry items.
+}
+
+STRING 520
+// Upgrades: R00G (Abolish Magic), Hotkey (Hotkey)
+{
+P
+}
+
+STRING 521
+// Upgrades: R00G (Abolish Magic), Name (Name)
+{
+Increase Crystal Power and Capacity
+}
+
+STRING 522
+// Upgrades: R00G (Abolish Magic), Tip (Tooltip)
+{
+Increase Crystal |cffffcc00P|rower and Capacity
+}
+
+STRING 523
+// Upgrades: R00G (Abolish Magic), Ubertip (Tooltip - Extended)
+{
+Increases Naga Sea Crystals maximum mana and mana regeneration.
+}
+
+STRING 524
+// Upgrades: R00G (Abolish Magic), effect1 (Effect 1)
+{
+rmnx
+}
+
+STRING 525
+// Upgrades: R00G (Abolish Magic), effect2 (Effect 2)
+{
+rmnr
+}
+
+STRING 526
+// Upgrades: R00G (Abolish Magic), Tip (Tooltip)
+{
+Further increase Crystal |cffffcc00P|rower and Capacity
+}
+
+STRING 528
+// Upgrades: R00G (Abolish Magic), Name (Name)
+{
+Further increase Crystal Power and Capacity
+}
+
+STRING 529
+// Upgrades: R00G (Abolish Magic), class (Class)
+{
+caster
+}
+
+STRING 530
+// Upgrades: R00G (Abolish Magic), Ubertip (Tooltip - Extended)
+{
+Further increases Naga Sea Crystals maximum mana and mana regeneration.
+}
+
+STRING 531
+{
+Undead
+}
+
+STRING 532
+{
+Naga
+}
+
+STRING 533
+{
+Choose Race
+}
+
+STRING 534
+{
+Game will begin in: 3 seconds.
+}
+
+STRING 535
+{
+Game will begin in: 2 seconds.
+}
+
+STRING 536
+{
+Game will begin in: 1 seconds.
+}
+
+STRING 539
+// Abilities: A01L (Petrafication Arrow), Name (Name)
+{
+Petrafication Arrow
+}
+
+STRING 553
+// Abilities: A01L (Petrafication Arrow), Researchhotkey (Hotkey - Learn)
+{
+R
+}
+
+STRING 554
+// Abilities: A01L (Petrafication Arrow), Hotkey (Hotkey - Normal)
+{
+R
+}
+
+STRING 555
+// Abilities: A01L (Petrafication Arrow), Researchtip (Tooltip - Learn)
+{
+Learn Petrafication A|cffffcc00r|rrow - [|cffffcc00Level %d|r]
+}
+
+STRING 556
+// Abilities: A01L (Petrafication Arrow), Tip (Tooltip - Normal)
+{
+Petrafication A|cffffcc00r|rrow - [|cffffcc00Level 1|r]
+}
+
+STRING 557
+// Abilities: A01L (Petrafication Arrow), Tip (Tooltip - Normal)
+{
+Petrafication A|cffffcc00r|rrow - [|cffffcc00Level 2|r]
+}
+
+STRING 558
+// Abilities: A01L (Petrafication Arrow), Tip (Tooltip - Normal)
+{
+Petrafication A|cffffcc00r|rrow - [|cffffcc00Level 3|r]
+}
+
+STRING 563
+// Abilities: A01P (Petrafication Arrow), Name (Name)
+{
+Petrafication Arrow
+}
+
+STRING 566
+// Abilities: A01P (Petrafication Arrow), EditorSuffix (Editor Suffix)
+{
+(Naga)
+}
+
+STRING 567
+// Abilities: A01Q (Medusa Tentacle), EditorSuffix (Editor Suffix)
+{
+ (Medusa)
+}
+
+STRING 568
+// Abilities: A01Q (Medusa Tentacle), Name (Name)
+{
+Medusa Tentacle
+}
+
+STRING 569
+// Abilities: A00V (Medusa Tentacles), EditorSuffix (Editor Suffix)
+{
+(naga) OLD
+}
+
+STRING 570
+// Abilities: A01Q (Medusa Tentacle), Tip (Tooltip - Normal)
+{
+Medusa |cffffcc00T|rentacles
+}
+
+STRING 571
+// Abilities: A01Q (Medusa Tentacle), Researchtip (Tooltip - Learn)
+{
+Learn Medusa |cffffcc00T|rentacles
+}
+
+STRING 574
+// Abilities: A01R (Medusa Tentacle), Name (Name)
+{
+Medusa Tentacle
+}
+
+STRING 575
+// Abilities: A01R (Medusa Tentacle), Researchubertip (Tooltip - Learn - Extended)
+{
+Learn Medusa |cffffcc00T|rentacles
+}
+
+STRING 576
+// Abilities: A01R (Medusa Tentacle), Researchtip (Tooltip - Learn)
+{
+Learn Medusa |cffffcc00T|rentacles
+}
+
+STRING 577
+// Abilities: A01R (Medusa Tentacle), Tip (Tooltip - Normal)
+{
+Medusa |cffffcc00T|rentacles
+}
+
+STRING 578
+// Abilities: A01R (Medusa Tentacle), Ubertip (Tooltip - Normal - Extended)
+{
+Medusa |cffffcc00T|rentacles
+}
+
+STRING 579
+// Buffs/Effects: B00Q (), Bufftip (Tooltip)
+{
+Medusa Tentacle
+}
+
+STRING 580
+// Buffs/Effects: B00Q (), Buffubertip (Tooltip - Extended)
+{
+This Tentacle is mighty.
+}
+
+STRING 581
+// Abilities: A01M (Shrink), Hotkey (Hotkey - Normal)
+{
+T
+}
+
+STRING 582
+// Abilities: A01M (Shrink), Unhotkey (Hotkey - Turn Off)
+{
+T
+}
+
+STRING 591
+// Abilities: A01S (Hardened Exo Skeleton), Name (Name)
+{
+Hardened Exo Skeleton
+}
+
+STRING 592
+// Abilities: A01S (Hardened Exo Skeleton), Tip (Tooltip - Normal)
+{
+Hardened Exo Skeleton
+}
+
+STRING 593
+// Abilities: A01S (Hardened Exo Skeleton), Ubertip (Tooltip - Normal - Extended)
+{
+Reduces all attacks on the Magi-Crusher by <A01S:Assk,DataC1> damage. Attacks cannot be reduced below <A01S:Assk,DataB1> damage.
+}
+
+STRING 594
+// Upgrades: R00H (Hardened Skin), Name (Name)
+{
+Hardened Exo Skeleton
+}
+
+STRING 595
+// Upgrades: R00H (Hardened Skin), Tip (Tooltip)
+{
+Research |cffffcc00H|rardened Exo Skeleton
+}
+
+STRING 596
+// Upgrades: R00H (Hardened Skin), Ubertip (Tooltip - Extended)
+{
+Gives Magi-Crushers increased resistance to attack damage.
+}
+
+STRING 605
+// Abilities: A011 (Adrenaline), Researchubertip (Tooltip - Learn - Extended)
+{
+Increases movement speed and attack speed.  |n|n|cffffcc00Level 1|r - 30% faster attack speed and 30% faster movement. |n|cffffcc00Level 2|r - 60% faster attack speed and 60% faster movement. |n|cffffcc00Level 3|r - 90% faster attack speed and 90% faster movement.
+}
+
+STRING 606
+// Abilities: A011 (Adrenaline), Ubertip (Tooltip - Normal - Extended)
+{
+Causes this unit to attack 60% faster, and move 60% faster.
+}
+
+STRING 607
+// Abilities: A011 (Adrenaline), Ubertip (Tooltip - Normal - Extended)
+{
+Causes this unit to attack 90% faster, and move 90% faster.
+}
+
+STRING 608
+// Abilities: A011 (Adrenaline), Ubertip (Tooltip - Normal - Extended)
+{
+Causes this unit to attack 30% faster, and move 30% faster.
+}
+
+STRING 609
+// Abilities: A00Q (Spell Immunity), EditorSuffix (Editor Suffix)
+{
+(3,2)
+}
+
+STRING 610
+// Abilities: A01T (Resistant Skin), EditorSuffix (Editor Suffix)
+{
+ (Naga) (1,2)
+}
+
+STRING 611
+// Abilities: A01U (Spell Resistance), Name (Name)
+{
+Spell Resistance
+}
+
+STRING 612
+// Abilities: A01U (Spell Resistance), Tip (Tooltip - Normal)
+{
+Spell Resistance
+}
+
+STRING 614
+// Upgrades: R00I (Hardened Skin), Name (Name)
+{
+Spell Resistance
+}
+
+STRING 615
+// Upgrades: R00I (Hardened Skin), Tip (Tooltip)
+{
+Research Sp|cffffcc00e|rll Resistance
+}
+
+STRING 617
+// Abilities: A006 (Venom Spike), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 618
+// Abilities: A01V (Frost Wave), EditorSuffix (Editor Suffix)
+{
+ (Manta)
+}
+
+STRING 619
+// Abilities: A01V (Frost Wave), Name (Name)
+{
+Frost Wave
+}
+
+STRING 620
+// Abilities: A01V (Frost Wave), Ubertip (Tooltip - Normal - Extended)
+{
+Allows Mantas to deal cold damage and splash damage to air units.
+}
+
+STRING 621
+// Abilities: A01V (Frost Wave), Tip (Tooltip - Normal)
+{
+Frost Wave
+}
+
+STRING 622
+// Upgrades: R00J (Freezing Breath), Name (Name)
+{
+Frost Wave
+}
+
+STRING 623
+// Upgrades: R00J (Freezing Breath), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 624
+// Upgrades: R00J (Freezing Breath), Tip (Tooltip)
+{
+Research Frost |cffffcc00W|rave
+}
+
+STRING 625
+// Upgrades: R00J (Freezing Breath), Ubertip (Tooltip - Extended)
+{
+Allows Mantas to deal cold damage and splash damage to air units.
+}
+
+STRING 626
+// Units: o007 (Petrafied Unit), Name (Name)
+{
+Petrafied Unit
+}
+
+STRING 627
+// Units: o008 (Petrafied Unit), Name (Name)
+{
+Petrafied Unit
+}
+
+STRING 628
+// Units: o009 (Petrafied Unit), Name (Name)
+{
+Petrafied Unit
+}
+
+STRING 632
+// Abilities: A01Z (AOE damage upon death), EditorSuffix (Editor Suffix)
+{
+(NAGA)
+}
+
+STRING 637
+// Abilities: A020 (AOE damage upon death), EditorSuffix (Editor Suffix)
+{
+(NAGA) lvl3
+}
+
+STRING 638
+// Abilities: A021 (AOE damage upon death), EditorSuffix (Editor Suffix)
+{
+(NAGA) lvl 2
+}
+
+STRING 639
+// Buffs/Effects: B00P (), Buffubertip (Tooltip - Extended)
+{
+This unit was hit by a Petrafication Arrow; if it dies; it will turn into a stone.
+}
+
+STRING 640
+// Abilities: A01L (Petrafication Arrow), Researchubertip (Tooltip - Learn - Extended)
+{
+Adds extra damage to attacks. Units killed while under the effect of Petrafication Arrow will turn into stones which will explode dealing damage. |n|n|cffffcc00Level 1|r - <A01L:ANba,DataA1> bonus damage, 3 second stone 50 damage. |n|cffffcc00Level 2|r - <A01L:ANba,DataA2> bonus damage, 2 second stone 100 damage.|n|cffffcc00Level 3|r - <A01L:ANba,DataA3> bonus damage, 1 second stone 150 damage.
+}
+
+STRING 641
+// Abilities: A01L (Petrafication Arrow), Ubertip (Tooltip - Normal - Extended)
+{
+Adds <A01L:ANba,DataA1> bonus damage to attacks. Units killed while under the effect of Petrafication Arrow will turn into stones which last 3 seconds which will explode on death dealing 50 damage.
+}
+
+STRING 642
+// Abilities: A01L (Petrafication Arrow), Ubertip (Tooltip - Normal - Extended)
+{
+Adds <A01L:ANba,DataA2> bonus damage to attacks. Units killed while under the effect of Petrafication Arrow will turn into stones which last 2 seconds which will explode on death dealing 100 damage.
+}
+
+STRING 643
+// Abilities: A01L (Petrafication Arrow), Ubertip (Tooltip - Normal - Extended)
+{
+Adds <A01L:ANba,DataA3> bonus damage to attacks. Units killed while under the effect of Petrafication Arrow will turn into stones which last 1seconds which will explode on death dealing 150 damage.
+}
+
+STRING 648
+{
+Information
+}
+
+STRING 649
+{
+War3 + Naga by TekkVicious
+Version 0.7 
+7/5/04
+Official Testers: Tessaiga
+
+Water Special effects: errorcode_404  
+
+Icons/Models & skins:
+http://www.wc3sear.ch/  
+TekkVicious
+
+Custom Spells: TekkVicious
+
+
+Email Tekshadodemon@aol.com
+Please send comments/suggestions/bugs/balance.
+}
+
+STRING 652
+{
+Features to be added
+}
+
+STRING 653
+{
+New Skins and models
+Improved tooltips.
+and more..
+
+}
+
+STRING 654
+{
+Feedback
+}
+
+STRING 655
+{
+Feed back on royal mymridon and dragon turtles and heros and caster is needed.  Also spelling mistakes, missing tooltips and incorrect tooltips. Also any glitches and other balance ideas and  feed back is welcome. Refer to Information to contact me.
+}
+
+STRING 680
+// Buffs/Effects: B00R (), Bufftip (Tooltip)
+{
+Vacuum Aura
+}
+
+STRING 694
+// Buffs/Effects: B00S (), Bufftip (Tooltip)
+{
+Vacuum Aura
+}
+
+STRING 705
+// Buffs/Effects: B00T (), Bufftip (Tooltip)
+{
+Vacuum Aura
+}
+
+STRING 716
+// Buffs/Effects: B00U (), Bufftip (Tooltip)
+{
+Vacuum Aura
+}
+
+STRING 717
+// Buffs/Effects: B00V (), Bufftip (Tooltip)
+{
+Vacuum Aura
+}
+
+STRING 718
+// Buffs/Effects: B00S (), Buffubertip (Tooltip - Extended)
+{
+This unit is projecting Vacuum Aura; other units effected by this aura will have decreased movement speed.
+}
+
+STRING 719
+// Buffs/Effects: B00W (), Bufftip (Tooltip)
+{
+Vacuum Aura
+}
+
+STRING 720
+// Abilities: A026 (Vacuum Aura), Researchubertip (Tooltip - Learn - Extended)
+{
+Reduce movement speed of nearby enemy units.  |n|n|cffffcc00Level 1|r - 9% speed reduction. |n|cffffcc00Level 2|r - 17% speed reduction. |n|cffffcc00Level 3|r - 23% speed reduction. 
+}
+
+STRING 723
+// Buffs/Effects: B00R (), EditorSuffix (Editor Suffix)
+{
+lvl 3 Source
+}
+
+STRING 724
+// Buffs/Effects: B00S (), EditorSuffix (Editor Suffix)
+{
+lvl 1 Source
+}
+
+STRING 725
+// Buffs/Effects: B00T (), EditorSuffix (Editor Suffix)
+{
+lvl 2 Source
+}
+
+STRING 726
+// Buffs/Effects: B00U (), EditorSuffix (Editor Suffix)
+{
+lvl 2 target
+}
+
+STRING 729
+// Buffs/Effects: B00V (), EditorSuffix (Editor Suffix)
+{
+lvl 1 target
+}
+
+STRING 732
+// Buffs/Effects: B00W (), EditorSuffix (Editor Suffix)
+{
+lvl 3 target
+}
+
+STRING 741
+// Buffs/Effects: B00U (), Buffubertip (Tooltip - Extended)
+{
+|c00808080Level:|r 2 |nThis unit is caught within Vacuum Aura;its movement speed has been reduced.
+}
+
+STRING 742
+// Buffs/Effects: B00V (), Buffubertip (Tooltip - Extended)
+{
+|c00808080Level:|r 1 |nThis unit is caught within Vacuum Aura;its movement speed has been reduced.
+}
+
+STRING 743
+// Buffs/Effects: B00W (), Buffubertip (Tooltip - Extended)
+{
+|c00808080Level:|r 3 |nThis unit is caught within Vacuum Aura;its movement speed has been reduced.
+}
+
+STRING 745
+// Abilities: A026 (Vacuum Aura), EditorSuffix (Editor Suffix)
+{
+NEW IMPROVED
+}
+
+STRING 754
+// Buffs/Effects: B00D (), Buffubertip (Tooltip - Extended)
+{
+This unit is caught within a Vacuum Aura; its movement speed has been reduced.
+}
+
+STRING 759
+// Abilities: A029 (TEST HEAL SHIELD), Name (Name)
+{
+TEST HEAL SHIELD
+}
+
+STRING 765
+// Abilities: A026 (Vacuum Aura), Ubertip (Tooltip - Normal - Extended)
+{
+Decreases nearby enemy units' movement speed by 9%
+}
+
+STRING 766
+// Abilities: A026 (Vacuum Aura), Ubertip (Tooltip - Normal - Extended)
+{
+Decreases nearby enemy units' movement speed by 14%
+}
+
+STRING 767
+// Abilities: A026 (Vacuum Aura), Ubertip (Tooltip - Normal - Extended)
+{
+Decreases nearby enemy units' movement speed by 23%
+}
+
+STRING 768
+// Units: n008 (Dragon Turtle), Ubertip (Tooltip - Extended)
+{
+A powerful Turtle good at piercing through enemy defenses. Has Resistant Skin and Spiked Shell Armor, which reduces damage taken, and deals damage to enemy melee attackers. Can also have its speed upgraded. |n|n|cffffcc00Attacks land units.
+}
+
+STRING 769
+// Units: n002 (Dragon Turtle), Ubertip (Tooltip - Extended)
+{
+A powerful Turtle good at piercing through enemy defenses. Can gain Resistant Skin and Spiked Shell Armor by obtaining Spiked Shell Armor Upgrade. Can also have its speed upgraded. |n|n|cffffcc00Attacks land units.
+}
+
+STRING 787
+// Buffs/Effects: B00Y (), Buffubertip (Tooltip - Extended)
+{
+This unit was hit by Poison Spike; it will take damage over time.
+}
+
+STRING 789
+// Abilities: A006 (Venom Spike), Researchhotkey (Hotkey - Learn)
+{
+E
+}
+
+STRING 790
+// Abilities: A006 (Venom Spike), Researchubertip (Tooltip - Learn - Extended)
+{
+Calls up spikes tipped with poison that damage units in an area. Deals initial damage and then poisons enemies for 10 seconds. |n|n|cffffcc00Level 1|r - 35 damage, 5 damage per second. |n|cffffcc00Level 2|r - 55 damage, 10 damage per second. |n|cffffcc00Level 3|r - 75 damage, 15 damage per second.
+}
+
+STRING 798
+// Abilities: A00G (Ethereal Assassin), Researchhotkey (Hotkey - Learn)
+{
+E
+}
+
+STRING 800
+// Buffs/Effects: B00X (), Bufftip (Tooltip)
+{
+Poison Blades
+}
+
+STRING 801
+// Buffs/Effects: B00Z (), Bufftip (Tooltip)
+{
+Poison Blades
+}
+
+STRING 802
+// Abilities: A012 (Poison Blades), Researchubertip (Tooltip - Learn - Extended)
+{
+Adds poison damage to attacks units with low hit points will die from the poison.  |n|n|cffffcc00Level 1|r - 5 poison damage over 10 seconds. |n|cffffcc00Level 2|r -10 poison damage over 10 seconds. |n|cffffcc00Level 3|r - 15 poison damage over 10 seconds. 
+}
+
+STRING 804
+// Units: n00T (Tidal Ground Guardian), Name (Name)
+{
+Tidal Ground Guardian
+}
+
+STRING 805
+// Units: n00T (Tidal Ground Guardian), Ubertip (Tooltip - Extended)
+{
+Primary defensive structure for land units. |n|n|cffffcc00Attacks land.|r
+}
+
+STRING 806
+// Units: n00T (Tidal Ground Guardian), Tip (Tooltip - Basic)
+{
+Build Tidal |cffffcc00G|rround Guardian
+}
+
+STRING 807
+// Units: n00W (Tidal Air Guardian), Name (Name)
+{
+Tidal Air Guardian
+}
+
+STRING 808
+// Units: n00W (Tidal Air Guardian), Ubertip (Tooltip - Extended)
+{
+Primary defensive structure for air units. |n|n|cffffcc00Attacks  air units.|r
+}
+
+STRING 809
+// Units: n00W (Tidal Air Guardian), Tip (Tooltip - Basic)
+{
+Build Tidal |cffffcc00A|rir Guardian
+}
+
+STRING 810
+// Abilities: A017 (Gaurdian Tentacle), Hotkey (Hotkey - Normal)
+{
+G
+}
+
+STRING 811
+// Upgrades: R006 (Berserker Upgrade), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 818
+// Upgrades: R005 (Ultravision), Hotkey (Hotkey)
+{
+T
+}
+
+STRING 819
+// Upgrades: R007 (Ghoul Frenzy), Hotkey (Hotkey)
+{
+T
+}
+
+STRING 820
+// Abilities: A02E (Stop), Ubertip (Tooltip - Normal - Extended)
+{
+Units effected by stop are immobile and cannot attack for 25 seconds.
+}
+
+STRING 821
+// Abilities: A01M (Shrink), Tip (Tooltip - Normal)
+{
+|cffffcc00T|rarnish
+}
+
+STRING 824
+// Units: e002 (Naga Sea Crystal), Ubertip (Tooltip - Extended)
+{
+Allows construction for additional buildings. Also has Healing and Spirit Essence ability. Healing does not stack. 
+}
+
+STRING 825
+// Abilities: A01U (Spell Resistance), Ubertip (Tooltip - Normal - Extended)
+{
+When Rays cannot do their job evolution is called for, reduces the duration of negative spells.
+}
+
+STRING 827
+// Units: o003 (Petrafied Unit), Name (Name)
+{
+Petrafied Unit
+}
+
+STRING 828
+// Units: o007 (Petrafied Unit), EditorSuffix (Name - Editor Suffix)
+{
+(Food)
+}
+
+STRING 830
+// Units: o008 (Petrafied Unit), EditorSuffix (Name - Editor Suffix)
+{
+lvl 2 (Food)
+}
+
+STRING 832
+// Units: o009 (Petrafied Unit), EditorSuffix (Name - Editor Suffix)
+{
+lvl 3 (food)
+}
+
+STRING 834
+// Buffs/Effects: B010 (), EditorSuffix (Editor Suffix)
+{
+ ( lvl 3)
+}
+
+STRING 835
+// Buffs/Effects: B011 (), EditorSuffix (Editor Suffix)
+{
+ ( lvl 2)
+}
+
+STRING 837
+// Buffs/Effects: B012 (), EditorSuffix (Editor Suffix)
+{
+ ( lvl 1)
+}
+
+STRING 840
+// Abilities: A01L (Petrafication Arrow), EditorSuffix (Editor Suffix)
+{
+(OLD VERSION)
+}
+
+STRING 843
+// Abilities: A01P (Petrafication Arrow), Ubertip (Tooltip - Normal - Extended)
+{
+Adds <A01P:AEpa,DataA2> bonus damage and 10 poison damage over 10 seconds, but drains mana with each shot fired.  Units killed will create a 300 Hit point stone, dealing 40 area of effect damage.
+}
+
+STRING 844
+// Abilities: A01P (Petrafication Arrow), Ubertip (Tooltip - Normal - Extended)
+{
+Adds <A01P:AEpa,DataA3> bonus damage and 15 poison damage over 10 seconds, but drains mana with each shot fired.  Units killed will create a 400 Hit point stone, dealing 60 area of effect damage.
+}
+
+STRING 845
+// Abilities: A01P (Petrafication Arrow), Researchtip (Tooltip - Learn)
+{
+Learn Petrafication A|cffffcc00r|rrow - [|cffffcc00Level %d|r]
+}
+
+STRING 846
+// Abilities: A01P (Petrafication Arrow), Tip (Tooltip - Normal)
+{
+Petrafication A|cffffcc00r|rrow - [|cffffcc00Level 1|r]
+}
+
+STRING 847
+// Abilities: A01P (Petrafication Arrow), Tip (Tooltip - Normal)
+{
+Petrafication A|cffffcc00r|rrow - [|cffffcc00Level 2|r]
+}
+
+STRING 848
+// Abilities: A01P (Petrafication Arrow), Tip (Tooltip - Normal)
+{
+Petrafication A|cffffcc00r|rrow - [|cffffcc00Level 3|r]
+}
+
+STRING 849
+// Buffs/Effects: B00P (), Bufftip (Tooltip)
+{
+Petrafication Arrow
+}
+
+STRING 850
+// Units: E001 (Queen of Malice), Name (Name)
+{
+Queen of Malice
+}
+
+STRING 851
+// Units: E001 (Queen of Malice), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 852
+// Units: E001 (Queen of Malice), Ubertip (Tooltip - Extended)
+{
+Cunning Hero, adept at killing units quickly. Can learn Mana Poison, Venom Spike, Poison Blades, and Great Manta. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 853
+// Units: E001 (Queen of Malice), Awakentip (Tooltip - Awaken)
+{
+Revive |cffffcc00Q|rueen of Malice
+}
+
+STRING 854
+// Units: E001 (Queen of Malice), Tip (Tooltip - Basic)
+{
+Summon |cffffcc00Q|rueen of Malice
+}
+
+STRING 855
+// Units: E001 (Queen of Malice), Revivetip (Tooltip - Revive)
+{
+Revive |cffffcc00Q|rueen of Malice
+}
+
+STRING 856
+// Abilities: A006 (Venom Spike), Name (Name)
+{
+Venom Spike
+}
+
+STRING 857
+// Abilities: A006 (Venom Spike), Tip (Tooltip - Normal)
+{
+Venom Spik|cffffcc00e|r - [|cffffcc00Level 1|r]
+}
+
+STRING 858
+// Abilities: A006 (Venom Spike), Tip (Tooltip - Normal)
+{
+Venom Spik|cffffcc00e|r - [|cffffcc00Level 2|r]
+}
+
+STRING 859
+// Abilities: A006 (Venom Spike), Tip (Tooltip - Normal)
+{
+Venom Spik|cffffcc00e|r - [|cffffcc00Level 3|r]
+}
+
+STRING 860
+// Abilities: A006 (Venom Spike), Ubertip (Tooltip - Normal - Extended)
+{
+Calls up spikes tipped with venom that damage units in an area. Deals 35 damage and then poisons enemies dealing 5 damage per second for 10 seconds.
+}
+
+STRING 861
+// Abilities: A006 (Venom Spike), Ubertip (Tooltip - Normal - Extended)
+{
+Calls up spikes tipped with venom that damage units in an area. Deals 55 damage and then poisons enemies dealing 10 damage per second for 10 seconds.
+}
+
+STRING 862
+// Abilities: A006 (Venom Spike), Ubertip (Tooltip - Normal - Extended)
+{
+Calls up spikes tipped with venom that damage units in an area. Deals 75 damage and then poisons enemies dealing 15 damage per second for 10 seconds.
+}
+
+STRING 863
+// Abilities: A006 (Venom Spike), Researchtip (Tooltip - Learn)
+{
+Learn Venom Spik|cffffcc00e|r - [|cffffcc00Level %d|r]
+}
+
+STRING 864
+// Buffs/Effects: X001 (Venom Spike (Effect)), EditorName (Name (Editor Only))
+{
+Venom Spike (Effect)
+}
+
+STRING 865
+// Buffs/Effects: B00Y (), Bufftip (Tooltip)
+{
+Venom Spike
+}
+
+STRING 866
+// Units: E001 (Queen of Malice), Propernames (Proper Names)
+{
+VenomSong,PoisonFury,LifeStalker,VirualSeeker,BaneWeaver,PainTerror,Animositi,Antipathim,Animus,Inimicala,Antagon,Ignomina,Aversia,Malevolence,Invidiousa
+}
+
+STRING 867
+// Abilities: A015 (Great Manta), Ubertip (Tooltip - Normal - Extended)
+{
+What's a Queen without a nice ride!? Summons a Great Manta that can cast Dark Calling. |nLasts 180 seconds. |n|n|cffffcc00Attacks land and air units.|r 
+}
+
+STRING 868
+// Abilities: A015 (Great Manta), Researchubertip (Tooltip - Learn - Extended)
+{
+What's a Queen without a nice ride!? Summons a Great Manta that can cast Dark Calling. |nLasts 180 seconds. |n|n|cffffcc00Attacks land and air units.|r 
+}
+
+STRING 869
+// Buffs/Effects: B00H (), Bufftip (Tooltip)
+{
+Great Manta
+}
+
+STRING 870
+// Abilities: A00V (Medusa Tentacles), Ubertip (Tooltip - Normal - Extended)
+{
+Unleashes a group of 12 mighty tentacles upon the enemy, units caught in the wake of a tentacle are stunned.  |n|n|cffffcc00Attacks land and air units.|r 
+}
+
+STRING 871
+// Abilities: A00V (Medusa Tentacles), Researchubertip (Tooltip - Learn - Extended)
+{
+Unleashes a group of 12 mighty tentacles upon the enemy, units caught in the wake of a tentacle are stunned.  |n|n|cffffcc00Attacks land and air units.|r 
+}
+
+STRING 874
+// Abilities: A01Q (Medusa Tentacle), Researchubertip (Tooltip - Learn - Extended)
+{
+Unleashes a group of 9 mighty tentacles upon the enemy, units caught in the wake of a tentacle are stunned.  |n|n|cffffcc00Attacks land and air units.|r 
+}
+
+STRING 875
+// Abilities: A01Q (Medusa Tentacle), Ubertip (Tooltip - Normal - Extended)
+{
+Unleashes a group of 9 mighty tentacles upon the enemy, units caught in the wake of a tentacle are stunned.  |n|n|cffffcc00Attacks land and air units.|r 
+}
+
+STRING 876
+// Items: I000 (Orb of Water), Name (Name)
+{
+Orb of Water
+}
+
+STRING 877
+// Items: I000 (Orb of Water), Tip (Tooltip - Basic)
+{
+Purchase Orb of |cffffcc00W|rlater
+}
+
+STRING 879
+// Abilities: A010 (Disable), Ubertip (Tooltip - Normal - Extended)
+{
+Stops all enemies in from being able to do anything but move in a small target area. <A010:ANsi,Dur2> seconds.
+}
+
+STRING 880
+// Abilities: A010 (Disable), Ubertip (Tooltip - Normal - Extended)
+{
+Stops all enemies in from being able to do anything but move in a small target area. <A010:ANsi,Dur3> seconds.
+}
+
+STRING 881
+// Abilities: A010 (Disable), Ubertip (Tooltip - Normal - Extended)
+{
+Stops all enemies in from being able to do anything but move in a small target area. <A010:ANsi,Dur1> seconds.
+}
+
+STRING 913
+// Abilities: A00G (Ethereal Assassin), Name (Name)
+{
+Ethereal Assassin
+}
+
+STRING 917
+// Buffs/Effects: B00G (), Bufftip (Tooltip)
+{
+Ethereal Assassin
+}
+
+STRING 926
+// Abilities: A001 (Parasite (naga)), Ubertip (Tooltip - Normal - Extended)
+{
+Afflicts a target enemy unit with a deadly parasite that deals 2 damage per second for 30 seconds. If the afflicted unit dies while under the effect of Parasite, a minor minion will spawn from its corpse.
+}
+
+STRING 927
+// Abilities: A010 (Disable), Researchubertip (Tooltip - Learn - Extended)
+{
+Stops all enemies in a target area from being able to do anything but move. The duration increase with level. |n|n|cffffcc00Level 1|r - lasts 3 seconds. |n|cffffcc00Level 2|r - lasts 7 seconds. |n|cffffcc00Level 3|r - lasts 11 seconds.
+}
+
+STRING 928
+// Abilities: A00S (Lancer), Ubertip (Tooltip - Normal - Extended)
+{
+Sends a blast of concentrated energy to deal <A00S:AUcs,DataA1> damage to each enemy unit in a long thin line.
+}
+
+STRING 929
+// Abilities: A00S (Lancer), Ubertip (Tooltip - Normal - Extended)
+{
+Sends a blast of concentrated energy to deal <A00S:AUcs,DataA2> damage to each enemy unit in a long thin line.
+}
+
+STRING 930
+// Abilities: A00S (Lancer), Ubertip (Tooltip - Normal - Extended)
+{
+Sends a blast of concentrated energy to deal <A00S:AUcs,DataA3> damage to each enemy unit in a long thin line.
+}
+
+STRING 931
+// Abilities: A00S (Lancer), Researchubertip (Tooltip - Learn - Extended)
+{
+Sends a blast of concentrated energy to deal damage enemies. |n|n|cffffcc00Level 1|r - <A00S:AUcs,DataA1> damage per unit. |n|cffffcc00Level 2|r - <A00S:AUcs,DataA2> damage per unit. |n|cffffcc00Level 3|r - <A00S:AUcs,DataA3> damage per unit.
+}
+
+STRING 932
+// Abilities: A00S (Lancer), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00L|rancer - [|cffffcc00Level %d|r]
+}
+
+STRING 933
+// Units: U001 (Sea Medusa), Ubertip (Tooltip - Extended)
+{
+Mystical Hero, particularly adept at defensive magic. Can learn Disable, Petrafication Arrows, Vacuum Aura and Medusa Tentacles. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 934
+// Units: n00I (Couatl), Ubertip (Tooltip - Extended)
+{
+Small flying creature adept at spying. Has Shadow Sight, True Sight and can learn Vanish. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 935
+// Units: n00L (Snap Dragon), Ubertip (Tooltip - Extended)
+{
+Light ranged unit that has a poison attack which slows and damages enemy units. Can learn the Submerge ability, which allows this unit to hide in water. |n|n|cffffcc00Attacks land and air units.|r
+}
+
+STRING 936
+// Units: n00M (Naga Myrmidon), Ubertip (Tooltip - Extended)
+{
+Powerful melee unit. Can learn the Submerge ability, which allows this unit to hide in water.  |n|n|cffffcc00Attacks land units.
+}
+
+STRING 937
+// Units: n00N (Naga Royal Myrmidon), Ubertip (Tooltip - Extended)
+{
+Incredibly powerful melee unit. Can learn the Submerge ability, which allows this unit to hide in water. Also can also learn cleave which allows Naga Royal Myrmidon to do spalsh dmg. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 938
+// Units: n00Q (Coral Bed), Ubertip (Tooltip - Extended)
+{
+Provides food, which increases the maximum number of units that can be trained. Can also be upgraded to become a ground or air defense structure.
+}
+
+STRING 939
+// Units: n00U (Deep Sea Gate), Ubertip (Tooltip - Extended)
+{
+Trains Couatl, Frost Rays, and Mantas. Also contains upgrades.
+}
+
+STRING 940
+// Abilities: A002 (Mana Poison), Ubertip (Tooltip - Normal - Extended)
+{
+Destroys 75 mana of a target enemy unit's mana pool over 10 seconds. 
+}
+
+STRING 941
+// Abilities: A002 (Mana Poison), Ubertip (Tooltip - Normal - Extended)
+{
+Destroys 150 mana of a target enemy unit's mana pool over 10 seconds. 
+}
+
+STRING 942
+// Abilities: A002 (Mana Poison), Ubertip (Tooltip - Normal - Extended)
+{
+Destroys 225 mana of a target enemy unit's mana pool over 10 seconds. 
+}
+
+STRING 943
+// Abilities: A002 (Mana Poison), Researchubertip (Tooltip - Learn - Extended)
+{
+Destroys a certain amount of a target enemy unit's mana pool over 10 seconds.  |n|n|cffffcc00Level 1|r - 75 Destroyed. |n|cffffcc00Level 2|r - 150 Destroyed. |n|cffffcc00Level 3|r -  225 Destroyed. 
+}
+
+STRING 944
+// Abilities: A003 (Shadowsight), Ubertip (Tooltip - Normal - Extended)
+{
+Unit hit by Shadowsight we be revealed for 300seconds.
+}
+
+STRING 945
+// Abilities: A004 (Anti-Magic Wave), Ubertip (Tooltip - Normal - Extended)
+{
+Hurls forth a stream of neutralizing magic that bounces up to <A004:AIdc,DataC1> times, dispelling units in its wake.   |n|cffffcc00Deals 180 damage to summoned units.|r
+}
+
+STRING 946
+// Abilities: A01D (Vanish), Ubertip (Tooltip - Normal - Extended)
+{
+Allows the Couatl to become invisible, and move <A01D:ANwk,DataB1,%>% faster.
+}
+
+STRING 947
+// Upgrades: R003 (Abolish Magic), Ubertip (Tooltip - Extended)
+{
+Gives the Makrura Magi-Crusher the ability to crush summoned units with concentrated anti-magic. Also increases mana pool by 100 and gives bonus mana regeneration.
+}
+
+STRING 948
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Ubertip (Tooltip - Extended)
+{
+Increases Mur'gul Reavers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Tarnish .
+}
+
+STRING 949
+// Upgrades: R004 (Naga Siren Adept Training,Naga Siren Master Training), Ubertip (Tooltip - Extended)
+{
+Increases  Mur'gul Reavers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Plague .
+}
+
+STRING 950
+// Upgrades: R005 (Ultravision), Ubertip (Tooltip - Extended)
+{
+Gives snap dragon poison sting ablity. Units hit with poison sting will take 2 damage per second for 10 seconds.
+}
+
+STRING 951
+// Upgrades: R00C (Naga Siren Adept Training,Naga Siren Master Training), Ubertip (Tooltip - Extended)
+{
+Increases Naga Sirens' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Water Image.
+}
+
+STRING 952
+// Upgrades: R00C (Naga Siren Adept Training,Naga Siren Master Training), Ubertip (Tooltip - Extended)
+{
+Increases Naga Sirens' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Stop.
+}
+
+STRING 953
+// Upgrades: R00E (Berserker Upgrade), Ubertip (Tooltip - Extended)
+{
+Upgrades Couatl to so the can cloak.
+}
+
+STRING 954
+// Upgrades: R00I (Hardened Skin), Ubertip (Tooltip - Extended)
+{
+When Rays cannot do their job evolution is called for, reduces the duration of negative spells.
+}
+
+STRING 956
+// Abilities: A008 (Healing Water), Ubertip (Tooltip - Normal - Extended)
+{
+Heals a target friendly unit for 200 hit points over 20 seconds.
+}
+
+STRING 961
+// Abilities: A00A (Water Image), Ubertip (Tooltip - Normal - Extended)
+{
+Creates an illusion of water that last 30 seconds.
+}
+
+STRING 994
+// Buffs/Effects: B010 (), Bufftip (Tooltip)
+{
+Petrafication Arrows
+}
+
+STRING 995
+// Buffs/Effects: B011 (), Bufftip (Tooltip)
+{
+Petrafication Arrows
+}
+
+STRING 996
+// Buffs/Effects: B012 (), Bufftip (Tooltip)
+{
+Petrafication Arrows
+}
+
+STRING 997
+{
+YAY
+
+}
+
+STRING 998
+// Units: e000 (water), Name (Name)
+{
+water
+}
+
+STRING 999
+// Abilities: A02F (Water), Name (Name)
+{
+Water
+}
+
+STRING 1000
+// Buffs/Effects: B016 (), Bufftip (Tooltip)
+{
+Water
+}
+
+STRING 1001
+// Buffs/Effects: B016 (), Buffubertip (Tooltip - Extended)
+{
+This unit is under the effects of Water; it has an increased hit point regeneration.
+}
+
+STRING 1004
+// Abilities: A00G (Ethereal Assassin), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 1005
+// Upgrades: R00K (Ghoul Frenzy), Name (Name)
+{
+Ramming Speed
+}
+
+STRING 1006
+// Upgrades: R00K (Ghoul Frenzy), Tip (Tooltip)
+{
+Research Ramming Sp|cffffcc00e|red.
+}
+
+STRING 1007
+// Upgrades: R00K (Ghoul Frenzy), Ubertip (Tooltip - Extended)
+{
+Greatly Increases Dragon Turtle movement speed.
+}
+
+STRING 1017
+// Abilities: A02G (Raging Demon), Name (Name)
+{
+Raging Demon
+}
+
+STRING 1018
+// Units: e004 (Evil), Name (Name)
+{
+Evil
+}
+
+STRING 1020
+// Abilities: A02H (Raging Demon Death), EditorSuffix (Editor Suffix)
+{
+(NAGA)
+}
+
+STRING 1021
+// Abilities: A02H (Raging Demon Death), Name (Name)
+{
+Raging Demon Death
+}
+
+STRING 1023
+// Units: E005 (Omega Hunter), EditorSuffix (Name - Editor Suffix)
+{
+(Ethereal Assassin 2)
+}
+
+STRING 1025
+// Units: E006 (Omega Hunter), EditorSuffix (Name - Editor Suffix)
+{
+(Ethereal Assassin 1)
+}
+
+STRING 1027
+// Units: E007 (Omega Hunter), EditorSuffix (Name - Editor Suffix)
+{
+(Ethereal Assassin 3)
+}
+
+STRING 1028
+// Buffs/Effects: B017 (), Bufftip (Tooltip)
+{
+Raging Demon
+}
+
+STRING 1029
+// Buffs/Effects: B017 (), Buffubertip (Tooltip - Extended)
+{
+This unit is about to get its butt kicked.
+}
+
+STRING 1030
+// Abilities: A02G (Raging Demon), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00R|raging Demon
+}
+
+STRING 1033
+// Abilities: A02G (Raging Demon), Tip (Tooltip - Normal)
+{
+|cffffcc00R|raging Demon
+}
+
+STRING 1034
+// Abilities: A02G (Raging Demon), Researchhotkey (Hotkey - Learn)
+{
+R
+}
+
+STRING 1035
+// Abilities: A02G (Raging Demon), Hotkey (Hotkey - Normal)
+{
+R
+}
+
+STRING 1036
+// Abilities: A02G (Raging Demon), Ubertip (Tooltip - Normal - Extended)
+{
+A dark ancient sacred technique that only few could live to master. This skill can instantly kill, or cripple its target. It also steals all living essences of its target.
+}
+
+STRING 1038
+// Abilities: A00G (Ethereal Assassin), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00E|rthereal Assassin - [|cffffcc00Level %d|r]
+}
+
+STRING 1043
+// Abilities: A00G (Ethereal Assassin), Tip (Tooltip - Normal)
+{
+|cffffcc00E|rthereal Assassin - [|cffffcc00Level 1|r]
+}
+
+STRING 1044
+// Abilities: A00G (Ethereal Assassin), Tip (Tooltip - Normal)
+{
+|cffffcc00E|rthereal Assassin - [|cffffcc00Level 2|r]
+}
+
+STRING 1045
+// Abilities: A00G (Ethereal Assassin), Tip (Tooltip - Normal)
+{
+|cffffcc00E|rthereal Assassin - [|cffffcc00Level 3|r]
+}
+
+STRING 1046
+// Upgrades: R00I (Hardened Skin), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 1047
+// Upgrades: R00K (Ghoul Frenzy), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 1056
+// Abilities: A01W (Icey doom), Name (Name)
+{
+Icey doom
+}
+
+STRING 1057
+// Units: o00B (Floating Spike), Name (Name)
+{
+Floating Spike
+}
+
+STRING 1067
+// Buffs/Effects: B018 (), Bufftip (Tooltip)
+{
+Icy Doom
+}
+
+STRING 1068
+// Buffs/Effects: B018 (), Buffubertip (Tooltip - Extended)
+{
+This unit is Trap by Icy Doom;it has its movement speed slowed for a short duration.
+}
+
+STRING 1070
+// Abilities: A02G (Raging Demon), Researchubertip (Tooltip - Learn - Extended)
+{
+A dark ancient sacred technique that only few could live to master. This skill can instantly kill, or cripple its target. It also steals all living essences of its target. Instantly kills a unit. Deals 50% of max life, and max mana to hero's.
+}
+
+STRING 1072
+// Abilities: A00D (Spell Shield), Researchubertip (Tooltip - Learn - Extended)
+{
+Blocks one negative spell. Area of effect increases slighty with level.  |n|n|cffffcc00Level 1|r - Last 20 seconds and 60 second cooldown. |n|cffffcc00Level 2|r -  Last 40 seconds and  40 second cooldown.  |n|cffffcc00Level 3|r -  Last 60 seconds and 20 second cooldown. 
+}
+
+STRING 1073
+// Abilities: A00D (Spell Shield), Tip (Tooltip - Normal)
+{
+Spell Sheil|cffffcc00d|r - [|cffffcc00Level 1|r]
+}
+
+STRING 1074
+// Abilities: A00D (Spell Shield), Tip (Tooltip - Normal)
+{
+Spell Sheil|cffffcc00d|r - [|cffffcc00Level 2|r]
+}
+
+STRING 1075
+// Abilities: A00D (Spell Shield), Tip (Tooltip - Normal)
+{
+Spell Sheil|cffffcc00d|r - [|cffffcc00Level 3|r]
+}
+
+STRING 1076
+// Abilities: A00D (Spell Shield), Researchtip (Tooltip - Learn)
+{
+Learn Spell Sheil|cffffcc00d|r - [|cffffcc00Level %d|r]
+}
+
+STRING 1077
+// Abilities: A01X (Messatsu Gou Hado), Name (Name)
+{
+Messatsu Gou Hado
+}
+
+STRING 1078
+// Abilities: A01X (Messatsu Gou Hado), Tip (Tooltip - Normal)
+{
+Messatsu |cffffcc00G|rou Hado - [|cffffcc00Level 1|r]
+}
+
+STRING 1079
+// Abilities: A01X (Messatsu Gou Hado), Tip (Tooltip - Normal)
+{
+Messatsu |cffffcc00G|rou Hado - [|cffffcc00Level 2|r]
+}
+
+STRING 1080
+// Abilities: A01X (Messatsu Gou Hado), Tip (Tooltip - Normal)
+{
+Messatsu |cffffcc00G|rou Hado - [|cffffcc00Level 3|r]
+}
+
+STRING 1085
+// Abilities: A01X (Messatsu Gou Hado), Researchtip (Tooltip - Learn)
+{
+Learn Messatsu |cffffcc00G|rou Hado - [|cffffcc00Level %d|r]
+}
+
+STRING 1086
+// Abilities: A019 (Demon Shadow), Researchhotkey (Hotkey - Learn)
+{
+D
+}
+
+STRING 1087
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 1088
+// Units: E003 (Omega Hunter), Name (Name)
+{
+Omega Hunter
+}
+
+STRING 1089
+// Units: E003 (Omega Hunter), Hotkey (Hotkey)
+{
+O
+}
+
+STRING 1090
+// Units: E003 (Omega Hunter), Awakentip (Tooltip - Awaken)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1091
+// Units: E003 (Omega Hunter), Tip (Tooltip - Basic)
+{
+Summon |cffffcc00O|rmega Hunter
+}
+
+STRING 1092
+// Units: E003 (Omega Hunter), Revivetip (Tooltip - Revive)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1094
+// Units: E003 (Omega Hunter), Propernames (Proper Names)
+{
+Evilsong,Darkfury,Darkstalker,Evilseeker,Chaosweaver,Chaosterror,Chaossorrow,Hellweller,Hellmurder,Evilbourne,Wrath,Chaosrunner,Darkbrand,Furywrath,Terroredge
+}
+
+STRING 1095
+// Units: E005 (Omega Hunter), Name (Name)
+{
+Omega Hunter
+}
+
+STRING 1096
+// Units: E005 (Omega Hunter), Awakentip (Tooltip - Awaken)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1097
+// Units: E005 (Omega Hunter), Revivetip (Tooltip - Revive)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1098
+// Units: E005 (Omega Hunter), Tip (Tooltip - Basic)
+{
+Summon |cffffcc00O|rmega Hunter
+}
+
+STRING 1100
+// Units: E005 (Omega Hunter), Propernames (Proper Names)
+{
+Evilsong,Darkfury,Darkstalker,Evilseeker,Chaosweaver,Chaosterror,Chaossorrow,Hellweller,Hellmurder,Evilbourne,Wrath,Chaosrunner,Darkbrand,Furywrath,Terroredge
+}
+
+STRING 1101
+// Units: E006 (Omega Hunter), Name (Name)
+{
+Omega Hunter
+}
+
+STRING 1102
+// Units: E006 (Omega Hunter), Awakentip (Tooltip - Awaken)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1103
+// Units: E006 (Omega Hunter), Revivetip (Tooltip - Revive)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1104
+// Units: E006 (Omega Hunter), Tip (Tooltip - Basic)
+{
+Summon |cffffcc00O|rmega Hunter
+}
+
+STRING 1106
+// Units: E006 (Omega Hunter), Propernames (Proper Names)
+{
+Evilsong,Darkfury,Darkstalker,Evilseeker,Chaosweaver,Chaosterror,Chaossorrow,Hellweller,Hellmurder,Evilbourne,Wrath,Chaosrunner,Darkbrand,Furywrath,Terroredge
+}
+
+STRING 1107
+// Units: E007 (Omega Hunter), Name (Name)
+{
+Omega Hunter
+}
+
+STRING 1108
+// Units: E007 (Omega Hunter), Awakentip (Tooltip - Awaken)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1109
+// Units: E007 (Omega Hunter), Revivetip (Tooltip - Revive)
+{
+Revive |cffffcc00O|rmega Hunter
+}
+
+STRING 1110
+// Units: E007 (Omega Hunter), Tip (Tooltip - Basic)
+{
+Summon |cffffcc00O|rmega Hunter
+}
+
+STRING 1112
+// Units: E007 (Omega Hunter), Propernames (Proper Names)
+{
+Evilsong,Darkfury,Darkstalker,Evilseeker,Chaosweaver,Chaosterror,Chaossorrow,Hellweller,Hellmurder,Evilbourne,Wrath,Chaosrunner,Darkbrand,Furywrath,Terroredge
+}
+
+STRING 1115
+// Abilities: A018 (Plague), Hotkey (Hotkey - Normal)
+{
+G
+}
+
+STRING 1116
+// Abilities: A01X (Messatsu Gou Hado), Researchhotkey (Hotkey - Learn)
+{
+G
+}
+
+STRING 1117
+// Buffs/Effects: B00G (), Buffubertip (Tooltip - Extended)
+{
+Makes Omega Hunter apear invisible and boost attack and movement speed.
+}
+
+STRING 1118
+// Buffs/Effects: B013 (), Bufftip (Tooltip)
+{
+Gaurdian Tentacle
+}
+
+STRING 1119
+// Buffs/Effects: B013 (), Buffubertip (Tooltip - Extended)
+{
+This unit has become a Gaurdian Tentacle;it cannot move, but its attack rate, attack damage, and attack range have been increased.
+}
+
+STRING 1121
+// Abilities: A01M (Shrink), EditorSuffix (Editor Suffix)
+{
+New Auto Cast
+}
+
+STRING 1125
+// Abilities: A01M (Shrink), Name (Name)
+{
+Shrink
+}
+
+STRING 1128
+// Abilities: A01Y (Armor), Name (Name)
+{
+Armor
+}
+
+STRING 1129
+// Abilities: A01N (Shrink), Name (Name)
+{
+Shrink
+}
+
+STRING 1130
+// Buffs/Effects: B014 (), Bufftip (Tooltip)
+{
+Shrink
+}
+
+STRING 1131
+// Abilities: A02C (Shrink Armor), Name (Name)
+{
+Shrink Armor
+}
+
+STRING 1132
+// Abilities: A02C (Shrink Armor), EditorSuffix (Editor Suffix)
+{
+(-3)
+}
+
+STRING 1133
+// Abilities: A01N (Shrink), EditorSuffix (Editor Suffix)
+{
+New
+}
+
+STRING 1135
+// Abilities: A01O (Orb of Water), Name (Name)
+{
+Orb of Water
+}
+
+STRING 1136
+// Abilities: A02B (Orb of Water), Name (Name)
+{
+Orb of Water
+}
+
+STRING 1137
+// Abilities: A02B (Orb of Water), EditorSuffix (Editor Suffix)
+{
+(Tarnish Effect)
+}
+
+STRING 1139
+// Buffs/Effects: B015 (), Bufftip (Tooltip)
+{
+Orb of Water
+}
+
+STRING 1141
+// Items: I000 (Orb of Water), Ubertip (Tooltip - Extended)
+{
+Adds <AIsb,DataA1> bonus damage to the attack of a Hero when carried. The Hero's attacks also become ranged when attacking air, and reduce the armor and attack of enemy units for 5 seconds.
+}
+
+STRING 1142
+// Buffs/Effects: B015 (), EditorSuffix (Editor Suffix)
+{
+Orb of Water
+}
+
+STRING 1143
+// Buffs/Effects: B015 (), Buffubertip (Tooltip - Extended)
+{
+This unit is Tarnished by Orb of Water; its damage and armor have been reduced.
+}
+
+STRING 1144
+// Items: I000 (Orb of Water), Description (Description)
+{
+Attacks will reduce enemy armor and damage.
+}
+
+STRING 1145
+// Abilities: A01Y (Armor), EditorSuffix (Editor Suffix)
+{
+Orb of Water(-2)
+}
+
+STRING 1146
+// Buffs/Effects: B014 (), Buffubertip (Tooltip - Extended)
+{
+This unit has been Shrunken; its down and armor have been reduced.
+}
+
+STRING 1149
+// Abilities: A01N (Shrink), Ubertip (Tooltip - Normal - Extended)
+{
+Reduces movement speed by <A01N:Acri,DataA1,%>%, damage by <A01N:Acri,DataC1,%>%, and armor by <A02C:Ald2,DataA1> of a target enemy unit. |nLasts <A01N:Acri,Dur1> seconds.
+}
+
+STRING 1150
+// Abilities: A01N (Shrink), Tip (Tooltip - Normal)
+{
+Shri|cffffcc00n|rk
+}
+
+STRING 1152
+// Units: o003 (Petrafied Unit), EditorSuffix (Name - Editor Suffix)
+{
+(InvisFood)
+}
+
+STRING 1155
+// Abilities: A01P (Petrafication Arrow), Researchubertip (Tooltip - Learn - Extended)
+{
+Increases the damage of attacks by adding lethal poison that will kill units and slow by 10%. Units killed under the effects of Petrafication arrow will turn to stone with negative 10 life regeneration. Stones will take up 1 food of enemy's unit supply and will explode upon death. |n|n|cffffcc00Level 1|r - <A01P:AEpa,DataA1> bonus damage and 3 poison damage over 10 seconds, 200 Hit point stone, 20 damage. |n|cffffcc00Level 2|r - <A01P:AEpa,DataA2> bonus damage and 10 poison damage over 10 seconds, 300 Hit point stone, 40 damage. |n|cffffcc00Level 3|r - <A01P:AEpa,DataA3> bonus damage and 15 poison damage over 10 seconds, 400 Hit point stone, 60 damage.
+}
+
+STRING 1156
+// Abilities: A01P (Petrafication Arrow), Ubertip (Tooltip - Normal - Extended)
+{
+Adds <A01P:AEpa,DataA1> bonus damage and 3 poison damage over 10 seconds, but drains mana with each shot fired. Units killed will create a 200 Hit point stone, dealing 20 area of effect damage.
+}
+
+STRING 1157
+// Units: n010 (Submerged Mur'gul Slave), EditorSuffix (Name - Editor Suffix)
+{
+(naga burrowed)
+}
+
+STRING 1159
+// Abilities: A02K (Submerge), Name (Name)
+{
+Submerge
+}
+
+STRING 1161
+// Abilities: A01X (Messatsu Gou Hado), Hotkey (Hotkey - Normal)
+{
+G
+}
+
+STRING 1164
+// Abilities: A007 (Submerge), Name (Name)
+{
+Submerge
+}
+
+STRING 1169
+// Abilities: A00B (Submerge), Name (Name)
+{
+Submerge
+}
+
+STRING 1174
+// Abilities: A00N (Submerge), Name (Name)
+{
+Submerge
+}
+
+STRING 1178
+// Abilities: A02K (Submerge), Tip (Tooltip - Normal)
+{
+S|cffffcc00u|rbmerge
+}
+
+STRING 1179
+// Abilities: A02K (Submerge), Hotkey (Hotkey - Normal)
+{
+U
+}
+
+STRING 1180
+// Abilities: A02K (Submerge), Unhotkey (Hotkey - Turn Off)
+{
+U
+}
+
+STRING 1181
+// Abilities: A02K (Submerge), Ubertip (Tooltip - Normal - Extended)
+{
+Allows this unit to dive beneath water, hiding it from view.
+}
+
+STRING 1182
+// Abilities: A02K (Submerge), Unubertip (Tooltip - Turn Off - Extended)
+{
+Allows this unit to emerge from the water.
+}
+
+STRING 1183
+// Abilities: A02K (Submerge), Untip (Tooltip - Turn Off)
+{
+S|cffffcc00u|rrface
+}
+
+STRING 1184
+// Abilities: A007 (Submerge), Tip (Tooltip - Normal)
+{
+S|cffffcc00u|rbmerge
+}
+
+STRING 1185
+// Abilities: A007 (Submerge), Hotkey (Hotkey - Normal)
+{
+U
+}
+
+STRING 1186
+// Abilities: A007 (Submerge), Unhotkey (Hotkey - Turn Off)
+{
+U
+}
+
+STRING 1187
+// Abilities: A007 (Submerge), Ubertip (Tooltip - Normal - Extended)
+{
+Allows this unit to dive beneath water, hiding it from view.
+}
+
+STRING 1188
+// Abilities: A007 (Submerge), Unubertip (Tooltip - Turn Off - Extended)
+{
+Allows this unit to emerge from the water.
+}
+
+STRING 1189
+// Abilities: A007 (Submerge), Untip (Tooltip - Turn Off)
+{
+S|cffffcc00u|rrface
+}
+
+STRING 1190
+// Abilities: A00B (Submerge), Tip (Tooltip - Normal)
+{
+S|cffffcc00u|rbmerge
+}
+
+STRING 1191
+// Abilities: A00B (Submerge), Hotkey (Hotkey - Normal)
+{
+U
+}
+
+STRING 1192
+// Abilities: A00B (Submerge), Unhotkey (Hotkey - Turn Off)
+{
+U
+}
+
+STRING 1193
+// Abilities: A00B (Submerge), Ubertip (Tooltip - Normal - Extended)
+{
+Allows this unit to dive beneath water, hiding it from view.
+}
+
+STRING 1194
+// Abilities: A00B (Submerge), Unubertip (Tooltip - Turn Off - Extended)
+{
+Allows this unit to emerge from the water.
+}
+
+STRING 1195
+// Abilities: A00B (Submerge), Untip (Tooltip - Turn Off)
+{
+S|cffffcc00u|rrface
+}
+
+STRING 1196
+// Abilities: A00N (Submerge), Tip (Tooltip - Normal)
+{
+S|cffffcc00u|rbmerge
+}
+
+STRING 1197
+// Abilities: A00N (Submerge), Hotkey (Hotkey - Normal)
+{
+U
+}
+
+STRING 1198
+// Abilities: A00N (Submerge), Unhotkey (Hotkey - Turn Off)
+{
+U
+}
+
+STRING 1199
+// Abilities: A00N (Submerge), Ubertip (Tooltip - Normal - Extended)
+{
+Allows this unit to dive beneath water, hiding it from view.
+}
+
+STRING 1200
+// Abilities: A00N (Submerge), Unubertip (Tooltip - Turn Off - Extended)
+{
+Allows this unit to emerge from the water.
+}
+
+STRING 1201
+// Abilities: A00N (Submerge), Untip (Tooltip - Turn Off)
+{
+S|cffffcc00u|rrface
+}
+
+STRING 1202
+// Units: n011 (Submerged Naga Royal Myrmidon), Name (Name)
+{
+Submerged Naga Royal Myrmidon
+}
+
+STRING 1203
+// Units: n011 (Submerged Naga Royal Myrmidon), Tip (Tooltip - Basic)
+{
+Train N|cffffcc00a|rga Royal Myrmidon
+}
+
+STRING 1204
+// Units: n011 (Submerged Naga Royal Myrmidon), Ubertip (Tooltip - Extended)
+{
+Train N|cffffcc00a|rga Royal Myrmidon
+}
+
+STRING 1205
+// Units: n011 (Submerged Naga Royal Myrmidon), EditorSuffix (Name - Editor Suffix)
+{
+(Defensive naga)
+}
+
+STRING 1206
+// Units: n012 (Submerged Naga Myrmidon), Tip (Tooltip - Basic)
+{
+Train Na|cffffcc00g|ra Myrmidon
+}
+
+STRING 1207
+// Units: n012 (Submerged Naga Myrmidon), Ubertip (Tooltip - Extended)
+{
+Powerful melee unit. Has the Submerge ability, which allows this unit to hide in water.  |n|n|cffffcc00Attacks land units.
+}
+
+STRING 1208
+// Units: n012 (Submerged Naga Myrmidon), EditorSuffix (Name - Editor Suffix)
+{
+(Defensive naga)
+}
+
+STRING 1209
+// Units: n013 (Submerged Snap Dragon), EditorSuffix (Name - Editor Suffix)
+{
+(Defensive naga)
+}
+
+STRING 1210
+// Upgrades: R009 (Berserker Upgrade), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 1211
+// Units: o002 (Submerged Mur'gul Slave), Name (Name)
+{
+Submerged Mur'gul Slave
+}
+
+STRING 1215
+// Buffs/Effects: B01A (), Bufftip (Tooltip)
+{
+Water
+}
+
+STRING 1216
+// Buffs/Effects: B01A (), Buffubertip (Tooltip - Extended)
+{
+This unit is under the effects of Water; it has deceased movement.
+}
+
+STRING 1217
+// Buffs/Effects: B01A (), EditorSuffix (Editor Suffix)
+{
+(offensive)
+}
+
+STRING 1218
+// Abilities: A01C (Bad water), Name (Name)
+{
+Bad water
+}
+
+STRING 1219
+// Abilities: A00R (Poison Sting), Ubertip (Tooltip - Normal - Extended)
+{
+Deals 2 poison damage per second. |nLasts 5 seconds.
+}
+
+STRING 1220
+// Abilities: A00G (Ethereal Assassin), Researchubertip (Tooltip - Learn - Extended)
+{
+Boost movement speed and attack rate. Also gives an ethereal looking effect, and also lowers this units collision size. Also effects hero status on minimap. For 30 seconds. n|n|cffffcc00Level 1|r - Mild increased attack and movement speed. Slightly transparent. Small collision drecement.  |n|cffffcc00Level 2|r - Moderate increased attack and movement speed. Moderately transparent. bigger collision drecement. Hides hero status on minimap.  |n|cffffcc00Level 3|r - Greatly increased attack and movement speed. Very transparent. No collision size. Does not show on minimap. 
+}
+
+STRING 1221
+// Abilities: A00G (Ethereal Assassin), Ubertip (Tooltip - Normal - Extended)
+{
+Mild increased attack and movement speed. Slightly transparent. Small collision drecement. 
+}
+
+STRING 1222
+// Abilities: A00G (Ethereal Assassin), Ubertip (Tooltip - Normal - Extended)
+{
+Moderate increased attack and movement speed. Moderately transparent. bigger collision drecement. Hides hero status on minimap. 
+}
+
+STRING 1223
+// Abilities: A00G (Ethereal Assassin), Ubertip (Tooltip - Normal - Extended)
+{
+Greatly increased attack and movement speed. Very transparent. No collision size. Does not show on minimap.
+}
+
+STRING 1224
+// Abilities: A01X (Messatsu Gou Hado), Ubertip (Tooltip - Normal - Extended)
+{
+Throws a fire ball to deal <A01X:AUcs,DataA1> damage per unit. <A01X:AUcs,DataB1> max damage.
+}
+
+STRING 1225
+// Abilities: A01X (Messatsu Gou Hado), Ubertip (Tooltip - Normal - Extended)
+{
+Throws a fire ball to deal <A01X:AUcs,DataA2> damage per unit. <A01X:AUcs,DataB2> max damage.
+}
+
+STRING 1226
+// Abilities: A01X (Messatsu Gou Hado), Ubertip (Tooltip - Normal - Extended)
+{
+Throws a fire ball to deal <A01X:AUcs,DataA3> damage per unit. <A01X:AUcs,DataB3> max damage.
+}
+
+STRING 1227
+// Abilities: A01X (Messatsu Gou Hado), Researchubertip (Tooltip - Learn - Extended)
+{
+Throws a fireball which damages enemies. |n|n|cffffcc00Level 1|r - <A01X:AUcs,DataA1> damage per unit. <A01X:AUcs,DataB1> max damage. |n|cffffcc00Level 2|r - <A01X:AUcs,DataA2> damage per unit. <A01X:AUcs,DataB2> max damage. |n|cffffcc00Level 3|r - <A01X:AUcs,DataA3> damage per unit. <A01X:AUcs,DataB3> max damage.
+}
+
+STRING 1228
+// Units: n014 (Omega Hunter X), Name (Name)
+{
+Omega Hunter X
+}
+
+STRING 1233
+// Units: n015 (Omega Hunter X), EditorSuffix (Name - Editor Suffix)
+{
+level 2
+}
+
+STRING 1234
+// Units: n015 (Omega Hunter X), Name (Name)
+{
+Omega Hunter X
+}
+
+STRING 1235
+// Units: n016 (Omega Hunter X), EditorSuffix (Name - Editor Suffix)
+{
+level 3
+}
+
+STRING 1236
+// Units: n016 (Omega Hunter X), Name (Name)
+{
+Omega Hunter X
+}
+
+STRING 1237
+// Abilities: A019 (Demon Shadow), Name (Name)
+{
+Demon Shadow
+}
+
+STRING 1238
+// Abilities: A019 (Demon Shadow), Tip (Tooltip - Normal)
+{
+|cffffcc00D|remon Shadow - [|cffffcc00Level 1|r]
+}
+
+STRING 1239
+// Abilities: A019 (Demon Shadow), Tip (Tooltip - Normal)
+{
+|cffffcc00D|remon Shadow - [|cffffcc00Level 2|r]
+}
+
+STRING 1240
+// Abilities: A019 (Demon Shadow), Tip (Tooltip - Normal)
+{
+|cffffcc00D|remon Shadow - [|cffffcc00Level 3|r]
+}
+
+STRING 1245
+// Abilities: A019 (Demon Shadow), Researchtip (Tooltip - Learn)
+{
+Learn |cffffcc00D|remon Shadow - [|cffffcc00Level %d|r]
+}
+
+STRING 1246
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 1252
+// Units: E003 (Omega Hunter), Ubertip (Tooltip - Extended)
+{
+Some Demon Hunters in order to fight chaos, have become nothing but it. Consumed by so much evil that evil glows through thier eyes with such intensity that you can see them behind thier blindings. They have mastered new arts and are now called Omega Hunters. Adept at maneuvering through battles. Can learn Messatsu Gou Hado, Demon Shadow, Ethereal Assassin, and Raging Demon. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 1253
+// Units: E005 (Omega Hunter), Ubertip (Tooltip - Extended)
+{
+Some Demon Hunters in order to fight chaos, have become nothing but it. Consumed by so much evil that evil glows through thier eyes with such intensity that you can see them behind thier blindings. They have mastered new arts and are now called Omega Hunters. Adept at maneuvering through battles. Can learn Messatsu Gou Hado, Demon Shadow, Ethereal Assassin, and Raging Demon. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 1254
+// Units: E006 (Omega Hunter), Ubertip (Tooltip - Extended)
+{
+Some Demon Hunters in order to fight chaos, have become nothing but it. Consumed by so much evil that evil glows through thier eyes with such intensity that you can see them behind thier blindings. They have mastered new arts and are now called Omega Hunters. Adept at maneuvering through battles. Can learn Messatsu Gou Hado, Demon Shadow, Ethereal Assassin, and Raging Demon. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 1255
+// Units: E007 (Omega Hunter), Ubertip (Tooltip - Extended)
+{
+Some Demon Hunters in order to fight chaos, have become nothing but it. Consumed by so much evil that evil glows through thier eyes with such intensity that you can see them behind thier blindings. They have mastered new arts and are now called Omega Hunters. Adept at maneuvering through battles. Can learn Messatsu Gou Hado, Demon Shadow, Ethereal Assassin, and Raging Demon. |n|n|cffffcc00Attacks land units.|r
+}
+
+STRING 1256
+// Units: n010 (Submerged Mur'gul Slave), Name (Name)
+{
+Submerged Mur'gul Slave
+}
+
+STRING 1259
+// Upgrades: R003 (Abolish Magic), Hotkey (Hotkey)
+{
+N
+}
+
+STRING 1265
+// Abilities: A02K (Submerge), EditorSuffix (Editor Suffix)
+{
+(Slave Mur'gul)
+}
+
+STRING 1274
+// Abilities: A007 (Submerge), EditorSuffix (Editor Suffix)
+{
+(Defense Mymridon)
+}
+
+STRING 1275
+// Abilities: A00B (Submerge), EditorSuffix (Editor Suffix)
+{
+(Defense Dragon)
+}
+
+STRING 1276
+// Abilities: A00N (Submerge), EditorSuffix (Editor Suffix)
+{
+(Defense Roya lMymridon)
+}
+
+STRING 1277
+// Abilities: A01J (Permanent Invisibility), EditorSuffix (Editor Suffix)
+{
+(fast naga)
+}
+
+STRING 1278
+// Abilities: A000 (Cleaving Attack), EditorSuffix (Editor Suffix)
+{
+(royal Mymridon)
+}
+
+STRING 1282
+// Abilities: A019 (Demon Shadow), Ubertip (Tooltip - Normal - Extended)
+{
+Splits into 6 shadows that deal 25 - 30 damage per attack.
+}
+
+STRING 1283
+// Abilities: A019 (Demon Shadow), Ubertip (Tooltip - Normal - Extended)
+{
+Splits into 6 shadows that deal 35 - 40 damage per attack.
+}
+
+STRING 1284
+// Abilities: A019 (Demon Shadow), Ubertip (Tooltip - Normal - Extended)
+{
+Splits into 6 shadows that deal 45 - 50 damage per attack.
+}
+
+STRING 1285
+// Abilities: A019 (Demon Shadow), Researchubertip (Tooltip - Learn - Extended)
+{
+Splits into 6 shadows that teleport to a random target within the area of the Omega hunter, and attack twice. Max 3 shadows to a unit.  |n|n|cffffcc00Level 1|r - 25 - 30 damage per hit.  |n|cffffcc00Level 2|r - 35 - 40 damage per hit. |n|cffffcc00Level 3|r - 45 - 50 damage per hit.
+}
+
+STRING 1286
+// Upgrades: R008 (Coral Blades,Chitinous Blades,Razorspine Blades), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 1287
+// Units: o006 (Water Stone), Name (Name)
+{
+Water Stone
+}
+
+STRING 1288
+// Units: o004 (Water Stone), Name (Name)
+{
+Water Stone
+}
+
+STRING 1289
+// Items: I006 (Water Stone), Name (Name)
+{
+Water Stone
+}
+
+STRING 1290
+// Buffs/Effects: B01B (), Buffubertip (Tooltip - Extended)
+{
+This stone provides life regeneration for nearby player units.
+}
+
+STRING 1291
+// Units: o004 (Water Stone), EditorSuffix (Name - Editor Suffix)
+{
+(effect)
+}
+
+STRING 1292
+// Abilities: A02D (Water Stone), Name (Name)
+{
+Water Stone
+}
+
+STRING 1294
+// Items: I006 (Water Stone), Description (Description)
+{
+Conjures a Water Stone
+}
+
+STRING 1295
+// Items: I006 (Water Stone), Tip (Tooltip - Basic)
+{
+Purchase Water Stone
+}
+
+STRING 1297
+// Buffs/Effects: B01B (), Bufftip (Tooltip)
+{
+Water Stone
+}
+
+STRING 1298
+// Items: I006 (Water Stone), Ubertip (Tooltip - Extended)
+{
+Drops a water stone that gives the water healing effect to nearby player units for 60 seconds. |nContains 2 charges.
+}
+
+STRING 1299
+// Abilities: A004 (Anti-Magic Wave), Tip (Tooltip - Normal)
+{
+Anti-Magi|cffffcc00c|r Wave
+}
+
+STRING 1300
+// Abilities: A00F (Concentrated Anti-Magic), Tip (Tooltip - Normal)
+{
+Concentrated A|cffffcc00n|rti-Magic
+}
+
+STRING 1301
+// Upgrades: R002 (Ghoul Frenzy), Hotkey (Hotkey)
+{
+N
+}
+
+STRING 1310
+{
+Player 3
+}
+
+STRING 1311
+{
+Player 4
+}
+

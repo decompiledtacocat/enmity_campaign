@@ -1,0 +1,447 @@
+
+===============================
+Items:
+===============================
+ULTILITY ITEMS:
+Pocket Robo Engineers are now charged. Gold cost reduced to 400. Mana cost reduced to 0.
+Lock Down Missile is now charged. Gold cost reduced to 200. Mana cost reduced to 0.
+Land Mines gold cost reduced to 100. Now have 10 charges. Mana cost reduced to 0.
+
+POTIONS ITEMS:
+Clarity Potion - Now has 4 charges.
+
+Details:
+Added various cast animations to item abilities.
+
+=================================
+RANGER:
+=================================
+Tier 1 Items:
+----------------------------------
+Flame Threads 
+-bonus damage
+-Use: Flame Shot - Stuns and ignites target
+Upgrade
+Increased stats
+Flame Shot - Stronger fire effect
+
+Acid Threads 
+-bonus damage.
+-Use: Acid Shot - Reduces target armor.
+Upgrade
+Increased stats
+Acid Shot - stronger acids
+  
+Marksman's Grips 
+-increases attack speed. 
+-bonus Armor. 
+-bonus agility,bonus strength.
+-Use: Rapidity - Increases attack speed for a duration.
+Upgrade
+Increased stats
+Rapidity - Increased attack speed.
+
+
+Tier 2 Items:
+----------------------------------
+
+Stasis Trap 
+-Bonus Intelligence
+-Use: Stasis Trap - Creates a stasis trap which stuns enemy units when activated.
+Upgrade
+Increased stats
+Increased stun duration.
+
+Shadow Cloak 
+-Bonus strength,Bonus agility.
+-Bonus armor.
+-Shadow Meld
+-Use: Flash - Turns user invisible and restrains surrounding enemys.
+Upgrade
+Increased stats
+Flash - Stuns targets instead of restrains.
+
+Beast Stone 
+-Bonus Intelligence.
+-Bonus strength.
+-Use: Heart of the Beast - Summons a beast depending on user.
+Upgrade
+Increased stats
+Summons recieve upgrade skills, more life, damage and new skills sometimes.
+
+Tier 3 Items:
+----------------------------------
+
+Hawk Eye Lens 
+-Minor Detection
+-Use: Hawk Eye - Gives a high chance to crit for a duration.
+Upgrade
+Better Detection
+Hawk Eye - Chance to crit for more damage.
+
+
+=================================
+MAGE:
+=================================
+Tier 1 Items:
+----------------------------------
+Frozen Wrath
+-Bonus intelligence
+-Frost Blast - Deals damage and chills target.
+Upgrade
+Increased stats
+Frost Blast longer chill duration
+
+Flame Caller
+-Bonus agility
+-Bonus damage
+-Use: Rain of Fire.
+Upgrade
+Increased stats
+Rain of fire more damage.
+
+Liquid Dream I
+-Converts 15% of damage taken into mana.
+-Reduces spell, magic and piercing damage
+-Use: Restores percentage of your max mana.
+Upgrade
+Increased effects
+Restores higer percentage of mana.
+
+Essence of Earth
+-Bonus strength
+-Bonus health regeneration
+-Use: Spore - Launches spores at surrounding units which ensnares units in roots.
+Upgrade
+Increased stats
+Spore - Duration increased.
+
+
+Tier 2 Items:
+--------------
+Warlock Armor
+-Bonus armor
+-Bonus strength,Bonus intelligence
+-Use: Demon Armor increases armor and health regeneration for a duration.
+Upgrade
+Increased stats
+Demon Armor - Armor and regeneration greatly increased.
+
+Warped Armor
+-Bonus armor
+-Bonus increased movement speed.
+-Bonus intelligence, Bonus strength.
+-Use: Blink - teleports caster.
+Upgrade
+Increased stats
+Blink - Cooldown reduced.
+
+Aegis Reflector
+-Bonus mana.
+-Use: Mana Shield - All damage taken is absorbed by mana.
+Upgrade
+Increased stats
+Mana Shield dmg to mana ratio improved.
+
+Tier 3:
+----------------------------------------------------
+
+
+Paragon of Recall 
+-Use: Recall - Reset all cooldowns.
+Upgrade
+Cooldown for recall reduced by 50%
+
+Ghost Staff
+-Bonus intelligence.
+-Use: Banish - Banishes target for a duration.
+Upgrade 
+Increased Intelligence
+Banish becomes a target nova effect.
+
+
+=================================
+Assualt:
+=================================
+
+Tier 1
+----------------------------------------------------
+Throwing Blades
+-bonus agility
+Use: Throw - Throws a Shuriuken at target dealing damage plus 100% agility.
+Upgrade
+Increase stats
+Increase Throw Damage
+
+
+Muddle Dust
+-bonus intelligence
+-Use: Muddle Dust - Silences target and reduces movement and chance to attack for 4 seconds.
+Upgrade
+Increase stats
+Increase Muddle strength and duration.
+
+Brawlers
+-bonus strength
+-Use: Power Strike - Instant strike which deals damage plus 100% of strength. 
+-Open Blow - When power strike is performed behind a target it will deal 50% more damage stun for short duration.
+Upgrade
+Increase stats
+Increase Power Strike damage and Open Blow stun duration.
+
+Tier 2
+----------------------------------------------------
+Quick Step Boots
+-Bonus agility
+-Bonus strength
+-Bonus Armor
+-Use: Evasion - Increases chance to evade by 50% for a short duration.
+Upgrade
+Increased stats
+Evasion - Higher chance to evade.
+
+
+Assassin's Blade
+-Bonus Damage
+-Bonus Agility
+-Use: Deadly Strike - A deadly strike which deals damage plus an agility bonus to target unit, which 
+reduces target's armor is reduced and deals 50% of the initial damage over 6 seconds.
+Upgrade
+Increase stats
+Deadly Strike - damage and armor reduction
+
+
+Infiltrator
+-Bonus agility
+-Bonus strength
+-Bonus Armor
+-Use: Stealth - Invisibility, lower movement.
+Upgrade
+Increases stats
+Improved stealth movement.
+
+
+Tier 3
+----------------------------------------------------
+
+Grace of Air
+-Bonus agility
+-Use: Air Trick
+Upgrade
+Increase stats
+Reduced cooldown.
+Death's Embrace
+-Use: Your next high damage ability will deal double damage.
+
+=================================
+Shared Upgradeable Items:
+=================================
+Tier 1
+----------------------------------------------------
+Agility
+Bonus Agility
+Use: Increase Agility by X for 12 seconds.
+Upgrade
+Increase Stats
+Use - Increase bonus
+
+Stength
+Bonus Stength
+Use: Increase Stength by X for 12 seconds.
+Upgrade
+Increase Stats
+Use - Increase bonus
+
+Intelligence
+Bonus Intelligence
+Use: Increase Intelligence by X for 12 seconds.
+Upgrade
+Increase Stats
+Use - Increase bonus
+
+Essence Crystal
+-Bonus Regeneration
+-Bonus mana Regeneration
+-Use: Restore xxxxx
+
+
+Tier 2
+----------------------------------------------------
+Health Stone
+Bonus life
+Bonus life regeneration.
+Use: Restore a % of your max hit points.
+Upgrade
+Increase Stats
+Restore higer %.
+
+Mana Stone
+Bonus Mana
+Bonus Mana regeneration
+Use: Restore a % of your max mana.
+Upgrad
+Increase Stats
+Restore higher % of mana.
+
+Inflitrator Boots
+-Bonus agility
+-Bonus Armor
+-Bonus armor
+-Use: Dash - Increases movement speed for a short period of time.
+Upgrade
+Increases stats
+Dash - Increased movement speed/duration.
+
+Runed Bracers
+-Spell Resistance
+-Use: AMS absorbs spell and magic damage.
+Upgrade 
+Increase Spell Resistance
+Use - Increases damage absorbed.
+
+Tier 3
+----------------------------------------------------
+Summoner Stone
+10 intelligence.
+Passive - Increase life of created units and summons by 50% and increase damage by 50%.
+Use: Restore target unit life to full.
+Upgrade
+Increase stats
+Added Aura Effect
+Use: Restore all units under the effects of summoner stone.
+
+
+=================================
+TANK:
+=================================
+Tier 1:
+----------------------------------------------------
+
+Berserker 
+-Bonus Life Regeneration
+-Use: Berserk - Increases damage taken, increases attack speed. Renders user resistant negative effects.
+Upgrade
+Increase life rengeration
+Increases attack speed
+Increases resistance
+
+Golden Gloves
+-bonus strength
+-bonus armor
+-Use: A powerful Strike which knocks back target and stunning it dealing 25 damage plus 125% of the user's strength. 
+Upgrade
+Increase armor/strength
+Power Bash - Increase stun and damage.
+
+Executioner
+-Bonus Damage
+-Use: Instantly deals 125-375 damage deals 50% more damage to units under 20% life.
+
+Tier 2:
+----------------------------------------------------
+Juggernaut
+-Increases movement speed by a %.
+-Reduces spell and magic damage by a %.
+-Use: Juggernaut - Renders user spell immune for 8-12 seconds.
+Upgrade
+Increase effects.
+
+Gauntlets of Destruction
+-Bonus strength
+-Bonus armor.
+-Use: PowerWave 125-275 damage.
+Upgrade
+Increase stats
+Increase Power Wave Damage.
+
+
+Devastator
+-Bonus strength
+-Use: Shockwave -  Deals 100 +strength siege damage in a line, slowing all enemies by a %.
+
+Tier 3:
+----------------------------------------------------
+Shock Absorber
+-Bonus strength.
+-Bonus armor
+-Use: Stone Wall - Reduce all damage taken by 50-75% for 15 seconds.
+Upgrade
+Increase Stats
+Increase Stone Wall effects.
+
+
+=================================
+Utility Items:
+=================================
+Grenade Launcher - Now can be  upgraded
+Upgrades increase grenade effects.
+
+Pocket Gun - Now can be upgraded.
+Upgrades increase damage/life.
+
+=================================
+Undead Items:
+=================================
+Frost Skull
+-Frost Skill
+Upgrade
+Increase Frost damage.
+
+
+
+
+
+Spiked Armor
+-Returns damage to melee attackers.
+-Bonus armor.
+-Bonus Strength strength.
+-Use: Spiked Wall - Increases armor, returns 50%-100% damage to attackers for 6 seconds.
+
+Protecter
+-Armor
+-Life
+Use: Remove dispellable debuffs.
+
+Eye of Aucria
+-True Shot Aura
+-Increase Damage by 200% reduced attack speed by 100%.
+
+
+Spell Book
+
+
+
+
+
+
+
+
+
+
+
+Support
+Staff of Negation
+-Use: Dispel all magic.
+-Use: Dispel all negative buffs on friendly units, and positive buffs on hostile units.
+
+Frost
+-Use: Frost Shield - Consumes frost effects and turns them into mana.
+-Use: Frost Enhancement - Keep units frosted.
+
+Flame
+-Use: Flame Shield - Converts fire effects and frenzy effects.
+-Use: Flame enhancement - Deals x fire damage per second for each flame effect on target unit.
+
+Poison
+-Use: Poison Ward - Converts poison effects and restoration effects.
+-Use: Poison Enhancement - Deals x Poison damage per second while under the effects of poison.
+Focus
+-Use: Stun Ward - Consumes stun effects
+
+
+
+
+
+
+
+

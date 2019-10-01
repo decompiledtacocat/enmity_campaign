@@ -1,0 +1,141 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil Courier New;}{\f1\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue0;\red0\green136\blue204;\red0\green0\blue128;\red0\green0\blue255;\red128\green0\blue0;\red120\green120\blue120;}
+\viewkind4\uc1\pard\cf1\b\f0\fs18 function \b0 Trig_CrossSlash_Conditions\b  takes \cf2\b0 nothing\cf1\b  returns \cf2\b0 boolean\cf1\b 
+\par \cf3\b0 return\cf1\b   ( \cf3\b0 GetSpellAbilityId\cf1\b () \cf3\b0 ==\cf1\b  \cf4\b0\i 'A054'\cf1\b\i0  )
+\par endfunction\b0 
+\par \b function\b0  Trig_CrossSlash_Actions \b takes\b0  \cf2 nothing\cf1  \b returns\b0  \cf2 nothing
+\par \cf3     local \cf2 unit\cf3  \cf1\f1 caster\cf3\f0 =GetSpellAbilityUnit\cf1\b ()\cf3\b0 
+\par     local \cf2 unit\cf3  \cf1\f1 dummy\cf3\f0 
+\par     local \cf2 unit\cf3  \cf1\f1 dummy2\cf3\f0 
+\par     \f1 local\cf1  \cf2 unit\cf1  target\cf3 =GetSpellTargetUnit\cf1\b ()\cf3\b0\f0 
+\par     local \cf2 player\cf3  \cf1 owner\cf3 =GetOwningPlayer\cf1\b (\b0 caster\b )\cf3\b0 
+\par     local \cf2 location\cf3  \cf1\f1 castloc\cf3\f0  =GetUnitLoc\cf1\b (\b0 airlunit\b )
+\par \cf3\b0     local \cf2 location\cf3  \cf1\f1 targetloc\cf3\f0 =\f1 GetUnitLoc\cf1\b\f0 (\b0\f1 target\b\f0 )\cf3\b0 
+\par     local \cf2 location\cf3  \cf1 p1\cf3 
+\par     local \cf2 location\cf3  \cf1 p2\cf3 
+\par     local \cf2 location\cf3  \cf1 p3\cf3 
+\par     local \cf2 location\cf3  \cf1 p4
+\par     \cf3\f1 local\cf1  \cf2 real\cf1  castangle\cf3 =AngleBetweenPoints\cf1\b (\b0 castloc,targetloc\b )\cf3\b0\f0 
+\par     local \cf2 real\cf3  \cf1 angle\cf3\f1 =\cf1 castangle\cf3 -15\cf1\f0 
+\par \f1     \cf3 local\cf1  \cf2 real\cf1  angle2\cf3 =\cf1 castangle\cf3 +15
+\par     local\cf1  \cf2 location\cf1  start1\cf3 =PolarProjectionBJ\cf1\b (\b0 castloc,\cf3 250\cf1 ,castangle\cf3 +15\cf1\b )\b0 
+\par     \cf3 local\cf1  \cf2 location\cf1  start2\cf3 =PolarProjectionBJ\cf1\b (\b0 castloc,\cf3 250\cf1 ,castangle\cf3 -15\cf1\b )
+\par \b0\f0     \cf3\f1 local\cf1  \cf2 location\cf1  end1\cf3 =PolarProjectionBJ\cf1\b (\b0 start1,\cf3 500\cf1 ,angle\b )\b0 
+\par     \cf3 local\cf1  \cf2 location\cf1  end2\cf3 =PolarProjectionBJ\cf1\b (\b0 start2,\cf3 500\cf1 ,angle2\b )
+\par \b0\f0     \cf3\f1 local\cf1  \cf2 group\cf1  temp
+\par     \cf3 local\cf1  \cf2 unit\cf1  picked
+\par     \cf3 call\cf1  \cf3 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectByIdLoc\cf1\b (\cf4\b0\i 'A054'\cf1\i0  , \cf5 EFFECT_TYPE_CASTER\cf1 , castloc\b ))\b0 
+\par     \cf3 call\cf1  \cf3 ShowUnitHide\cf1\b (\b0 caster\b )\b0\f0 
+\par             \cf3 set\cf1  \f1 dummy\cf3\f0 =CreateUnitAtLoc\cf1\b (\b0  \cf3 Player\cf1\b (\cf3\b0 15\cf1\b )\b0 , \cf3 GetUnitTypeId\cf1\b (\b0 caster\b )\b0 , \f1 start1\f0 , castangle\cf3 +15\cf1\b )
+\par \b0             \cf3 set\cf1  dummy\f1 2\cf3\f0 =CreateUnitAtLoc\cf1\b (\b0  \cf3 Player\cf1\b (\cf3\b0 15\cf1\b )\b0 , \cf3 GetUnitTypeId\cf1\b (\b0 caster\b )\b0 , start\f1 2\f0 , castangle\cf3 -15\cf1\b )\b0 
+\par             \cf3 call\cf1  \cf3 UnitAddAbility\cf1\b (\b0  dummy, \cf4\i 'Aloc'\cf1\i0  \b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitColor\cf1\b (\b0  dummy, \cf3 GetPlayerColor\cf1\b (\b0  \cf3 GetOwningPlayer\cf1\b (\b0 caster\b )\b0  \b )\b0  \b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitVertexColor\cf1\b (\b0 dummy, \cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 127\cf1\b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitVertexColor\cf1\b (\b0 dummy, \cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 63\cf1\b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitTimeScale\cf1\b (\b0  dummy,\cf3 0\cf1\b )
+\par             \cf3\b0 call\cf1  \cf3 UnitAddAbility\cf1\b (\b0  dummy\f1 2\f0 , \cf4\i 'Aloc'\cf1\i0  \b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitColor\cf1\b (\b0  dummy\f1 2\f0 , \cf3 GetPlayerColor\cf1\b (\b0  \cf3 GetOwningPlayer\cf1\b (\b0 caster\b )\b0  \b )\b0  \b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitVertexColor\cf1\b (\b0 dummy\f1 2\f0 , \cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 127\cf1\b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitVertexColor\cf1\b (\b0 dummy\f1 2\f0 , \cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 255\cf1 ,\cf3 63\cf1\b )\b0 
+\par             \cf3 call\cf1  \cf3 SetUnitTimeScale\cf1\b (\b0  dummy\f1 2\f0 ,\cf3 0\cf1\b )
+\par \b0\f1    \cf3 call\cf1  \cf3 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectTargetById\cf1\b (\cf4\b0\i 'A054' \cf1\i0 , \cf5 EFFECT_TYPE_SPECIAL\cf1 , dummy,\cf4\i "weapon"\cf1\b\i0 ))
+\par \b0\f0    \cf3 call\cf1  \cf3 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectTargetById\cf1\b (\cf4\b0\i 'A054'\cf1\i0  , \cf5 EFFECT_TYPE_SPECIAL\cf1 , dummy\f1 2\f0 ,\cf4\i "weapon"\cf1\b\i0 ))
+\par \b0\f1    \cf3\f0 call\cf1  \cf3 SetUnitAnimation\cf1\b (\b0 dummy, \cf4\i "attack"\cf1\i0  \b )
+\par    \cf3\b0 call\cf1  \cf3 SetUnitAnimation\cf1\b (\b0 dummy\f1 2\f0 , \cf4\i "attack"\cf1\i0  \b )
+\par \b0    \cf3 call\cf1  \cf3 SetUnitPositionLoc\cf1\b (\b0\f1 dummy\f0 ,end1\b )
+\par \b0    \cf3 call\cf1  \cf3 SetUnitPositionLoc\cf1\b (\b0 dummy\f1 2\f0 ,end2\b )
+\par    
+\par \b0    \cf3 set\cf1  p1\cf3 =PolarProjectionBJ\cf1\b (\b0 start1, \cf3 100.00\cf1 ,  angle \cf3 +\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \cf3 set\cf1  p2\cf3 =PolarProjectionBJ\cf1\b (\b0 end1, \cf3 100.00\cf1 , angle \cf3 +\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \cf3 set\cf1  p3\cf3 =PolarProjectionBJ\cf1\b (\b0 end1, \cf3 100.00\cf1 , angle \cf3 -\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \b s\cf3\b0 et\cf1  p4\cf3 =PolarProjectionBJ\cf1\b (\b0 start1, \cf3 100.00\cf1 , angle \cf3 -\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \cf3 set\cf1  udg_tempfilterplayer\cf3 =\cf5 null\cf1 
+\par    \cf3 set\cf1  udg_tempfilterplayer\cf3 =\cf1\f1 owner\f0 
+\par    \cf3 call\cf1  GroupEnumUnitsInQuad\b (\b0 temp,p1,p2,p3,p4, \cf3 Condition\cf1\b (\b0  \b function\b0  filtercheck \b ))\b0 
+\par     \b loop\b0 
+\par       \cf3 set\cf1  picked\cf3 =FirstOfGroup\cf1\b (\b0 temp\b )\b0 
+\par       \cf3 exitwhen\cf1  picked\cf3 ==\cf5 null\cf1 
+\par       \cf3 set\cf1  udg_tempecheckunit\cf3 =\cf5 null\cf1 
+\par       \cf3 set\cf1  udg_tempecheckunit\cf3 =\cf1 picked
+\par       \b if\b0  \b (\b0 etherealcheck\b ())\b0  \b then\b0 
+\par       \cf3 call\cf1  UnitDamageTargetBJ\b (\b0\f1 caster\f0 , picked, damage , ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL \b )\b0 
+\par     \b  \b0  \b else\b0 
+\par       \cf3 call\cf1  UnitDamageTargetBJ\b (\b0 caster, picked, damage , ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL \b )\b0 
+\par       \b endif\b0 
+\par       \cf3 call\cf1  \cf3 GroupRemoveUnit\cf1\b (\b0 temp,picked\b )\b0 
+\par       \cf3 set\cf1  picked\cf3 =\cf5 null\cf1 
+\par     \b endloop\b0 
+\par     \cf3 call\cf1  \cf3 DestroyGroup\cf1\b (\b0 temp\b )\b0 
+\par     \cf3 set\cf1  temp\cf3 =\cf5 null\cf1 
+\par \cf3\f1 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p1\b )\b0\f0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p\f1 2\b\f0 )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p\f1 3\b\f0 )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p\f1 4\b\f0 )\b0 
+\par    \cf3 set\cf1  p1\cf3 =PolarProjectionBJ\cf1\b (\b0 start\f1 2\f0 , \cf3 100.00\cf1 ,  angle \cf3 +\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \cf3 set\cf1  p2\cf3 =PolarProjectionBJ\cf1\b (\b0 end\f1 2\f0 , \cf3 100.00\cf1 , angle \cf3 +\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \cf3 set\cf1  p3\cf3 =PolarProjectionBJ\cf1\b (\b0 end\f1 2\f0 , \cf3 100.00\cf1 , angle \cf3 -\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \cf3 set\cf1  p4\cf3 =PolarProjectionBJ\cf1\b (\b0 start\f1 2\f0 , \cf3 100.00\cf1 , angle \cf3 -\cf1  \cf3 90.00\cf1  \b )\b0 
+\par    \cf3 set\cf1  udg_tempfilterplayer\cf3 =\cf5 null\cf1 
+\par    \cf3 set\cf1  udg_tempfilterplayer\cf3 =\cf1 owner
+\par    call GroupEnumUnitsInQuad(temp,p1,p2,p3,p4, Condition( function filtercheck ))
+\par     loop
+\par       set picked=FirstOfGroup(temp)
+\par       exitwhen picked==null
+\par       set udg_tempecheckunit=null
+\par       set udg_tempecheckunit=picked
+\par       if (etherealcheck()) then
+\par       call UnitDamageTargetBJ(caster, picked, damage , ATTACK_TYPE_MAGIC, DAMAGE_TYPE_NORMAL )
+\par       else
+\par       call UnitDamageTargetBJ(caster, picked, damage , ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL )
+\par       endif
+\par       call GroupRemoveUnit(temp,picked)
+\par       \cf3 set\cf1  picked\cf3 =\cf5 null\cf1 
+\par     \b endloop\b0 
+\par     call DestroyGroup(temp)
+\par     \cf3 set\cf1  temp\cf3 =\cf5 null\cf1 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p1\b )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p2\b )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p3\b )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 p4\b )
+\par \cf3\b0\f1 set\cf1  p1\cf3 =\cf5 null\cf1 
+\par \cf3\f0 set\cf1\b  \b0 p\f1 2\cf3\f0 =\cf5 null\cf1 
+\par \cf3 set\cf1  p\f1 3\cf3\f0 =\cf5 null\cf1 
+\par \cf3 set\cf1  p\f1 4\cf3\f0 =\cf5 null\cf1 
+\par \b 
+\par \cf3\b0\f1 call\cf1  PolledWait2\b (\b0 .5\b )
+\par \cf3\b0 call\cf1  \cf3 DestroyEffect\cf1\b (\cf3\b0 AddSpellEffectByIdLoc\cf1\b (\cf4\b0\i 'A054'\cf1\i0  , \cf5 EFFECT_TYPE_CASTER\cf1 , castloc\b ))
+\par \cf3\b0 call\cf1  \cf3 ShowUnitShow\cf1\b (\b0 caster\b )\b0 
+\par 
+\par \cf3 call\cf1  \cf3 RemoveUnit\cf1\b (\b0 dummy1\b )\b0 
+\par \cf3\f0 call\cf1  \cf3 RemoveUnit\cf1\b (\b0 dummy\f1 2\b\f0 )
+\par \cf3\b0\f1 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 start1\b )\b0 
+\par \cf3\f0 call\cf1  \cf3 RemoveLocation\cf1\b (\b0 start\f1 2\b\f0 )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0\f1 end1\b\f0 )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0\f1 end2\b\f0 )
+\par \cf3\b0 call\cf1  \cf3 RemoveLocation\cf1\b (\b0\f1 castloc\b\f0 )\b0 
+\par \cf3 call\cf1  \cf3 RemoveLocation\cf1\b (\b0\f1 targetloc\b\f0 )\b0 
+\par \cf3\f1 set\cf1  dummy1\cf3 =\cf5 null\cf1 
+\par \cf3\f0 set\cf1  dummy\f1 2\cf3\f0 =\cf5 null\cf1 
+\par \cf3\f1 set\cf1\f0  start1\cf3 =\cf5 null\cf1 
+\par \cf3 set\cf1   start2\cf3 =\cf5 null\cf1 
+\par \cf3 set\cf1   end1\cf3 =\cf5 null\cf1 
+\par \cf3 set \cf1 end2\cf3 =\cf5 null\cf1 
+\par \cf3 set\cf1   caster\cf3 =\cf5 null\cf1 
+\par \cf3 set\cf1  target\cf3 =\cf5 null\cf1 
+\par \cf3 set\cf1   owner\cf3 =\cf5 null\cf1 
+\par \cf3 set  \cf1 castloc\cf3  =\cf5 null\cf1 
+\par \cf3 set\cf1   targetloc\cf3 =\cf5 null\cf1 
+\par 
+\par \b endfunction\b0 
+\par 
+\par \cf6\i //===========================================================================\cf1\i0 
+\par \b function\b0  InitTrig_CrossSlash \b takes\b0  \cf2 nothing\cf1  \b returns\b0  \cf2 nothing\cf1 
+\par     \cf3 set\cf1  gg_trg_CrossSlash \cf3 =\cf1  \cf3 CreateTrigger\cf1\b (\b0   \b )\b0 
+\par     \cf3 call\cf1  \cf3 TriggerRegisterAnyUnitEventBJ\cf1\b (\b0  gg_trg_CrossSlash, \cf5 EVENT_PLAYER_UNIT_SPELL_EFFECT\cf1  \b )\b0 
+\par     \cf3 call\cf1  \cf3 TriggerAddCondition\cf1\b (\b0  gg_trg_CrossSlash, \cf3 Condition\cf1\b (\b0  \b function\b0  Trig_CrossSlash_Conditions \b )\b0  \b )\b0 
+\par     \cf3 call\cf1  \cf3 TriggerAddAction\cf1\b (\b0  gg_trg_CrossSlash, \b function\b0  Trig_CrossSlash_Actions \b )\b0 
+\par \b endfunction\b0 
+\par 
+\par \cf0 
+\par }
+ 

@@ -1,0 +1,38 @@
+function EternalDarknessConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A00U' ) 
+endfunction
+function EternalDarknessActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local integer level=GetUnitAbilityLevelSwapped('A00U', caster) 
+local integer casted=0
+if (GetUnitAbilityLevel(caster,'A00H')>0) then
+set casted=1
+else
+call UnitAddAbility(caster,'A00H')
+call UnitAddAbility(caster,'A00L')
+endif 
+call SetUnitMoveSpeed(caster, (GetUnitDefaultMoveSpeed(caster)+30*level) )
+call SetUnitAbilityLevelSwapped('A00H',caster,level)
+call SetUnitAbilityLevelSwapped('A00L',caster, level)
+if casted==1 then 
+set caster=null
+return
+endif 
+call PolledWait2(2.0)
+loop
+exitwhen GetTimeOfDay()!=0
+call PolledWait2(1.0)
+endloop 
+call SetUnitMoveSpeed(caster, GetUnitDefaultMoveSpeed(caster))
+call UnitRemoveAbility(caster,'A00H')
+call UnitRemoveAbility(caster,'A00L')
+set caster=null
+endfunction
+//===========================================================================
+function InitTrig_Eternal_Darkness takes nothing returns nothing
+    set gg_trg_Eternal_Darkness = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Eternal_Darkness, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Eternal_Darkness, Condition( function EternalDarknessConditions ) )
+    call TriggerAddAction( gg_trg_Eternal_Darkness, function EternalDarknessActions )
+endfunction
+

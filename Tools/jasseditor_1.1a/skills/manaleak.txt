@@ -1,0 +1,53 @@
+function ManaLeakConditions takes nothing returns boolean
+return GetSpellAbilityId()=='A0HU'
+endfunction
+
+function ManaLeakDamageActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local real mana=GetUnitState(caster,UNIT_STATE_MANA)
+local integer level=GetHandleInt(GetTriggeringTrigger(),"level")
+local real damage=.25*level
+local real newmana
+if GetBooleanOr(UnitHasBuffBJ(GetSpellAbilityUnit(), 'B03H') == false,GetTriggerEventId()== EVENT_UNIT_DEATH) then
+set caster=null
+call FlushHandleLocals(GetTriggeringTrigger())
+call DestroyTrigger(GetTriggeringTrigger())
+else
+call TriggerSleepAction(0)
+set newmana=mana-GetUnitState(caster,UNIT_STATE_MANA)
+if  newmana>0 then
+   if newmana*damage>=GetUnitState(caster,UNIT_STATE_MANA) then
+   set newmana=GetUnitState(caster,UNIT_STATE_MANA)
+   call SetUnitState(caster,UNIT_STATE_MANA,0)
+   else
+   call SetUnitState(caster,UNIT_STATE_MANA,GetUnitState(caster,UNIT_STATE_MANA)-newmana*damage)
+   set newmana=newmana*damage
+   endif
+call FadingText("-"+ I2S(R2I(newmana)),82,82,255,GetUnitX(caster),GetUnitY(caster))
+endif
+endif
+set caster=null
+endfunction
+
+function ManaLeakActions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local trigger t=CreateTrigger()
+call SetHandleInt(t,"level",GetUnitAbilityLevel(caster,'A0HU'))
+call TriggerRegisterUnitEvent(t, target, EVENT_UNIT_SPELL_EFFECT )
+call TriggerRegisterUnitEvent(t, target, EVENT_UNIT_DEATH )
+call TriggerAddAction(t, function ManaLeakDamageActions )
+set caster=null
+set target=null
+set t=null
+endfunction
+
+
+//===========================================================================
+function InitTrig_ManaLeak takes nothing returns nothing
+    set gg_trg_ManaLeak = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ManaLeak, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_ManaLeak, Condition( function ManaLeakConditions ) )
+    call TriggerAddAction( gg_trg_ManaLeak, function ManaLeakActions )
+endfunction
+

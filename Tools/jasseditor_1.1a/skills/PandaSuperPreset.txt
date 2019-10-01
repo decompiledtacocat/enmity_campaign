@@ -1,0 +1,19 @@
+function SuperPresetConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0AR' ) 
+endfunction
+function SuperPresetActions takes nothing returns nothing
+local unit panda=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+call SetHandleHandle(panda,"super",target)
+set target=null
+set panda=null
+endfunction
+
+//===========================================================================
+function InitTrig_SuperPreset takes nothing returns nothing
+    set gg_trg_SuperPreset = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SuperPreset, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SuperPreset, Condition( function SuperPresetConditions ) )
+    call TriggerAddAction( gg_trg_SuperPreset, function SuperPresetActions )
+endfunction
+

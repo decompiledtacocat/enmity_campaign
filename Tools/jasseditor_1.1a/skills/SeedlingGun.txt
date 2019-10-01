@@ -1,0 +1,35 @@
+function SeedlingGunConditions  takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A09N' )
+endfunction
+function SeedlingGunActions takes nothing returns nothing
+    local unit scaster=GetSpellAbilityUnit()
+    local unit starget= GetSpellTargetUnit()
+    local unit seedshooter
+    local unit oldshooter
+    local player splayer=GetOwningPlayer(scaster)
+    local location sloc =GetUnitLoc(scaster)
+    local integer smaxshot= ( 4 * GetUnitAbilityLevelSwapped('A09N', scaster) ) 
+    set seedshooter=CreateUnitAtLoc( splayer, 'u019', sloc, bj_UNIT_FACING )
+    call SetUnitVertexColorBJ( seedshooter, 100, 100, 100, 100.00 )
+    call SetUnitAbilityLevelSwapped( 'A09U',seedshooter, GetHeroLevel(scaster) )
+    call IssueTargetOrderBJ( seedshooter, "attack", starget)
+    call SetHandleInt(seedshooter, "maxshot", smaxshot)
+    call SetHandleInt(seedshooter, "shotcount", 1)
+    call SetHandleHandle(seedshooter, "shooter", seedshooter)
+    call SetHandleHandle(seedshooter, "target", starget)
+    call RemoveLocation(sloc) 
+    set sloc=null 
+    set scaster=null
+    set starget=null
+    set seedshooter=null
+    set oldshooter=null
+    set splayer=null
+endfunction
+//===========================================================================
+function InitTrig_SeedlingGun takes nothing returns nothing
+    set gg_trg_SeedlingGun = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SeedlingGun, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_SeedlingGun, Condition( function SeedlingGunConditions ) )
+    call TriggerAddAction( gg_trg_SeedlingGun, function SeedlingGunActions)
+endfunction
+

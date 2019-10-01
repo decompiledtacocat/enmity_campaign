@@ -1,0 +1,171 @@
+==============================================================================
+Exe:      C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+Time:     Feb  2, 2005  2:03:40.000 PM
+User:     TekkVicious
+Computer: TEKKZ
+------------------------------------------------------------------------------
+
+This application has encountered a critical error:
+
+Not enough storage is available to process this command.
+
+Program:	C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+Object:	HGEOSET (.PAUHGEOSET__@@)
+
+
+
+------------------------------------------------------------------------------
+
+----------------------------------------
+    Stack Trace (Using DBGHELP.DLL)
+----------------------------------------
+
+150227FB storm.dll    Ordinal405+411 (0xFFFFFFFF,0x239D3100,0x6F6B2648,0xFFFFFFFE)
+6F024EF7 GAME.DLL     <unknown symbol>+0 (0x08E74C40,0x0012324C,0x00000000,0x093E01E8)
+6F02763C GAME.DLL     <unknown symbol>+0 (0x0012324C,0x093E01E8,0x00000000,0x0012324C)
+6F027BB2 GAME.DLL     <unknown symbol>+0 (0x0012324C,0x0012F5C0,0x007699C8,0x08E7238C)
+6F02270A GAME.DLL     <unknown symbol>+0 (0x08E74FB4,0x0070C22D,0x0070C20C,0x0070C321)
+0072DFE8 War3FileConverter.exe +168140 (0x08E74FB4,0x0012F94C,0x08E74FB4,0x0072DC9B)
+0070C1A1 War3FileConverter.exe +29317 (0x00650142,0x0012F9C4,0x08E74878,0x0012F94C)
+00730A44 War3FileConverter.exe +178984 (0x0012F928,0x0073052F,0x0012F944,0x0012F9E0)
+00730517 War3FileConverter.exe +177659 (0x00000111,0x00000142,0x00650142,0x00000000)
+0071CF9E War3FileConverter.exe +98434 (0x004B00EC,0x00000111,0x00000142,0x00650142)
+77D48709 USER32.dll   GetDC+114 (0x08FC0FAE,0x004B00EC,0x00000111,0x00000142)
+77D487EB USER32.dll   GetDC+340 (0x00000000,0x08FC0FAE,0x004B00EC,0x00000111)
+77D4B743 USER32.dll   GetParent+364 (0x008464E0,0x007E5FE0,0x00000142,0x00650142)
+77D4B7AB USER32.dll   SendMessageW+73 (0x004B00EC,0x00000111,0x00000142,0x00650142)
+77D7FC9D USER32.dll   CreateMDIWindowA+445 (0x007BD4D8,0x00000000,0x007BD4D8,0x0015500C)
+77D76530 USER32.dll   GetClipboardFormatNameA+25067 (0x0015500C,0x00000001,0x00000000,0x0012FB8C)
+77D58386 USER32.dll   IsCharAlphaA+3451 (0x007BD4D8,0x00000202,0x00000000,0x0008004D)
+77D5887A USER32.dll   IsCharAlphaA+4719 (0x00650142,0x00000202,0x00000000,0x0008004D)
+77D48709 USER32.dll   GetDC+114 (0x77D5882E,0x00650142,0x00000202,0x00000000)
+77D487EB USER32.dll   GetDC+340 (0x00000000,0x77D5882E,0x00650142,0x00000202)
+77D4C00E USER32.dll   DestroyCaret+94 (0x77D5882E,0x00650142,0x00000202,0x00000000)
+77D4E366 USER32.dll   CallWindowProcA+27 (0x77D5882E,0x00650142,0x00000202,0x00000000)
+007309EF War3FileConverter.exe +178899 (0x0012FE5C,0x08FC0F94,0x08E74FB4,0x00730517)
+0070C1A1 War3FileConverter.exe +29317 (0x00000202,0x00000000,0x0008004D,0x00000000)
+0071CF9E War3FileConverter.exe +98434 (0x00650142,0x00000202,0x00000000,0x0008004D)
+77D48709 USER32.dll   GetDC+114 (0x08FC0F94,0x00650142,0x00000202,0x00000000)
+77D487EB USER32.dll   GetDC+340 (0x00000000,0x08FC0F94,0x00650142,0x00000202)
+77D489A5 USER32.dll   GetWindowLongW+295 (0x0012FF18,0x00000001,0x0012FF4C,0x007258E0)
+77D4BCCC USER32.dll   DispatchMessageA+15 (0x0012FF18,0x0012FF00,0x00000000,0x00765328)
+007258E0 War3FileConverter.exe +133572 (0x00000000,0x00765328,0x0014246E,0x0012FFB0)
+0070130B War3FileConverter.exe _GetExceptDLLinfo+690 (0x00700000,0x00000000,0x0014246E,0x00000001)
+0075F4DB War3FileConverter.exe +370111 (0x00765328,0x7C816D4F,0x00370038,0x00350036)
+
+
+----------------------------------------
+    Stack Trace (Manual)
+----------------------------------------
+
+Address  Frame    Logical addr  Module
+
+150227FB 001231B8 0001:000217FB C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\storm.dll
+6F024EF7 001231E0 0001:00023EF7 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\GAME.DLL
+6F02763C 001231F8 0001:0002663C C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\GAME.DLL
+6F027BB2 00123220 0001:00026BB2 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\GAME.DLL
+6F02270A 0012F628 0001:0002170A C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\GAME.DLL
+0072DFE8 0012F784 0001:0002CFE8 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+0070C1A1 0012F7B0 0001:0000B1A1 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+00730A44 0012F914 0001:0002FA44 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+00730517 0012F944 0001:0002F517 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+0071CF9E 0012F95C 0001:0001BF9E C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+77D48709 0012F988 0001:00007709 C:\WINDOWS\system32\USER32.dll
+77D487EB 0012F9F0 0001:000077EB C:\WINDOWS\system32\USER32.dll
+77D4B743 0012FA2C 0001:0000A743 C:\WINDOWS\system32\USER32.dll
+77D4B7AB 0012FA4C 0001:0000A7AB C:\WINDOWS\system32\USER32.dll
+77D7FC9D 0012FA64 0001:0003EC9D C:\WINDOWS\system32\USER32.dll
+77D76530 0012FA80 0001:00035530 C:\WINDOWS\system32\USER32.dll
+77D58386 0012FB04 0001:00017386 C:\WINDOWS\system32\USER32.dll
+77D5887A 0012FB24 0001:0001787A C:\WINDOWS\system32\USER32.dll
+77D48709 0012FB50 0001:00007709 C:\WINDOWS\system32\USER32.dll
+77D487EB 0012FBB8 0001:000077EB C:\WINDOWS\system32\USER32.dll
+77D4C00E 0012FBE8 0001:0000B00E C:\WINDOWS\system32\USER32.dll
+77D4E366 0012FC08 0001:0000D366 C:\WINDOWS\system32\USER32.dll
+007309EF 0012FD9C 0001:0002F9EF C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+0070C1A1 0012FDDC 0001:0000B1A1 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+0071CF9E 0012FDF4 0001:0001BF9E C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+77D48709 0012FE20 0001:00007709 C:\WINDOWS\system32\USER32.dll
+77D487EB 0012FE88 0001:000077EB C:\WINDOWS\system32\USER32.dll
+77D489A5 0012FEE8 0001:000079A5 C:\WINDOWS\system32\USER32.dll
+77D4BCCC 0012FEF8 0001:0000ACCC C:\WINDOWS\system32\USER32.dll
+007258E0 0012FF4C 0001:000248E0 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+0070130B 0012FF88 0001:0000030B C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+0075F4DB 0012FFB8 0001:0005E4DB C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+00000000 0012FFF0 0000:00000000 C:\Documents and Settings\TekkVicious\Desktop\map\War3FileConverter\War3FileConverter\War3FileConverter.exe
+
+----------------------------------------
+    Memory Dump
+----------------------------------------
+
+Stack: 1024 bytes starting at (ESP = 00122238)
+
+* = addr                            **                                *       
+00122230: 4B 1B 00 15  38 22 12 00  00 00 00 00  19 26 12 00  K...8".......&..
+00122240: 58 22 00 00  2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  X"..------------
+00122250: 2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  ----------------
+00122260: 2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  ----------------
+00122270: 2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  ----------------
+00122280: 2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  2D 2D 2D 2D  ----------------
+00122290: 2D 2D 00 00  43 3A 5C 44  6F 63 75 6D  65 6E 74 73  --..C:\Documents
+001222A0: 20 61 6E 64  20 53 65 74  74 69 6E 67  73 5C 54 65   and Settings\Te
+001222B0: 6B 6B 56 69  63 69 6F 75  73 5C 44 65  73 6B 74 6F  kkVicious\Deskto
+001222C0: 70 5C 6D 61  70 5C 57 61  72 33 46 69  6C 65 43 6F  p\map\War3FileCo
+001222D0: 6E 76 65 72  74 65 72 5C  57 61 72 33  46 69 6C 65  nverter\War3File
+001222E0: 43 6F 6E 76  65 72 74 65  72 5C 57 61  72 33 46 69  Converter\War3Fi
+001222F0: 6C 65 43 6F  6E 76 65 72  74 65 72 2E  65 78 65 00  leConverter.exe.
+00122300: 00 00 00 00  00 00 00 00  03 00 00 00  B8 FF 12 00  ................
+00122310: 00 00 00 00  03 00 00 00  38 22 12 00  00 00 00 00  ........8"......
+00122320: 03 00 00 00  00 00 00 00  28 53 76 00  4F 6D 81 7C  ........(Sv.Om.|
+00122330: 38 00 37 00  36 00 35 00  00 00 00 00  01 00 00 00  8.7.6.5.........
+00122340: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122350: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122360: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122370: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122380: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122390: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+001223A0: 38 22 12 00  4B 1B 00 15  23 00 00 00  01 00 2E 00  8"..K...#.......
+001223B0: 24 31 12 00  E4 56 01 15  00 00 00 00  03 00 00 00  $1...V..........
+001223C0: 00 00 00 00  00 00 00 00  C0 31 12 00  00 00 66 09  .........1....f.
+001223D0: 20 00 00 00  CA A7 AD 78  B8 F7 C4 01  6E 91 EC E7   ......x....n...
+001223E0: 51 09 C5 01  00 1E D0 2B  86 37 C2 01  00 00 00 00  Q......+.7......
+001223F0: 00 32 07 00  7E 00 10 01  04 00 00 00  57 61 72 33  .2..~.......War3
+00122400: 46 69 6C 65  43 6F 6E 76  65 72 74 65  72 2E 65 78  FileConverter.ex
+00122410: 65 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  e...............
+00122420: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122430: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122440: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122450: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122460: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122470: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122480: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122490: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+001224A0: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+001224B0: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+001224C0: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+001224D0: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+001224E0: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+001224F0: 00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00  ................
+00122500: 57 41 52 33  46 49 7E 31  2E 45 58 45  00 00 00 00  WAR3FI~1.EXE....
+00122510: 54 68 69 73  20 61 70 70  6C 69 63 61  74 69 6F 6E  This application
+00122520: 20 68 61 73  20 65 6E 63  6F 75 6E 74  65 72 65 64   has encountered
+00122530: 20 61 20 63  72 69 74 69  63 61 6C 20  65 72 72 6F   a critical erro
+00122540: 72 3A 0A 0A  4E 6F 74 20  65 6E 6F 75  67 68 20 73  r:..Not enough s
+00122550: 74 6F 72 61  67 65 20 69  73 20 61 76  61 69 6C 61  torage is availa
+00122560: 62 6C 65 20  74 6F 20 70  72 6F 63 65  73 73 20 74  ble to process t
+00122570: 68 69 73 20  63 6F 6D 6D  61 6E 64 2E  0D 0A 0A 50  his command....P
+00122580: 72 6F 67 72  61 6D 3A 09  43 3A 5C 44  6F 63 75 6D  rogram:.C:\Docum
+00122590: 65 6E 74 73  20 61 6E 64  20 53 65 74  74 69 6E 67  ents and Setting
+001225A0: 73 5C 54 65  6B 6B 56 69  63 69 6F 75  73 5C 44 65  s\TekkVicious\De
+001225B0: 73 6B 74 6F  70 5C 6D 61  70 5C 57 61  72 33 46 69  sktop\map\War3Fi
+001225C0: 6C 65 43 6F  6E 76 65 72  74 65 72 5C  57 61 72 33  leConverter\War3
+001225D0: 46 69 6C 65  43 6F 6E 76  65 72 74 65  72 5C 57 61  FileConverter\Wa
+001225E0: 72 33 46 69  6C 65 43 6F  6E 76 65 72  74 65 72 2E  r3FileConverter.
+001225F0: 65 78 65 0A  4F 62 6A 65  63 74 3A 09  48 47 45 4F  exe.Object:.HGEO
+00122600: 53 45 54 20  28 2E 50 41  55 48 47 45  4F 53 45 54  SET (.PAUHGEOSET
+00122610: 5F 5F 40 40  29 0A 0A 0A  0A 00 00 00  01 00 00 00  __@@)...........
+00122620: 00 00 00 00  00 00 00 00  10 00 00 00  00 00 00 00  ................
+00122630: 98 26 12 00  01 00 00 00  00 00 00 00  00 00 00 00  .&..............
+
+
+------------------------------------------------------------------------------

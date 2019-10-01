@@ -1,0 +1,81 @@
+function Trig_DeathPact_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0DF' )
+endfunction
+
+function DeathPactHeal takes nothing returns nothing
+local unit target=GetTriggerUnit()
+local unit caster=GetHandleUnit(target,"deathpactcaster")
+local real damage=GetEventDamage()
+local integer level=GetHandleInt(GetTriggeringTrigger(),"deathpactlevel")
+local effect fx
+local effect fx2
+
+if UnitHasBuffBJ(target,'B02A')==true then
+  if damage >0 then
+  call SetUnitLifeBJ(caster,GetUnitState(caster,UNIT_STATE_LIFE)+damage*(1*level))
+  set fx=AddSpecialEffectTarget("Abilities\\Spells\\Undead\\DeathPact\\DeathPactTarget.mdl",target,"chest")
+  set fx2=AddSpecialEffectTarget("Abilities\\Spells\\Undead\\DeathPact\\DeathPactCaster.mdl",caster,"chest")
+  call TriggerSleepAction(.5)
+  call DestroyEffect(fx)
+  set fx=null
+  call DestroyEffect(fx2)
+  set fx2=null
+  endif
+else
+call FlushHandleLocals(GetTriggeringTrigger())
+call DestroyTrigger(GetTriggeringTrigger())
+endif
+set caster=null
+set target=null
+endfunction
+
+function Trig_DeathPact_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local integer level=GetUnitAbilityLevel(caster,'A0DF')
+local trigger t
+local trigger o=GetHandleTrigger(caster,"deathpacttrigger")
+local unit old=GetHandleUnit(o,"deathpacttarget")
+local unit oldcaster=GetHandleUnit(target,"deathpactcaster")
+if old!=null then
+if UnitHasBuffBJ(old,'B02A')==true then
+call UnitRemoveBuffBJ('B02A',old)
+endif
+call FlushHandleLocals(o)
+call DestroyTrigger(o)
+call SetHandleHandle(caster,"deathpacttrigger",null)
+set old=null
+set o=null
+endif
+if oldcaster!=null then
+if UnitHasBuffBJ(target,'B02A')==true then
+call UnitRemoveBuffBJ('B02A',target)
+endif
+set o=GetHandleTrigger(oldcaster,"deathpacttrigger")
+call SetHandleHandle(target,"deathpactcaster",null)
+call FlushHandleLocals(o)
+call DestroyTrigger(o)
+set old=null
+set o=null
+endif
+
+set t=CreateTrigger()
+call SetHandleHandle(target,"deathpactcaster",caster)
+call SetHandleHandle(caster,"deathpacttrigger",t)
+call SetHandleHandle(t,"deathpactcaster",caster)
+call SetHandleInt(t,"deathpactlevel",level)
+call TriggerAddAction(t, function DeathPactHeal )
+call TriggerRegisterUnitEvent( t, target, EVENT_UNIT_DAMAGED )
+set caster=null
+set target=null
+set old=null
+endfunction
+
+//===========================================================================
+function InitTrig_DeathPact takes nothing returns nothing
+    set gg_trg_DeathPact = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DeathPact, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DeathPact, Condition( function Trig_DeathPact_Conditions ) )
+    call TriggerAddAction( gg_trg_DeathPact, function Trig_DeathPact_Actions )
+endfunction
+

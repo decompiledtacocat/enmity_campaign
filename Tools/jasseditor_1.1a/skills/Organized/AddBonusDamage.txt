@@ -1,0 +1,68 @@
+function SetDamageBonusLevel takes unit caster, integer bonus, integer level returns nothing
+local integer id
+if bonus == 1 then
+set id='A00H'
+elseif bonus == 2 then
+set id='A05J'
+elseif bonus == 3 then
+set id='A067'
+endif 
+if level<=0 then
+  if GetUnitAbilityLevel(caster,id)>0 then
+  call UnitRemoveAbility(caster,id)
+  endif
+else
+  if GetUnitAbilityLevel(caster,id)<=0 then
+  call UnitAddAbility(caster,id)
+  endif
+  call SetUnitAbilityLevel(caster,id,level)
+endif
+set caster=null
+endfunction
+
+function GetCurrentBonusDamage takes unit caster returns integer
+local integer one=GetUnitAbilityLevel(caster,'A00H')
+local integer two=GetUnitAbilityLevel(caster,'A05J')*10
+local integer three=GetUnitAbilityLevel(caster,'A067')*100
+return one+two+three
+endfunction
+
+function SetBonusDamage takes unit caster, integer damage, boolean add returns nothing
+//1-9 A00H
+//10-90 A05J
+//100-1000 A067
+local integer one
+local integer two
+local integer three
+local integer bonus=GetCurrentBonusDamage(caster)
+
+if damage >999 then
+set damage=999
+endif
+set one=ModuloInteger(damage,10)
+set two=ModuloInteger(damage/10,10)
+set three=ModuloInteger(damage/100,10)
+
+if add==false then
+call SetDamageBonusLevel(caster,1,one) 
+call SetDamageBonusLevel(caster,2,two) 
+call SetDamageBonusLevel(caster,3,three) 
+else
+call SetDamageBonusLevel(caster,1,one+bonus)
+call SetDamageBonusLevel(caster,2,two+bonus)
+call SetDamageBonusLevel(caster,3,three+bonus)
+endif
+set caster=null
+endfunction
+function RemoveBonusDamage takes unit caster returns nothing
+call SetBonusDamage(caster,0,false)
+set caster=null
+endfunction
+
+function SpellEffectUnit takes unit caster, integer abl,effecttype t,string attachPoint returns nothing
+call DestroyEffect(AddSpellEffectTargetById(abl , t,caster,attachPoint))
+endfunction
+
+function SpellEffectXY takes  integer abl,effecttype t,real x, real y returns nothing
+call DestroyEffect(AddSpellEffectById(abl , t,x,y))
+endfunction

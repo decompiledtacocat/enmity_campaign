@@ -1,0 +1,36 @@
+function Trig_HolyStrike_Func001001 takes nothing returns boolean
+return  GetBooleanAnd(GetBooleanAnd( UnitHasItemOfTypeBJ(GetAttacker(), 'I043') == true,IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_UNDEAD) == true),IsUnitType(GetAttacker(), UNIT_TYPE_MELEE_ATTACKER) == true)
+endfunction
+
+function Trig_HolyStrike_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local player owner=GetOwningPlayer(caster)
+local unit target=GetAttackedUnitBJ()
+local location targetloc=GetUnitLoc(target)
+local unit rabbit
+
+        if ( GetRandomInt(1, 100) <= 20 ) then
+            call TriggerSleepAction(0)
+            set rabbit=CreateRabbit(owner,targetloc)
+            if (IsUnitIllusionBJ(GetAttacker()) == false) then
+              call UnitAddAbility(rabbit,'A0EK')
+            else
+              call UnitAddAbility(rabbit,'A0EL')
+            endif
+            call IssueTargetOrder(rabbit,"holybolt",target)
+        endif
+call RemoveLocation(targetloc)
+set targetloc=null
+set owner=null
+set caster=null
+
+endfunction
+
+//===========================================================================
+function InitTrig_HolyStrike takes nothing returns nothing
+    set gg_trg_HolyStrike = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_HolyStrike, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_HolyStrike, Condition( function Trig_HolyStrike_Conditions ) )
+    call TriggerAddAction( gg_trg_HolyStrike, function Trig_HolyStrike_Actions )
+endfunction
+

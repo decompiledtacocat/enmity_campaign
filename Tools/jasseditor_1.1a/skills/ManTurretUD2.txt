@@ -1,0 +1,83 @@
+function ManTurretUDConditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanAnd(( IsUnitIllusionBJ(GetEnteringUnit()) == false ), ( IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) == true )),( IsUnitAlly(GetEnteringUnit(), Player(6)) == true ))
+endfunction
+function ManTurretUDFilter  takes nothing returns boolean
+return  GetBooleanAnd((GetOwningPlayer(GetFilterUnit()) == Player(PLAYER_NEUTRAL_PASSIVE) ),GetBooleanOr(( GetUnitTypeId(GetFilterUnit()) == 'h00M' ),( GetUnitTypeId(GetFilterUnit()) == 'h00L' )) )
+endfunction
+function ManTurretUDActions takes nothing returns nothing
+    local unit pickedunit
+    local unit enteringunit=GetEnteringUnit()
+    local player mplayer=GetOwningPlayer(enteringunit)
+    local rect entered
+    local group turretgroup
+   if  RectContainsUnit(gg_rct_Spire1,enteringunit) then
+     set entered=gg_rct_Spire1
+   elseif RectContainsUnit(gg_rct_Spire2,enteringunit) then
+     set entered=gg_rct_Spire2
+   elseif RectContainsUnit(gg_rct_Spire3,enteringunit) then
+     set entered=gg_rct_Spire3
+   elseif RectContainsUnit(gg_rct_Spire4,enteringunit) then
+     set entered=gg_rct_Spire4
+   elseif RectContainsUnit(gg_rct_Spire5,enteringunit) then
+     set entered=gg_rct_Spire5
+   elseif RectContainsUnit(gg_rct_Spire6,enteringunit) then
+     set entered=gg_rct_Spire6
+   elseif RectContainsUnit(gg_rct_Spire7,enteringunit) then
+     set entered=gg_rct_Spire7
+   elseif RectContainsUnit(gg_rct_Spire8,enteringunit) then
+     set entered=gg_rct_Spire8
+   elseif RectContainsUnit(gg_rct_Spire9,enteringunit) then
+     set entered=gg_rct_Spire9
+   elseif RectContainsUnit(gg_rct_Spire10,enteringunit) then
+     set entered=gg_rct_Spire10
+   elseif RectContainsUnit(gg_rct_Spire11,enteringunit) then
+     set entered=gg_rct_Spire11
+   elseif RectContainsUnit(gg_rct_Spire12,enteringunit) then
+     set entered=gg_rct_Spire12  
+   elseif RectContainsUnit(gg_rct_Spire13,enteringunit) then
+     set entered=gg_rct_Spire13    
+   elseif RectContainsUnit(gg_rct_Spire14,enteringunit) then
+     set entered=gg_rct_Spire14    
+   elseif RectContainsUnit(gg_rct_Spire15,enteringunit) then
+     set entered=gg_rct_Spire15    
+   elseif RectContainsUnit(gg_rct_Spire16,enteringunit) then
+     set entered=gg_rct_Spire16    
+   endif
+set turretgroup=GetUnitsInRectMatching(entered, Condition(function ManTurretUDFilter))
+set pickedunit=FirstOfGroup(turretgroup)
+call DestroyGroup(turretgroup)
+set turretgroup=null
+if pickedunit!=null then
+call SetUnitOwner(pickedunit, mplayer, true )
+loop
+exitwhen (RectContainsUnit(entered,enteringunit)==false)
+call TriggerSleepAction(1.0)
+endloop
+call SetUnitOwner(pickedunit, Player(PLAYER_NEUTRAL_PASSIVE), true )
+endif
+set pickedunit=null
+set enteringunit=null
+set mplayer =null
+endfunction
+//===========================================================================
+function InitTrig_ManTurretUD takes nothing returns nothing
+    set gg_trg_ManTurretUD = CreateTrigger(  )
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire1)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire2)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire3)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire4)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire5)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire6)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire7)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire8)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire9)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire10)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire11)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire12)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire13)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire14)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire15)
+    call TriggerRegisterEnterRectSimple( gg_trg_ManTurretUD , gg_rct_Spire16)
+    call TriggerAddCondition( gg_trg_ManTurretUD, Condition( function ManTurretUDConditions ) )
+    call TriggerAddAction( gg_trg_ManTurretUD, function ManTurretUDActions )
+endfunction

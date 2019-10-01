@@ -1,0 +1,64 @@
+function DogsConditions takes nothing returns boolean
+return (GetSpellAbilityId() == 'A0AY' )
+endfunction
+function DogsActions takes nothing returns nothing
+    local unit caster= GetSpellAbilityUnit()
+    local unit spitz=GetHandleUnit(caster,"spitz")
+    local unit joy=GetHandleUnit(caster,"joy")
+    local player owner=GetOwningPlayer(caster)
+    local location castloc=GetUnitLoc(caster)
+    local location dogloc
+    local integer level=GetUnitAbilityLevelSwapped('A0AY',caster)   
+    if IsUnitAliveBJ(spitz)==true then
+    call SpellEffectXY('A0AY',EFFECT_TYPE_SPECIAL,GetUnitX(spitz),GetUnitY(spitz))
+    call KillUnit(spitz)
+    call RemoveUnit( spitz )
+    set spitz=null
+    endif
+    if IsUnitAliveBJ(joy)==true then
+    call SpellEffectXY('A0AY',EFFECT_TYPE_SPECIAL,GetUnitX(joy),GetUnitY(joy))
+    call KillUnit(joy)
+    call RemoveUnit(joy)
+    set joy=null
+    endif
+    
+    set dogloc=PolarProjectionBJ(castloc, 175.00, GetUnitFacing(caster))
+    set joy=CreateUnitAtLoc( owner, 'o00U', dogloc, GetUnitFacing(caster))
+    set spitz=CreateUnitAtLoc( owner, 'o00N', dogloc, bj_UNIT_FACING )
+    call SpellEffectXY('A0AY',EFFECT_TYPE_SPECIAL,GetUnitX(spitz),GetUnitY(spitz))
+    call SpellEffectXY('A0AY',EFFECT_TYPE_SPECIAL,GetUnitX(joy),GetUnitY(joy))
+    if ( doglevel>1 ) then
+    call UnitAddAbilityBJ( 'A0AW', joy )
+    call UnitAddAbilityBJ( 'A0AW',spitz )
+    endif
+    if ( doglevel>2) then
+    call SetBonusDamage(joy,10,false)
+    call SetBonusDamage(spitz,10,false)
+    endif
+    if ( doglevel>3 ) then
+    call UnitAddAbilityBJ( 'ACrk', joy )
+    call UnitAddAbilityBJ( 'ACrk',spitz )
+    endif
+    if ( doglevel>4 ) then
+    call UnitAddAbilityBJ( 'A0AZ', joy)
+    call UnitAddAbilityBJ( 'A0AX',spitz )
+    endif
+call SetHandleHandle(caster,"spitz",spitz )
+call SetHandleHandle(caster,"joy",joy)
+call RemoveLocation(dogloc)
+call RemoveLocation(castloc)
+set caster=null
+set spitz=null
+set joy=null
+set owner=null
+set castloc=null
+set dogloc=null
+endfunction
+//===========================================================================
+function InitTrig_Dogs takes nothing returns nothing
+    set gg_trg_Dogs = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Dogs, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_Dogs, Condition( function DogsConditions) )
+    call TriggerAddAction( gg_trg_Dogs, function DogsActions )
+endfunction
+

@@ -1,0 +1,188 @@
+
+~~~~~~~~~~~~~~~~~Warcraft 3 Viewer~~~~~~~~~~~~~~~~
+                    How-to & FAQ
+______________________________________________________
+
+Contents:
+
+1 - What do I need?
+2 - Viewing an image
+3 - Extracting an image
+4 - Converting to .blp
+5 - Viewing manipulated textures in the Warcraft 3 Viewer
+6 - Reloading Textures
+7 - Using images in the WCIII World Editor
+8 - FAQ
+______________________________________________________
+
+1 - What do I need
+
+~Warcraft III Viewer
+
+~Paintshop Pro, Photoshop or, Gimp(free)           (advanced)
+ These are not necessary for simple viewing however,
+ one or the other will be needed if you
+ have interest in skinning.
+
+~3Ds max, Milkshape or, Gmax(free)             (advanced)
+ These are not nessesary however, one or
+ the other will be needed for modeling.
+______________________________________________________
+
+2 - Viewing an image
+
+ There are three ways to view an image.
+
+(a) Use the default treeview window that
+    appears when you load Warcraft III Viewer.
+
+(b) Use 'Find in MPQ' under 'View' on the pull-down menu
+    or, use the Ctrl-F hot key. Then, enter the name of
+    unit you want to view.
+
+(c) To view an image you have already extracted
+    use 'Open' under 'File' on the pull-down menu
+    or use the Ctrl-O hot key.
+______________________________________________________
+
+3 - Extracting an image
+
+ To manipulate an image you will have to first 
+ extract it.
+
+~First, load an image by using (a) or (b) under
+ part 2 - Viewing an image.
+
+~Then, select the extraction type that relates to the
+ type of file being viewed (shows type by default)
+ under 'Current File' on the pull-down menu.
+______________________________________________________
+
+4 - Converting to .blp
+
+ Once you have manipulated an image (See above software)
+ you will have to convert it back to a .blp file for use
+ in Warcraft III.
+
+~To convert your edited image back to a .blp
+ select 'BMP,TGA,orJPG->BLP' under Convert Files
+ on the pull-down menu.
+______________________________________________________
+
+5 - Viewing manipulated textures in the Warcraft 3 Viewer
+
+~Load the .mdx of the unit on which you wish to view the
+ manipulated texture. Go to 'Remap textures'(Ctrl-M) under
+ the 'Current File' menu. Select the texture that
+ you wish to change and click on it. Then select the 'Change'
+ button.
+
+~To view the original texture again go back to 'Remap textures'
+ and deactivate the manipulated texture that you imported.
+______________________________________________________
+
+6 - Reloading Textures
+
+ To instantly see the results of your work when editing
+ skins you will want to use this feature.
+
+~Convert the .blp of the unit on which you will be working
+ to a .tga (or other file types: .jpg .bmp)
+
+~Load the .mdx of the unit on which you will be working
+ into the Warcraft 3 Viewer so that you can see the model.
+
+~Go to the remap texture feature and change the path of
+ the current .blp to the .tga that you just created.
+
+~Without closing the Warcraft3 Viewer open the .tga file that 
+ you just created with Photoshop or, whatever paint
+ program you prefer.
+
+~Edit the .tga "skin" and save it.
+
+~Go back to the Warcraft 3 Viewer and select the 
+ 'Reload Textures' feature in the 'View' menu. You will
+ now see the changes that you made to the unit's skin.
+
+ Note: If you position the windows of your paint program
+ and the Warcraft 3 Viewer you can see the results of
+ your work as you skin. (as long as you save your work and
+ reload the textures)
+
+ Note: 'Convert local .tga and reload textures' does 
+ the same thing only it recognizes the tga's in your local
+ files and converts them.
+_____________________________________________________
+
+7 - Using images in the WCIII World Editor
+
+~To use an image on a map go to the World Editor
+ and open the 'Import Manager'(F12). Now select
+ 'Import File'(Ctrl-I) and find the file you want to
+ use.
+
+~After importing a file, double click on the
+ name of the file and check the box 'use custom path'
+
+~Enter the exact path of the file you want to replace.
+ If you don't know the path use 'Find in MPQ'(Ctrl-F) in
+ the Warcraft III Viewer to find it.
+______________________________________________________
+
+8 - FAQ
+
+~What is that 'Textures\white.blp' in the 'Remap textures' window?
+ It not only shows up by default but, it also shows up with
+ the model's textures and you can't change it.
+
+Don't matter about that texture, it is just the texture used for the
+Camera model used inside the viewer and for the axis.
+
+~How, and why, do I change the background picture and color?
+
+You can change the background picture(Render->Background picture)
+to make it appear that your model is in the Warcraft III game This
+is done so that you can get an idea of how your coloration will
+appear against the terrain colors. You make great snapshots with
+this too. Dont forget: Any picture will work. You can add an 
+avitar, an album cover or whatever you want.
+
+To make a warcraft scene as your background picture go to the
+World editor and position your view the way you want it.
+Then, hit the print screen key on your keyboard. You will find
+Your picture in the warcraft directory in the newly created
+'Screenshots' folder.
+
+To resize the background picture use the number pad
+the controls are the following
+Width----------------4 or 6
+Height---------------2 or 8
+Width and Height ----1 or 9
+
+You can change the background color (Render->Change background color)
+to get a better view of the coloration on your model. 
+(ex: If you had a very dark character
+you would not want a black background)
+
+~What is the Warcraft III Directory
+
+That's just another name for the series of folders
+in which your warcraft files are stored.
+______________________________________________________
+For more support go to: www.wc3campaigns.com
+
+Thanks go out to TheProphet for
+making such a great tool. Without which                 
+we would be caveman modders.                           __
+                                                      ____
+           00                                        ______
+            0000                                    ________
+             00000                                 __________
+00000000000000000000 Warcraft 3 Viewer created by: TheProphet
+             00000
+            0000
+           00
+
+
+'How-to & faq' written J3y: J3lademaster  -)--------

@@ -1,0 +1,58 @@
+function Trig_BlightedArrow_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0F3' )
+endfunction
+
+function Trig_BlightedArrow_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetSpellTargetLoc()
+local unit rabbit=CreateUnitAtLoc( owner, 'u01E',castloc,bj_UNIT_FACING )
+local unit picked
+local group temp
+local integer level=GetUnitAbilityLevel(caster,'A0F3')
+local real damage=level*80
+call SetUnitVertexColorBJ( rabbit, 100.00, 100.00, 100.00, 100.00 )
+call IssuePointOrderLocBJ( rabbit, "attackground", targetloc)
+call PolledWait2(DistanceBetweenPoints(castloc,targetloc)/600)
+set rabbit=CreateRabbit(owner,targetloc)
+call UnitAddAbility(rabbit,'A0F4')
+call PolledWait2(0)
+set udg_tempfilterplayer=null
+set udg_tempfilterplayer=owner
+set temp=GetUnitsInRangeOfLocAll(350, targetloc)
+                  loop
+                   set picked=FirstOfGroup(temp)
+                   exitwhen picked==null
+                   if GetBooleanAnd(IsUnitType(picked, UNIT_TYPE_STRUCTURE) == false,IsUnitType(picked, UNIT_TYPE_MECHANICAL) == false) then
+                   if GetBooleanAnd(IsUnitType(picked, UNIT_TYPE_UNDEAD) == true,IsUnitEnemy(picked,owner) == false ) then
+                     call SetUnitLifeBJ(picked,GetUnitState(picked,UNIT_STATE_LIFE)+damage) 
+                      call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl",picked,"chest"))
+                   elseif GetBooleanAnd(IsUnitType(picked, UNIT_TYPE_UNDEAD) == false,IsUnitEnemy(picked,owner) == true ) then
+                     call UnitDamageTargetBJ(caster, picked,damage/2, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+                      call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl",picked,"chest"))
+                   endif
+                   endif
+                  
+                   call GroupRemoveUnit(temp,picked)  
+                  endloop
+                call DestroyGroup(temp)
+                set temp=null
+
+set rabbit=null
+set caster=null
+set owner=null
+call RemoveLocation(castloc)
+set castloc=null
+call RemoveLocation(targetloc)
+set targetloc=null
+endfunction
+
+//===========================================================================
+function InitTrig_BlightedArrow takes nothing returns nothing
+    set gg_trg_BlightedArrow = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_BlightedArrow, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_BlightedArrow, Condition( function Trig_BlightedArrow_Conditions ) )
+    call TriggerAddAction( gg_trg_BlightedArrow, function Trig_BlightedArrow_Actions )
+endfunction
+

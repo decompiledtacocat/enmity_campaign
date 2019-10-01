@@ -1,0 +1,63 @@
+function CopyHeroConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A064' ) 
+endfunction
+function CopyHeroActions takes nothing returns nothing
+local unit target= GetSpellTargetUnit()
+local unit caster=GetSpellAbilityUnit()
+local unit xcopy
+local real copytime = (25 * I2R(GetUnitAbilityLevelSwapped('A064', caster)))
+local player owner=GetOwningPlayer(caster)
+local effect cfx
+local location casterloc=GetUnitLoc(caster)
+local integer array copylevels 
+local integer sloop=0
+local real mana =GetUnitManaPercent(caster)
+local real life =GetUnitLifePercent(caster) 
+local real ghostform=GetUnitAbilityLevelSwapped('A082', caster)
+local integer targetid=GetUnitTypeId(target)
+    set copylevels[0] = GetUnitAbilityLevelSwapped('A06C', caster)
+    set copylevels[1] = GetUnitAbilityLevelSwapped('A061', caster)
+    set copylevels[2] = GetUnitAbilityLevelSwapped('A064', caster)
+    set copylevels[3] = GetUnitAbilityLevelSwapped('A04O', caster)
+    set copylevels[4] = GetUnitAbilityLevelSwapped('A07S', caster)
+    set cfx=AddSpecialEffectLocBJ(casterloc, "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl" )
+    call RemoveLocation(casterloc)
+    set casterloc=null
+    if ghostform > 0 then
+    set targetid='U00K'
+    endif
+    set  xcopy=ReplaceUnitBJ( caster,targetid , bj_UNIT_STATE_METHOD_RELATIVE )
+    call SetUnitLifePercentBJ(xcopy,life)
+    call SetUnitManaPercentBJ(xcopy, mana)
+    call transferward(caster,xcopy)
+    call UnitAddAbilityBJ( 'A06G',xcopy )
+    call UnitAddAbilityBJ( 'A06F',xcopy )
+    call SelectUnitAddForPlayer( xcopy , owner )
+    loop
+    exitwhen sloop>4
+    call SetHandleInt(xcopy,("xcopylevel"+I2S(sloop)),copylevels[sloop]) 
+    set sloop=sloop+1
+    endloop
+    call SetHandleInt(xcopy,"isacopy",1)
+    call SetHandleHandle(xcopy,"oldcopy",caster)
+    call SetHandleHandle(caster,"newcopy",xcopy)
+    call PolledWait2(copytime)
+    set xcopy=GetHandleUnit(caster,"newcopy")
+    call RemoveUnit(caster)
+    loop 
+    exitwhen IsUnitAliveBJ(xcopy)==true
+    call PolledWait2(1.0)
+    endloop
+    set caster=ReplaceUnitBJ(xcopy, 'O003', bj_UNIT_STATE_METHOD_RELATIVE )
+    call DestroyEffect(cfx)
+    call DeCopy(caster,xcopy)
+    call RemoveUnit(xcopy)
+endfunction
+//===========================================================================
+function InitTrig_CopyHero takes nothing returns nothing
+    set gg_trg_CopyHero = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_CopyHero, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_CopyHero, Condition( function CopyHeroConditions  ) )
+    call TriggerAddAction( gg_trg_CopyHero, function CopyHeroActions )
+endfunction
+

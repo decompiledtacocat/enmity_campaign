@@ -1,0 +1,32 @@
+function Trig_GhostCheck_Actions takes nothing returns nothing
+local group temp=CreateGroup()
+local unit picked
+call GroupAddGroup(udg_ghostgroup,temp)
+loop
+set picked=FirstOfGroup(temp)
+exitwhen picked==null
+  if  GetUnitTypeId(picked) != 'U00K' then
+    if GetUnitStateSwap(UNIT_STATE_MANA,picked)<10 then
+         call IssueImmediateOrderBJ(picked, "unravenform" )
+    endif
+  else
+  call GroupRemoveUnit(udg_ghostgroup,picked)
+  endif
+call GroupRemoveUnit(temp,picked)
+endloop
+call DestroyGroup(temp)
+set temp=null
+set picked=null
+if CountUnitsInGroup(udg_ghostgroup)<=0 then
+call DisableTrigger(gg_trg_GhostCheck)
+endif
+endfunction
+
+//===========================================================================
+function InitTrig_GhostCheck takes nothing returns nothing
+    set gg_trg_GhostCheck = CreateTrigger(  )
+    call DisableTrigger( gg_trg_GhostCheck )
+    call TriggerRegisterTimerEventPeriodic( gg_trg_GhostCheck, 1.00 )
+    call TriggerAddAction( gg_trg_GhostCheck, function Trig_GhostCheck_Actions )
+endfunction
+

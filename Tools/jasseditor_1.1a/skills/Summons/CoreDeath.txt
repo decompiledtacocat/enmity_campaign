@@ -1,0 +1,25 @@
+function ElementalCoreDiesCondition takes nothing returns boolean
+    return ( GetUnitTypeId(GetDyingUnit())=='o00I' )
+endfunction
+function ElementalCoreDiesActions takes nothing returns nothing
+    local integer gloop=0
+    local unit core=GetDyingUnit()
+    local unit element
+    loop
+    exitwhen gloop>3
+    set element=GetHandleUnit(core,("elements"+I2S(gloop)))
+    call KillUnit(element)
+    set gloop=gloop+1
+    endloop
+    call GroupRemoveUnit(udg_elementals,core)
+    call FlushHandleLocals(core)
+    set core=null
+    set element=null
+endfunction
+//===========================================================================
+function InitTrig_ElementalCoreDies takes nothing returns nothing
+    set gg_trg_ElementalCoreDies = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ElementalCoreDies, EVENT_PLAYER_UNIT_DEATH )
+    call TriggerAddCondition( gg_trg_ElementalCoreDies, Condition( function ElementalCoreDiesCondition) )
+    call TriggerAddAction( gg_trg_ElementalCoreDies, function ElementalCoreDiesActions )
+endfunction

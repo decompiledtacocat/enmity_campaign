@@ -1,0 +1,16 @@
+function BioMissleConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A03C' )
+endfunction
+function BioMissleActions takes nothing returns nothing
+    local unit caster=GetSpellAbilityUnit()
+    local unit target=GetSpellTargetUnit()
+    call SetHandleHandle(caster,"bmissile",target)
+endfunction
+//===========================================================================
+function InitTrig_BioMissle takes nothing returns nothing
+    set gg_trg_BioMissle = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_BioMissle, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_BioMissle, Condition( function BioMissleConditions) )
+    call TriggerAddAction( gg_trg_BioMissle, function BioMissleActions)
+endfunction
+

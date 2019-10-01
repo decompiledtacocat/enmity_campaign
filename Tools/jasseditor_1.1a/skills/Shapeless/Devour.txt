@@ -1,0 +1,21 @@
+function DevourConditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A06C' )
+endfunction
+function DevourActions takes nothing returns nothing
+local unit caster= GetSpellAbilityUnit()
+local integer Clevel=GetUnitAbilityLevelSwapped('A06C', caster) 
+local integer Dlevel=GetUnitAbilityLevelSwapped('A06D', caster)
+    if (Dlevel!=Clevel) then
+    call SetUnitAbilityLevelSwapped( 'A06D',caster, Clevel )
+    endif
+set caster=null
+endfunction
+
+//===========================================================================
+function InitTrig_Devour takes nothing returns nothing
+    set gg_trg_Devour = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Devour, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_Devour, Condition( function DevourConditions ) )
+    call TriggerAddAction( gg_trg_Devour, function DevourActions )
+endfunction
+

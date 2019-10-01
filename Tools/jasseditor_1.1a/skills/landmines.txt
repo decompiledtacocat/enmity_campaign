@@ -1,0 +1,46 @@
+function Trig_LandMines_Conditions takes nothing returns boolean
+return GetBooleanOr(GetSpellAbilityId() == 'A0G2' ,GetSpellAbilityId() == 'A0FY' ) 
+endfunction
+
+function Trig_LandMines_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local player owner=GetOwningPlayer(caster)
+local location targetloc=GetSpellTargetLoc()
+local integer id=GetSpellAbilityId()
+local unit mine
+
+if id==  'A0FY' then//normal
+set mine=CreateUnitAtLoc(owner,'n02N',targetloc,bj_UNIT_FACING)
+call UnitRemoveAbility(mine,'A0FK')
+if IsUnitType(caster, UNIT_TYPE_MECHANICAL)==false then
+call UnitRemoveAbility(mine,'A0G1')
+call UnitAddAbility(mine,'A0FR')
+endif
+
+elseif id== 'A0G2' then//remote
+if IsUnitType(caster, UNIT_TYPE_MECHANICAL)==false then
+set mine=CreateUnitAtLoc(owner,'n02N',targetloc,bj_UNIT_FACING)
+call UnitRemoveAbility(mine,'A0FK')
+call UnitRemoveAbility(mine,'A0G1')
+call UnitAddAbility(mine,'A0FR')
+else
+set mine=CreateUnitAtLoc(owner,'n02O',targetloc,bj_UNIT_FACING)
+endif
+endif
+
+call MaxUnit(caster,mine,"PocketLandMine",4,4)
+call RemoveLocation(targetloc)
+set targetloc=null
+set owner=null
+set caster=null
+set mine=null
+endfunction
+
+//===========================================================================
+function InitTrig_LandMines takes nothing returns nothing
+    set gg_trg_LandMines = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_LandMines, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_LandMines, Condition( function Trig_LandMines_Conditions ) )
+    call TriggerAddAction( gg_trg_LandMines, function Trig_LandMines_Actions )
+endfunction
+

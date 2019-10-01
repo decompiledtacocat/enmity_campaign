@@ -1,0 +1,188 @@
+; Created by KaTTaNa
+
+; NOTE
+; -----------------------------------------------------------
+; Do not change this file unless you know what you are doing!
+;    It is required for Jass Editor.exe to work properly!
+; -----------------------------------------------------------
+
+
+
+
+; Syntax:
+
+;   @COLOR
+;     Starts a new syntax set.
+;     COLOR can either be the name of a color starting with "cl"
+;     Or it can be $BBGGRR
+;       Where BB is Blue, GG green and RR red - in hexadecimals
+    
+
+;     Example syntax declarations that work:
+;       @clRed, @clBlue, @clGreen, @clGrayText, @clMaroon, @clBtnFace, @$20CCFF
+
+;     Example syntax declarations that doesn't work:
+;       @Red, @Blue, @ffffcc, @ clGreen, clBlue
+
+;   !COMMAND
+;     Commands are "bold", "italic", "underline" and "nocase". (without the "quotes")
+;     They will apply to the last declared syntax
+;     "nocase" will disable case sensivity
+
+;     Commands that work:
+;       !bold, !italic, !underline, !nocase
+
+;     Examples that doesn't work:
+;       ! bold, !"bold"
+
+;   ;Comment
+;     Lines where the first character is ; are comments, and are ignored
+
+;     Note that this is will not work!
+;       @clBlack ;Block Builders
+
+;     It ONLY works if the FIRST character on the line is ;
+
+;   (any word)
+;     All other words will be added to the last declared syntax
+
+;   Strings and Comment colors/style:
+;     These are built into Jass Editor.exe and can't be changed through this file
+
+; NOTE: NEVER make the first character of a line blank (eg. a space).
+
+
+; Block Builders
+@clBlack
+!bold
+function
+endfunction
+takes
+returns
+loop
+endloop
+if
+then
+endif
+elseif
+else
+type
+extends
+constant
+native
+globals
+endglobals
+
+; Keywords
+@clNavy
+call
+return
+set
+exitwhen
+local
+not
+and
+or
+
+; Values
+@clMaroon
+null
+true
+false
+
+; Types
+@$CC8800
+; Non-Object Types
+nothing
+array
+string
+integer
+real
+code
+boolean
+
+; Object Types
+handle
+event
+player
+widget
+unit
+destructable
+item
+ability
+buff
+force
+group
+trigger
+triggercondition
+triggeraction
+timer
+location
+region
+rect
+boolexpr
+sound
+conditionfunc
+filterfunc
+unitpool
+itempool
+race
+alliancetype
+racepreference
+gamestate
+igamestate
+fgamestate
+playerstate
+playergameresult
+unitstate
+aidifficulty
+eventid
+gameevent
+playerevent
+playerunitevent
+unitevent
+limitop
+widgetevent
+dialogevent
+unittype
+gamespeed
+gamedifficulty
+gametype
+mapflag
+mapvisibility
+mapsetting
+mapdensity
+mapcontrol
+playerslotstate
+volumegroup
+camerafield
+camerasetup
+playercolor
+placement
+startlocprio
+raritycontrol
+blendmode
+texmapflags
+effect
+effecttype
+weathereffect
+terraindeformation
+fogstate
+fogmodifier
+dialog
+button
+quest
+questitem
+defeatcondition
+timerdialog
+leaderboard
+multiboard
+multiboarditem
+trackable
+gamecache
+version
+itemtype
+texttag
+
+; new in 1.13
+playerscore

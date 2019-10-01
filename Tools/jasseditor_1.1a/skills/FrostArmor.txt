@@ -1,0 +1,33 @@
+function FrostArmorConditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanAnd(( IsUnitType(GetAttacker(), UNIT_TYPE_STRUCTURE) == false ),( UnitHasBuffBJ(GetAttackedUnitBJ(), 'B00A') == true )),(IsUnitAlly(GetAttacker(), GetOwningPlayer(GetAttackedUnitBJ())) == false ))
+endfunction
+
+function FrostArmorActions takes nothing returns nothing
+    local unit caster=GetAttackedUnitBJ()
+    local unit source=GetHandleUnit(caster,"frostarmor")
+    local unit attacker=GetAttacker()
+    local player frostarmorplayer=GetOwningPlayer(caster)
+    local location frostarmorloc=GetUnitLoc(caster)
+    local location frostarmorattackloc=GetUnitLoc(attacker)
+    local unit stupid
+    set stupid=CreateUnitAtLoc( frostarmorplayer, 'u00E', frostarmorloc, bj_UNIT_FACING)
+    call SetUnitVertexColorBJ( stupid, 100.00, 100.00, 100.00, 100.00 )
+    call SetUnitAbilityLevelSwapped( 'A02Q',stupid, GetUnitAbilityLevelSwapped('A02P', source) )
+    call IssueTargetOrderBJ( stupid, "attack", attacker)
+    call RemoveLocation (frostarmorattackloc)
+    call RemoveLocation (frostarmorloc)
+set frostarmorloc=null
+set frostarmorattackloc=null
+set frostarmorplayer=null
+set caster=null
+set attacker=null
+set stupid=null
+endfunction
+
+//===========================================================================
+function InitTrig_FrostArmor takes nothing returns nothing
+    set gg_trg_FrostArmor = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_FrostArmor, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_FrostArmor, Condition( function FrostArmorConditions) )
+    call TriggerAddAction( gg_trg_FrostArmor, function FrostArmorActions)
+endfunction

@@ -1,0 +1,44 @@
+function Trig_DirectLightning_Conditions takes nothing returns boolean
+return ( GetSpellAbilityId() == 'A0EV' )
+endfunction
+
+function Trig_DirectLightning_Actions takes nothing returns nothing
+local unit caster=GetSpellAbilityUnit()
+local unit target=GetSpellTargetUnit()
+local player owner=GetOwningPlayer(caster)
+local location castloc=GetUnitLoc(caster)
+local location targetloc=GetUnitLoc(target)
+local unit rabbit=CreateRabbit(owner,castloc)
+local integer level=GetUnitAbilityLevel(caster,'A0EV')
+local real maxdamage=240+120*level
+local location moveloc=PolarProjectionBJ(castloc,DistanceBetweenPoints(castloc,targetloc)-125,AngleBetweenPoints(castloc,targetloc))
+call UnitAddAbility(rabbit,'A0EP')
+call IssueTargetOrderBJ(rabbit,"chainlightning",target)
+call SetUnitPositionLocFacingLocBJ(caster,moveloc,targetloc)
+set rabbit=CreateRabbit(owner,castloc)
+call UnitAddAbility(rabbit,'A0ET')
+call IssueTargetOrder(rabbit,"purge",target)
+set rabbit=CreateRabbit(owner,castloc)
+call UnitAddAbility(rabbit,'A0ET')
+call IssueTargetOrder(rabbit,"purge",caster)
+call UnitDamageTargetBJ(caster, target,GetRandomReal(1,maxdamage), ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL )
+set caster=null
+set target=null
+set owner=null
+call RemoveLocation(castloc)
+call RemoveLocation(targetloc)
+call RemoveLocation(moveloc)
+set moveloc=null
+set castloc=null
+set targetloc=null
+set rabbit=null
+endfunction
+
+//===========================================================================
+function InitTrig_DirectLightning takes nothing returns nothing
+    set gg_trg_DirectLightning = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_DirectLightning, EVENT_PLAYER_UNIT_SPELL_EFFECT )
+    call TriggerAddCondition( gg_trg_DirectLightning, Condition( function Trig_DirectLightning_Conditions ) )
+    call TriggerAddAction( gg_trg_DirectLightning, function Trig_DirectLightning_Actions )
+endfunction
+

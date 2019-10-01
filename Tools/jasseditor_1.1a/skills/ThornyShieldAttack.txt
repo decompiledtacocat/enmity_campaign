@@ -1,0 +1,20 @@
+function ThornyShieldAttackConditions takes nothing returns boolean
+return GetUnitTypeId(GetAttacker()) == 'U00X' 
+endfunction
+function ThornyShieldAttackActions takes nothing returns nothing
+    local unit tsattacker=GetAttacker()
+    local unit impaler=GetHandleUnit(tsattacker,"impaler")
+    local unit tstarget = GetAttackedUnitBJ()
+    local integer imlvl= GetUnitAbilityLevelSwapped('A06U', tsattacker)
+    if ( imlvl > 0 ) then
+        call SetUnitAbilityLevelSwapped( 'A00P', impaler, imlvl )
+        call IssueTargetOrderBJ( impaler, "impale",tstarget  )
+    endif
+endfunction
+//===========================================================================
+function InitTrig_ThornyShieldAttack takes nothing returns nothing
+    set gg_trg_ThornyShieldAttack = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_ThornyShieldAttack, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_ThornyShieldAttack, Condition( function ThornyShieldAttackConditions ) )
+    call TriggerAddAction( gg_trg_ThornyShieldAttack, function ThornyShieldAttackActions )
+endfunction

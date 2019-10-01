@@ -1,0 +1,19 @@
+function SentryGunConditions takes nothing returns boolean
+return ( GetUnitTypeId(GetSummonedUnit()) == 'o00A' )
+endfunction
+function SentryGunActions takes nothing returns nothing
+    local unit caster=GetSummoningUnit()
+    local unit gun=GetSummonedUnit()
+    local integer maxguns=(GetUnitAbilityLevelSwapped('A04U',caster)+1)
+    local integer maxlimit=6
+    call MaxUnit(caster,gun,"guns",maxguns,maxlimit)
+    // takes unit caster,unit utype,string catagory, integer maxlevel, integer maxlimit 
+endfunction
+//===========================================================================
+function InitTrig_SentryGun takes nothing returns nothing
+    set gg_trg_SentryGun = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_SentryGun, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_SentryGun, Condition( function SentryGunConditions  ) )
+    call TriggerAddAction( gg_trg_SentryGun, function SentryGunActions  )
+endfunction
+

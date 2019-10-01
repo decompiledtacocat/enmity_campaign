@@ -1,0 +1,24 @@
+function TrueFormConditions takes nothing returns boolean
+return  ( GetSpellAbilityId() == 'A03F' )
+endfunction
+
+function TrueFormActions takes nothing returns nothing
+    local unit trueformcaster=GetSpellAbilityUnit()
+    local location trueformcastloc = GetUnitLoc(trueformcaster)
+    local effect trueformfx
+    call AddSpecialEffectLocBJ(trueformcastloc, "Abilities\\Spells\\Human\\MarkOfChaos\\MarkOfChaosTarget.mdl" )
+    set trueformfx=GetLastCreatedEffectBJ()
+    call RemoveLocation(trueformcastloc)
+    call SetUnitAnimation(trueformcaster, "death" )
+    call TriggerSleepAction(1.0)
+    call DestroyEffect(trueformfx)
+    set trueformcaster=null
+endfunction
+//===========================================================================
+function InitTrig_TrueForm takes nothing returns nothing
+    set gg_trg_TrueForm = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_TrueForm, EVENT_PLAYER_UNIT_SPELL_CAST )
+    call TriggerAddCondition( gg_trg_TrueForm, Condition( function TrueFormConditions) )
+    call TriggerAddAction( gg_trg_TrueForm, function TrueFormActions)
+endfunction
+

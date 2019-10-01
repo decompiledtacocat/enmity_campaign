@@ -1,0 +1,140 @@
+function ShiftConditions takes nothing returns boolean
+local integer spell=GetSpellAbilityId()
+return GetBooleanOr(GetBooleanOr((spell== 'A0AQ'),(spell == 'A0AO' )),GetBooleanOr(( spell == 'A0AP' ),( spell == 'A0AK' )))
+endfunction
+function ShiftActions takes nothing returns nothing
+local unit panda=GetSpellAbilityUnit()
+local unit newpanda
+local integer shift=GetSpellAbilityId()
+local real life
+local real mana
+local integer array pandalevels
+local player owner=GetOwningPlayer(panda)
+call SelectUnitRemoveForPlayer(panda, owner)
+if (shift=='A0AQ') then
+set pandalevels[0]=GetHandleInt(panda,"fire")
+set pandalevels[1]=GetHandleInt(panda,"earth")
+set pandalevels[2]=GetHandleInt(panda,"wind")
+set pandalevels[3]=GetHandleInt(panda,"balance")
+set pandalevels[4]=GetHandleInt(panda,"super") 
+set life=GetUnitLifePercent(panda) 
+set mana=GetUnitManaPercent(panda)
+set newpanda=ReplaceUnitBJ(panda, 'N01U', bj_UNIT_STATE_METHOD_RELATIVE )
+call transferward(panda,newpanda)
+call PossessionAlt(panda,newpanda) 
+call FlushHandleLocals(panda)
+   call RemoveUnit(panda)
+   call SetUnitLifePercentBJ(newpanda,life)
+   call SetUnitManaPercentBJ(newpanda, mana)
+
+        if ( pandalevels[0]>0 ) then
+            call SelectHeroSkill(newpanda, 'A0AO' )
+            call SetUnitAbilityLevelSwapped( 'A0AO', newpanda, pandalevels[0] )
+            call ModifyHeroSkillPoints( newpanda, bj_MODIFYMETHOD_SUB, (pandalevels[0] - 1 ) )
+        endif
+        if (pandalevels[1]>0  ) then
+            call SelectHeroSkill(newpanda, 'A0AP' )
+            call SetUnitAbilityLevelSwapped( 'A0AP',newpanda, pandalevels[1] )
+            call ModifyHeroSkillPoints( newpanda, bj_MODIFYMETHOD_SUB, ( pandalevels[1] - 1 ) )
+        endif
+        if (pandalevels[2]>0  ) then
+            call SelectHeroSkill(newpanda, 'A0AK' )
+            call SetUnitAbilityLevelSwapped( 'A0AK', newpanda, pandalevels[2] )
+            call ModifyHeroSkillPoints( newpanda, bj_MODIFYMETHOD_SUB, ( pandalevels[2] - 1 ) )
+        endif
+        if ( pandalevels[3]>0  ) then
+            call SelectHeroSkill(newpanda, 'A07X' )
+            call SetUnitAbilityLevelSwapped( 'A07X',newpanda, pandalevels[3] )
+            call ModifyHeroSkillPoints(newpanda, bj_MODIFYMETHOD_SUB, ( pandalevels[3] - 1 ) )
+        endif
+        if ( pandalevels[4]>0 ) then
+            call SelectHeroSkill(newpanda, 'A0AR' )
+            call SetUnitAbilityLevelSwapped( 'A0AR',newpanda,pandalevels[4] )
+            call ModifyHeroSkillPoints(newpanda, bj_MODIFYMETHOD_SUB, (pandalevels[4] - 1 ) )
+       endif
+else
+call PolledWait2(0.25)
+set pandalevels[0] = GetUnitAbilityLevelSwapped('A0AO',panda)//fire
+set pandalevels[1] = GetUnitAbilityLevelSwapped('A0AP',panda)//earth
+set pandalevels[2] = GetUnitAbilityLevelSwapped('A0AK',panda)//wind
+set pandalevels[3] = GetUnitAbilityLevelSwapped('A07X',panda)//balance
+set pandalevels[4] = GetUnitAbilityLevelSwapped('A0AR',panda)//super
+set life= GetUnitLifePercent(panda)
+set mana= GetUnitManaPercent(panda)
+   if ( shift=='A0AO') then
+   set newpanda=ReplaceUnitBJ( panda, 'N01S', bj_UNIT_STATE_METHOD_RELATIVE )
+   elseif ( shift=='A0AP') then
+   set newpanda=ReplaceUnitBJ( panda, 'N01R', bj_UNIT_STATE_METHOD_RELATIVE )
+   elseif ( shift=='A0AK') then
+   set newpanda=ReplaceUnitBJ( panda, 'N01T', bj_UNIT_STATE_METHOD_RELATIVE )
+   endif
+call transferward(panda,newpanda)
+call PossessionAlt(panda,newpanda) 
+call FlushHandleLocals(panda)
+   call RemoveUnit(panda)
+   call SetUnitLifePercentBJ(newpanda, life)
+   call SetUnitManaPercentBJ(newpanda, mana )
+   
+   if ( shift=='A0AO') then//fire
+        call SetUnitAbilityLevelSwapped( 'A0AL', newpanda, pandalevels[0] )
+        call SetUnitAbilityLevelSwapped( 'A0AH', newpanda, pandalevels[0] )
+        call SetUnitAbilityLevelSwapped( 'A0AN', newpanda, pandalevels[0] )
+        if (pandalevels[4] < 1) then
+            call UnitRemoveAbilityBJ( 'A0AU', newpanda)
+        else
+            call SetUnitAbilityLevelSwapped( 'A0AU', newpanda, pandalevels[4] )
+        endif
+    endif
+    if ( shift=='A0AP') then//earth
+        call SetUnitAbilityLevelSwapped( 'A0AF', newpanda, pandalevels[1] )
+        call SetUnitAbilityLevelSwapped( 'A0AS', newpanda, pandalevels[1] )
+        call SetUnitAbilityLevelSwapped( 'A0AI', newpanda, pandalevels[1] )
+        call SetUnitAbilityLevelSwapped( 'A0AE', newpanda, pandalevels[1] )
+        if (pandalevels[4] < 1) then
+             call UnitRemoveAbilityBJ( 'A0AS', newpanda )
+        else
+            call SetUnitAbilityLevelSwapped( 'A0AS', newpanda, pandalevels[4] )
+        endif
+    endif
+    if ( shift=='A0AK') then//wind
+        call SetUnitAbilityLevelSwapped( 'A0AM',newpanda, pandalevels[2] )
+        call SetUnitAbilityLevelSwapped( 'A0AJ',newpanda, pandalevels[2] )
+        call SetUnitAbilityLevelSwapped( 'A0AG',newpanda, pandalevels[2] )
+        if ( pandalevels[4] < 1) then
+             call UnitRemoveAbilityBJ( 'A0AT', newpanda )
+        else
+            call SetUnitAbilityLevelSwapped( 'A0AT',newpanda, pandalevels[4] )
+        endif
+    endif
+  if ( pandalevels[3] >= 1 ) then //balance skill
+  call SelectHeroSkill( newpanda, 'A07X' )
+  call SetUnitAbilityLevelSwapped( 'A07X',newpanda, pandalevels[3] )
+  call ModifyHeroSkillPoints(newpanda, bj_MODIFYMETHOD_SUB, ( pandalevels[3] - 1 ) )
+  endif
+   call SetHandleInt(newpanda,"fire",pandalevels[0])
+   call SetHandleInt(newpanda,"earth",pandalevels[1])
+   call SetHandleInt(newpanda,"wind",pandalevels[2])
+   call SetHandleInt(newpanda,"balance",pandalevels[3])
+   call SetHandleInt(newpanda,"super",pandalevels[4])
+endif
+set owner=GetOwningPlayer(newpanda)
+    if (GetUnitTypeId(newpanda)== 'N01U' ) then
+        call SelectUnitAddForPlayer(newpanda, owner)
+    else
+        call SelectUnitAddForPlayer(newpanda, owner)
+        call PolledWait2(30.00 )
+        call UnitAddAbilityBJ('A0AQ', newpanda)
+       
+    endif
+set panda=null
+set newpanda=null
+set owner=null   
+endfunction
+
+//===========================================================================
+function InitTrig_Shift takes nothing returns nothing
+    set gg_trg_Shift = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_Shift, EVENT_PLAYER_UNIT_SPELL_EFFECT)
+    call TriggerAddCondition( gg_trg_Shift, Condition( function ShiftConditions ) )
+    call TriggerAddAction( gg_trg_Shift, function ShiftActions )
+endfunction

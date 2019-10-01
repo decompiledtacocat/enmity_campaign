@@ -1,0 +1,46 @@
+function Trig_MaskOfTheDevourer_Conditions takes nothing returns boolean
+return GetBooleanAnd(GetBooleanAnd(IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_STRUCTURE) == false,IsUnitType(GetAttackedUnitBJ(), UNIT_TYPE_MECHANICAL)==false),GetBooleanAnd(UnitHasItemOfTypeBJ(GetAttacker(), 'I045') == true,IsTeamKill(GetAttacker(),GetAttackedUnitBJ())==false))
+endfunction
+
+function MaskOfTheDevourer takes nothing returns nothing
+local unit target=GetTriggerUnit()
+local unit caster=GetHandleUnit(GetTriggeringTrigger(),"MaskOfDevour")
+local unit source=GetEventDamageSource()
+local real damage=GetEventDamage()
+local effect fx
+if source==caster then
+call SetUnitManaBJ(caster,GetUnitState(caster,UNIT_STATE_MANA)+damage*.04)
+set fx=AddSpecialEffectTarget("Abilities\\Spells\\Undead\\ReplenishMana\\SpiritTouchTarget.mdl",caster,"chest")
+call TriggerSleepAction(.5)
+call DestroyEffect(fx)
+set fx=null
+set caster=null
+set target=null
+set source=null
+call DestroyTrigger(GetTriggeringTrigger())
+endif
+set caster=null
+set target=null
+set source=null
+endfunction
+
+function Trig_MaskOfTheDevourer_Actions takes nothing returns nothing
+local unit caster=GetAttacker()
+local unit target=GetAttackedUnitBJ()
+local trigger t
+set t=CreateTrigger()
+call SetHandleHandle(t,"MaskOfDevour",caster)
+call TriggerAddAction(t, function MaskOfTheDevourer)
+call TriggerRegisterUnitEvent( t, target, EVENT_UNIT_DAMAGED )
+set caster=null
+set target=null
+endfunction
+
+//===========================================================================
+function InitTrig_MaskOfTheDevourer takes nothing returns nothing
+    set gg_trg_MaskOfTheDevourer = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_MaskOfTheDevourer, EVENT_PLAYER_UNIT_ATTACKED )
+    call TriggerAddCondition( gg_trg_MaskOfTheDevourer, Condition( function Trig_MaskOfTheDevourer_Conditions ) )
+    call TriggerAddAction( gg_trg_MaskOfTheDevourer, function Trig_MaskOfTheDevourer_Actions )
+endfunction
+

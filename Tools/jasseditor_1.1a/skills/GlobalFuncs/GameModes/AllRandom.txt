@@ -1,0 +1,71 @@
+function AllRandomActions takes nothing returns nothing
+local group temp
+local unit picked
+local player owner
+local integer id//1-16
+local location tloc
+local integer index=1
+
+loop
+exitwhen index>11
+set owner=Player(index)
+set id=GetConvertedPlayerId(owner)
+if (GetPlayerSlotState(owner)==PLAYER_SLOT_STATE_PLAYING) then 
+           if (udg_allpick==true) then
+             set temp=GetUnitsInRectMatching(gg_rct_HeroSelection, Condition(function RandomFilter))
+           else
+            if id >=7 then
+             set temp=GetUnitsInRectMatching(gg_rct_HeroSelection, Condition(function RandomFilterUD))
+            else
+             set temp=GetUnitsInRectMatching(gg_rct_HeroSelection, Condition(function RandomFilterHU))
+           endif
+          endif
+    set picked=GroupPickRandomUnit(temp) 
+    call SetPlayerStateBJ( owner, PLAYER_STATE_RESOURCE_LUMBER, 0 )
+    if ( id>=7 ) then
+    set tloc=GetRectCenter(gg_rct_Hero_Revive_Yellow)
+        call PanCameraToTimedLocForPlayer( owner, tloc, 0 )
+        call CreateUnitAtLoc(owner,GetUnitTypeId(picked), tloc, bj_UNIT_FACING )
+    else
+     set tloc=GetRectCenter(gg_rct_Hero_Revive_Good)
+        call PanCameraToTimedLocForPlayer( owner, tloc, 0 )
+        call CreateUnitAtLoc(owner,GetUnitTypeId(picked),tloc, bj_UNIT_FACING  )
+    endif   
+call DestroyGroup(temp)
+set temp=null
+call RemoveLocation(tloc)
+set tloc=null       
+endif    
+set index=index+1
+endloop
+
+  set temp=CreateGroup()
+  call GroupAddGroup(udg_heropick,temp)
+  loop
+  set picked=FirstOfGroup(temp)
+  exitwhen picked==null
+  call SelectUnitRemoveForPlayer(picked,owner)
+  call GroupRemoveUnit(temp,picked)
+  endloop
+  call DestroyGroup(temp)
+set temp=null
+set picked=null
+
+set owner=null
+
+
+call DestroyTrigger(gg_trg_Repick)
+call DestroyTrigger(gg_trg_Random)
+call DestroyTrigger(gg_trg_AllRandom)
+call DestroyTrigger(gg_trg_Marker15)
+call DestroyTrigger(gg_trg_MinuteMarker)
+call DestroyTrigger(gg_trg_MultiPick)
+endfunction
+
+//===========================================================================
+function InitTrig_AllRandom takes nothing returns nothing
+    set gg_trg_AllRandom = CreateTrigger(  )
+    call TriggerRegisterPlayerChatEvent( gg_trg_AllRandom, Player(1), "-allrandom", true )
+    call TriggerRegisterPlayerChatEvent( gg_trg_AllRandom, Player(7), "-allrandom", true )
+    call TriggerAddAction( gg_trg_AllRandom, function AllRandomActions )
+endfunction

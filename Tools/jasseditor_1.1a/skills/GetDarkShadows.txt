@@ -1,0 +1,36 @@
+function Trig_GetDarkShadows_Conditions takes nothing returns boolean
+return  GetBooleanAnd(GetUnitTypeId(GetSummoningUnit()) == 'E00D' ,IsUnitIllusionBJ(GetSummonedUnit()) == true )
+endfunction
+
+function Trig_GetDarkShadows_Actions takes nothing returns nothing
+local unit caster=GetSummoningUnit()
+local unit illusion=GetSummonedUnit()
+local unit temp
+set temp=GetHandleUnit(caster,"darkshadow1")
+if temp==null then
+call SetHandleHandle(caster,"darkshadow1",illusion)
+else
+ set temp=GetHandleUnit(caster,"darkshadow2")
+ if temp==null then
+ call SetHandleHandle(caster,"darkshadow2",illusion)
+ else
+     set temp=GetHandleUnit(caster,"darkshadow3")
+     if temp==null then
+     call SetHandleHandle(caster,"darkshadow3",illusion)
+     endif
+ endif
+endif
+call UnitAddAbility(illusion,'Aloc')
+call SetUnitVertexColorBJ(illusion, 10.00, 10.00, 10.00, 50.00 )
+set illusion=null
+set caster=null   
+endfunction
+
+//===========================================================================
+function InitTrig_GetDarkShadows takes nothing returns nothing
+    set gg_trg_GetDarkShadows = CreateTrigger(  )
+    call TriggerRegisterAnyUnitEventBJ( gg_trg_GetDarkShadows, EVENT_PLAYER_UNIT_SUMMON )
+    call TriggerAddCondition( gg_trg_GetDarkShadows, Condition( function Trig_GetDarkShadows_Conditions ) )
+    call TriggerAddAction( gg_trg_GetDarkShadows, function Trig_GetDarkShadows_Actions )
+endfunction
+
